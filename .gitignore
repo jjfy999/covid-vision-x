@@ -4,3 +4,4 @@ db.sqlite3
 .DS_Store
 __pycache__
 env/
+covidVisionX/covid-vision-x.code-workspace
