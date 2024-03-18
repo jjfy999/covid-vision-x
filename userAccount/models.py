@@ -1,5 +1,6 @@
-from django.contrib.auth.models import AbstractUser
+
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Account(AbstractUser):
@@ -12,7 +13,13 @@ class Account(AbstractUser):
 
     def __str__(self):
         return self.username
+    
 
+    def update_details(self, new_username, new_email):
+        self.username = new_username
+        self.email = new_email
+        self.save()
+'''
 class Patient(Account):
     STATUS_CHOICES = [
         ('covid', 'COVID'),
@@ -27,3 +34,4 @@ class Doctor(Account):
 class SystemAdmin(Account):
     role = 'system_admin'
 
+'''

@@ -20,5 +20,5 @@ from userAccount import views as userAccount
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', userAccount.views.loginPage, name='login'),
+    path('', userAccount.loginPage, name='login'),
 ]
