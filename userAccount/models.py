@@ -15,11 +15,8 @@ class Account(AbstractUser):
         return self.username
     
 
-    def update_details(self, new_username, new_email):
-        self.username = new_username
-        self.email = new_email
-        self.save()
-'''
+
+
 class Patient(Account):
     STATUS_CHOICES = [
         ('covid', 'COVID'),
@@ -34,4 +31,3 @@ class Doctor(Account):
 class SystemAdmin(Account):
     role = 'system_admin'
 
-'''
