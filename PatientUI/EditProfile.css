@@ -55,7 +55,15 @@ header .navbar a{
     padding: .5rem 1.5rem;
     color: white;
     margin-right: 10px;
+    overflow: hidden;
 }
+
+.navbar .dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+
 header .navbar a.active{
     color:white;
     background: var(--yellow);
@@ -164,10 +172,27 @@ input{
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
-    padding: .8rem 7rem;
-    margin-right: .1cm;
+    padding: .8rem 4rem;
+    margin-right: .7cm;
 }
 #doneBtn:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+}
+
+#cancelBtn{
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    color: black;
+    background: var(--yellow);
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem 4rem;
+    margin-right: .1cm;
+}
+#cancelBtn:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
