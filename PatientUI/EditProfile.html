@@ -32,7 +32,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../PatientUI/Profile.css" />
+    <link rel="stylesheet" href="../PatientUI/EditProfile.css" />
   </head>
 
   <body>
@@ -48,6 +48,10 @@
       <nav class="navbar">
         <a class="report" href="Report.html">Report</a>
         <a class="active" href="Profile.html">Profile</a>
+        <div id="profiledropdown">
+          <a href="Profile.html">View My Profile</a>
+          <a href="../LoginPageUI/login.html">Logout</a>
+        </div>
       </nav>
 
       <div class="icons">
@@ -58,7 +62,7 @@
 
     <!-- Report starts -->
     <section>
-      <h1 id="patientProfile">My Profile</h1>
+      <h1 id="patientProfile">Profile Editing</h1>
 
       <div id="tablediv">
         <img
@@ -104,8 +108,8 @@
       </div>
 
       <div class="btn">
-        <button id="doneBtn">Done</button>
-        <button id="cancelBtn">Cancel</button>
+        <a id="doneBtn" href="Profile.html">Done</a>
+        <a id="cancelBtn" href="Profile.html">Cancel</a>
       </div>
     </section>
 

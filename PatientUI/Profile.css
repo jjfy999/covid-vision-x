@@ -108,7 +108,7 @@ section:nth-child(even){
 #patientImg{
     height: 40rem;
     margin-right: 3rem; 
-    padding: px; 
+    padding: 30px; 
     width: fit-content; 
 }
 
