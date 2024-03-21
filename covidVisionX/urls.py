@@ -25,4 +25,9 @@ urlpatterns = [
     path('system-admin/', system_admin_site.urls),
     path('', userAccount.loginPage, name='login'),
 
+    path('login/', userAccount.loginAuth, name='loginAuth'),
+    path('updateDetails/', userAccount.updateDetails, name='updateDetails'),
+    # path('updateDetails/', userAccount.updateDetails, name='updateDetails'),
+    # path('updateDetails/<int:pk>/', userAccount.updateDetails, name='updateDetails'),
+    path('listusers/', userAccount.list_users, name='listusers'),
 ]
