@@ -90,7 +90,7 @@ header .icons #menu-bars{
 }
 /* Header part css ends*/
 
-/* Report css starts */
+/* UserAcc css starts */
 section{
     padding: 2rem 9%;
     background: white;
@@ -99,7 +99,83 @@ section{
 section:nth-child(even){
     background: white;
 }
-/* Report css ends */
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    color: var(--black);
+    background: var(--orange);
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem 3rem;
+}
+.btn:hover{
+    color: var(--light-color);
+    background: var(--orange);
+    letter-spacing: .1rem;
+}
+#userList {
+    display: flex; 
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto)); 
+    gap: 1.8rem;
+    flex-direction: column;
+
+}
+.userBox {
+    background: rgb(219, 219, 219);
+    padding: 1rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.user-img-box {
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.userImg{
+    width: 15rem; 
+    height: 15rem;
+    margin: 3rem;
+}
+.userID, .userName, .role {
+    color: black;
+    font-size: 2rem;
+    width: fit-content;
+    margin: 3rem;
+
+}
+
+.viewInfoBtn {
+    font-size: 1.7rem;
+    color: black;
+    background: var(--yellow);
+    border-radius: .5rem;
+    cursor: pointer;
+    margin: 3rem;
+    width: 20rem; 
+    height: 5rem;
+    text-align: center;
+    justify-content: space-between;
+    display: inline-block;
+}
+
+.viewInfoBtn:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+}
+/* User Acc css ends */
 
 /* Media queries starts */
 @media (max-width:991px){

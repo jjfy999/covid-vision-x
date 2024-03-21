@@ -1,6 +1,6 @@
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class Account(AbstractUser):
@@ -14,8 +14,6 @@ class Account(AbstractUser):
 
     def __str__(self):
         return self.username
-    
- 
 
 
 class Patient(Account):
@@ -23,25 +21,23 @@ class Patient(Account):
         ('covid', 'COVID'),
         ('normal', 'Normal'),
     ]
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_applicable')
-    
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='not_applicable')
+
     def save(self, *args, **kwargs):
         self.role = 'patient'
         super().save(*args, **kwargs)
 
-    
 
 class Doctor(Account):
-
 
     def save(self, *args, **kwargs):
         self.role = 'doctor'
         super().save(*args, **kwargs)
 
-class SystemAdmin(Account):
 
+class SystemAdmin(Account):
 
     def save(self, *args, **kwargs):
         self.role = 'system_admin'
         super().save(*args, **kwargs)
-

@@ -11,7 +11,7 @@
       content="width=device-width, initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>PatientReport</title>
+    <title>SAEditProfile</title>
 
     <!-- Swiper link -->
     <link
@@ -32,7 +32,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../PatientUI/EditProfile.css" />
+    <link rel="stylesheet" href="../SystemAdminUI/EditProfile.css" />
   </head>
 
   <body>
@@ -46,7 +46,7 @@
       </div>
 
       <nav class="navbar">
-        <a class="report" href="Report.html">Report</a>
+        <a class="userAcc" href="UserAcc.html">Report</a>
         <a class="active" href="Profile.html" onclick="toggleDropdown()"
           >Profile</a
         >
@@ -64,7 +64,7 @@
 
     <!-- Report starts -->
     <section>
-      <h1 id="patientProfile">Profile Editing</h1>
+      <h1 id="SAEditProfile">Profile Editing</h1>
 
       <div id="tablediv">
         <img
@@ -73,12 +73,12 @@
         />
         <table id="infoTable">
           <tr>
-            <th><label for="id">Patient ID:</label></th>
+            <th><label for="id">System Admin ID:</label></th>
             <th><input type="text" id="id" name="id" /></th>
           </tr>
 
           <tr>
-            <th><label for="name">Patient Name:</label></th>
+            <th><label for="name">System Admin Name:</label></th>
             <th><input type="text" id="name" name="name" /></th>
           </tr>
 
@@ -100,11 +100,6 @@
           <tr>
             <th><label for="rating">Email:</label></th>
             <th><input type="text" id="email" name="email" /></th>
-          </tr>
-
-          <tr>
-            <th><label for="release">Covid-19 Diagnosis status:</label></th>
-            <th><input type="text" id="status" name="status" /></th>
           </tr>
         </table>
       </div>

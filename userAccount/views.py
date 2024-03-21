@@ -1,30 +1,29 @@
-from django.shortcuts import render
 from django.contrib import messages
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
-from userAccount.serializers import DoctorSysAdminSerializer, PatientSerializer, DoctorSysAdminUpdateSerializer
-from .models import Patient, Doctor, SystemAdmin
-from rest_framework.decorators import api_view
-
-
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from django.contrib.auth.decorators import login_required
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseRedirect, JsonResponse)
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from userAccount.serializers import (DoctorSysAdminSerializer,
+                                     DoctorSysAdminUpdateSerializer,
+                                     PatientSerializer)
+
+from .models import Doctor, Patient, SystemAdmin
 
 # Create your views here.
 
 
 def loginPage(request):
-    
+
     return render(request, 'login.html')
 
 
-def loginAuth(request): #only a temporary login function for testing
-    
+def loginAuth(request):  # only a temporary login function for testing
+
     if request.method == 'POST':
         username = request.POST['uname']
         password = request.POST['psw']
@@ -50,7 +49,8 @@ def list_users(request):
 
     # Serialize system admins
     system_admins = SystemAdmin.objects.all()
-    system_admin_serializer = DoctorSysAdminSerializer(system_admins, many=True)
+    system_admin_serializer = DoctorSysAdminSerializer(
+        system_admins, many=True)
 
     # Combine the serialized data
     users_data = {
@@ -60,7 +60,3 @@ def list_users(request):
     }
 
     return JsonResponse(users_data, json_dumps_params={'indent': 2})
-    
-
-
-

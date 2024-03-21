@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import Doctor, SystemAdmin, Patient
+
+from .models import Doctor, Patient, SystemAdmin
+
 
 class DoctorSysAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor  # Assuming Doctor and SystemAdmin have the same fields
         fields = '__all__'
-
-
 
 
 class PatientSerializer(serializers.ModelSerializer):
@@ -15,12 +15,11 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
 class DoctorSysAdminUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        fields = ['username', 'email', 'name', 'phone_number', 'password']  # Specify only the fields you want to update
+        # Specify only the fields you want to update
+        fields = ['username', 'email', 'name', 'phone_number', 'password']
 
     # Define the fields as not required
     username = serializers.CharField(required=False)
@@ -28,4 +27,3 @@ class DoctorSysAdminUpdateSerializer(serializers.ModelSerializer):
     name = serializers.CharField(required=False)
     phone_number = serializers.CharField(required=False)
     password = serializers.CharField(required=False)
-
