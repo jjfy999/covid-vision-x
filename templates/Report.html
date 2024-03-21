@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,7 +33,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../PatientUI/Report.css" />
+    <link rel="stylesheet" href="{% static 'patient/css/Report.css' %}" />  
   </head>
 
   <body>
@@ -40,14 +41,14 @@
     <header>
       <div id="logoImgBox">
         <img
-          src="../LoginPageUI/Images/Picture3-fotor-20240319214142-removebg-preview.png"
+          src="{% static 'images/Picture3-fotor-20240319214142-removebg-preview.png' %}"
           id="logoImg"
         />
       </div>
 
       <nav class="navbar">
-        <a class="active" href="Report.html">Report</a>
-        <a class="profile" href="Profile.html">Profile</a>
+        <a class="active" href="/patientReport/">Report</a>
+        <a class="profile" href="/patientProfile/">Profile</a>
       </nav>
 
       <div class="icons">
@@ -63,6 +64,6 @@
 
     <!-- Report ends -->
 
-    <script src="withSearchBar.js"></script>
+    <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
   </body>
 </html>
