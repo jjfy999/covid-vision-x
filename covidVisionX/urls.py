@@ -18,7 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from userAccount import views as userAccount
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', userAccount.loginPage, name='login'),
+    path('login/', userAccount.loginAuth, name='loginAuth'),
+    path('updateDetails/', userAccount.updateDetails, name='updateDetails'),
+    #path('updateDetails/<int:pk>/', userAccount.updateDetails, name='updateDetails'),
+    path('listusers/', userAccount.list_users, name='listusers'),
 ]

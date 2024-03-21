@@ -14,7 +14,16 @@ class Account(AbstractUser):
     def __str__(self):
         return self.username
     
-
+    def update_Details(self, new_username, new_email, new_phone_number, new_name):
+        if new_username:
+            self.username = new_username
+        if new_email:
+            self.email = new_email
+        if new_phone_number:
+            self.phone_number = new_phone_number
+        if new_name:
+            self.name = new_name
+        self.save()
 
 
 class Patient(Account):
@@ -24,6 +33,8 @@ class Patient(Account):
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_applicable')
     role = 'patient'
+
+    
 
 class Doctor(Account):
     role = 'doctor'
