@@ -62,7 +62,7 @@ def loginAuth(request): #only a temporary login function for testing
 
         if user is not None:
             login(request, user)
-            return redirect(patientReport)
+            return HttpResponse('Logged in successfully, will link UI later')
         else:
             return HttpResponse('Invalid credentials')
 
