@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,7 +34,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../PatientUI/EditProfile.css" />
+    <link rel="stylesheet" href="{% static 'patient/css/EditProfile.css' %}" />
   </head>
 
   <body>
@@ -40,19 +42,19 @@
     <header>
       <div id="logoImgBox">
         <img
-          src="../LoginPageUI/Images/Picture3-fotor-20240319214142-removebg-preview.png"
+          src="{% static 'images/Picture3-fotor-20240319214142-removebg-preview.png' %}"
           id="logoImg"
         />
       </div>
 
       <nav class="navbar">
-        <a class="report" href="Report.html">Report</a>
-        <a class="active" href="Profile.html" onclick="toggleDropdown()"
+        <a class="report" href="/patientReport/">Report</a>
+        <a class="active" href="/patientProfile/" onclick="toggleDropdown()"
           >Profile</a
         >
         <div id="profiledropdown">
-          <a href="Profile.html">View My Profile</a>
-          <a href="../LoginPageUI/login.html">Logout</a>
+          <a href="/patientProfile/">View My Profile</a>
+          <a href="/logout/">Logout</a>
         </div>
       </nav>
 
@@ -68,7 +70,7 @@
 
       <div id="tablediv">
         <img
-          src="../LoginPageUI/Images/istockphoto-1209654046-612x612.jpg"
+          src="{% static 'images/istockphoto-1209654046-612x612.jpg' %}"
           id="patientImg"
         />
         <table id="infoTable">
@@ -110,13 +112,13 @@
       </div>
 
       <div class="btn">
-        <a id="doneBtn" href="Profile.html">Done</a>
-        <a id="cancelBtn" href="Profile.html">Cancel</a>
+        <a id="doneBtn" href="/patientProfile/">Done</a>
+        <a id="cancelBtn" href="/patientProfile/">Cancel</a>
       </div>
     </section>
 
     <!-- Report ends -->
 
-    <script src="withSearchBar.js"></script>
+    <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
   </body>
 </html>
