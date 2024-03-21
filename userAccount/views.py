@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from itertools import chain
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from userAccount.serializers import DoctorSysAdminUpdateSerializer
+from userAccount.serializers import DoctorSysAdminSerializer, PatientSerializer
 from .models import Patient, Doctor, SystemAdmin
+from rest_framework.decorators import api_view
 # Create your views here.
 
 
@@ -37,18 +37,29 @@ def updateDetails(request):
             messages.error(request, "Invalid user type")
 '''
 
-
+@api_view(['GET'])
 def list_users(request):
-    # Fetch all users from each model
-    patients = Patient.objects.all().values()
-    doctors = Doctor.objects.all().values()
-    admins = SystemAdmin.objects.all().values()
+    # Serialize patients
+    patients = Patient.objects.all()
+    patient_serializer = PatientSerializer(patients, many=True)
 
-    # Combine the querysets
-    all_users = list(chain(patients, doctors, admins))
+    # Serialize doctors
+    doctors = Doctor.objects.all()
+    doctor_serializer = DoctorSysAdminSerializer(doctors, many=True)
 
-    # Return the combined queryset as JSON response
-    return JsonResponse({'users': all_users})
+    # Serialize system admins
+    system_admins = SystemAdmin.objects.all()
+    system_admin_serializer = DoctorSysAdminSerializer(system_admins, many=True)
+
+    # Combine the serialized data
+    users_data = {
+        'patients': patient_serializer.data,
+        'doctors': doctor_serializer.data,
+        'system_admins': system_admin_serializer.data
+    }
+
+    return JsonResponse(users_data, json_dumps_params={'indent': 2})
+
 
 
 

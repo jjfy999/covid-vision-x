@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import Doctor, SystemAdmin, Patient
 
-class DoctorSysAdminUpdateSerializer(serializers.ModelSerializer):
+class DoctorSysAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor  # Assuming Doctor and SystemAdmin have the same fields
-        fields = ['id', 'name', 'email', 'phone_number', 'username', 'role']
+        fields = '__all__'
 
     def update(self, instance, validated_data):
         instance = super().update(instance, validated_data)  # Call the default update method
@@ -19,10 +19,10 @@ class DoctorSysAdminUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 
-class PatientUpdateSerializer(serializers.ModelSerializer):
+class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['id', 'name', 'email', 'phone_number', 'username', 'status']
+        fields = '__all__'
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)

@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
         '''
         # Generate new users
-        for i in range(10):
+        for i in range(10, 20):
             role = random.choice(['patient', 'doctor'])
             username = f'{role}{i+1}'
             email = f'{username}@gmail.com'
