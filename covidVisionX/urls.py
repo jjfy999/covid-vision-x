@@ -23,7 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', userAccount.loginPage, name='login'),
     path('login/', userAccount.loginAuth, name='loginAuth'),
+    path('logout/', userAccount.logout, name='logout'),
+    path('patientReport/', userAccount.reportView, name='reportView'),
+    path('patientProfile/', userAccount.profileView, name='profileView'),
+    #path('patientEditProfile/', userAccount.updateDetails, name='updateDetails'),  #to update own details
     path('updateDetails/', userAccount.updateDetails, name='updateDetails'),
-    #path('updateDetails/<int:pk>/', userAccount.updateDetails, name='updateDetails'),
+    path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails, name='updateUserDetails'),  #to update another person details
     path('listusers/', userAccount.list_users, name='listusers'),
 ]
