@@ -1,6 +1,6 @@
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class Account(AbstractUser):
@@ -10,20 +10,10 @@ class Account(AbstractUser):
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
     account_id = models.AutoField(primary_key=True)
+    role = models.CharField(max_length=20, null=True)  # Define role field here
 
     def __str__(self):
         return self.username
-    
-    def update_Details(self, new_username, new_email, new_phone_number, new_name):
-        if new_username:
-            self.username = new_username
-        if new_email:
-            self.email = new_email
-        if new_phone_number:
-            self.phone_number = new_phone_number
-        if new_name:
-            self.name = new_name
-        self.save()
 
 
 class Patient(Account):
@@ -31,14 +21,23 @@ class Patient(Account):
         ('covid', 'COVID'),
         ('normal', 'Normal'),
     ]
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='not_applicable')
-    role = 'patient'
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='not_applicable')
 
-    
+    def save(self, *args, **kwargs):
+        self.role = 'patient'
+        super().save(*args, **kwargs)
+
 
 class Doctor(Account):
-    role = 'doctor'
+
+    def save(self, *args, **kwargs):
+        self.role = 'doctor'
+        super().save(*args, **kwargs)
+
 
 class SystemAdmin(Account):
-    role = 'system_admin'
 
+    def save(self, *args, **kwargs):
+        self.role = 'system_admin'
+        super().save(*args, **kwargs)
