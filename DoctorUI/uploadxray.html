@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Upload X-Ray Image</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href= "C:\Users\Ernest\Desktop\asdf\master.css">
+</head>
+<body>
+
+  
+  <header>
+    <div id="logoImgBox">
+      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+    </div>
+	
+	
+	<nav class="navbar">
+	
+  <div class="dropdown">
+    <a class="active dropbtn">Patient</a>
+    <div class="dropdown-content">
+      <a href="UploadXRay.html">Upload X-ray Image</a>
+      <a href="Report.html">Report</a>
+      <a href="NonUploadedReport.html">Non-uploaded Report</a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <a class="patient dropbtn">Profile</a>
+    <div class="dropdown-content">
+      <a href="DoctorProfile.html">View Profile</a>
+      <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+    </div>
+  </div>
+</nav>
+
+	
+    <div class="icons">
+      <i class="fas fa-bars" id="menu-bars"></i>
+    </div>
+  </header>
+
+  <section>
+    <h1 id="uploadTitle">Upload X-Ray Image</h1>
+    <div id="uploadContainer">
+      <div id="dropZone">
+        <p>Upload your file:</p>
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span>Upload Patient X-ray Image</span>
+        <span>Supports: .jpg, .png, .pdf</span>
+        <input type="file" id="fileInput" hidden>
+        <button onclick="document.getElementById('fileInput').click()">Browse</button>
+      </div>
+      <input type="text" id="patientName" name="patientName" placeholder="Patient name">
+      <button id="analyseBtn">Analyse</button>
+    </div>
+  </section>
+
+  <!-- Your scripts here -->
+  <script src="withSearchBar.js"></script>
+</body>
+</html>

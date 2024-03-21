@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Doctor Profile</title>
+  <link rel="stylesheet" href="..\asdf\master.css" />
+</head>
+<body>
+  <header>
+    <div id="logoImgBox">
+      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+    </div>
+	
+<!-- 	 <div id="logoImgBox">
+        <img
+          src="../LoginPageUI/Images/Picture3-fotor-20240319214142-removebg-preview.png"
+          id="logoImg"
+        />
+     </div>
+"C:\Users\Ernest\Desktop\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png"	 -->
+	
+<!--     <nav class="navbar">
+      <a class="patient" href="Report.html">Patient</a>
+      <a class="active" href="DoctorProfile.html">Profile</a>
+    </nav> -->
+	
+	<nav class="navbar">
+	
+  <div class="dropdown">
+    <a class="patient dropbtn">Patient</a>
+    <div class="dropdown-content">
+      <a href="UploadXRay.html">Upload X-ray Image</a>
+      <a href="Report.html">Report</a>
+      <a href="NonUploadedReport.html">Non-uploaded Report</a>
+    </div>
+  </div>
+  
+  <div class="dropdown">
+    <a class="active dropbtn">Profile</a>
+    <div class="dropdown-content">
+      <a href="DoctorProfile.html">View Profile</a>
+      <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+    </div>
+  </div>
+</nav>
+
+	
+    <div class="icons">
+      <i class="fas fa-bars" id="menu-bars"></i>
+    </div>
+  </header>
+
+  <section>
+    <h1 id="doctorProfile">Doctor Profile</h1>
+    <div id="tablediv">
+      <img src="..\asdf\img\istockphoto-1209654046-612x612.jpg" id="doctorImg" alt="Doctor Image"/>
+      <table id="infoTable">
+        <!-- Replace with the doctor's information -->
+        <tr>
+          <th><label for="id">Doctor ID:</label></th>
+          <th>D1987</th>
+        </tr>
+        <tr>
+          <th><label for="name">Doctor Name:</label></th>
+          <th>Dr. Jane Smith</th>
+        </tr>
+        <tr>
+          <th><label for="specialty">Specialty:</label></th>
+          <th>Cardiology</th>
+        </tr>
+        <tr>
+          <th><label for="years">Years of Experience:</label></th>
+          <th>10</th>
+        </tr>
+        <tr>
+          <th><label for="contact">Contact number:</label></th>
+          <th>+1 234 567 8900</th>
+        </tr>
+        <tr>
+          <th><label for="email">Email:</label></th>
+          <th>dr.janesmith@example.com</th>
+        </tr>
+      </table>
+    </div>
+    <div class="btn">
+      <a id="editBtn" href="EditDoctorProfile.html">Edit</a>
+    </div>
+  </section>
+
+  <script src="withSearchBar.js"></script>
+</body>
+</html>
