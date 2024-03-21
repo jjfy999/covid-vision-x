@@ -40,4 +40,5 @@ class SystemAdmin(Account):
 
     def save(self, *args, **kwargs):
         self.role = 'system_admin'
+        self.is_staff = True
         super().save(*args, **kwargs)
