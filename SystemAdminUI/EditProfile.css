@@ -55,7 +55,15 @@ header .navbar a{
     padding: .5rem 1.5rem;
     color: white;
     margin-right: 10px;
+    overflow: hidden;
 }
+
+.navbar .dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+
 header .navbar a.active{
     color:white;
     background: var(--yellow);
@@ -108,7 +116,7 @@ section:nth-child(even){
 #patientImg{
     height: 40rem;
     margin-right: 3rem; 
-    padding: 30px; 
+    padding: px; 
     width: fit-content; 
 }
 
@@ -156,7 +164,7 @@ input{
     font-size: 1.7rem;
     padding-left: 1rem;
 }
-#editBtn{
+#doneBtn{
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -164,10 +172,27 @@ input{
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
-    padding: .8rem 7rem;
+    padding: .8rem 4rem;
+    margin-right: .7cm;
+}
+#doneBtn:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+}
+
+#cancelBtn{
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    color: black;
+    background: var(--yellow);
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem 4rem;
     margin-right: .1cm;
 }
-#editBtn:hover{
+#cancelBtn:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
