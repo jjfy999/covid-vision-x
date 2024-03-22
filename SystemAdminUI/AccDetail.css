@@ -148,7 +148,7 @@ input{
     font-size: 1.7rem;
     padding-left: 1rem;
 }
-#editBtn{
+#editBtn, #backBtn{
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -160,6 +160,11 @@ input{
     margin-right: .1cm;
 }
 #editBtn:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+}
+#backBtn:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;

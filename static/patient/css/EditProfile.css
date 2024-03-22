@@ -95,7 +95,7 @@ header .icons #menu-bars{
 }
 /* Header part css ends*/
 
-/* Report css starts */
+/* Edit profile css starts */
 section{
     padding: 2rem 9%;
     background: white;
@@ -197,7 +197,7 @@ input{
     background: var(--green);
     letter-spacing: .1rem;
 }
-/* Report css ends */
+/* Edit profile css ends */
 
 /* Media queries starts */
 @media (max-width:991px){

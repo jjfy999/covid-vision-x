@@ -95,7 +95,7 @@ header .icons #menu-bars{
 }
 /* Header part css ends*/
 
-/* Report css starts */
+/* Edit Profile css starts */
 section{
     padding: 2rem 9%;
     background: white;
@@ -105,7 +105,7 @@ section:nth-child(even){
     background: rgb(201, 195, 195);
 }
 
-#patientProfile{
+#SAEditProfile{
     padding-top: 70px; 
     padding-bottom: 15px;
     font-size: 3rem;
@@ -197,7 +197,7 @@ input{
     background: var(--green);
     letter-spacing: .1rem;
 }
-/* Report css ends */
+/* Edit Profile css ends */
 
 /* Media queries starts */
 @media (max-width:991px){
