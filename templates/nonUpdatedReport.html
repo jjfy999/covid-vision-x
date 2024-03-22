@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report</title>
+<link rel="stylesheet" href="master.css">
+<link href="https://fonts.googleapis.com/css2?family=Joan&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div id="logoImgBox">
+      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+    </div>
+    
+    <nav class="navbar">
+      <div class="dropdown">
+        <a class="active dropbtn">Patient</a>
+        <div class="dropdown-content">
+          <a href="UploadXRay.html">Upload X-ray Image</a>
+          <a href="Report.html">Report</a>
+          <a href="nonUpdatedReport.html">Non-uploaded Report</a>
+        </div>
+      </div>
+      
+      <div class="dropdown">
+        <a class="patient dropbtn">Profile</a>
+        <div class="dropdown-content">
+          <a href="DoctorProfile.html">View Profile</a>
+          <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+        </div>
+      </div>
+    </nav>
+
+    <div class="icons">
+      <i class="fas fa-bars" id="menu-bars"></i>
+    </div>
+</header>
+
+<section>
+    <div id="reportContainer">
+        <h1 id="uploadTitle">X-ray Analysis</h1>
+        <div id="uploadContainer">
+            <div id="xrayImage">
+                <!-- X-ray image displayed here -->
+                <img src="..\DoctorUI\img\xray.png"" alt="X-ray Image">
+            </div>
+            <div id="reportInfo">
+                <p>NAME: John Tan</p>
+                <p>DATE: 23 March 2024</p>
+                <h2>Detailed report information</h2>
+                <!-- Additional report information here -->
+            </div>
+            <div id="resultContainer">
+                <h2>Result</h2>
+                <label for="statusDropdown">Status:</label>
+                <select id="statusDropdown" name="status">
+                    <option value="covid">Covid</option>
+                    <option value="normal">Normal</option>
+                </select>
+            </div>
+            <div id="actionButtons">
+                <button id="uploadButton">Upload</button>
+                <button id="deleteButton">Delete</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // You can add JavaScript here if you need interactive elements
+</script>
+
+</body>
+</html>

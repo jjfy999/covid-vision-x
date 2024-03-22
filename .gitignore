@@ -8,3 +8,5 @@ covidVisionX/covid-vision-x.code-workspace
 .venv/
 **/**/**/migrations/
 **/**/migrations/
+
+**/migration/*

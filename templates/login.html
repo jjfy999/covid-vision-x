@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 
 <html>
@@ -33,15 +31,14 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="{% static 'login/login.css' %}" />
+    <link rel="stylesheet" href="login.css" />
   </head>
   <body>
     <div id="container">
       <div id="loginSection">
         <div>
           <h1 id="loginHeading">LOGIN</h1>
-          <form onsubmit="return validateLogin()" action="/login/" method="post">
-            {% csrf_token %}
+          <form onsubmit="validateLogin(event)" method="post">
             <label for="role"><b>Login As</b></label>
             <select name="role" required id="roleInput">
               <option value="" disabled selected>Select a role</option>
@@ -75,7 +72,7 @@
 
       <div id="logoSection">
         <div id="img-box">
-          <img src="{% static 'images/logo.png' %}" id="logoImg" />
+          <img src="/static/images/logo.png" id="logoImg" />
         </div>
       </div>
     </div>
@@ -86,14 +83,27 @@
       function validateLogin(event) {
         event.preventDefault(); // Prevent default form submission behavior
 
-        var role = document.getElementsById("roleInput").value;
+        var role = document.getElementById("roleInput").value;
         var username = document.getElementById("usernameInput").value;
         var password = document.getElementById("passwordInput").value;
 
-        if (!role && !username && !password) {
-          window.location.href = "systemAdminDashboard.html";
-        } else {
+        // Validation logic: Check if any of the fields are empty
+        if (!role || !username || !password) {
           alert("Please fill in all required fields.");
+          return; // Exit the function if validation fails
+        }
+
+        // Redirect user based on role
+        switch (role) {
+          case "patient":
+            window.location.href = "/PatientUI/Report.html";
+            break;
+          case "doctor":
+            window.location.href = "/";
+            break;
+          case "sysad":
+            window.location.href = "/SystemAdminUI/UserAcc.html";
+            break;
         }
       }
     </script>
