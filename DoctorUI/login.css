@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+
+:root{
+  --green:#267b83;
+  --white:#D1D0D0;
+  --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
+}
+
+*{
+    margin: 0;
+    font-family: 'Joan', serif;
+    color: #333;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none; border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+  }
+
+/* The entire web container */
+#container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Side by side section */
+#loginSection,
+#logoSection {
+  flex: 1;
+  padding: 20px;
+}
+
+#loginSection {
+    background-color: white; 
+    display: grid;
+    align-items: center;
+}
+  
+#logoSection{
+    background-color: var(--green); 
+    display: grid;
+    align-items: center;
+}
+
+#loginHeading {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+#img-box {
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+#logoImg {
+    width: 90%; 
+    height: 90%;
+}
+
+#welcomeHeading {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+/* Bordered form */
+form {
+    border: 3px solid rgb(149, 149, 149);
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 16px 16px 30px;
+}
+    
+/* Full-width inputs and drop down list*/
+input[type=password], input[type=text], select {
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 8px 0;
+    padding: 12px 20px;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+    
+/* Buttons */
+button {
+    background-color: var(--green);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    margin: 8px 0;
+    opacity: 0.8;
+    padding: 14px 20px;
+    width: 100%;
+}
+  
+/* Center the logo image inside this container
+.imgcontainer {
+    margin: 24px 0 12px 0;
+    text-align: center;
+}
+  
+/* Logo image */
+/* .logo {
+    border-radius: 50%;
+    width: 40%;
+} */
+  
+/* The "Forgot password" text */
+.forget-password {
+    float: right;
+    font-size: 13px;
+}
+  
+/* Custom alert */
+.custom-alert {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  
+/* Message */
+.message {
+    color: #1c7226;
+}
