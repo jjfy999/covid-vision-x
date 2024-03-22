@@ -27,12 +27,12 @@ def loginPage(request):
     return render(request, 'login.html')
 
 
-'''
+
 def loginAuth(request):  # only a temporary login function for testing
 
     if request.method == 'POST':
-        username = request.POST['uname']
-        password = request.POST['psw']
+        username = request.POST['username']
+        password = request.POST['password']
 
         user = authenticate(username=username, password=password)
 
@@ -40,16 +40,16 @@ def loginAuth(request):  # only a temporary login function for testing
             login(request, user)
             print(type(user))
             if user.role == 'doctor':
-                return HttpResponse('Logged in successfully, will link UI later')
+                return redirect('docUploadXRay')
             elif user.role == 'patient':
                 return redirect('reportView')
             elif user.role == 'system_admin':
-                return HttpResponse('Logged in successfully, will link UI later')
+                return redirect('sysUserAccList')
             else:
                 return HttpResponse('Who are you')
         else:
             return HttpResponse('Invalid credentials')
-'''
+
 
 
 def reportView(request):    
@@ -57,11 +57,11 @@ def reportView(request):
 
 
 def profileView(request):
-    return render(request, 'Profile.html')
+    return render(request, 'PatientProfile.html')
 
 
 def editProfileView(request):
-    return render(request, 'EditProfile.html')
+    return render(request, 'EditPatientProfile.html')
 
 def sysUserAccList(request):                
     return render(request, 'UserAcc.html')
@@ -80,7 +80,7 @@ def sysEditAccDetails(request):
 
 
 def docEditProfileView(request):
-    return render(request, 'EditDocProfile.html')
+    return render(request, 'EditDoctorProfile.html')
 
 def docUploadXRay(request):
     return render(request, 'uploadxray.html')
@@ -91,19 +91,19 @@ def docNonUpdatedReport(request):
 def docReportView(request):
     return render(request, 'DocReport.html')
 
-'''
+
 def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
-'''
 
 
 
 
+@login_required
 def getDetails(request):                                                             #for users to view own details
     user=request.user
-
+    print("User role:", user.role)
     if user.role == 'patient':
         serialized_User = PatientGetDetailsSerializer(user)
         context = {'user': serialized_User.data}
@@ -148,12 +148,12 @@ def list_users(request):                                                        
     return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
-@api_view(['POST'])
+
 @login_required
-def updateDetails(request):
+def updateDetails(request):                                                       #for users to update own details 
 
     user = request.user
-
+    
     # Check if the user is a Doctor or a SystemAdmin
     if user.role == 'doctor' or user.role == 'system_admin':
         serializer = DoctorSysAdminUpdateSerializer(user, data=request.POST)

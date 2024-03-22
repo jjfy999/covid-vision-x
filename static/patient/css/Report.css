@@ -95,10 +95,28 @@ section{
     padding: 2rem 9%;
     background: white;
     grid-template-columns: 1fr 3fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align items horizontally in the center */
+    justify-content: center; /* Align items vertically in the center */
+    height: 100vh; /* Set the height to full viewport height */
 }
 section:nth-child(even){
     background: white;
 }
+#patientProfile {
+    padding-top: 10px; 
+    padding-bottom: 15px;
+    font-size: 3rem;
+    margin-left: 3rem;
+    color: var(--green);
+}
+#tablediv {
+    margin-top: 5rem; /* Add some spacing between the image and table */
+}
+#infoTable {
+    font-size: 2rem; /* Increase the font size of table text */
+  }
 /* Report css ends */
 
 /* Media queries starts */

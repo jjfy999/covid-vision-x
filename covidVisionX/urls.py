@@ -26,8 +26,8 @@ urlpatterns = [
     path('system-admin/', system_admin_site.urls),
     path('', userAccount.loginPage, name='login'),
 
-    # path('login/', userAccount.loginAuth, name='loginAuth'),
-    # path('logout/', userAccount.logout, name='logout'),
+    path('login/', userAccount.loginAuth, name='loginAuth'),
+    path('logout/', userAccount.logout, name='logout'),
     path('patientReport/', userAccount.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
@@ -52,6 +52,6 @@ urlpatterns = [
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
     path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
 
-    path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
-    path('logout/', accessControl.LogoutView.as_view(), name='logout'),
+    #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
+    #path('logout/', accessControl.LogoutView.as_view(), name='logout'),
 ]
