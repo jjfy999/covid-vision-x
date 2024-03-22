@@ -46,7 +46,7 @@ def loginAuth(request):  # only a temporary login function for testing
         else:
             return HttpResponse('Invalid credentials')
 
-def reportView(request):
+def reportView(request):    
     return render(request, 'Report.html')
 
 def profileView(request):
@@ -55,28 +55,65 @@ def profileView(request):
 def editProfileView(request):
     return render(request, 'EditProfile.html')
 
+def sysUserAccList(request):                
+    return render(request, 'UserAcc.html')
+
+def sysProfileView(request):
+    return render(request, 'SysadminProfile.html')
+
+def sysEditProfileView(request):
+    return render(request, 'EditSysadminProfile.html')
+
+def accDetails(request):
+    return render(request, 'AccDetail.html')
+
+def sysEditAccDetails(request):
+    return render(request, 'EditAcc.html')
+
+
+def docEditProfileView(request):
+    return render(request, 'EditDocProfile.html')
+
+def docUploadXRay(request):
+    return render(request, 'uploadxray.html')
+
+def docNonUpdatedReport(request):
+    return render(request, 'nonUpdatedReport.html')
+
+def docReportView(request):
+    return render(request, 'DocReport.html')
+
 def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
 
-def getDetails(request):
+
+
+def getDetails(request):                                                             #for users to view own details
     user=request.user
 
     if user.role == 'patient':
         serialized_User = PatientGetDetailsSerializer(user)
-        
-    elif user.role == 'doctor' or user.role == 'system_admin':
+        context = {'user': serialized_User.data}
+        return render(request, 'PatientProfile.html', context)
+    
+    elif user.role == 'doctor':
         serialized_User = DoctorSysAdminGetDetailsSerializer(user)
-
+        context = {'user': serialized_User.data}
+        return render(request, 'DoctorProfile.html', context)
+    
+    elif user.role == 'system_admin':
+        serialized_User = DoctorSysAdminGetDetailsSerializer(user)    
+        context = {'user': serialized_User.data}
+        return render(request, 'SysadminProfile.html', context)
+    
     else:    
         return HttpResponse('User not found')
     
-    context = {'user': serialized_User.data}
-    return render(request, 'Profile.html', context)
-
+    
 @api_view(['GET'])
-def list_users(request):
+def list_users(request):                                                               #for system admin to view list of users
     # Serialize patients
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
@@ -99,17 +136,16 @@ def list_users(request):
 
     return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
-@api_view(['POST'])
-#@login_required
-def updateDetails(request):
+@login_required
+def updateDetails(request):                                                                 #for users to update own details
     
     user = request.user
         
     # Check if the user is a Doctor or a SystemAdmin
-    if isinstance(user, Doctor) or isinstance(user, SystemAdmin):
-        serializer = DoctorSysAdminSerializer(user, data=request.data)
-    elif isinstance(user, Patient):
-        serializer = PatientSerializer(user, data=request.data)
+    if user.role == 'doctor' or user.role == 'system_admin':
+        serializer = DoctorSysAdminUpdateSerializer(user, data=request.POST)
+    elif user.role == 'patient':
+        serializer = PatientUpdateSerializer(user, data=request.POST)
     else:
         messages.error(request, "Invalid user type")
         return HttpResponseBadRequest("Invalid user type")
@@ -119,12 +155,13 @@ def updateDetails(request):
         messages.success(request, "Details updated successfully!")
     else:
         messages.error(request, "Failed to update details")
-        return render(request, 'update_details.html')  # Render the update details form
+    
+    return redirect('getDetails')
 
 
 
 @api_view(['POST'])
-def updateUserDetails(request, pk):
+def updateUserDetails(request, pk):                                                          #for system admin to update another person details
 
     # Retrieve the user object from Doctor table
     try:

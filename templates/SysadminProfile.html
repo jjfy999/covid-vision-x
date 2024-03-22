@@ -45,13 +45,13 @@
       </div>
 
       <nav class="navbar">
-        <a class="userAcc" href="UserAcc.html">Report</a>
-        <a class="active" href="Profile.html">Profile</a>
+        <a class="userAcc" href="/sysUserAccList/">Report</a>
+        <a class="active" href="/sysProfileView/">Profile</a>
       </nav>
 
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
-        <a href="/LoginPageUI/login.html" class="bx bx-lock-open"></a>
+        <a href="/logout/" class="bx bx-lock-open"></a>
       </div>
     </header>
     <!-- Header section ends -->
@@ -70,7 +70,7 @@
 
           <tr>
             <th><label for="name">System Admin Name:</label></th>
-            <th>Bryant Ng</th>
+            <th>{{user.name}}</th>
           </tr>
 
           <tr>
@@ -85,12 +85,12 @@
 
               <tr>
                 <th><label for="contact">Contact number:</label></th>
-                <th>+65 7788 9900</th>
+                <th>{{user.phone_number}}</th>
               </tr>
 
               <tr>
                 <th><label for="email">Email:</label></th>
-                <th>bryantng@gmail.com</th>
+                <th>{{user.email}}</th>
               </tr>
             </th>
           </tr>
@@ -98,7 +98,7 @@
       </div>
 
       <div class="btn">
-        <a id="editBtn" href="EditProfile.html">Edit</a>
+        <a id="editBtn" href="/sysEditProfileView/">Edit</a>
       </div>
     </section>
 

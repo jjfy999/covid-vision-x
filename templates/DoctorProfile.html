@@ -33,17 +33,17 @@
   <div class="dropdown">
     <a class="patient dropbtn">Patient</a>
     <div class="dropdown-content">
-      <a href="UploadXRay.html">Upload X-ray Image</a>
-      <a href="Report.html">Report</a>
-      <a href="nonUpdatedReport.html">Non-uploaded Report</a>
+      <a href="/docUploadXRay/">Upload X-ray Image</a>
+      <a href="/docReportView/">Report</a>
+      <a href="/docNonUpdatedReport/">Non-uploaded Report</a>
     </div>
   </div>
   
   <div class="dropdown">
     <a class="active dropbtn">Profile</a>
     <div class="dropdown-content">
-      <a href="DoctorProfile.html">View Profile</a>
-      <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+      <a href="/docProfileView/">View Profile</a>
+      <a href="/logout/">Logout</a> <!-- Adjust the href as needed for logout functionality -->
     </div>
   </div>
 </nav>
@@ -66,7 +66,7 @@
         </tr>
         <tr>
           <th><label for="name">Doctor Name:</label></th>
-          <th>Dr. Jane Smith</th>
+          <th>{{user.name}}</th>
         </tr>
         <tr>
           <th><label for="specialty">Specialty:</label></th>
@@ -78,16 +78,16 @@
         </tr>
         <tr>
           <th><label for="contact">Contact number:</label></th>
-          <th>+1 234 567 8900</th>
+          <th>{{user.phone_number}}</th>
         </tr>
         <tr>
           <th><label for="email">Email:</label></th>
-          <th>dr.janesmith@example.com</th>
+          <th>{{user.email}}</th>
         </tr>
       </table>
     </div>
     <div class="btn">
-      <a id="editBtn" href="EditDoctorProfile.html">Edit</a>
+      <a id="editBtn" href="/docEditProfileView/">Edit</a>
     </div>
   </section>
 

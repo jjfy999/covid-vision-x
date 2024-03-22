@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Report</title>
-  <link rel="stylesheet" href="..\asdf\master.css"">
+  <link rel="stylesheet" href="{% static 'doctor/css/master.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <header>
     <div id="logoImgBox">
-      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+      <img src="{% static 'images\Picture3-fotor-20240319214142-removebg-preview.png' %}" id="logoImg" alt="Logo"/>
     </div>
 	
 	<nav class="navbar">
@@ -19,17 +21,17 @@
   <div class="dropdown">
     <a class="active dropbtn">Patient</a>
     <div class="dropdown-content">
-      <a href="UploadXRay.html">Upload X-ray Image</a>
-      <a href="Report.html">Report</a>
-      <a href="nonUpdatedReport.html">Non-uploaded Report</a>
+      <a href="/docUploadXRay/">Upload X-ray Image</a>
+      <a href="/docReportView/">Report</a>
+      <a href="/docNonUpdatedReport/">Non-uploaded Report</a>
     </div>
   </div>
   
   <div class="dropdown">
     <a class="patient dropbtn">Profile</a>
     <div class="dropdown-content">
-      <a href="DoctorProfile.html">View Profile</a>
-      <a href="..\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+      <a href="/docProfileView/">View Profile</a>
+      <a href="/logout/">Logout</a> <!-- Adjust the href as needed for logout functionality -->
     </div>
   </div>
 </nav>

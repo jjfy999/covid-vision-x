@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,24 +34,24 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="/static/patient/css/EditProfile.css" />
+    <link rel="stylesheet" href="{% static 'patient/css/EditProfile.css' %}" />
   </head>
 
   <body>
     <!-- Header section starts -->
     <header>
       <div id="logoImgBox">
-        <img src="/static/images/logo_transparent.png" id="logoImg" />
+        <img src="{% static 'images/logo_transparent.png' %}" id="logoImg" />
       </div>
 
       <nav class="navbar">
-        <a class="report" href="Report.html">Report</a>
-        <a class="active" href="Profile.html">Profile</a>
+        <a class="report" href="/patientReport/">Report</a>
+        <a class="active" href="patientProfile/">Profile</a>
       </nav>
 
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
-        <a href="/LoginPageUI/login.html" class="bx bx-lock-open"></a>
+        <a href="/logout/" class="bx bx-lock-open"></a>
       </div>
     </header>
     <!-- Header section ends -->
@@ -57,9 +59,10 @@
     <!-- Report starts -->
     <section>
       <h1 id="patientProfile">Profile Editing</h1>
-
+      <form method="post" action="/updateDetails/">
+        {% csrf_token %}
       <div id="tablediv">
-        <img src="/static/images/unknownPerson.jpg" id="patientImg" />
+        <img src="{% static 'images/unknownPerson.jpg' %}" id="patientImg" />
         <table id="infoTable">
           <tr>
             <th><label for="id">Patient ID:</label></th>
@@ -94,13 +97,14 @@
       </div>
 
       <div class="btn">
-        <a id="doneBtn" href="Profile.html">Done</a>
-        <a id="cancelBtn" href="Profile.html">Cancel</a>
+        <button id="doneBtn" type="submit">Done</button>
+        <a id="cancelBtn" href="/patientProfile/">Cancel</a>
       </div>
+      </form> 
     </section>
 
     <!-- Report ends -->
 
-    <script src="withSearchBar.js"></script>
+    <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
   </body>
 </html>

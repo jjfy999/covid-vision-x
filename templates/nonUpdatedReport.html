@@ -1,34 +1,36 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Report</title>
-<link rel="stylesheet" href="master.css">
+<link rel="stylesheet" href="{% static 'doctor/css/master.css' %}">
 <link href="https://fonts.googleapis.com/css2?family=Joan&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
     <div id="logoImgBox">
-      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+      <img src="{% static 'images\Picture3-fotor-20240319214142-removebg-preview.png' %}" id="logoImg" alt="Logo"/>
     </div>
     
     <nav class="navbar">
       <div class="dropdown">
         <a class="active dropbtn">Patient</a>
         <div class="dropdown-content">
-          <a href="UploadXRay.html">Upload X-ray Image</a>
-          <a href="Report.html">Report</a>
-          <a href="nonUpdatedReport.html">Non-uploaded Report</a>
+          <a href="/docUploadXRay/">Upload X-ray Image</a>
+          <a href="/docReportView/">Report</a>
+          <a href="/docNonUpdatedReport/">Non-uploaded Report</a>
         </div>
       </div>
       
       <div class="dropdown">
         <a class="patient dropbtn">Profile</a>
         <div class="dropdown-content">
-          <a href="DoctorProfile.html">View Profile</a>
-          <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+          <a href="/docProfileView/">View Profile</a>
+          <a href="/logout/">Logout</a> <!-- Adjust the href as needed for logout functionality -->
         </div>
       </div>
     </nav>
@@ -44,7 +46,7 @@
         <div id="uploadContainer">
             <div id="xrayImage">
                 <!-- X-ray image displayed here -->
-                <img src="..\DoctorUI\img\xray.png"" alt="X-ray Image">
+                <img src="{% static 'images\xray.png' %}" alt="X-ray Image">
             </div>
             <div id="reportInfo">
                 <p>NAME: John Tan</p>

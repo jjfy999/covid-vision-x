@@ -42,7 +42,7 @@ class PatientUpdateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=False)
 
 
-
+#Modify the serializers to include the required fields
 class DoctorSysAdminGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
@@ -54,6 +54,7 @@ class DoctorSysAdminGetDetailsSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
 
+#Modify the serializers to include the required fields
 class PatientGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +11,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <!-- Link to your CSS file -->
-  <link rel="stylesheet" href= "C:\Users\Ernest\Desktop\asdf\master.css">
+  <link rel="stylesheet" href= "{% static 'doctor/css/master.css' %}">
 </head>
 <body>
 
   
   <header>
     <div id="logoImgBox">
-      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+      <img src="{% static 'images\Picture3-fotor-20240319214142-removebg-preview.png' %}" id="logoImg" alt="Logo"/>
     </div>
 	
 	
@@ -25,17 +27,17 @@
   <div class="dropdown">
     <a class="active dropbtn">Patient</a>
     <div class="dropdown-content">
-      <a href="UploadXRay.html">Upload X-ray Image</a>
-      <a href="Report.html">Report</a>
-      <a href="nonUpdatedReport.html">Non-uploaded Report</a>
+      <a href="/docUploadXRay/">Upload X-ray Image</a>
+      <a href="/docReportView/">Report</a>
+      <a href="/docNonUpdatedReport/">Non-uploaded Report</a>
     </div>
   </div>
   
   <div class="dropdown">
     <a class="patient dropbtn">Profile</a>
     <div class="dropdown-content">
-      <a href="DoctorProfile.html">View Profile</a>
-      <a href="C:\Users\Ernest\Desktop\asdf\login.html">Logout</a> <!-- Adjust the href as needed for logout functionality -->
+      <a href="/docProfileView/">View Profile</a>
+      <a href="/logout/">Logout</a> <!-- Adjust the href as needed for logout functionality -->
     </div>
   </div>
 </nav>
@@ -63,6 +65,6 @@
   </section>
 
   <!-- Your scripts here -->
-  <script src="withSearchBar.js"></script>
+  <script src="{% static 'systemadmin/js/withSearchBar.js' %}"></script>
 </body>
 </html>

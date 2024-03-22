@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,24 +34,24 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../SystemAdminUI/UserAcc.css" />
+    <link rel="stylesheet" href="{% static 'systemadmin/css/UserAcc.css' %}" />
   </head>
 
   <body>
     <!-- Header section starts -->
     <header>
       <div id="logoImgBox">
-        <img src="/static/images/logo_transparent.png" id="logoImg" />
+        <img src="{% static 'images/logo_transparent.png' %}" id="logoImg" />
       </div>
 
       <nav class="navbar">
-        <a class="active" href="UserAcc.html">User Account</a>
-        <a class="profile" href="Profile.html">Profile</a>
+        <a class="active" href="/sysUserAccList/">User Account</a>
+        <a class="profile" href="/sysProfileView/">Profile</a>
       </nav>
 
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
-        <a href="/LoginPageUI/login.html" class="bx bx-lock-open"></a>
+        <a href="/logout/" class="bx bx-lock-open"></a>
       </div>
     </header>
     <!-- Header section ends -->
@@ -62,7 +64,7 @@
         <div class="userBox">
           <div class="user-img-box">
             <img
-              src="/static/images/unknownPerson.jpg"
+              src="{% static 'images/unknownPerson.jpg' %}"
               alt="User 1"
               class="userImg"
             />
@@ -71,14 +73,14 @@
           <p class="userName">Bernad Koh</p>
           <p class="role">Doctor</p>
           <div class="viewInfoBtn">
-            <a href="AccDetail.html" class="btn">View Details</a>
+            <a href="/accDetails/" class="btn">View Details</a>
           </div>
         </div>
 
         <div class="userBox">
           <div class="user-img-box">
             <img
-              src="/static/images/unknownPerson.jpg"
+              src="{% static 'images/unknownPerson.jpg' %}"
               alt="User 2"
               class="userImg"
             />
@@ -87,14 +89,14 @@
           <p class="userName">Bernad Koh</p>
           <p class="role">Doctor</p>
           <div class="viewInfoBtn">
-            <a href="AccDetail.html" class="btn">View Details</a>
+            <a href="/accDetails/" class="btn">View Details</a>
           </div>
         </div>
 
         <div class="userBox">
           <div class="user-img-box">
             <img
-              src="/static/images/unknownPerson.jpg"
+              src="{% static 'images/unknownPerson.jpg' %}"
               alt="User 3"
               class="userImg"
             />
@@ -103,14 +105,14 @@
           <p class="userName">Bernad Koh</p>
           <p class="role">Doctor</p>
           <div class="viewInfoBtn">
-            <a href="AccDetail.html" class="btn">View Details</a>
+            <a href="/accDetails/" class="btn">View Details</a>
           </div>
         </div>
 
         <div class="userBox">
           <div class="user-img-box">
             <img
-              src="/static/images/unknownPerson.jpg"
+              src="{% static 'images/unknownPerson.jpg' %}"
               alt="User 4"
               class="userImg"
             />
@@ -119,14 +121,14 @@
           <p class="userName">Bernad Koh</p>
           <p class="role">Doctor</p>
           <div class="viewInfoBtn">
-            <a href="AccDetail.html" class="btn">View Details</a>
+            <a href="/accDetails/" class="btn">View Details</a>
           </div>
         </div>
 
         <div class="userBox">
           <div class="user-img-box">
             <img
-              src="/static/images/unknownPerson.jpg"
+              src="{% static 'images/unknownPerson.jpg' %}"
               alt="User 5"
               class="userImg"
             />
@@ -135,7 +137,7 @@
           <p class="userName">Bernad Koh</p>
           <p class="role">Doctor</p>
           <div class="viewInfoBtn">
-            <a href="AccDetail.html" class="btn">View Details</a>
+            <a href="/accDetails/" class="btn">View Details</a>
           </div>
         </div>
       </div>
@@ -143,6 +145,6 @@
 
     <!-- User Account ends -->
 
-    <script src="withSearchBar.js"></script>
+    <script src="{% static 'systemadmin/js/withSearchBar.js' %}"></script>
   </body>
 </html>
