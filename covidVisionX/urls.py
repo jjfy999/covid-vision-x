@@ -15,18 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from userAccount import views as userAccount
 from userAccount.admin import system_admin_site
 
+# from accessControl import views as accessControl
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('system-admin/', system_admin_site.urls),
-    path('', userAccount.loginPage, name='login'),
+    # path('', userAccount.loginPage, name='login'),
 
-    path('login/', userAccount.loginAuth, name='loginAuth'),
-    path('logout/', userAccount.logout, name='logout'),
+    # path('login/', userAccount.loginAuth, name='loginAuth'),
+    # path('logout/', userAccount.logout, name='logout'),
     path('patientReport/', userAccount.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
@@ -35,4 +37,5 @@ urlpatterns = [
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,
          name='updateUserDetails'),  # to update another person details
     path('listusers/', userAccount.list_users, name='listusers'),
+    path('accessControl/', include('accessControl.urls')),
 ]

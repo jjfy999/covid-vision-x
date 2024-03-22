@@ -7,6 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from userAccount.models import Account
+
 from .serializers import UserLoginSerializer, UserRegisterSerializer
 
 
@@ -22,7 +24,9 @@ class LoginView(APIView):
             login(request, authenticated_user)
             token, created = Token.objects.get_or_create(
                 user=authenticated_user)
-            return Response({'token': token.key}, status=status.HTTP_200_CREATED)
+            user_role = authenticated_user.role
+
+            return Response({'token': token.key, 'role': user_role}, status=status.HTTP_200_CREATED)
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 

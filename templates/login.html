@@ -94,19 +94,33 @@
           alert("Please fill in all required fields.");
           return; // Exit the function if validation fails
         }
+        axios
+          .post("/login/", { username, password })
+          .then((response) => {
+            if (response.data.token) {
+              localStorage.setItem("auth_token", response.data.token);
+              message.textContent = "Login successful!";
 
-        // Redirect user based on role
-        switch (role) {
-          case "patient":
-            window.location.href = "/PatientUI/Report.html";
-            break;
-          case "doctor":
-            window.location.href = "/";
-            break;
-          case "sysad":
-            window.location.href = "/SystemAdminUI/UserAcc.html";
-            break;
-        }
+              const role1 = response.data.role;
+              switch (role1) {
+                case "patient":
+                  window.location.href = "/PatientUI/Report.html";
+                  break;
+                case "doctor":
+                  window.location.href = "/";
+                  break;
+                case "sysad":
+                  window.location.href = "/SystemAdminUI/UserAcc.html";
+                  break;
+              }
+            } else {
+              message.textContent = "Invalid credentials";
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            message.textContent = "Login failed";
+          });
       }
     </script>
   </body>
