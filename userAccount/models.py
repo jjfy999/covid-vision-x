@@ -1,5 +1,5 @@
 
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 
 
@@ -40,4 +40,5 @@ class SystemAdmin(Account):
 
     def save(self, *args, **kwargs):
         self.role = 'system_admin'
+        self.is_staff = True
         super().save(*args, **kwargs)

@@ -6,4 +6,5 @@ __pycache__
 env/
 covidVisionX/covid-vision-x.code-workspace
 .venv/
-
+**/**/**/migrations/
+**/**/migrations/
