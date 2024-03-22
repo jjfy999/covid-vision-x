@@ -1,20 +1,23 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from django.http import (HttpResponse, HttpResponseBadRequest, HttpResponseNotFound,
-                         HttpResponseRedirect, JsonResponse)
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseNotFound, HttpResponseRedirect,
+                         JsonResponse)
 from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from userAccount.serializers import (DoctorSysAdminSerializer,
+from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
+                                     DoctorSysAdminSerializer,
                                      DoctorSysAdminUpdateSerializer,
-                                     PatientSerializer, PatientUpdateSerializer, DoctorSysAdminGetDetailsSerializer, PatientGetDetailsSerializer)
+                                     PatientGetDetailsSerializer,
+                                     PatientSerializer,
+                                     PatientUpdateSerializer)
 
 from .models import Doctor, Patient, SystemAdmin
-from django.contrib.auth import logout as auth_logout
-
 
 # Create your views here.
 
@@ -24,6 +27,7 @@ def loginPage(request):
     return render(request, 'login.html')
 
 
+'''
 def loginAuth(request):  # only a temporary login function for testing
 
     if request.method == 'POST':
@@ -45,12 +49,16 @@ def loginAuth(request):  # only a temporary login function for testing
                 return HttpResponse('Who are you')
         else:
             return HttpResponse('Invalid credentials')
+'''
+
 
 def reportView(request):    
     return render(request, 'Report.html')
 
+
 def profileView(request):
     return render(request, 'Profile.html')
+
 
 def editProfileView(request):
     return render(request, 'EditProfile.html')
@@ -83,10 +91,13 @@ def docNonUpdatedReport(request):
 def docReportView(request):
     return render(request, 'DocReport.html')
 
+'''
 def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
+'''
+
 
 
 
@@ -136,11 +147,13 @@ def list_users(request):                                                        
 
     return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
+
+@api_view(['POST'])
 @login_required
-def updateDetails(request):                                                                 #for users to update own details
-    
+def updateDetails(request):
+
     user = request.user
-        
+
     # Check if the user is a Doctor or a SystemAdmin
     if user.role == 'doctor' or user.role == 'system_admin':
         serializer = DoctorSysAdminUpdateSerializer(user, data=request.POST)
@@ -149,7 +162,7 @@ def updateDetails(request):                                                     
     else:
         messages.error(request, "Invalid user type")
         return HttpResponseBadRequest("Invalid user type")
-            
+
     if serializer.is_valid():
         serializer.save()
         messages.success(request, "Details updated successfully!")
@@ -179,7 +192,8 @@ def updateUserDetails(request, pk):                                             
             try:
                 user = get_object_or_404(SystemAdmin, pk=pk)
                 user_type = "SystemAdmin"
-                serializer = DoctorSysAdminUpdateSerializer(user, data=request.data)
+                serializer = DoctorSysAdminUpdateSerializer(
+                    user, data=request.data)
             except SystemAdmin.DoesNotExist:
                 # If not found in any table, return 404
                 return HttpResponseNotFound("User not found")
@@ -188,6 +202,5 @@ def updateUserDetails(request, pk):                                             
         serializer.save()
         return Response({'message': f'Details updated successfully for {user_type}'})
     else:
-        return Response(serializer.errors, status=400)  # Return errors if serializer is not valid
-
-
+        # Return errors if serializer is not valid
+        return Response(serializer.errors, status=400)

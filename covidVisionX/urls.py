@@ -15,8 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
+from accessControl import views as accessControl
 from userAccount import views as userAccount
 from userAccount.admin import system_admin_site
 
@@ -25,10 +26,10 @@ urlpatterns = [
     path('system-admin/', system_admin_site.urls),
     path('', userAccount.loginPage, name='login'),
 
-    path('login/', userAccount.loginAuth, name='loginAuth'),                    
-    path('logout/', userAccount.logout, name='logout'), 
-    path('patientReport/', userAccount.reportView, name='reportView'),                          #for patient to view own reports
-    path('patientProfile/', userAccount.getDetails, name='getDetails'),                         #for patient to view own details
+    # path('login/', userAccount.loginAuth, name='loginAuth'),
+    # path('logout/', userAccount.logout, name='logout'),
+    path('patientReport/', userAccount.reportView, name='reportView'),
+    path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
          name='editProfileView'),                                                               #for patient to view edit own details page          
     path('updateDetails/', userAccount.updateDetails, name='updateDetails'),                    #for patient to update own details
@@ -50,4 +51,7 @@ urlpatterns = [
     path('docNonUpdatedReport/', userAccount.docNonUpdatedReport, name='docNonUpdatedReport'),  #for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
     path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
+
+    path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
+    path('logout/', accessControl.LogoutView.as_view(), name='logout'),
 ]

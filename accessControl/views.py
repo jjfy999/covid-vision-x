@@ -2,29 +2,36 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthTokenView
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from userAccount.models import Account
 
 from .serializers import UserLoginSerializer, UserRegisterSerializer
 
 
 class LoginView(APIView):
     def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['username']
-        password = serializer.validate_data['password']
+        if request.method == 'POST':
+            serializer = UserLoginSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            user = serializer.validated_data['username']
+            password = serializer.validated_data['password']
 
-        authenticated_user = authenticate(username=user, password=password)
-        if authenticated_user is not None:
-            login(request, authenticated_user)
-            token, created = Token.objects.get_or_create(
-                user=authenticated_user)
-            return Response({'token': token.key}, status=status.HTTP_200_CREATED)
+            authenticated_user = authenticate(username=user, password=password)
+            if authenticated_user is not None:
+                login(request, authenticated_user)
+                token, created = Token.objects.get_or_create(
+                    user=authenticated_user)
+                user_role = authenticated_user.role
+
+                return Response({'token': token.key, 'role': user_role}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class LogoutView(APIView):
@@ -34,7 +41,7 @@ class LogoutView(APIView):
         return Response({"Message": "You are logged out"}, status=status.HTTP_200_OK)
 
 
-@api_view({"POST"})
+@api_view(["POST"])
 def user_register_view(request):
     if request.method == "POST":
         serializer = UserRegisterSerializer(data=request.data)
