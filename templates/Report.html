@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,14 +34,14 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="/static/patient/css/Report.css" />
+    <link rel="stylesheet" href="{% static 'patient/css/Report.css' %}" />
   </head>
 
   <body>
     <!-- Header section starts -->
     <header>
       <div id="logoImgBox">
-        <img src="/static/images/logo_transparent.png" id="logoImg" />
+        <img src="{% static 'images/logo_transparent.png' %}" id="logoImg" />
       </div>
 
       <nav class="navbar">
@@ -59,7 +61,7 @@
       <h1 id="patientProfile">My Report</h1>
 
       <div id="tablediv">
-        <img src="/static/images/xray.jpeg" id="patientImg" />
+        <img src="{% static 'images/xray.jpeg' %}" id="patientImg" />
         <table id="infoTable">
           <tr>
             <th><label for="id">Patient ID:</label></th>
@@ -84,6 +86,6 @@
 
     <!-- Report ends -->
 
-    <script src="/static/patient/js/withSearchBar.js"></script>
+    <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
   </body>
 </html>

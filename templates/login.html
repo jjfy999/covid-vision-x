@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html>
@@ -31,7 +33,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="{% static 'login/login.css' %}" />
   </head>
   <body>
     <div id="container">
@@ -72,7 +74,7 @@
 
       <div id="logoSection">
         <div id="img-box">
-          <img src="/static/images/logo.png" id="logoImg" />
+          <img src="{% static 'images/logo.png' %}" id="logoImg" />
         </div>
       </div>
     </div>

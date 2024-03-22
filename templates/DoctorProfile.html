@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Doctor Profile</title>
-  <link rel="stylesheet" href="..\asdf\master.css" />
+  <link rel="stylesheet" href="{% static 'doctor/master.css' %}" />
 </head>
 <body>
   <header>
     <div id="logoImgBox">
-      <img src="..\asdf\img\Picture3-fotor-20240319214142-removebg-preview.png" id="logoImg" alt="Logo"/>
+      <img src="{% static 'images/Picture3-fotor-20240319214142-removebg-preview.png' %}" id="logoImg" alt="Logo"/>
     </div>
 	
 <!-- 	 <div id="logoImgBox">
@@ -55,7 +57,7 @@
   <section>
     <h1 id="doctorProfile">Doctor Profile</h1>
     <div id="tablediv">
-      <img src="..\asdf\img\istockphoto-1209654046-612x612.jpg" id="doctorImg" alt="Doctor Image"/>
+      <img src="{% static 'images/istockphoto-1209654046-612x612.jpg' %}" id="doctorImg" alt="Doctor Image"/>
       <table id="infoTable">
         <!-- Replace with the doctor's information -->
         <tr>
@@ -89,6 +91,6 @@
     </div>
   </section>
 
-  <script src="withSearchBar.js"></script>
+  <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
 </body>
 </html>
