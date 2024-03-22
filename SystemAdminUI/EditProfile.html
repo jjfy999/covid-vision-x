@@ -39,22 +39,17 @@
     <!-- Header section starts -->
     <header>
       <div id="logoImgBox">
-        <img src="../UIImg/logo_transparent.png" id="logoImg" />
+        <img src="/static/images/logo_transparent.png" id="logoImg" />
       </div>
 
       <nav class="navbar">
         <a class="userAcc" href="UserAcc.html">Report</a>
-        <a class="active" href="Profile.html" onclick="toggleDropdown()"
-          >Profile</a
-        >
-        <div id="profiledropdown">
-          <a href="Profile.html">View My Profile</a>
-          <a href="../LoginPageUI/login.html">Logout</a>
-        </div>
+        <a class="active" href="Profile.html">Profile</a>
       </nav>
 
       <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
+        <a href="/LoginPageUI/login.html" class="bx bx-lock-open"></a>
       </div>
     </header>
     <!-- Header section ends -->
@@ -64,10 +59,7 @@
       <h1 id="SAEditProfile">Profile Editing</h1>
 
       <div id="tablediv">
-        <img
-          src="../LoginPageUI/Images/istockphoto-1209654046-612x612.jpg"
-          id="patientImg"
-        />
+        <img src="/static/images/unknownPerson.jpg" id="patientImg" />
         <table id="infoTable">
           <tr>
             <th><label for="id">System Admin ID:</label></th>
