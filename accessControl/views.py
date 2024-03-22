@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthTokenView
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -38,7 +38,7 @@ class LogoutView(APIView):
         return Response({"Message": "You are logged out"}, status=status.HTTP_200_OK)
 
 
-@api_view({"POST"})
+@api_view(["POST"])
 def user_register_view(request):
     if request.method == "POST":
         serializer = UserRegisterSerializer(data=request.data)
