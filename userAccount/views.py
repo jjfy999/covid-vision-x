@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from userAccount.serializers import (DoctorSysAdminSerializer,
                                      DoctorSysAdminUpdateSerializer,
-                                     PatientSerializer, PatientUpdateSerializer)
+                                     PatientSerializer, PatientUpdateSerializer, DoctorSysAdminGetDetailsSerializer, PatientGetDetailsSerializer)
 
 from .models import Doctor, Patient, SystemAdmin
 from django.contrib.auth import logout as auth_logout
@@ -59,6 +59,21 @@ def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
+
+def getDetails(request):
+    user=request.user
+
+    if user.role == 'patient':
+        serialized_User = PatientGetDetailsSerializer(user)
+        
+    elif user.role == 'doctor' or user.role == 'system_admin':
+        serialized_User = DoctorSysAdminGetDetailsSerializer(user)
+
+    else:    
+        return HttpResponse('User not found')
+    
+    context = {'user': serialized_User.data}
+    return render(request, 'Profile.html', context)
 
 @api_view(['GET'])
 def list_users(request):
