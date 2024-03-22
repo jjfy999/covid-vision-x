@@ -13,6 +13,8 @@ from userAccount.serializers import (DoctorSysAdminSerializer,
                                      PatientSerializer, PatientUpdateSerializer)
 
 from .models import Doctor, Patient, SystemAdmin
+from django.contrib.auth import logout as auth_logout
+
 
 # Create your views here.
 
@@ -50,11 +52,11 @@ def reportView(request):
 def profileView(request):
     return render(request, 'Profile.html')
 
-def updateDetails(request):
+def editProfileView(request):
     return render(request, 'EditProfile.html')
 
 def logout(request):
-    logout(request)
+    auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
 

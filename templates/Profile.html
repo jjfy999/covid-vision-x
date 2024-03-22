@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <!-- Specify the language of the content as English -->
@@ -32,7 +33,7 @@
     />
 
     <!-- Css file link -->
-    <link rel="stylesheet" href="../PatientUI/Profile.css" />
+    <link rel="stylesheet" href="{% static 'patient/css/Profile.css' %}" />
   </head>
 
   <body>
@@ -40,14 +41,14 @@
     <header>
       <div id="logoImgBox">
         <img
-          src="../LoginPageUI/Images/Picture3-fotor-20240319214142-removebg-preview.png"
+          src="{% static 'images/Picture3-fotor-20240319214142-removebg-preview.png' %}"
           id="logoImg"
         />
       </div>
 
       <nav class="navbar">
-        <a class="report" href="Report.html">Report</a>
-        <a class="active" href="Profile.html">Profile</a>
+        <a class="report" href="/patientReport/">Report</a>
+        <a class="active" href="/patientProfile/">Profile</a>
       </nav>
 
       <div class="icons">
@@ -62,7 +63,7 @@
 
       <div id="tablediv">
         <img
-          src="../LoginPageUI/Images/istockphoto-1209654046-612x612.jpg"
+          src="{%  static 'images/istockphoto-1209654046-612x612.jpg' %}"
           id="patientImg"
         />
         <table id="infoTable">
@@ -106,12 +107,12 @@
       </div>
 
       <div class="btn">
-        <a id="editBtn" href="EditProfile.html">Edit</a>
+        <a id="editBtn" href="/patientEditProfile/">Edit</a>
       </div>
     </section>
 
     <!-- Report ends -->
 
-    <script src="withSearchBar.js"></script>
+    <script src="{% static 'patient/js/withSearchBar.js' %}"></script>
   </body>
 </html>
