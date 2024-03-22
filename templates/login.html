@@ -40,7 +40,7 @@
       <div id="loginSection">
         <div>
           <h1 id="loginHeading">LOGIN</h1>
-          <form onsubmit="validateLogin(event)" method="post">
+          <form onsubmit="validateLogin(event)" action="/login/" method="post">
             <label for="role"><b>Login As</b></label>
             <select name="role" required id="roleInput">
               <option value="" disabled selected>Select a role</option>
@@ -53,7 +53,7 @@
             <input
               type="text"
               placeholder="Enter Username"
-              name="uname"
+              name="username"
               id="usernameInput"
               required
             />
@@ -62,7 +62,7 @@
             <input
               type="password"
               placeholder="Enter Password"
-              name="psw"
+              name="password"
               id="passwordInput"
               required
             />
@@ -80,7 +80,7 @@
     </div>
 
     <!-- Javascript -->
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
       // to handle validatation temporarily
       function validateLogin(event) {
         event.preventDefault(); // Prevent default form submission behavior
@@ -109,8 +109,8 @@
                 case "doctor":
                   window.location.href = "/";
                   break;
-                case "sysad":
-                  window.location.href = "/SystemAdminUI/UserAcc.html";
+                case "system_admin":
+                  window.location.href = "/templates/SysadminProfile.html";
                   break;
               }
             } else {
