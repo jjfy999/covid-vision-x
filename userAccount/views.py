@@ -122,9 +122,39 @@ def getDetails(request):                                                        
     else:    
         return HttpResponse('User not found')
     
+
+def getUserDetails(request, pk):                                            #for system admin to view specific user details 
+    user = None
+    # Try to find the user in the Doctor model
+    doctor = Doctor.objects.filter(pk=pk)
+    if doctor.exists():
+        user=doctor.first()
+        serializer = DoctorSysAdminGetDetailsSerializer(user)
+        
+    # If not found in Doctor model, try the Patient model
+    if user is None:
+        patient = Patient.objects.filter(pk=pk)
+        if patient.exists():
+            user=patient.first()
+            serializer = PatientGetDetailsSerializer(user)
+            
+    # If not found in Patient model, try the SystemAdmin model
+    if user is None:
+        system_admin = SystemAdmin.objects.filter(pk=pk)
+        if system_admin.exists():
+            user=system_admin.first()
+            serializer = DoctorSysAdminGetDetailsSerializer(user)
+            
+    if user is None:
+        return HttpResponseNotFound("User not found")
+
+    return render(request, 'AccDetail.html', {'user': serializer.data})
+
+
+    
     
 @api_view(['GET'])
-def list_users(request):                                                               #for system admin to view list of users
+def listUsers(request):                                                               #for system admin to view list of users
     # Serialize patients
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
@@ -145,7 +175,7 @@ def list_users(request):                                                        
         'system_admins': system_admin_serializer.data
     }
 
-    return JsonResponse(users_data, json_dumps_params={'indent': 2})
+    return render(request, 'Useracc.html', {'users_data': users_data})
 
 
 

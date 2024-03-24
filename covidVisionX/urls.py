@@ -35,15 +35,16 @@ urlpatterns = [
     path('updateDetails/', userAccount.updateDetails, name='updateDetails'),                    #for patient to update own details
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,                          #for system admin to update another person details!!!!!!!!!! (linked to below)
          name='updateUserDetails'),  # to update another person details
-    path('listusers/', userAccount.list_users, name='listusers'),                               #for system admin to view list of users                   
+                 
 
 
-    path('sysUserAccList/', userAccount.sysUserAccList, name='sysUserAccList'),                 #for system admin to view list of users
+    path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),                      #for system admin to view list of users
     path('sysProfileView/', userAccount.getDetails, name='getDetails'),                         #for system admin to view own details
     path('sysEditProfileView/', userAccount.sysEditProfileView, name='sysEditProfileView'),     #for system admin to view edit own details page
-    path('accDetails/', userAccount.accDetails, name='accDetails'),                             #for system admin to view specific user details supposed to have pk !!!!!!!!!!! 
+    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='accDetails'),                #for system admin to view specific user details supposed to have pk !!!!!!!!!!! 
     path('sysEditAccDetails/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details supposed to have pk !!!!!!!!!!!
     path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for system admin to update own details
+
 
     path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
     path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page

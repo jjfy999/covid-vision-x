@@ -46,22 +46,26 @@ class PatientUpdateSerializer(serializers.ModelSerializer):
 class DoctorSysAdminGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        fields = ['username', 'email', 'name', 'phone_number', 'password']
+        fields = ['account_id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
 
+    account_id = serializers.IntegerField(required=True)
     username = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     name = serializers.CharField(required=True)
     phone_number = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
+    role = serializers.CharField(required=True)
 
 #Modify the serializers to include the required fields
 class PatientGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['username', 'email', 'name', 'phone_number', 'password']
+        fields = ['account_id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
 
+    account_id = serializers.IntegerField(required=True)
     username = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     name = serializers.CharField(required=True)
     phone_number = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
+    role = serializers.CharField(required=True)
