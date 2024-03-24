@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseNotFound, HttpResponseRedirect,
                          JsonResponse)
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -25,7 +25,6 @@ from .models import Doctor, Patient, SystemAdmin
 def loginPage(request):
 
     return render(request, 'login.html')
-
 
 
 def loginAuth(request):  # only a temporary login function for testing
@@ -75,8 +74,8 @@ def sysEditProfileView(request):
 def accDetails(request):
     return render(request, 'AccDetail.html')
 
-def sysEditAccDetails(request):
-    return render(request, 'EditAcc.html')
+def sysEditAccDetails(request,pk):
+    return render(request, 'EditAcc.html', {'pk': pk})
 
 
 def docEditProfileView(request):
@@ -96,7 +95,6 @@ def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
-
 
 
 
@@ -122,6 +120,7 @@ def getDetails(request):                                                        
     else:    
         return HttpResponse('User not found')
     
+
 
 def getUserDetails(request, pk):                                            #for system admin to view specific user details 
     user = None
@@ -202,35 +201,33 @@ def updateDetails(request):                                                     
     return redirect('getDetails')
 
 
-
-@api_view(['POST'])
+@login_required
 def updateUserDetails(request, pk):                                                          #for system admin to update another person details
+    user = None
 
-    # Retrieve the user object from Doctor table
-    try:
-        user = get_object_or_404(Doctor, pk=pk)
-        user_type = "Doctor"
-        serializer = DoctorSysAdminUpdateSerializer(user, data=request.data)
-    except Doctor.DoesNotExist:
-        # If not found in Doctor table, try to get from Patient table
-        try:
-            user = get_object_or_404(Patient, pk=pk)
-            user_type = "Patient"
-            serializer = PatientUpdateSerializer(user, data=request.data)
-        except Patient.DoesNotExist:
-            # If not found in Patient table, try to get from SystemAdmin table
-            try:
-                user = get_object_or_404(SystemAdmin, pk=pk)
-                user_type = "SystemAdmin"
-                serializer = DoctorSysAdminUpdateSerializer(
-                    user, data=request.data)
-            except SystemAdmin.DoesNotExist:
-                # If not found in any table, return 404
-                return HttpResponseNotFound("User not found")
+    doctor = Doctor.objects.filter(pk=pk)
+    if doctor.exists():
+        user=doctor.first()
+        serializer = DoctorSysAdminUpdateSerializer(user,data=request.POST)
+                                                    
+    if user is None:
+        patient = Patient.objects.filter(pk=pk)
+        if patient.exists():
+            user=patient.first()
+            serializer = PatientUpdateSerializer(user,data=request.POST)
+            
+    # If not found in Patient model, try the SystemAdmin model
+    if user is None:
+        system_admin = SystemAdmin.objects.filter(pk=pk)
+        if system_admin.exists():
+            user=system_admin.first()
+            serializer = DoctorSysAdminUpdateSerializer(user,data=request.POST)
 
     if serializer.is_valid():
         serializer.save()
-        return Response({'message': f'Details updated successfully for {user_type}'})
+        return redirect(reverse('getUserDetails', kwargs={'pk': pk}))
     else:
         # Return errors if serializer is not valid
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=400)  
+
+   

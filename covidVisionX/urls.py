@@ -41,8 +41,8 @@ urlpatterns = [
     path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),                      #for system admin to view list of users
     path('sysProfileView/', userAccount.getDetails, name='getDetails'),                         #for system admin to view own details
     path('sysEditProfileView/', userAccount.sysEditProfileView, name='sysEditProfileView'),     #for system admin to view edit own details page
-    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='accDetails'),                #for system admin to view specific user details supposed to have pk !!!!!!!!!!! 
-    path('sysEditAccDetails/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details supposed to have pk !!!!!!!!!!!
+    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),                #for system admin to view specific user details supposed to have pk !!!!!!!!!!! 
+    path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details supposed to have pk !!!!!!!!!!!
     path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for system admin to update own details
 
 
