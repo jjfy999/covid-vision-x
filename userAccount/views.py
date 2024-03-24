@@ -230,4 +230,21 @@ def updateUserDetails(request, pk):                                             
         # Return errors if serializer is not valid
         return Response(serializer.errors, status=400)  
 
-   
+@login_required 
+def deleteUserAccount(request, pk):                                                          #for system admin to delete another person account
+    user = None
+
+    doctor = Doctor.objects.filter(pk=pk)
+    if doctor.exists():
+        user=doctor.first()
+                                                    
+    if user is None:
+        patient = Patient.objects.filter(pk=pk)
+        if patient.exists():
+            user=patient.first()
+        
+    user.delete()        
+    return redirect('sysUserAccList')        
+
+
+    
