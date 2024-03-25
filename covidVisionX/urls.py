@@ -41,11 +41,13 @@ urlpatterns = [
     path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),                      #for system admin to view list of users
     path('sysProfileView/', userAccount.getDetails, name='getDetails'),                         #for system admin to view own details
     path('sysEditProfileView/', userAccount.sysEditProfileView, name='sysEditProfileView'),     #for system admin to view edit own details page
-    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),                #for system admin to view specific user details supposed to have pk !!!!!!!!!!! 
-    path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details supposed to have pk !!!!!!!!!!!
+    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),            #for system admin to view specific user details 
+    path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details 
     path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for system admin to update own details
+    #path('sysSearchuser/', userAccount.searchUser, name='searchUser'),                          #for system admin to search for a doctor or patient
 
-
+    #path('docSearchuser/', userAccount.searchUser, name='searchUser'),                         #for doctor to search for a patient
+    path('docUserAccList/', userAccount.listUsers, name='docUserAccList'),                      #for doctor to view list of patients (waiting for UI)
     path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
     path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page
     path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),                    #for doctor to upload xray image page

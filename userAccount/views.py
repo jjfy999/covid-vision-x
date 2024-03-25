@@ -122,35 +122,31 @@ def getDetails(request):                                                        
     
 
 
-def getUserDetails(request, pk):                                            #for system admin to view specific user details 
-    user = None
-    # Try to find the user in the Doctor model
-    doctor = Doctor.objects.filter(pk=pk)
-    if doctor.exists():
-        user=doctor.first()
-        serializer = DoctorSysAdminGetDetailsSerializer(user)
-        
-    # If not found in Doctor model, try the Patient model
-    if user is None:
-        patient = Patient.objects.filter(pk=pk)
-        if patient.exists():
-            user=patient.first()
-            serializer = PatientGetDetailsSerializer(user)
-            
+def getUserDetails(request, pk):                                                    #for system admin to view specific user details
+    try:
+        doctor = Doctor.objects.get(account_id=pk)
+        serializer = DoctorSysAdminGetDetailsSerializer(doctor)
+    except Doctor.DoesNotExist:
+        doctor = None
+
+    if doctor is None:
+        try:
+            patient = Patient.objects.get(account_id=pk)
+            serializer = PatientGetDetailsSerializer(patient)
+        except Patient.DoesNotExist:
+            patient = None
+
     # If not found in Patient model, try the SystemAdmin model
-    if user is None:
-        system_admin = SystemAdmin.objects.filter(pk=pk)
-        if system_admin.exists():
-            user=system_admin.first()
-            serializer = DoctorSysAdminGetDetailsSerializer(user)
-            
-    if user is None:
-        return HttpResponseNotFound("User not found")
+    if doctor is None and patient is None:
+        try:
+            system_admin = SystemAdmin.objects.get(account_id=pk)
+            serializer = DoctorSysAdminGetDetailsSerializer(system_admin)
+        except SystemAdmin.DoesNotExist:
+            return HttpResponseNotFound("User not found")
 
     return render(request, 'AccDetail.html', {'user': serializer.data})
 
 
-    
     
 @api_view(['GET'])
 def listUsers(request):                                                               #for system admin to view list of users
@@ -167,15 +163,23 @@ def listUsers(request):                                                         
     system_admin_serializer = DoctorSysAdminSerializer(
         system_admins, many=True)
 
-    # Combine the serialized data
     users_data = {
         'patients': patient_serializer.data,
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-
     return render(request, 'Useracc.html', {'users_data': users_data})
 
+
+@api_view(['GET'])
+def listPatients(request):                                                               #for doctor to view list of patients !! have not updated url, waiting for UI
+    # Serialize patients
+    patients = Patient.objects.all()
+    patient_serializer = PatientSerializer(patients, many=True)
+
+    
+    users_data = {'patients': patient_serializer.data}
+    return render(request, 'Useracc.html', {'users_data': users_data})
 
 
 @login_required
@@ -201,50 +205,80 @@ def updateDetails(request):                                                     
     return redirect('getDetails')
 
 
-@login_required
-def updateUserDetails(request, pk):                                                          #for system admin to update another person details
-    user = None
+@login_required 
+def updateUserDetails(request, pk):                                                             #for system admin to update another person details
+    try:
+        doctor = Doctor.objects.get(account_id=pk)
+        serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.POST)
+    except Doctor.DoesNotExist:
+        doctor = None
 
-    doctor = Doctor.objects.filter(pk=pk)
-    if doctor.exists():
-        user=doctor.first()
-        serializer = DoctorSysAdminUpdateSerializer(user,data=request.POST)
-                                                    
-    if user is None:
-        patient = Patient.objects.filter(pk=pk)
-        if patient.exists():
-            user=patient.first()
-            serializer = PatientUpdateSerializer(user,data=request.POST)
-            
+    if doctor is None:
+        try:
+            patient = Patient.objects.get(account_id=pk)
+            serializer = PatientUpdateSerializer(patient, data=request.POST)
+        except Patient.DoesNotExist:
+            patient = None
+
     # If not found in Patient model, try the SystemAdmin model
-    if user is None:
-        system_admin = SystemAdmin.objects.filter(pk=pk)
-        if system_admin.exists():
-            user=system_admin.first()
-            serializer = DoctorSysAdminUpdateSerializer(user,data=request.POST)
+    if doctor is None and patient is None:
+        try:
+            system_admin = SystemAdmin.objects.get(account_id=pk)
+            serializer = DoctorSysAdminUpdateSerializer(system_admin, data=request.POST)
+        except SystemAdmin.DoesNotExist:
+            return HttpResponseNotFound("User not found")
 
     if serializer.is_valid():
         serializer.save()
         return redirect(reverse('getUserDetails', kwargs={'pk': pk}))
     else:
         # Return errors if serializer is not valid
-        return Response(serializer.errors, status=400)  
+        return Response(serializer.errors, status=400)
 
-@login_required 
-def deleteUserAccount(request, pk):                                                          #for system admin to delete another person account
-    user = None
 
-    doctor = Doctor.objects.filter(pk=pk)
-    if doctor.exists():
-        user=doctor.first()
-                                                    
+'''
+@login_required
+def deleteUserAccount(request, pk):                                                                 #for system admin to delete user account
+    try:
+        user = Doctor.objects.get(account_id=pk)
+    except Doctor.DoesNotExist:
+        user = None
+
     if user is None:
-        patient = Patient.objects.filter(pk=pk)
-        if patient.exists():
-            user=patient.first()
-        
-    user.delete()        
-    return redirect('sysUserAccList')        
+        try:
+            user = Patient.objects.get(account_id=pk)
+        except Patient.DoesNotExist:
+            user = None
 
+    if user is not None:
+        user.delete()
+    
+    return redirect('sysUserAccList')
+
+
+     
 
     
+
+def searchUser(request):                                                                        #for system admin to search for user && for doctor to search for patient
+    account_id = request.POST.get('account_id', None)
+    
+    if account_id:
+        try:
+            if request.user.role == 'doctor':
+                searchUser = Patient.objects.get(account_id=account_id)
+                serializer = PatientGetDetailsSerializer(searchUser)
+                return render(request, 'UserAcc.html', {'user': serializer.data})
+            else:
+                searchUser = Patient.objects.get(account_id=account_id)
+                serializer = PatientGetDetailsSerializer(searchUser)
+                if not searchUser:  # If patient not found, search for doctor
+                    searchUser = Doctor.objects.get(account_id=account_id)
+                    serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
+                    return render(request, 'UserAcc.html', {'user': serializer.data})
+        except (Patient.DoesNotExist, Doctor.DoesNotExist):
+            return HttpResponseBadRequest("Invalid user type")
+        
+
+    return render(request, 'UserAcc.html')
+'''
