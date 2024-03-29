@@ -101,10 +101,10 @@
             if (response.data.token) {
               localStorage.setItem("auth_token", response.data.token);
               message.textContent = "Login successful!";
+              window.location.href = "./templates/SysadminProfile.html";
               axios.defaults.headers.common[
                 "Authorization"
               ] = `Token ${response.data.token}`;
-              window.location.href = "./templates/SysadminProfile.html";
             } else {
               message.textContent = "Invalid credentials";
             }
