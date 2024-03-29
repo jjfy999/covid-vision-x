@@ -104,7 +104,7 @@
               axios.defaults.headers.common[
                 "Authorization"
               ] = `Token ${response.data.token}`;
-              window.location.href = "/templates/SysadminProfile.html";
+              window.location.href = "./templates/SysadminProfile.html";
             } else {
               message.textContent = "Invalid credentials";
             }
