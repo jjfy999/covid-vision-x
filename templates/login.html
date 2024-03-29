@@ -66,7 +66,7 @@
               id="passwordInput"
               required
             />
-
+            <input type="hidden" name="next" value="{{next}}" />
             <button type="submit">Login</button>
           </form>
         </div>
@@ -79,8 +79,9 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+    <script>
       // to handle validatation temporarily
       function validateLogin(event) {
         event.preventDefault(); // Prevent default form submission behavior
@@ -100,19 +101,10 @@
             if (response.data.token) {
               localStorage.setItem("auth_token", response.data.token);
               message.textContent = "Login successful!";
-
-              const role1 = response.data.role;
-              switch (role1) {
-                case "patient":
-                  window.location.href = "/PatientUI/Report.html";
-                  break;
-                case "doctor":
-                  window.location.href = "/";
-                  break;
-                case "system_admin":
-                  window.location.href = "/templates/SysadminProfile.html";
-                  break;
-              }
+              axios.defaults.headers.common[
+                "Authorization"
+              ] = `Token ${response.data.token}`;
+              window.location.href = "/templates/SysadminProfile.html";
             } else {
               message.textContent = "Invalid credentials";
             }

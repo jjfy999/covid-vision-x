@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.template.loader import get_template
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -26,8 +28,15 @@ class LoginView(APIView):
                 token, created = Token.objects.get_or_create(
                     user=authenticated_user)
                 user_role = authenticated_user.role
+                template_path = 'SysadminProfile.html'
+                template = get_template(template_path)
+                response_data = {
+                    'token': token.key,
+                    'redirect_url': template_path,
+                    'role': user_role,
+                }
 
-                return Response({'token': token.key, 'role': user_role}, status=status.HTTP_200_OK)
+                return JsonResponse(response_data, status=200)
             else:
                 return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
         else:
