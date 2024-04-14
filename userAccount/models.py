@@ -48,7 +48,7 @@ class SystemAdmin(Account):
         super().save(*args, **kwargs)
 
 
-
+'''
 username = 'admin1'
 admin, created = SystemAdmin.objects.get_or_create(
     username=username, email='admin1@gmail.com', phone_number='33333333', name='admin1')
@@ -98,3 +98,4 @@ for i in range(10, 20):
         )
         doctor.password = make_password(username)
         doctor.save()   
+'''
