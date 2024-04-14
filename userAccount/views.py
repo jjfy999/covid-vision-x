@@ -148,7 +148,7 @@ def getUserDetails(request, pk):                                                
 
 
     
-@api_view(['GET'])
+#@api_view(['GET'])
 def listUsers(request):                                                               #for system admin to view list of users
     # Serialize patients
     patients = Patient.objects.all()
@@ -168,7 +168,8 @@ def listUsers(request):                                                         
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-    return render(request, 'Useracc.html', {'users_data': users_data})
+    #return render(request, 'Useracc.html', {'users_data': users_data})
+    return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
 @api_view(['GET'])
