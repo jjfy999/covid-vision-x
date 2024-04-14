@@ -1,7 +1,11 @@
 
 from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
+from faker import Faker
+from django.contrib.auth.hashers import make_password
+import random
 
+fake = Faker()
 
 class Account(AbstractUser):
     name = models.CharField(max_length=100)
@@ -42,3 +46,55 @@ class SystemAdmin(Account):
         self.role = 'system_admin'
         self.is_staff = True
         super().save(*args, **kwargs)
+
+
+
+username = 'admin1'
+admin, created = SystemAdmin.objects.get_or_create(
+    username=username, email='admin1@gmail.com', phone_number='33333333', name='admin1')
+admin.password = make_password(username)
+admin.save()
+
+username = 'patient1'
+patient, created = Patient.objects.get_or_create(
+    username=username, email='patient1@gmail.com', phone_number='44444444', name='patient1', status='covid')
+patient.password = make_password(username)
+patient.save()
+
+username = 'doctor1'
+doctor, created = Doctor.objects.get_or_create(
+    username=username, email='doctor1@gmail.com', phone_number='55555555', name='doctor1')
+doctor.password = make_password(username)
+doctor.save()
+
+        
+# Generate new users
+for i in range(10, 20):
+    role = random.choice(['patient', 'doctor'])
+    username = f'{role}{i+1}'
+    email = f'{username}@gmail.com'
+    phone_number = fake.phone_number()
+    name = fake.name()
+
+    if role == 'patient':
+        status = random.choice(['covid', 'normal'])
+
+        patient = Patient.objects.create(
+            username=username,
+            email=email,
+            phone_number=phone_number,
+            name=name,
+            status=status
+        )
+        patient.password = make_password(username)
+        patient.save()
+
+    else:
+        doctor = Doctor.objects.create(
+            username=username,
+            email=email,
+            phone_number=phone_number,
+            name=name
+        )
+        doctor.password = make_password(username)
+        doctor.save()   
