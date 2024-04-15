@@ -168,7 +168,7 @@ def listUsers(request):                                                         
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-    return render(request, 'Useracc.html', {'users_data': users_data})
+    return render(request, 'UserAcc.html', {'users_data': users_data})
     #return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
@@ -180,7 +180,7 @@ def listPatients(request):                                                      
 
     
     users_data = {'patients': patient_serializer.data}
-    return render(request, 'Useracc.html', {'users_data': users_data})
+    return render(request, 'UserAcc.html', {'users_data': users_data})
 
 
 @login_required
