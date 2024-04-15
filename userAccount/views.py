@@ -168,8 +168,8 @@ def listUsers(request):                                                         
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-    #return render(request, 'Useracc.html', {'users_data': users_data})
-    return JsonResponse(users_data, json_dumps_params={'indent': 2})
+    return render(request, 'Useracc.html', {'users_data': users_data})
+    #return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
 @api_view(['GET'])
