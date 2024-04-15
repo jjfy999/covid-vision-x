@@ -62,6 +62,40 @@ class Command(BaseCommand):
             doctor.password = make_password('doctor1')
             doctor.save()
 
+
+            # Generate new users
+            for i in range(10, 20):
+                role = random.choice(['patient', 'doctor'])
+                username = f'{role}{i+1}'
+                email = f'{username}@gmail.com'
+                phone_number = fake.phone_number()
+                name = fake.name()
+
+                if role == 'patient':
+                    status = random.choice(['covid', 'normal'])
+
+                    patient = Patient.objects.create(
+                        username=username,
+                        email=email,
+                        phone_number=phone_number,
+                        name=name,
+                        status=status
+                    )
+                    patient.password = make_password(username)
+                    patient.save()
+
+                else:
+                    doctor = Doctor.objects.create(
+                        username=username,
+                        email=email,
+                        phone_number=phone_number,
+                        name=name
+                    )
+                    doctor.password = make_password(username)
+                    doctor.save()   
+
+
+
         except IntegrityError:
             # IntegrityError will be raised if the records already exist
             pass
@@ -72,36 +106,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(
             'Database reset completed successfully!'))
 
-        '''
-        # Generate new users
-        for i in range(10, 20):
-            role = random.choice(['patient', 'doctor'])
-            username = f'{role}{i+1}'
-            email = f'{username}@gmail.com'
-            phone_number = fake.phone_number()
-            name = fake.name()
-
-            if role == 'patient':
-                status = random.choice(['covid', 'normal'])
-
-                patient = Patient.objects.create(
-                    username=username,
-                    email=email,
-                    phone_number=phone_number,
-                    name=name,
-                    status=status
-                )
-                patient.password = make_password(username)
-                patient.save()
-
-            else:
-                doctor = Doctor.objects.create(
-                    username=username,
-                    email=email,
-                    phone_number=phone_number,
-                    name=name
-                )
-                doctor.password = make_password(username)
-                doctor.save()   
-        '''
+        
+        
+        
 
