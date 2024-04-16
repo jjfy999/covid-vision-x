@@ -20,6 +20,7 @@ from django.urls import include, path
 from accessControl import views as accessControl
 from userAccount import views as userAccount
 from userAccount.admin import system_admin_site
+from deepLearningModel import views as deepLearningModel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -54,6 +55,7 @@ urlpatterns = [
     path('docNonUpdatedReport/', userAccount.docNonUpdatedReport, name='docNonUpdatedReport'),  #for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
     path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
+    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),               #for doctor to view xray image result
 
     #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     #path('logout/', accessControl.LogoutView.as_view(), name='logout'),

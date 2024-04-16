@@ -51,18 +51,25 @@
   <section>
     <h1 id="uploadTitle">Upload X-Ray Image</h1>
     <div id="uploadContainer">
-      <div id="dropZone">
-        <p>Upload your file:</p>
-        <i class="fas fa-cloud-upload-alt"></i>
-        <span>Upload Patient X-ray Image</span>
-        <span>Supports: .jpg, .png, .pdf</span>
-        <input type="file" id="fileInput" hidden>
-        <button onclick="document.getElementById('fileInput').click()">Browse</button>
-      </div>
-      <input type="text" id="patientName" name="patientName" placeholder="Patient name">
-      <button id="analyseBtn">Analyse</button>
+      <form id="uploadForm" method="post" enctype="multipart/form-data" action="/docXrayResult/">
+        {% csrf_token %}
+        <div id="dropZone">
+          <p>Upload your file:</p>
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span>Upload Patient X-ray Image</span>
+          <span>Supports: .jpg, .png, .pdf</span>
+          <!-- Change hidden to file type for file input -->
+          <input type="file" name="image" id="fileInput" accept=".jpg,.png,.pdf" required>
+          <button type="button" onclick="document.getElementById('fileInput').click()">Browse</button>
+        </div>
+        <input type="text" id="patientName" name="patientName" placeholder="Patient name">
+        <!-- Change button type to submit -->
+        <button type="submit" id="analyseBtn">Analyse</button>
+      </form>
     </div>
   </section>
+  
+  
 
   <!-- Your scripts here -->
   <script src="{% static 'systemadmin/js/withSearchBar.js' %}"></script>
