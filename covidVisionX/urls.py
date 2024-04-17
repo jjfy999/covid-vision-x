@@ -55,7 +55,8 @@ urlpatterns = [
     path('docNonUpdatedReport/', userAccount.docNonUpdatedReport, name='docNonUpdatedReport'),  #for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
     path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
-    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),               #for doctor to view xray image result
+    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),              #for doctor to view xray image result (for testing)
+    path('docListReports/', deepLearningModel.listReports, name='docListReports'),              #for doctor to view list of reports
 
     #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     #path('logout/', accessControl.LogoutView.as_view(), name='logout'),

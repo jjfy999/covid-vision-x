@@ -8,24 +8,23 @@ import os
 
 class Image(models.Model):
     image_id = models.AutoField(primary_key=True)
-    image_path = models.CharField(max_length=255)  # or use FileField to store the path
+    image_path = models.CharField(max_length=255)
 
     def __str__(self):
         return f"Image {self.image_id}"
 
-
 class Report(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
+        ('covid', 'COVID'),
+        ('normal', 'Normal'),
     ]
     id = models.AutoField(primary_key=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='reports_by_id')
+    patient_name = models.CharField(max_length=100)  # Add related_name for patient_name
     date = models.DateField()
-    image = models.OneToOneField(Image, on_delete=models.CASCADE)
+    #image = models.OneToOneField(Image, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Report {self.id} for {self.patient.name}"
-
+        return f"Report {self.id} for {self.patient_name}"
 

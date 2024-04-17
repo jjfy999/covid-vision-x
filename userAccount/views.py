@@ -120,6 +120,23 @@ def getDetails(request):                                                        
     else:    
         return HttpResponse('User not found')
     
+'''
+@api_view(['GET']) # yc need to look at again
+@permission_classes([IsAuthenticated])
+def getDetails(request):
+    user = request.user
+    print("User role:", user.role)
+    
+    if user.role == 'patient':
+        serializer = PatientGetDetailsSerializer(user)
+    elif user.role == 'doctor' or user.role == 'system_admin':
+        serializer = DoctorSysAdminGetDetailsSerializer(user)
+    else:
+        return JsonResponse({'error': 'User role is not recognized'}, status=404)
+
+    return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
+
+'''
 
 
 def getUserDetails(request, pk):                                                    #for system admin to view specific user details
@@ -145,6 +162,7 @@ def getUserDetails(request, pk):                                                
             return HttpResponseNotFound("User not found")
 
     return render(request, 'AccDetail.html', {'user': serializer.data})
+    #return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
 
 
     

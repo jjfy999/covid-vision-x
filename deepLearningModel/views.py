@@ -4,6 +4,10 @@ from django.http import JsonResponse
 import os 
 import tensorflow as tf
 from keras.models import load_model
+from userAccount.models import Patient
+from datetime import date
+from .models import Report
+from django.shortcuts import get_object_or_404
 # Create your views here.
 # views.py
 
@@ -12,7 +16,6 @@ def analyze_image(request):
     if request.method == 'POST':
         # Load the model
         model_path = os.path.join(os.path.dirname(__file__), 'Model/fyptest1.hdf5')
-
         model = load_model(model_path)
 
         # Get the image from the request
@@ -27,22 +30,42 @@ def analyze_image(request):
         processed_image = tf.expand_dims(normalized_image, axis=0)
 
         # Make predictions using the model
-        # Assume image_data is the preprocessed image data in numpy array format
         predictions = model.predict(processed_image)
 
+        # Determine status based on predictions
+        status = "Covid-19" if predictions < 0.5 else "Normal"
 
-        # Process the predictions and generate the result
-        # For example, convert the predictions to a human-readable format
+        # Get the patient ID from the request
+        patient_id = request.POST.get('account_id')
 
+        # Retrieve the patient instance using the provided ID
+        try:
+            patient = Patient.objects.get(account_id=patient_id)
+        except Patient.DoesNotExist:
+            return JsonResponse({"error": "Patient not found."}, status=400)
 
-        if predictions < 0.5: 
-            result = "Predicted class is Covid-19"
-        else:
-            result = "Predicted class is Normal"
+        print (patient.name)
+        print(patient.account_id)
+        print(status)
+        print(patient.email)
+        print(patient.phone_number)
+        print(date.today())
+        # Create the report
+        report = Report.objects.create(
+            status=status,
+            patient_name=patient.name,
+            date=date.today(),
+            patient_id=patient  # Use the account_id of the patient
+        )
 
         # Return the result to the user
-        #return render(request, 'result.html', {'result': result})
+        result = {"status": status, "patientName": patient.name, "date": str(date.today())}
         return JsonResponse(result, json_dumps_params={'indent': 2}, safe=False)
 
-    # If the request method is not POST, render the form
-    #return render(request, 'analyze_image.html')
+    return JsonResponse({}, status=400)
+
+
+
+def listReports(request):
+    reports = Report.objects.all()
+    return JsonResponse({"reports": list(reports.values())}, json_dumps_params={'indent': 2}, safe=False)
