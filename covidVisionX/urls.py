@@ -21,6 +21,8 @@ from accessControl import views as accessControl
 from userAccount import views as userAccount
 from userAccount.admin import system_admin_site
 from deepLearningModel import views as deepLearningModel
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,7 +54,7 @@ urlpatterns = [
     path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
     path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page
     path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),                    #for doctor to upload xray image page
-    path('docNonUpdatedReport/', userAccount.docNonUpdatedReport, name='docNonUpdatedReport'),  #for doctor to view non updated reports of patients
+    path('docNonUpdatedReport/', deepLearningModel.listReports, name='docListReports'),  #for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
     path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
     path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),              #for doctor to view xray image result (for testing)
@@ -60,4 +62,10 @@ urlpatterns = [
 
     #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     #path('logout/', accessControl.LogoutView.as_view(), name='logout'),
+
+
+    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

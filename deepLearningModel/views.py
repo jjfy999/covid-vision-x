@@ -55,7 +55,9 @@ def analyze_image(request):
             status=status,
             patient_name=patient.name,
             date=date.today(),
-            patient_id=patient  # Use the account_id of the patient
+            patient_id=patient,  # Use the account_id of the patient
+            approved=False,
+            image=image_file
         )
 
         # Return the result to the user
@@ -67,5 +69,6 @@ def analyze_image(request):
 
 
 def listReports(request):
-    reports = Report.objects.all()
-    return JsonResponse({"reports": list(reports.values())}, json_dumps_params={'indent': 2}, safe=False)
+    reports = Report.objects.filter(approved=False)
+    #return JsonResponse({"reports": list(reports.values())}, json_dumps_params={'indent': 2}, safe=False)
+    return render(request, 'nonUpdatedReport.html', {'reports': reports})
