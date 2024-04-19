@@ -5,13 +5,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 import { createMuiTheme } from "./theme/theme";
 import { ThemeProvider } from "@emotion/react";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LoginPage />} />
     </Route>
   )
 );
