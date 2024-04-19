@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -30,7 +31,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ['fyptestingenv1.eba-p78kiscd.us-west-2.elasticbeanstalk.com', '127.0.0.1', '172.31.26.236']
+ALLOWED_HOSTS = [
+    'fyptestingenv1.eba-p78kiscd.us-west-2.elasticbeanstalk.com', '127.0.0.1', '172.31.26.236']
 
 
 # Application definition
@@ -43,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'accessControl',
     'userAccount',
     'deepLearningModel',
@@ -161,7 +163,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'userAccount.Account'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.isAuthenticated', ),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication_BasicAuthentication',
+                                       'rest_framework.authentication.SessionAuthentication',
+                                       'rest_framework_simplejwt.authentication.JWTAuthentication'
+                                       )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_LATE_USER': timedelta(days=30),
 }
