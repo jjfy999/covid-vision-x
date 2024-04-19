@@ -13,8 +13,8 @@ import { ThemeProvider } from "@emotion/react";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Home />} />
     </Route>
   )
 );
