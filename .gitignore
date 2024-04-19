@@ -10,3 +10,7 @@ covidVisionX/covid-vision-x.code-workspace
 **/**/migrations/
 
 **/migration/*
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

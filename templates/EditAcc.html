@@ -56,19 +56,19 @@
     <!-- Header section ends -->
 
     <!-- User Account Details starts -->
+  <form action="/updateUserDetails/{{pk}}/" method="POST">
+    {% csrf_token %}
     <section>
       <h1 id="userAccDeatails">Account Details</h1>
 
+      
       <div id="tablediv">
         <img src="{% static 'images/unknownPerson.jpg' %}" id="userImg" />
         <table id="infoTable">
-          <tr>
-            <th><label for="id">User ID:</label></th>
-            <th><input type="text" id="id" name="id" /></th>
-          </tr>
+
 
           <tr>
-            <th><label for="name">User Name:</label></th>
+            <th><label for="name">Name:</label></th>
             <th><input type="text" id="name" name="name" /></th>
           </tr>
 
@@ -84,7 +84,7 @@
 
           <tr>
             <th><label for="contact">Contact number:</label></th>
-            <th><input type="text" id="contact" name="contact" /></th>
+            <th><input type="text" id="contact" name="phone_number" /></th>
           </tr>
 
           <tr>
@@ -95,10 +95,12 @@
       </div>
 
       <div class="btn">
-        <a id="doneBtn" href="/accDetails/">Done</a>
-        <a id="cancelBtn" href="/accDetails/">Cancel</a>
+        <button id="doneBtn" type="submit">Done</button>   
+        <a id="cancelBtn" href="/accDetails/{{pk}}">Cancel</a>
       </div>
+      
     </section>
+  </form>
 
     <!-- Report ends -->
 

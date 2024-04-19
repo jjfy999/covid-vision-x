@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Doctor Profile</title>
-  <link rel="stylesheet" href="{% static 'doctor/master.css' %}" />
+  <link rel="stylesheet" href="{% static 'doctor/css/master.css' %}" />
 </head>
 <body>
   <header>
@@ -62,7 +62,7 @@
         <!-- Replace with the doctor's information -->
         <tr>
           <th><label for="id">Doctor ID:</label></th>
-          <th>D1987</th>
+          <th>{{user.account_id}}</th>
         </tr>
         <tr>
           <th><label for="name">Doctor Name:</label></th>

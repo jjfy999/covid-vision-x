@@ -46,11 +46,10 @@
 
   <section>
     <h1 id="doctorProfileTitle">Profile Editing</h1>
-    <form method="post" action="/docUpdateDetails/">
-      {% csrf_token %}
     <div id="formDiv">
       <img src="{% static 'images\istockphoto-1209654046-612x612.jpg' %}" id="doctorImg" alt="Doctor Image">
-      <form id="editForm">
+      <form id="editForm" method="post" action="/docUpdateDetails/">
+        {% csrf_token %}
         <label for="id">Doctor ID:</label>
         <input type="text" id="id" name="id">
         
@@ -64,11 +63,11 @@
         <input type="number" id="years" name="years"> -->
         
         <label for="contact">Contact number:</label>
-        <input type="text" id="contact" name="contact">
+        <input type="text" id="contact" name="phone_number">
         
         <label for="email">Email:</label>
         <input type="email" id="email" name="email">
-      </form>
+      
     </div>
 
 <!--     <div class="btn">

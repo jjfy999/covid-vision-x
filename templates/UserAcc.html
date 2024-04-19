@@ -56,92 +56,35 @@
     </header>
     <!-- Header section ends -->
 
-    <!-- User Account starts -->
-    <section>
-      <h1 id="userAcc">User Accounts</h1>
+<!-- User Account starts -->
+<section>
+  <h1 id="userAcc">User Accounts</h1>
 
-      <div id="userList">
+  <div id="userList">
+    <!-- Loop through each user in the users_data object -->
+    {% for user_type, users in users_data.items %}
+      <!-- Loop through each user in the current user_type -->
+      {% for user in users %}
         <div class="userBox">
           <div class="user-img-box">
-            <img
-              src="{% static 'images/unknownPerson.jpg' %}"
-              alt="User 1"
-              class="userImg"
-            />
+            <!-- Display user image -->
+            <img src="{% static 'images/unknownPerson.jpg' %}" alt="{{ user_type }} {{ forloop.counter }}" class="userImg" />
           </div>
-          <p class="userID">C0001</p>
-          <p class="userName">Bernad Koh</p>
-          <p class="role">Doctor</p>
+          <!-- Display user ID -->
+          <p class="userID">{{ user.account_id }}</p>
+          <!-- Display user name -->
+          <p class="userName">{{ user.name }}</p>
+          <!-- Display user role -->
+          <p class="role">{{ user.role }}</p>
           <div class="viewInfoBtn">
-            <a href="/accDetails/" class="btn">View Details</a>
+            <!-- Link to view user details -->
+            <a href="/accDetails/{{ user.account_id }}/" class="btn">View Details</a>
           </div>
         </div>
-
-        <div class="userBox">
-          <div class="user-img-box">
-            <img
-              src="{% static 'images/unknownPerson.jpg' %}"
-              alt="User 2"
-              class="userImg"
-            />
-          </div>
-          <p class="userID">C0001</p>
-          <p class="userName">Bernad Koh</p>
-          <p class="role">Doctor</p>
-          <div class="viewInfoBtn">
-            <a href="/accDetails/" class="btn">View Details</a>
-          </div>
-        </div>
-
-        <div class="userBox">
-          <div class="user-img-box">
-            <img
-              src="{% static 'images/unknownPerson.jpg' %}"
-              alt="User 3"
-              class="userImg"
-            />
-          </div>
-          <p class="userID">C0001</p>
-          <p class="userName">Bernad Koh</p>
-          <p class="role">Doctor</p>
-          <div class="viewInfoBtn">
-            <a href="/accDetails/" class="btn">View Details</a>
-          </div>
-        </div>
-
-        <div class="userBox">
-          <div class="user-img-box">
-            <img
-              src="{% static 'images/unknownPerson.jpg' %}"
-              alt="User 4"
-              class="userImg"
-            />
-          </div>
-          <p class="userID">C0001</p>
-          <p class="userName">Bernad Koh</p>
-          <p class="role">Doctor</p>
-          <div class="viewInfoBtn">
-            <a href="/accDetails/" class="btn">View Details</a>
-          </div>
-        </div>
-
-        <div class="userBox">
-          <div class="user-img-box">
-            <img
-              src="{% static 'images/unknownPerson.jpg' %}"
-              alt="User 5"
-              class="userImg"
-            />
-          </div>
-          <p class="userID">C0001</p>
-          <p class="userName">Bernad Koh</p>
-          <p class="role">Doctor</p>
-          <div class="viewInfoBtn">
-            <a href="/accDetails/" class="btn">View Details</a>
-          </div>
-        </div>
-      </div>
-    </section>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
 
     <!-- User Account ends -->
 

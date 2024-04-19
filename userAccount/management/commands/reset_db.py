@@ -11,71 +11,102 @@ from userAccount.models import Account, Doctor, Patient, SystemAdmin
 fake = Faker()
 
 
+
+
+
+
+from django.db.utils import IntegrityError
+
+
+
 class Command(BaseCommand):
     help = 'Reset the database by dropping all tables and recreating them'
 
-    with connection.cursor() as cursor:
-        cursor.execute(
-            "DELETE FROM sqlite_sequence WHERE name='userAccount_Account'")
-
-    def handle(self, *args, **options):
-        # Delete all rows from the custom user table
+    def delete_all_rows(self):
         Account.objects.all().delete()
         Doctor.objects.all().delete()
         Patient.objects.all().delete()
+        SystemAdmin.objects.all().delete()
 
-        username = 'admin1'
-        admin, created = SystemAdmin.objects.get_or_create(
-            username=username, email='admin1@gmail.com', phone_number='33333333', name='admin1')
-        admin.password = make_password(username)
-        admin.save()
+    def handle(self, *args, **options):
+        # Delete all rows from the tables
+        self.delete_all_rows()
 
-        username = 'patient1'
-        patient, created = Patient.objects.get_or_create(
-            username=username, email='patient1@gmail.com', phone_number='44444444', name='patient1', status='covid')
-        patient.password = make_password(username)
-        patient.save()
+        # Recreate the initial records
+        try:
+            admin = SystemAdmin.objects.create(
+                username='admin1',
+                email='admin1@gmail.com',
+                phone_number='12121212',
+                name='admin1'
+            )
+            admin.password = make_password('admin1')
+            admin.save()
 
-        username = 'doctor1'
-        doctor, created = Doctor.objects.get_or_create(
-            username=username, email='doctor1@gmail.com', phone_number='55555555', name='doctor1')
-        doctor.password = make_password(username)
-        doctor.save()
+            patient = Patient.objects.create(
+                username='patient1',
+                email='patient1@gmail.com',
+                phone_number='44444444',
+                name='patient1',
+                status='covid'
+            )
+            patient.password = make_password('patient1')
+            patient.save()
 
-        '''
-        # Generate new users
-        for i in range(10, 20):
-            role = random.choice(['patient', 'doctor'])
-            username = f'{role}{i+1}'
-            email = f'{username}@gmail.com'
-            phone_number = fake.phone_number()
-            name = fake.name()
+            doctor = Doctor.objects.create(
+                username='doctor1',
+                email='doctor1@gmail.com',
+                phone_number='55555555',
+                name='doctor1'
+            )
+            doctor.password = make_password('doctor1')
+            doctor.save()
 
-            if role == 'patient':
-                status = random.choice(['covid', 'normal'])
 
-                patient = Patient.objects.create(
-                    username=username,
-                    email=email,
-                    phone_number=phone_number,
-                    name=name,
-                    status=status
-                )
-                patient.password = make_password(username)
-                patient.save()
+            # Generate new users
+            for i in range(10, 20):
+                role = random.choice(['patient', 'doctor'])
+                username = f'{role}{i+1}'
+                email = f'{username}@gmail.com'
+                phone_number = fake.phone_number()
+                name = fake.name()
 
-            else:
-                doctor = Doctor.objects.create(
-                    username=username,
-                    email=email,
-                    phone_number=phone_number,
-                    name=name
-                )
-                doctor.password = make_password(username)
-                doctor.save()   
-        '''
+                if role == 'patient':
+                    status = random.choice(['covid', 'normal'])
 
+                    patient = Patient.objects.create(
+                        username=username,
+                        email=email,
+                        phone_number=phone_number,
+                        name=name,
+                        status=status
+                    )
+                    patient.password = make_password(username)
+                    patient.save()
+
+                else:
+                    doctor = Doctor.objects.create(
+                        username=username,
+                        email=email,
+                        phone_number=phone_number,
+                        name=name
+                    )
+                    doctor.password = make_password(username)
+                    doctor.save()   
+
+
+
+        except IntegrityError:
+            # IntegrityError will be raised if the records already exist
+            pass
+
+        # Call migrate command to apply migrations
         call_command('migrate')
 
         self.stdout.write(self.style.SUCCESS(
             'Database reset completed successfully!'))
+
+        
+        
+        
+

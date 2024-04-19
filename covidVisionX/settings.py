@@ -25,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fyptestingenv1.eba-p78kiscd.us-west-2.elasticbeanstalk.com', '127.0.0.1', '172.31.26.236']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'accessControl',
     'userAccount',
+    'deepLearningModel',
 
 ]
 
@@ -82,11 +83,23 @@ WSGI_APPLICATION = 'covidVisionX.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'admin100',
+        'PASSWORD': 'admin100',
+        'HOST': 'awseb-e-ii2ambiipb-stack-awsebrdsdatabase-yvkypgkxmfin.cpakgyie23bb.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -133,6 +146,10 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type

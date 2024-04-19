@@ -41,34 +41,44 @@
 </header>
 
 <section>
-    <div id="reportContainer">
-        <h1 id="uploadTitle">X-ray Analysis</h1>
-        <div id="uploadContainer">
-            <div id="xrayImage">
-                <!-- X-ray image displayed here -->
-                <img src="{% static 'images\xray.png' %}" alt="X-ray Image">
-            </div>
-            <div id="reportInfo">
-                <p>NAME: John Tan</p>
-                <p>DATE: 23 March 2024</p>
-                <h2>Detailed report information</h2>
-                <!-- Additional report information here -->
-            </div>
-            <div id="resultContainer">
-                <h2>Result</h2>
-                <label for="statusDropdown">Status:</label>
-                <select id="statusDropdown" name="status">
-                    <option value="covid">Covid</option>
-                    <option value="normal">Normal</option>
-                </select>
-            </div>
-            <div id="actionButtons">
-                <button id="uploadButton">Upload</button>
-                <button id="deleteButton">Delete</button>
-            </div>
-        </div>
-    </div>
+  <div id="reportContainer">
+      <h1 id="uploadTitle">X-ray Analysis</h1>
+      {% if reports %}
+      {% for report in reports %}
+      <div class="reportItem">
+          <div id="xrayImage">
+              <!-- Display the report image -->
+              <img src="{{ report.image.url }}" alt="X-ray Image">
+          </div>
+          <div id="reportInfo">
+              <!-- Display the report details -->
+              <p>NAME: {{ report.patient_name }}</p>
+              <p>DATE: {{ report.date }}</p>
+              <h2>Detailed report information</h2>
+              <!-- Additional report information here -->
+          </div>
+          <div id="resultContainer">
+              <h2>Result</h2>
+              <label for="statusDropdown">Status: {{report.status}}</label>
+
+              <select id="statusDropdown" name="status">
+                  <option value="covid" {% if report.status == 'covid' %} selected {% endif %}>Covid</option>
+                  <option value="normal" {% if report.status == 'normal' %} selected {% endif %}>Normal</option>
+              </select>
+          </div>
+          <div id="actionButtons">
+              <!-- Buttons for each report -->
+              <button class="uploadButton" data-report-id="{{ report.id }}">Upload</button>
+              <button class="deleteButton" data-report-id="{{ report.id }}">Delete</button>
+          </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No reports available</p>
+      {% endif %}
+  </div>
 </section>
+
 
 <script>
     // You can add JavaScript here if you need interactive elements

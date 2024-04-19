@@ -41,6 +41,7 @@
         <div>
           <h1 id="loginHeading">LOGIN</h1>
           <form onsubmit="validateLogin(event)" action="/login/" method="post">
+            {% csrf_token %}
             <label for="role"><b>Login As</b></label>
             <select name="role" required id="roleInput">
               <option value="" disabled selected>Select a role</option>

@@ -65,17 +65,17 @@
         <table id="infoTable">
           <tr>
             <th><label for="id">User ID:</label></th>
-            <th>T0992</th>
+            <th>{{user.account_id}}</th>
           </tr>
 
           <tr>
-            <th><label for="name">User Name:</label></th>
-            <th>Bryant Ng</th>
+            <th><label for="name">Name:</label></th>
+            <th>{{user.name}}</th>
           </tr>
 
           <tr>
             <th><label for="role">Role:</label></th>
-            <th>Doctor</th>
+            <th>{{user.role}}</th>
           </tr>
 
           <tr>
@@ -85,18 +85,18 @@
 
           <tr>
             <th><label for="contact">Contact number:</label></th>
-            <th>+65 7788 9900</th>
+            <th>{{user.phone_number}}</th>
           </tr>
 
           <tr>
             <th><label for="email">Email:</label></th>
-            <th>bryantng@gmail.com</th>
+            <th>{{user.email}}</th>
           </tr>
         </table>
       </div>
 
       <div class="btn">
-        <a id="editBtn" href="/sysEditAccDetails/">Edit</a>
+        <a id="editBtn" href="/sysEditAccDetails/{{user.account_id}}">Edit</a>
         <a id="backBtn" href="/sysUserAccList/">Back</a>
       </div>
     </section>
