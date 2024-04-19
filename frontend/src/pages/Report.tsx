@@ -4,7 +4,7 @@ import React from 'react';
 import '../css/Report.css';
 import logo_tran from '../images/logo_transparent.png';
 import { Link } from 'react-router-dom';
-import Header from '../Components/Header';
+import Header from './Header';
 
 const Report = () => {
   return (
