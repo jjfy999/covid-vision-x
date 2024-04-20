@@ -251,9 +251,28 @@ def updateUserDetails(request, pk):                                             
         return Response(serializer.errors, status=400)
 
 
-'''
-@login_required
-def deleteUserAccount(request, pk):                                                                 #for system admin to delete user account
+
+def searchUser(request, pk):            #for doctor to search for patients and for system admin to search for both doctor and patient
+    if pk:
+        try:
+            if request.user.role == 'doctor':
+                searchUser = Patient.objects.get(pk=pk)
+                serializer = PatientGetDetailsSerializer(searchUser)
+            else:
+                try:
+                    searchUser = Patient.objects.get(pk=pk)
+                    serializer = PatientGetDetailsSerializer(searchUser)
+                except Patient.DoesNotExist:
+                    searchUser = Doctor.objects.get(pk=pk)
+                    serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
+
+            return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
+        except (Patient.DoesNotExist, Doctor.DoesNotExist):
+            return JsonResponse({"error": "User not found"}, status=404)
+    return JsonResponse({"error": "User not found"}, status=400)
+
+
+def deleteUser(request, pk):                    #for system admin to delete a user
     try:
         user = Doctor.objects.get(account_id=pk)
     except Doctor.DoesNotExist:
@@ -267,33 +286,6 @@ def deleteUserAccount(request, pk):                                             
 
     if user is not None:
         user.delete()
-    
-    return redirect('sysUserAccList')
-
-
-     
-
-    
-
-def searchUser(request):                                                                        #for system admin to search for user && for doctor to search for patient
-    account_id = request.POST.get('account_id', None)
-    
-    if account_id:
-        try:
-            if request.user.role == 'doctor':
-                searchUser = Patient.objects.get(account_id=account_id)
-                serializer = PatientGetDetailsSerializer(searchUser)
-                return render(request, 'UserAcc.html', {'user': serializer.data})
-            else:
-                searchUser = Patient.objects.get(account_id=account_id)
-                serializer = PatientGetDetailsSerializer(searchUser)
-                if not searchUser:  # If patient not found, search for doctor
-                    searchUser = Doctor.objects.get(account_id=account_id)
-                    serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
-                    return render(request, 'UserAcc.html', {'user': serializer.data})
-        except (Patient.DoesNotExist, Doctor.DoesNotExist):
-            return HttpResponseBadRequest("Invalid user type")
-        
-
-    return render(request, 'UserAcc.html')
-'''
+        return JsonResponse({'message': 'User deleted successfully.'})
+    else:
+        return JsonResponse({'error': 'User not found.'}, status=404)
