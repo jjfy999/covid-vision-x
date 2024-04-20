@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.urls import reverse
 from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
                                      DoctorSysAdminSerializer,
                                      DoctorSysAdminUpdateSerializer,
@@ -41,7 +41,8 @@ def loginAuth(request):  # only a temporary login function for testing
             if user.role == 'doctor':
                 return redirect('docUploadXRay')
             elif user.role == 'patient':
-                return redirect('reportView')
+                redirect_url = reverse('reportView') + f'?account_id={user.account_id}'
+                return redirect(redirect_url)
             elif user.role == 'system_admin':
                 return redirect('sysUserAccList')
             else:
@@ -51,8 +52,7 @@ def loginAuth(request):  # only a temporary login function for testing
 
 
 
-def reportView(request):    
-    return render(request, 'Report.html')
+
 
 
 def profileView(request):
@@ -84,11 +84,7 @@ def docEditProfileView(request):
 def docUploadXRay(request):
     return render(request, 'uploadxray.html')
 
-def docNonUpdatedReport(request):
-    return render(request, 'nonUpdatedReport.html')
 
-def docReportView(request):
-    return render(request, 'DocReport.html')
 
 
 def logout(request):

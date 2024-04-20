@@ -31,7 +31,7 @@ urlpatterns = [
 
     path('login/', userAccount.loginAuth, name='loginAuth'),
     path('logout/', userAccount.logout, name='logout'),
-    path('patientReport/', userAccount.reportView, name='reportView'),
+    path('patientReport/', deepLearningModel.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
          name='editProfileView'),                                                               #for patient to view edit own details page          
@@ -54,11 +54,13 @@ urlpatterns = [
     path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
     path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page
     path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),                    #for doctor to upload xray image page
-    path('docNonUpdatedReport/', deepLearningModel.listReports, name='docListReports'),  #for doctor to view non updated reports of patients
+    path('docNonUpdatedReport/', deepLearningModel.listNonUploadedReports, name='docListReports'),  #for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
-    path('docReportView/', userAccount.docReportView, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
+    path('docReportView/', deepLearningModel.listUploadedReports, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
     path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),              #for doctor to view xray image result (for testing)
-    path('docListReports/', deepLearningModel.listReports, name='docListReports'),              #for doctor to view list of reports
+    path('docListAllReports/', deepLearningModel.listAllReports, name='docListAllReports'),     #for doctor to view list of all reports (for testing)
+    path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
+    path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
 
     #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     #path('logout/', accessControl.LogoutView.as_view(), name='logout'),
