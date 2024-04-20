@@ -173,14 +173,13 @@ def deleteReport(request):                                  #for doctor to delet
     report_id = request.POST.get('report_id')
     try:
         report = Report.objects.get(pk=report_id)
-        serializer = ReportSerializer(report)  
         report.delete()
-        return JsonResponse({'message': 'Report deleted successfully.', 'data': serializer.data})
+        return JsonResponse({'message': 'Report deleted successfully.'})
     except Report.DoesNotExist:
         return JsonResponse({'error': 'Report not found.'}, status=400)
     
 
-def reportView(request):
+def reportView(request):                                     #for patient to view their reports      
     account_id = request.GET.get('account_id')
     print("Received account_id:", account_id) 
     try:
