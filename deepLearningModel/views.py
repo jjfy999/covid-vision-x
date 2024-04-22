@@ -11,8 +11,64 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 from deepLearningModel.serializers import ReportSerializer, ReportApprovalSerializer
 from django.conf import settings
+import boto3
+from covidVisionX.settings import AWS_STORAGE_BUCKET_NAME,AWS_S3_REGION_NAME #,AWS_STORAGE_BUCKET_NAME_MODELS
+import io
 # Create your views here.
 # views.py
+'''
+loaded_model_newtest = None
+model_loaded_newtest = False
+
+loaded_model_fyptest = None
+model_loaded_fyptest = False
+
+def load_model_from_s3_newtest():
+    global loaded_model_newtest, model_loaded_newtest
+    if not model_loaded_newtest:
+        # Initialize S3 client
+        s3 = boto3.client('s3',
+                          aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                          region_name=settings.AWS_S3_REGION_NAME)
+
+        # Specify the S3 bucket and file name of the model
+        bucket_name = 'fypmodelss'
+        model_key = 'newtest.h5'
+
+        # Load the model from S3
+        try:
+            obj = s3.get_object(Bucket=bucket_name, Key=model_key)
+            model_data = obj['Body'].read()
+            loaded_model_newtest = tf.keras.models.load_model(io.BytesIO(model_data))
+            model_loaded_newtest = True
+        except Exception as e:
+            raise RuntimeError(f"Failed to load model from S3: {e}")
+        
+        
+def load_model_from_s3_fyptest():
+    global loaded_model_fyptest, model_loaded_fyptest
+    if not model_loaded_fyptest:
+        # Initialize S3 client
+        s3 = boto3.client('s3',
+                          aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                          region_name=settings.AWS_S3_REGION_NAME)
+
+        # Specify the S3 bucket and file name of the model
+        bucket_name = 'fypmodelss'
+        model_key = 'fyptest1.hdf5'
+
+        # Load the model from S3
+        try:
+            obj = s3.get_object(Bucket=bucket_name, Key=model_key)
+            model_data = obj['Body'].read()
+            loaded_model_fyptest = tf.keras.models.load_model(io.BytesIO(model_data))
+            model_loaded_fyptest = True
+        except Exception as e:
+            raise RuntimeError(f"Failed to load model from S3: {e}")
+'''
+
 
 
 def analyze_image(request):                                 #not serializing the report data
@@ -21,8 +77,11 @@ def analyze_image(request):                                 #not serializing the
         model_path = os.path.join(os.path.dirname(__file__), 'Model/fyptest1.hdf5')
         model = load_model(model_path)
 
+        #load_model_from_s3_newtest()
         # Get the image from the request
         image_file = request.FILES['image']
+
+        
         image_data = image_file.read()
         image_tensor = tf.image.decode_image(image_data, channels=3)
 
@@ -46,6 +105,11 @@ def analyze_image(request):                                 #not serializing the
             patient = Patient.objects.get(account_id=patient_id)
         except Patient.DoesNotExist:
             return JsonResponse({"error": "Patient not found."}, status=400)
+        
+        image_buffer = io.BytesIO()
+        image_buffer.write(image_data)
+        image_buffer.seek(0)
+
 
         print (patient.name)
         print(patient.account_id)
@@ -53,6 +117,7 @@ def analyze_image(request):                                 #not serializing the
         print(patient.email)
         print(patient.phone_number)
         print(date.today())
+        print(image_file)
         # Create the report
         report = Report.objects.create(
             status=status,
@@ -62,6 +127,9 @@ def analyze_image(request):                                 #not serializing the
             approved=False,
             image=image_file
         )
+        print(image_file)
+        print(report.image.name)
+        print(report.image.url)
 
         # Return the result to the user
         result = {"status": status, "patientName": patient.name, "date": str(date.today())}
@@ -129,9 +197,34 @@ def analyze_image(request):
 
     return JsonResponse({}, status=400)
 '''
+'''
+def listNonUploadedReports(request):
+    s3_client = boto3.client('s3', 
+                             aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                             region_name=settings.AWS_S3_REGION_NAME)
+
+    reports = Report.objects.filter(approved=False)
+    for report in reports:
+        # Generate a signed URL for accessing the image
+        signed_url = s3_client.generate_presigned_url('get_object',
+                                                      Params={'Bucket': AWS_STORAGE_BUCKET_NAME,
+                                                              'Key': report.image.name},
+                                                      ExpiresIn=3600)  # URL valid for 1 hour
+        report.image_url = signed_url  # Add the signed URL to the report object
+
+    serializer = ReportSerializer(reports, many=True)
+    data = {"reports": serializer.data}
+    return render(request, 'nonUpdatedReport.html', {'reports': reports})
+'''
 
 def listNonUploadedReports(request):        #for doctor to view all non uploaded reports
     reports = Report.objects.filter(approved=False)
+    for report in reports:
+        print(report.image.name)
+        print(report.image)
+        report.image = report.image.url
+        print(report.image)
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     #return JsonResponse(data, json_dumps_params={'indent': 2})
@@ -140,6 +233,9 @@ def listNonUploadedReports(request):        #for doctor to view all non uploaded
 
 def listUploadedReports(request):       #for doctor to view all uploaded reports
     reports = Report.objects.filter(approved=True)
+    for report in reports:
+        report.image = report.image.url
+
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2})
@@ -147,6 +243,8 @@ def listUploadedReports(request):       #for doctor to view all uploaded reports
 
 def listAllReports(request):           #for testing to view all reports
     reports = Report.objects.all()
+    for report in reports:
+        report.image = report.image.url
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2})
@@ -188,5 +286,7 @@ def reportView(request):                                     #for patient to vie
         return JsonResponse({"error": "Patient not found."}, status=400)
     
     reports = Report.objects.filter(patient_id=patient, approved=True)
+    for report in reports:
+        report.image = report.image.url
     serializer = ReportSerializer(reports, many=True)  
     return JsonResponse({"Reports": serializer.data}, json_dumps_params={'indent': 2}, safe=False)
