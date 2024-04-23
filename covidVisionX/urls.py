@@ -31,6 +31,7 @@ urlpatterns = [
 
     path('login/', userAccount.loginAuth, name='loginAuth'),
     path('logout/', userAccount.logout, name='logout'),
+    path('register/', userAccount.createUser, name='createUser'),                                   #for patient to register
     path('patientReport/', deepLearningModel.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
@@ -49,6 +50,7 @@ urlpatterns = [
     path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for system admin to update own details
     path('sysSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),                          #for system admin to search for a doctor or patient
     path('sysDeleteUser/<int:pk>/', userAccount.deleteUser, name='deleteUser'),                   #for system admin to delete a user
+    path('sysCreateUser/', userAccount.createUser, name='createUser'),                           #for system admin to create a user
 
     path('docSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),                         #for doctor to search for a patient
     path('docUserAccList/', userAccount.listUsers, name='docUserAccList'),                      #for doctor to view list of patients (waiting for UI)

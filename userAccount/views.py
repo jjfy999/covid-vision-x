@@ -18,6 +18,7 @@ from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
                                      PatientUpdateSerializer)
 
 from .models import Doctor, Patient, SystemAdmin
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
@@ -55,8 +56,7 @@ def loginAuth(request):  # only a temporary login function for testing
 
 
 
-def profileView(request):
-    return render(request, 'PatientProfile.html')
+
 
 
 def editProfileView(request):
@@ -94,31 +94,8 @@ def logout(request):
 
 
 
-@login_required
-def getDetails(request):                                                             #for users to view own details
-    user=request.user
-    print("User role:", user.role)
-    if user.role == 'patient':
-        serialized_User = PatientGetDetailsSerializer(user)
-        context = {'user': serialized_User.data}
-        return render(request, 'PatientProfile.html', context)
-    
-    elif user.role == 'doctor':
-        serialized_User = DoctorSysAdminGetDetailsSerializer(user)
-        context = {'user': serialized_User.data}
-        return render(request, 'DoctorProfile.html', context)
-    
-    elif user.role == 'system_admin':
-        serialized_User = DoctorSysAdminGetDetailsSerializer(user)    
-        context = {'user': serialized_User.data}
-        return render(request, 'SysadminProfile.html', context)
-    
-    else:    
-        return HttpResponse('User not found')
-    
-'''
-@api_view(['GET']) # yc need to look at again
-@permission_classes([IsAuthenticated])
+#@api_view(['GET']) # yc need to look at again              #for users to view own details
+#@permission_classes([IsAuthenticated]) 
 def getDetails(request):
     user = request.user
     print("User role:", user.role)
@@ -132,7 +109,7 @@ def getDetails(request):
 
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
 
-'''
+
 
 
 def getUserDetails(request, pk):                                                    #for system admin to view specific user details
@@ -289,3 +266,35 @@ def deleteUser(request, pk):                    #for system admin to delete a us
         return JsonResponse({'message': 'User deleted successfully.'})
     else:
         return JsonResponse({'error': 'User not found.'}, status=404)
+    
+    
+def createUser(request):                        #for patient to register and for system admin to create a user
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = make_password(request.POST.get('password'))
+        role = request.POST.get('role')
+
+        # Create the user based on the role
+        if role == 'patient':
+            status = 'not_applicable'  # Set default status for patient
+            user = Patient.objects.create_user(username=username, password=password, email=email, name=name, phone_number=phone_number, role=role, status=status)
+
+        elif role == 'doctor':
+            user = Doctor.objects.create_user(username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
+
+        elif role == 'system_admin':
+            user = SystemAdmin.objects.create_user(username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
+
+        else:
+            # Handle invalid role
+            return JsonResponse({'error': 'Invalid role'}, status=400)
+
+        return JsonResponse({'message': 'User created successfully.'})
+
+
+    else:
+        # Handle non-POST request
+        return JsonResponse({'error': 'User not created.'}, status=405)
