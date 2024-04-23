@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'admin100',
         'PASSWORD': 'admin100',
-        'HOST': 'awseb-e-ii2ambiipb-stack-awsebrdsdatabase-yvkypgkxmfin.cpakgyie23bb.us-west-2.rds.amazonaws.com',
+        'HOST': 'awseb-e-y3gsxymygs-stack-awsebrdsdatabase-ec5iokxdkmwi.cnuog0og8q72.ap-southeast-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
