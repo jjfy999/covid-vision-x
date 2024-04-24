@@ -53,7 +53,7 @@ urlpatterns = [
     path('sysCreateUser/', userAccount.createUser, name='createUser'),                           #for system admin to create a user
 
     path('docSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),                         #for doctor to search for a patient
-    path('docUserAccList/', userAccount.listUsers, name='docUserAccList'),                      #for doctor to view list of patients (waiting for UI)
+    path('docPatientAccList/', userAccount.listPatients, name='docUserAccList'),                      #for doctor to view list of patients (waiting for UI)
     path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
     path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page
     path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),                    #for doctor to upload xray image page

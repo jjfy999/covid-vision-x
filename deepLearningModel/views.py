@@ -95,7 +95,7 @@ def analyze_image(request):                                 #not serializing the
         predictions = model.predict(processed_image)
 
         # Determine status based on predictions
-        status = "Covid-19" if predictions < 0.5 else "Normal"
+        status = "covid" if predictions < 0.5 else "normal"
 
         # Get the patient ID from the request
         patient_id = request.POST.get('account_id')
@@ -197,28 +197,9 @@ def analyze_image(request):
 
     return JsonResponse({}, status=400)
 '''
-'''
-def listNonUploadedReports(request):
-    s3_client = boto3.client('s3', 
-                             aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-                             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-                             region_name=settings.AWS_S3_REGION_NAME)
 
-    reports = Report.objects.filter(approved=False)
-    for report in reports:
-        # Generate a signed URL for accessing the image
-        signed_url = s3_client.generate_presigned_url('get_object',
-                                                      Params={'Bucket': AWS_STORAGE_BUCKET_NAME,
-                                                              'Key': report.image.name},
-                                                      ExpiresIn=3600)  # URL valid for 1 hour
-        report.image_url = signed_url  # Add the signed URL to the report object
 
-    serializer = ReportSerializer(reports, many=True)
-    data = {"reports": serializer.data}
-    return render(request, 'nonUpdatedReport.html', {'reports': reports})
-'''
-
-def listNonUploadedReports(request):        #for doctor to view all non uploaded reports
+def listNonUploadedReports(request):        #for doctor to view all non uploaded reports            
     reports = Report.objects.filter(approved=False)
     for report in reports:
         print(report.image.name)
@@ -250,20 +231,29 @@ def listAllReports(request):           #for testing to view all reports
     return JsonResponse(data, json_dumps_params={'indent': 2})
     
 
-    
 
-def uploadReport(request):                                      #for doctor to upload report                      
+def uploadReport(request):                     #for doctor to upload report             #haven code for dropdown overwrite status!!
     report_id = request.POST.get('report_id')
     try:
         report = Report.objects.get(pk=report_id)
         serializer = ReportApprovalSerializer(instance=report, data={'approved': True}, partial=True)
         if serializer.is_valid():
+            # Update the report approval status
             serializer.save()
+
+            # Retrieve the patient associated with the report
+            patient = Patient.objects.get(pk=report.patient_id)
+
+            # Update the patient's status based on the report's status
+            patient.status = report.status
+            patient.save()
+
             return JsonResponse({'message': 'Report updated successfully.'})
         else:
             return JsonResponse(serializer.errors, status=400)
     except Report.DoesNotExist:
         return JsonResponse({'error': 'Report not found.'}, status=400)
+
 
 
 

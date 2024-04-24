@@ -101,13 +101,15 @@ def getDetails(request):
     print("User role:", user.role)
     
     if user.role == 'patient':
-        serializer = PatientGetDetailsSerializer(user)
+        patient_instance = Patient.objects.get(pk=user.account_id)  # Retrieve patient instance
+        serializer = PatientSerializer(patient_instance)
     elif user.role == 'doctor' or user.role == 'system_admin':
         serializer = DoctorSysAdminGetDetailsSerializer(user)
     else:
         return JsonResponse({'error': 'User role is not recognized'}, status=404)
 
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
+
 
 
 
@@ -234,7 +236,7 @@ def searchUser(request, pk):            #for doctor to search for patients and f
         try:
             if request.user.role == 'doctor':
                 searchUser = Patient.objects.get(pk=pk)
-                serializer = PatientGetDetailsSerializer(searchUser)
+                serializer = PatientSerializer(searchUser)
             else:
                 try:
                     searchUser = Patient.objects.get(pk=pk)
