@@ -1,23 +1,25 @@
-import { AppBar, Link, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import React from 'react';
 import '../css/Report.css';
+import logo_tran from '../../../static/images/logo_transparent.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header>
       <div id="logoImgBox">
-        <img src="../images/logo_transparent.png" id="logoImg" alt="Logo" />
+        <img src={logo_tran} id="logoImg" alt="Logo" />
       </div>
 
       <nav className="navbar">
-        <a className="active" href="Report.html">Report</a>
-        <a className="profile" href="Profile.html">Profile</a>
+        <Link to="/Report" className="active">Report</Link>
+        <Link to="/Profile" className="profile">Profile</Link>
       </nav>
 
       <div className="icons">
         <i className="fas fa-bars" id="menu-bars"></i>
-        <a href="/LoginPageUI/login.html" className="bx bx-lock-open"></a>
+        <Link to="/LoginPage" className="bx bx-lock-open"></Link>
       </div>
     </header>
   );

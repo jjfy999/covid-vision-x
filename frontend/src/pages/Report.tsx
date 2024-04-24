@@ -1,10 +1,8 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React from 'react';
-import '../css/Report.css';
-import logo_tran from '../images/logo_transparent.png';
-import { Link } from 'react-router-dom';
 import Header from './Header';
+import '../../../static/patient/css/Report.css';
+import xrayImg from '../../../static/images/xray.png';
 
 const Report = () => {
   return (
@@ -15,7 +13,7 @@ const Report = () => {
         <h1 id="patientProfile">My Report</h1>
 
         <div id="tablediv">
-          <img src="/static/images/xray.jpeg" id="patientImg" alt="Patient X-ray" />
+          <img src={xrayImg} id="patientImg" alt="Patient X-ray" />
           <table id="infoTable">
             <tbody>
               <tr>

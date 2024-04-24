@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../theme/login.css';
+import logo from '../../../static/images/logo.png';
 
 function LoginPage() {
     const [isLoginView, setIsLoginView] = useState(true);  // Toggle between login and signup view
@@ -18,7 +19,7 @@ function LoginPage() {
         fetchCsrfToken();
     }, []);
 
-    const handleLogin = async (event) => {
+    const handleLogin = async (event:any) => {
         event.preventDefault();
         if (!role || !username || !password) {
             alert('Please fill in all required fields.');
@@ -59,7 +60,7 @@ function LoginPage() {
         }
     };
 
-    const handleSignup = async (event) => {
+    const handleSignup = async (event:any) => {
         event.preventDefault();
         if (!username || !password || password !== confirmPassword) {
             alert('Please check your inputs or passwords do not match.');
@@ -143,7 +144,7 @@ function LoginPage() {
 
             <div id="logoSection">
                 <div id="img-box">
-                    <img src="/images/logo.png" id="logoImg" alt="Company Logo" />
+                    <img src={logo} id="logoImg" alt="Company Logo" />
                 </div>
             </div>
         </div>
