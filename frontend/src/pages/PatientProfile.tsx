@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function PatientProfile() {
   return (
     <div>
-        <Header/>
+        <Header userRole={'patient'}/>
 
         {/* Profile starts */}
         <section>
@@ -55,7 +55,7 @@ function PatientProfile() {
             </div>
 
             <div className="btn">
-                <Link id="editBtn" to="/EditProfile">Edit</Link>
+                <Link id="editBtn" to="/PatientEditProfile">Edit</Link>
             </div>
         </section>
       {/* Profile ends */}

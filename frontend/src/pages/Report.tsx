@@ -7,7 +7,7 @@ import xrayImg from '../../../static/images/xray.png';
 const Report = () => {
   return (
     <div>
-      <Header/>
+      <Header userRole={'patient'}/>
 
       <section>
         <h1 id="patientProfile">My Report</h1>

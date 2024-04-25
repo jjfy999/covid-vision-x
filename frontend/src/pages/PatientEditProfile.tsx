@@ -6,7 +6,7 @@ import '../../../static/patient/css/EditProfile.css';
 function EditProfile() {
   return (
     <div>
-        <Header/>
+        <Header userRole={'patient'}/>
 
       {/* Edit Profile section starts */}
       <section>
@@ -50,8 +50,8 @@ function EditProfile() {
         </div>
 
         <div className="btn">
-          <Link id="doneBtn" to="/Profile">Done</Link>
-          <Link id="cancelBtn" to="/Profile">Cancel</Link>
+          <Link id="doneBtn" to="/PatientProfile">Done</Link>
+          <Link id="cancelBtn" to="/PatientProfile">Cancel</Link>
         </div>
       </section>
       {/* Edit Profile section ends */}

@@ -8,9 +8,9 @@ import { createMuiTheme } from "./theme/theme";
 import { ThemeProvider } from "@emotion/react";
 import React from 'react';
 import Report from './pages/Report'; 
-import Profile from './pages/Profile';
+import Profile from './pages/PatientProfile';
 import LoginPage from "./pages/LoginPage";
-import EditProfile from "./pages/EditProfile";
+import EditProfile from "./pages/PatientEditProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
