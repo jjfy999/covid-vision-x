@@ -15,7 +15,7 @@ import EditProfile from "./pages/EditProfile";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />} />
+      {/* <Route path="/" element={<Home />} /> */}
       <Route path="/report" element={<Report />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/loginpage" element={<LoginPage />} />
