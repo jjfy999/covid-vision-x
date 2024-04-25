@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       <Route path="/PatientProfile" element={<PatientProfile />} />
       <Route path="/loginpage" element={<LoginPage />} />
       <Route path="/patientEditProfile" element={<PatientEditProfile />} />
-      <Route path="/" element={<UserAccount />} />
+      <Route path="/userAcc" element={<UserAccount />} />
       <Route path="/accDetail" element={<AccountDetails />} />
       <Route path="/editAcc" element={<EditAccountDetails />} />
       <Route path="/sysAdProfile" element={<SysadProfile />} />
