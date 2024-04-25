@@ -3,6 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import React from 'react';
 import logo_tran from '../../../static/images/logo_transparent.png';
 import { Link, useLocation } from 'react-router-dom';
+import '../theme/header.css';
 
 type UserRole = 'patient' | 'sysad';
 
