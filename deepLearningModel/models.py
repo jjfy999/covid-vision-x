@@ -24,7 +24,7 @@ class Report(models.Model):
     patient_name = models.CharField(max_length=100)  # Add related_name for patient_name
     date = models.DateField()
     approved = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='report_images/')  # Change to ImageField to store image
+    image = models.ImageField(upload_to='report_images/', max_length=255)  # Change to ImageField to store image
 
     def __str__(self):
         return f"Report {self.id} for {self.patient_name}"

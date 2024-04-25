@@ -2,10 +2,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseNotFound, HttpResponseRedirect,
                          JsonResponse)
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -42,21 +44,15 @@ def loginAuth(request):  # only a temporary login function for testing
             if user.role == 'doctor':
                 return redirect('docUploadXRay')
             elif user.role == 'patient':
-                return redirect('reportView')
+                redirect_url = reverse('reportView') + \
+                    f'?account_id={user.account_id}'
+                return redirect(redirect_url)
             elif user.role == 'system_admin':
                 return redirect('sysUserAccList')
             else:
                 return HttpResponse('Who are you')
         else:
             return HttpResponse('Invalid credentials')
-
-
-def reportView(request):
-    return render(request, 'Report.html')
-
-
-def profileView(request):
-    return render(request, 'PatientProfile.html')
 
 
 def editProfileView(request):
@@ -91,60 +87,28 @@ def docUploadXRay(request):
     return render(request, 'uploadxray.html')
 
 
-def docNonUpdatedReport(request):
-    return render(request, 'nonUpdatedReport.html')
-
-
-def docReportView(request):
-    return render(request, 'DocReport.html')
-
-
 def logout(request):
     auth_logout(request)
     messages.success(request, "Logged out successfully!")
     return redirect('login')
 
 
-@login_required
-def getDetails(request):  # for users to view own details
-    user = request.user
-    print("User role:", user.role)
-    if user.role == 'patient':
-        serialized_User = PatientGetDetailsSerializer(user)
-        context = {'user': serialized_User.data}
-        return render(request, 'PatientProfile.html', context)
-
-    elif user.role == 'doctor':
-        serialized_User = DoctorSysAdminGetDetailsSerializer(user)
-        context = {'user': serialized_User.data}
-        return render(request, 'DoctorProfile.html', context)
-
-    elif user.role == 'system_admin':
-        serialized_User = DoctorSysAdminGetDetailsSerializer(user)
-        context = {'user': serialized_User.data}
-        return render(request, 'SysadminProfile.html', context)
-
-    else:
-        return HttpResponse('User not found')
-
-
-'''
-@api_view(['GET']) # yc need to look at again
-@permission_classes([IsAuthenticated])
+# @api_view(['GET']) # yc need to look at again              #for users to view own details
+# @permission_classes([IsAuthenticated])
 def getDetails(request):
     user = request.user
     print("User role:", user.role)
-    
+
     if user.role == 'patient':
-        serializer = PatientGetDetailsSerializer(user)
+        patient_instance = Patient.objects.get(
+            pk=user.account_id)  # Retrieve patient instance
+        serializer = PatientSerializer(patient_instance)
     elif user.role == 'doctor' or user.role == 'system_admin':
         serializer = DoctorSysAdminGetDetailsSerializer(user)
     else:
         return JsonResponse({'error': 'User role is not recognized'}, status=404)
 
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
-
-'''
 
 
 def getUserDetails(request, pk):  # for system admin to view specific user details
@@ -263,9 +227,28 @@ def updateUserDetails(request, pk):  # for system admin to update another person
         return Response(serializer.errors, status=400)
 
 
-'''
-@login_required
-def deleteUserAccount(request, pk):                                                                 #for system admin to delete user account
+# for doctor to search for patients and for system admin to search for both doctor and patient
+def searchUser(request, pk):
+    if pk:
+        try:
+            if request.user.role == 'doctor':
+                searchUser = Patient.objects.get(pk=pk)
+                serializer = PatientSerializer(searchUser)
+            else:
+                try:
+                    searchUser = Patient.objects.get(pk=pk)
+                    serializer = PatientGetDetailsSerializer(searchUser)
+                except Patient.DoesNotExist:
+                    searchUser = Doctor.objects.get(pk=pk)
+                    serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
+
+            return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
+        except (Patient.DoesNotExist, Doctor.DoesNotExist):
+            return JsonResponse({"error": "User not found"}, status=404)
+    return JsonResponse({"error": "User not found"}, status=400)
+
+
+def deleteUser(request, pk):  # for system admin to delete a user
     try:
         user = Doctor.objects.get(account_id=pk)
     except Doctor.DoesNotExist:
@@ -279,33 +262,40 @@ def deleteUserAccount(request, pk):                                             
 
     if user is not None:
         user.delete()
-    
-    return redirect('sysUserAccList')
+        return JsonResponse({'message': 'User deleted successfully.'})
+    else:
+        return JsonResponse({'error': 'User not found.'}, status=404)
 
 
-     
+def createUser(request):  # for patient to register and for system admin to create a user
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = make_password(request.POST.get('password'))
+        role = request.POST.get('role')
 
-    
+        # Create the user based on the role
+        if role == 'patient':
+            status = 'not_applicable'  # Set default status for patient
+            user = Patient.objects.create_user(
+                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role, status=status)
 
-def searchUser(request):                                                                        #for system admin to search for user && for doctor to search for patient
-    account_id = request.POST.get('account_id', None)
-    
-    if account_id:
-        try:
-            if request.user.role == 'doctor':
-                searchUser = Patient.objects.get(account_id=account_id)
-                serializer = PatientGetDetailsSerializer(searchUser)
-                return render(request, 'UserAcc.html', {'user': serializer.data})
-            else:
-                searchUser = Patient.objects.get(account_id=account_id)
-                serializer = PatientGetDetailsSerializer(searchUser)
-                if not searchUser:  # If patient not found, search for doctor
-                    searchUser = Doctor.objects.get(account_id=account_id)
-                    serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
-                    return render(request, 'UserAcc.html', {'user': serializer.data})
-        except (Patient.DoesNotExist, Doctor.DoesNotExist):
-            return HttpResponseBadRequest("Invalid user type")
-        
+        elif role == 'doctor':
+            user = Doctor.objects.create_user(
+                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
 
-    return render(request, 'UserAcc.html')
-'''
+        elif role == 'system_admin':
+            user = SystemAdmin.objects.create_user(
+                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
+
+        else:
+            # Handle invalid role
+            return JsonResponse({'error': 'Invalid role'}, status=400)
+
+        return JsonResponse({'message': 'User created successfully.'})
+
+    else:
+        # Handle non-POST request
+        return JsonResponse({'error': 'User not created.'}, status=405)

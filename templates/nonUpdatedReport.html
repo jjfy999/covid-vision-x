@@ -48,7 +48,7 @@
       <div class="reportItem">
           <div id="xrayImage">
               <!-- Display the report image -->
-              <img src="{{ report.image.url }}" alt="X-ray Image">
+              <img src="{{ report.image }}" alt="X-ray Image">
           </div>
           <div id="reportInfo">
               <!-- Display the report details -->
@@ -67,10 +67,21 @@
               </select>
           </div>
           <div id="actionButtons">
-              <!-- Buttons for each report -->
-              <button class="uploadButton" data-report-id="{{ report.id }}">Upload</button>
-              <button class="deleteButton" data-report-id="{{ report.id }}">Delete</button>
-          </div>
+            <!-- Form for uploading -->
+            <form method="POST" action="/uploadReport/">
+                {% csrf_token %}
+                <input type="hidden" name="report_id" value="{{ report.id }}">
+                <button type="submit">Upload</button>
+            </form>
+        
+            <!-- Form for deleting -->
+            <form method="POST" action="/deleteReport/">
+                {% csrf_token %}
+                <input type="hidden" name="report_id" value="{{ report.id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        
       </div>
       {% endfor %}
       {% else %}

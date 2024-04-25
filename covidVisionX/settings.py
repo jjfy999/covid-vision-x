@@ -15,6 +15,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
+from storages.backends.s3boto3 import S3Boto3Storage
 
 load_dotenv()
 
@@ -31,8 +32,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = [
-    'fyptestingenv1.eba-p78kiscd.us-west-2.elasticbeanstalk.com', '127.0.0.1', '172.31.26.236']
+ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236',
+                 'fypfinal.eba-2vqeaaic.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -100,10 +101,33 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'admin100',
         'PASSWORD': 'admin100',
-        'HOST': 'awseb-e-ii2ambiipb-stack-awsebrdsdatabase-yvkypgkxmfin.cpakgyie23bb.us-west-2.rds.amazonaws.com',
+        'HOST': 'awseb-e-y3gsxymygs-stack-awsebrdsdatabase-ec5iokxdkmwi.cnuog0og8q72.ap-southeast-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
+
+
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_S3_SIGNATURE_NAME = 's3v4'
+AWS_S3_REGION_NAME = 'ap-southeast-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+
+AWS_STORAGE_BUCKET_NAME = 'fypimagess'
+# AWS_STORAGE_BUCKET_NAME_MODELS = 'fypmodelss'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+'''
+# Define storage backends for different buckets
+class CustomS3Boto3Storage(S3Boto3Storage):
+    def __init__(self, *args, **kwargs):
+        bucket_name = kwargs.pop('bucket_name', 'fypimagess')
+        super().__init__(bucket_name=bucket_name, *args, **kwargs)
+
+# Use fypimagess bucket as the default storage
+DEFAULT_FILE_STORAGE = 'path.to.CustomS3Boto3Storage'
+'''
 
 
 # Password validation

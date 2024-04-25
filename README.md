@@ -12,8 +12,5 @@ $ py manage.py collectstatic
 $ py manage.py makemigrations <ModelName>
 $ py manage.py migrate
 
-online site below (Currently using postgres RDS)
-http://fyptestingenv1.eba-p78kiscd.us-west-2.elasticbeanstalk.com/
-
-!!! deployment broke due to small storage overwhelmed by tensorflow and keras!!!
-but, it a problem for another day ^\_^ just not today
+online site below (Currently using postgres RDS and images S3 private bucket)
+http://fypfinal.eba-2vqeaaic.ap-southeast-1.elasticbeanstalk.com/
