@@ -166,7 +166,7 @@ section:nth-child(even){
 }
 
 .viewInfoBtn {
-    font-size: 1.7rem;
+    font-size: 2rem;
     color: black;
     background: var(--yellow);
     border-radius: .5rem;
@@ -175,8 +175,7 @@ section:nth-child(even){
     width: 20rem; 
     height: 5rem;
     text-align: center;
-    justify-content: space-between;
-    display: inline-block;
+    line-height: 5rem;
 }
 
 .viewInfoBtn:hover{
