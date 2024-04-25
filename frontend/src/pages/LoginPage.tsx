@@ -43,13 +43,13 @@ function LoginPage() {
             // Redirect based on role
             switch (role) {
                 case 'patient':
-                    window.location.href = '/PatientUI/Report.html';
+                    window.location.href = '/Report';
                     break;
                 case 'doctor':
                     window.location.href = '/';
                     break;
                 case 'sysad':
-                    window.location.href = '/SystemAdminUI/UserAcc.html';
+                    window.location.href = '/UserAcc';
                     break;
                 default:
                     break;
