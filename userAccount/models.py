@@ -1,19 +1,21 @@
 
+import random
+
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 from faker import Faker
-from django.contrib.auth.hashers import make_password
-import random
 
 fake = Faker()
 
+
 class Account(AbstractUser):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
-    account_id = models.AutoField(primary_key=True)
     role = models.CharField(max_length=50, null=True)  # Define role field here
 
     def __str__(self):
@@ -46,5 +48,3 @@ class SystemAdmin(Account):
         self.role = 'system_admin'
         self.is_staff = True
         super().save(*args, **kwargs)
-
-
