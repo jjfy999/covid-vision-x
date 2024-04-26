@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../theme/login.css';
-<<<<<<< Updated upstream
 import logo from '../../../static/images/logo.png';
-=======
->>>>>>> Stashed changes
 
 function LoginPage() {
     const [isLoginView, setIsLoginView] = useState(true);  // Toggle between login and signup view
@@ -22,11 +19,7 @@ function LoginPage() {
         fetchCsrfToken();
     }, []);
 
-<<<<<<< Updated upstream
-    const handleLogin = async (event:any) => {
-=======
     const handleLogin = async (event: any) => {
->>>>>>> Stashed changes
         event.preventDefault();
         if (!role || !username || !password) {
             alert('Please fill in all required fields.');
@@ -67,11 +60,7 @@ function LoginPage() {
         }
     };
 
-<<<<<<< Updated upstream
-    const handleSignup = async (event:any) => {
-=======
     const handleSignup = async (event: any) => {
->>>>>>> Stashed changes
         event.preventDefault();
         if (!username || !password || password !== confirmPassword) {
             alert('Please check your inputs or passwords do not match.');
