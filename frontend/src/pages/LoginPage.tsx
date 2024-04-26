@@ -29,7 +29,8 @@ function LoginPage() {
         const loginData = {
             role,
             username,
-            password
+            password,
+            qwer
         };
 
         try {
