@@ -30,7 +30,6 @@ function LoginPage() {
             role,
             username,
             password,
-            qwer
         };
 
         try {
