@@ -1,16 +1,37 @@
 import '../../../static/systemadmin/css/UserAcc.css';
-import profileImg from '../../../static/images/unknownPerson.jpg';
 import Header from './Header';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import UserBox from './UserBox';
+import { User } from './UserBox';
+
+const sampleUsers = [
+  { id: "1", name: "John", role: "Admin" },
+  { id: "2", name: "Jane", role: "User" },
+  // Add more sample user objects as needed
+];
 
 // Combined Component
 const UserAccount = () => {
-  // Sample user data (can be replaced with dynamic data or fetched from API)
-  const users = [
-    { id: "C0001", name: "Bernad Koh", role: "Doctor" },
-    { id: "C0002", name: "John Doe", role: "Nurse" },
-    // Add more user data as needed
-  ];
+  const [users, setUsers] = useState<User[]>(sampleUsers);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch user data from the API endpoint when component mounts
+    const fetchData = async () => {
+      try {
+        // const response = await axios.get('API_ENDPOINT_URL');
+        // setUsers(response.data);
+        setUsers(sampleUsers);
+
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setError('Error fetching user data');
+      }
+    };
+
+    fetchData(); // Call the fetchData function
+  }, []); // Empty dependency array means this effect runs only once after the first render
 
   return (
     <div>
@@ -20,19 +41,9 @@ const UserAccount = () => {
         <section>
             <h1 id="userAcc">User Accounts</h1>
             <div id="userList">
-            {users.map(user => (
-                <div className="userBox" key={user.id}>
-                <div className="user-img-box">
-                    <img src={profileImg} alt={user.name} className="userImg" />
-                </div>
-                <p className="userID">{user.id}</p>
-                <p className="userName">{user.name}</p>
-                <p className="role">{user.role}</p>
-                <div className="viewInfoBtn">
-                    <Link id="infoBtn" to="/AccDetail">View Details</Link>
-                </div>
-                </div>
-            ))}
+              {users.map(user => (
+                  <UserBox key={user.id} user={user} />
+              ))}
             </div>
         </section>
     </div>
