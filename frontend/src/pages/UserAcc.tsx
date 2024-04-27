@@ -2,8 +2,7 @@ import '../../../static/systemadmin/css/UserAcc.css';
 import Header from './Header';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import UserBox from './UserBox';
-import { User } from './UserBox';
+import UserBox, { User } from './UserBox';
 
 const sampleUsers = [
   { id: "1", name: "John", role: "Admin" },
