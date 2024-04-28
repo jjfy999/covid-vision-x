@@ -6,7 +6,7 @@ interface AuthContextProps {
   authTokens: string | null;
   user: { username: string; role: string };
   //isAuthenticated: boolean;
-  loginUser: (username: string, password: string) => Promise<void>;
+  loginUser(username: string, password: string): Promise<void>;
   logoutUser: () => void;
 }
 
@@ -31,18 +31,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const loginUser: AuthContextProps["loginUser"] = async (e) => {
+  const loginUser: AuthContextProps["loginUser"] = async (
+    username: string,
+    password: string
+  ) => {
     // Perform authentication logic
     //setIsAuthenticated(true);
-    e.preventDefault();
+    console.log("Username at login: ", username);
+    console.log("Password at login: ", password);
     const response = await fetch("http://127.0.0.1:8000/api/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
+        username: username,
+        password: password,
       }),
     });
     const data = await response.json();
@@ -109,9 +113,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         authTokens: authTokens,
         user: user,
-        loginUser: (username: string, password: string) =>
-          loginUser(username, password),
-        logoutUser: logoutUser,
+        loginUser,
+        logoutUser,
       }}
     >
       {loading ? null : children}

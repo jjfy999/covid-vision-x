@@ -12,7 +12,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   //const [csrfToken, setCsrfToken] = useState('');
-  const { user, loginUser } = useAuth();
+  let { user, loginUser } = useAuth();
   {
     /** 
   React.useEffect(() => {
@@ -24,8 +24,8 @@ function LoginPage() {
     }, []);
 */
   }
-  const handleLogin = async (event: any) => {
-    event.preventDefault();
+  const handleLogin = async (username: string, password: string) => {
+    //preventDefault();
     if (!role || !username || !password) {
       alert("Please fill in all required fields.");
       return;
@@ -40,6 +40,8 @@ function LoginPage() {
 */
     }
     try {
+      console.log("Username before login: ", username);
+      console.log("Password before login: ", password);
       await loginUser(username, password);
 
       {
@@ -54,18 +56,20 @@ function LoginPage() {
     */
       }
       // Redirect based on role
-      switch (user.role) {
-        case "patient":
-          window.location.href = "/Report";
-          break;
-        case "doctor":
-          window.location.href = "/";
-          break;
-        case "sysad":
-          window.location.href = "/UserAcc";
-          break;
-        default:
-          break;
+      if (user) {
+        switch (user.role) {
+          case "patient":
+            window.location.href = "/Report";
+            break;
+          case "doctor":
+            window.location.href = "/";
+            break;
+          case "sysad":
+            window.location.href = "/UserAcc";
+            break;
+          default:
+            break;
+        }
       }
     } catch (error) {
       console.error("Login error", error);
@@ -102,13 +106,18 @@ function LoginPage() {
     }
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, any) => {
+    event.preventDefault();
+    await handleLogin(username, password);
+  };
+
   return (
     <div id="container">
       <div id="loginSection">
         {isLoginView ? (
           <div>
             <h1 id="loginHeading">LOGIN</h1>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSubmit}>
               <label htmlFor="role">
                 <b>Login As</b>
               </label>

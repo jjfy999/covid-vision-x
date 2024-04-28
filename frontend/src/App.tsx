@@ -19,34 +19,47 @@ import SysadProfile from "./pages/SysAdProfile";
 import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
-/*
+import RoleRoute from "./pages/templates/RoleRoute";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <AuthProvider>
+    <Route>
       <Route path="/loginpage" element={<LoginPage />} />
       <Route path="/" element={<PrivateRoute />}>
-        <Route path="/report" element={<Report />} />
-        <Route path="/PatientProfile" element={<PatientProfile />} />
-        <Route path="/patientEditProfile" element={<PatientEditProfile />} />
-        <Route path="/userAcc" element={<UserAccount />} />
-        <Route path="/AccDetail/:userId" element={<AccountDetails />} />
-        <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
-        <Route path="/sysAdProfile" element={<SysadProfile />} />
-        <Route path="/sysAdEditProfile" element={<SysadEditProfile />} />
+        <Route element={<RoleRoute requiredRole={"patient"} />}>
+          <Route path="/report" element={<Report />} />
+          <Route path="/PatientProfile" element={<PatientProfile />} />
+          <Route path="/patientEditProfile" element={<PatientEditProfile />} />
+        </Route>
+        <Route element={<RoleRoute requiredRole={"system_admin"} />}>
+          <Route path="/userAcc" element={<UserAccount />} />
+          <Route path="/AccDetail/:userId" element={<AccountDetails />} />
+          <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
+          <Route path="/sysAdProfile" element={<SysadProfile />} />
+          <Route path="/sysAdEditProfile" element={<SysadEditProfile />} />
+        </Route>
       </Route>
-    </AuthProvider>
+    </Route>
   )
 );
-*/
 
+function App() {
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
+}
+
+/*
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/** Public Routes */}
+        {/** Public Routes *
         <Route path="/loginpage" element={<LoginPage />} />
-        {/** Private Routes */}
-        <Route path="/" element={<PrivateRoute />}>
+        {/** Private Routes *
+        <Route element={<PrivateRoute />}>
           <Route path="/report" element={<Report />} />
           <Route path="/PatientProfile" element={<PatientProfile />} />
           <Route path="/patientEditProfile" element={<PatientEditProfile />} />
@@ -60,5 +73,5 @@ const App: React.FC = () => {
     </AuthProvider>
   );
 };
-
+*/
 export default App;
