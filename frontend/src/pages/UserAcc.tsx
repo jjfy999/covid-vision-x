@@ -5,8 +5,8 @@ import axios from 'axios';
 import UserBox, { User } from './UserBox';
 
 const sampleUsers = [
-  { id: "1", name: "John", role: "Admin" },
-  { id: "2", name: "Jane", role: "User" },
+  { id: "T0992", name: "Bryant Ng", role: "Doctor" },
+  { id: "T0993", name: "Jane", role: "User" },
   // Add more sample user objects as needed
 ];
 
