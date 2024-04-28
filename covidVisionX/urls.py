@@ -14,15 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
 from accessControl import views as accessControl
+from deepLearningModel import views as deepLearningModel
 from userAccount import views as userAccount
 from userAccount.admin import system_admin_site
-from deepLearningModel import views as deepLearningModel
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,46 +31,72 @@ urlpatterns = [
 
     path('login/', userAccount.loginAuth, name='loginAuth'),
     path('logout/', userAccount.logout, name='logout'),
-    path('register/', userAccount.createUser, name='createUser'),                                   #for patient to register
+    path('register/', userAccount.createUser,
+         name='createUser'),  # for patient to register
     path('patientReport/', deepLearningModel.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     path('patientEditProfile/', userAccount.editProfileView,
-         name='editProfileView'),                                                               #for patient to view edit own details page          
-    path('updateDetails/', userAccount.updateDetails, name='updateDetails'),                    #for patient to update own details
-    path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,                          #for system admin to update another person details!!!!!!!!!! (linked to below)
+         name='editProfileView'),  # for patient to view edit own details page
+    path('updateDetails/', userAccount.updateDetails,
+         name='updateDetails'),  # for patient to update own details
+    path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,  # for system admin to update another person details!!!!!!!!!! (linked to below)
          name='updateUserDetails'),  # to update another person details
-                 
 
 
-    path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),                      #for system admin to view list of users
-    path('sysProfileView/', userAccount.getDetails, name='getDetails'),                         #for system admin to view own details
-    path('sysEditProfileView/', userAccount.sysEditProfileView, name='sysEditProfileView'),     #for system admin to view edit own details page
-    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),            #for system admin to view specific user details 
-    path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails, name='sysEditUserDetails'),       #for system admin to edit another person details 
-    path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for system admin to update own details
-    path('sysSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),                          #for system admin to search for a doctor or patient
-    path('sysDeleteUser/<int:pk>/', userAccount.deleteUser, name='deleteUser'),                   #for system admin to delete a user
-    path('sysCreateUser/', userAccount.createUser, name='createUser'),                           #for system admin to create a user
 
-    path('docSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),                         #for doctor to search for a patient
-    path('docPatientAccList/', userAccount.listPatients, name='docUserAccList'),                      #for doctor to view list of patients (waiting for UI)
-    path('docProfileView/', userAccount.getDetails, name='getDetails'),                         #for doctor to view own details
-    path('docEditProfileView/', userAccount.docEditProfileView, name='docEditProfileView'),     #for doctor to view edit own details page
-    path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),                    #for doctor to upload xray image page
-    path('docNonUpdatedReport/', deepLearningModel.listNonUploadedReports, name='docListReports'),  #for doctor to view non updated reports of patients
-    path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),                 #for doctor to update own details
-    path('docReportView/', deepLearningModel.listUploadedReports, name='docReportView'),                    #for doctor to view reports that are uploaded to patients
-    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),              #for doctor to view xray image result (for testing)
-    path('docListAllReports/', deepLearningModel.listAllReports, name='docListAllReports'),     #for doctor to view list of all reports (for testing)
+    # for system admin to view list of users
+    path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),
+    # for system admin to view own details
+    path('sysProfileView/', userAccount.getDetails, name='getDetails'),
+    # for system admin to view edit own details page
+    path('sysEditProfileView/', userAccount.sysEditProfileView,
+         name='sysEditProfileView'),
+    # for system admin to view specific user details
+    path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),
+    path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails,
+         name='sysEditUserDetails'),  # for system admin to edit another person details
+    # for system admin to update own details
+    path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),
+    # for system admin to search for a doctor or patient
+    path('sysSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),
+    path('sysDeleteUser/<int:pk>/', userAccount.deleteUser,
+         name='deleteUser'),  # for system admin to delete a user
+    # for system admin to create a user
+    path('sysCreateUser/', userAccount.createUser, name='createUser'),
+
+    path('docSearchUser/<int:pk>/', userAccount.searchUser,
+         name='searchUser'),  # for doctor to search for a patient
+    # for doctor to view list of patients (waiting for UI)
+    path('docPatientAccList/', userAccount.listPatients, name='docUserAccList'),
+    path('docProfileView/', userAccount.getDetails,
+         name='getDetails'),  # for doctor to view own details
+    path('docEditProfileView/', userAccount.docEditProfileView,
+         name='docEditProfileView'),  # for doctor to view edit own details page
+    # for doctor to upload xray image page
+    path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),
+    path('docNonUpdatedReport/', deepLearningModel.listNonUploadedReports,
+         name='docListReports'),  # for doctor to view non updated reports of patients
+    path('docUpdateDetails/', userAccount.updateDetails,
+         name='updateDetails'),  # for doctor to update own details
+    # for doctor to view reports that are uploaded to patients
+    path('docReportView/', deepLearningModel.listUploadedReports,
+         name='docReportView'),
+    # for doctor to view xray image result (for testing)
+    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),
+    # for doctor to view list of all reports (for testing)
+    path('docListAllReports/', deepLearningModel.listAllReports,
+         name='docListAllReports'),
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
 
-    #path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
-    #path('logout/', accessControl.LogoutView.as_view(), name='logout'),
+    path('api/', include('accessControl.urls'))
+    # path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
+    # path('logout/', accessControl.LogoutView.as_view(), name='logout'),
 
 
-    
+
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
