@@ -18,12 +18,10 @@ const UserBox: React.FC<UserBoxProps> = ({ users }) => {
   // const userId = "T0992";
 
   // const firstThreeUsers = users.slice(0, 3);
-  const firstThreeUsers = users;
-
 
   return (
     <div>
-      {firstThreeUsers.map((user, index) => (
+      {users.map((user, index) => (
         <div className="userBox" key={index}>
           <div className="user-img-box">
             <img src={profileImg} alt={user.name} className="userImg" />
