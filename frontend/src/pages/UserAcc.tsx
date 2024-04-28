@@ -1,18 +1,13 @@
 import '../../../static/systemadmin/css/UserAcc.css';
 import Header from './Header';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import UserBox, { User } from './UserBox';
-
-const sampleUsers = [
-  { id: "T0992", name: "Bryant Ng", role: "Doctor" },
-  { id: "T0993", name: "Jane", role: "User" },
-  // Add more sample user objects as needed
-];
+import UserBox from './UserBox';
+import { sampleUsers } from './sampleUserAcc';
+import { UserAccountDetails } from './UserAccInterface';
 
 // Combined Component
 const UserAccount = () => {
-  const [users, setUsers] = useState<User[]>(sampleUsers);
+  const [users, setUsers] = useState<UserAccountDetails[]>(sampleUsers);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -40,11 +35,7 @@ const UserAccount = () => {
         <section>
             <h1 id="userAcc">User Accounts</h1>
             <div id="userList">
-              {users.map(user => (
-                  // <UserBox key={user.id} user={user} userId="T0992" />
-
-                  <UserBox key={user.id} user={user} />
-              ))}
+              <UserBox users={users} />
             </div>
         </section>
     </div>
