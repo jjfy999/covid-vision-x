@@ -1,14 +1,14 @@
 import '../../../static/systemadmin/css/EditAcc.css';
 import profileImg from '../../../static/images/unknownPerson.jpg';
 import Header from './Header';
-import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { UserAccountDetails } from './UserAccInterface';
 import { sampleUsers } from './sampleUserAcc';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 
 const EditAccountDetails = () => {
-
+  
+  const history = useHistory(); // Access history object to navigate
   const { userId } = useParams(); // Get the user ID from URL parameters
   const [formData, setFormData] = useState<UserAccountDetails | null>(null);
 
@@ -27,11 +27,34 @@ const EditAccountDetails = () => {
     });
   };
 
+  // Function to update user data
+  const updateUser = (updatedUserData: UserAccountDetails) => {
+    // Find the index of the user in the sampleUsers array
+    const userIndex = sampleUsers.findIndex(user => user.id === userId);
+    if (userIndex !== -1) {
+      // Update the user data in the sampleUsers array
+      const updatedUsers = [...sampleUsers];
+      updatedUsers[userIndex] = updatedUserData;
+      console.log("User data updated successfully:", updatedUserData);
+      // Optionally, you might want to update the sampleUsers state as well
+      // setSampleUsers(updatedUsers);
+      return true; // Return true to indicate successful update
+    } else {
+      console.error("User not found");
+      return false; // Return false to indicate update failure
+    }
+  };
+
   // Function to handle form submission
   const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      // Perform actions such as updating the user data
-      console.log("Updated user data:", formData);
+    e.preventDefault();
+    // Update the user data if formData is not null
+    if (formData) {
+      if (updateUser(formData)) {
+        // If the update is successful, navigate to the account details page
+        history.push(`/AccDetail/${userId}`);
+      }
+    }
   };
 
   if (!formData) {
@@ -80,10 +103,8 @@ const EditAccountDetails = () => {
           </form>
         </div>
         <div className="btn">
-          {/* <Link id="doneBtn" to="/AccDetail">Done</Link> */}
-          <button id="doneBtn" type="submit">Done</button>
-
-          <Link id="cancelBtn" to="/AccDetail">Cancel</Link>
+          <Link id="doneBtn" to={`/AccDetail/${userId}`}>Done</Link>
+          <Link id="cancelBtn" to={`/AccDetail/${userId}`}>Cancel</Link>
         </div>
       </section>
     </div>
