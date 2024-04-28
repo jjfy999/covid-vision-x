@@ -4,13 +4,13 @@ import Header from './Header';
 import React, { useState, useEffect } from 'react';
 import { UserAccountDetails } from './UserAccInterface';
 import { sampleUsers } from './sampleUserAcc';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const EditAccountDetails = () => {
   
-  const history = useHistory(); // Access history object to navigate
   const { userId } = useParams(); // Get the user ID from URL parameters
   const [formData, setFormData] = useState<UserAccountDetails | null>(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     // Find the user with the matching ID from the sampleUsers array
@@ -35,9 +35,11 @@ const EditAccountDetails = () => {
       // Update the user data in the sampleUsers array
       const updatedUsers = [...sampleUsers];
       updatedUsers[userIndex] = updatedUserData;
-      console.log("User data updated successfully:", updatedUserData);
+      // Update the state with the new user data
+      setFormData(updatedUserData);
       // Optionally, you might want to update the sampleUsers state as well
       // setSampleUsers(updatedUsers);
+      console.log("User data updated successfully:", updatedUserData);
       return true; // Return true to indicate successful update
     } else {
       console.error("User not found");
@@ -52,7 +54,7 @@ const EditAccountDetails = () => {
     if (formData) {
       if (updateUser(formData)) {
         // If the update is successful, navigate to the account details page
-        history.push(`/AccDetail/${userId}`);
+        navigate(`/AccDetail/${userId}`);
       }
     }
   };
@@ -103,7 +105,9 @@ const EditAccountDetails = () => {
           </form>
         </div>
         <div className="btn">
-          <Link id="doneBtn" to={`/AccDetail/${userId}`}>Done</Link>
+          {/* <Link id="doneBtn" to={`/AccDetail/${userId}`}>Done</Link> */}
+          <button id="doneBtn" type="submit">Done</button>
+
           <Link id="cancelBtn" to={`/AccDetail/${userId}`}>Cancel</Link>
         </div>
       </section>
