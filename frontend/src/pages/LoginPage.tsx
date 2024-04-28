@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../theme/login.css';
 import logo from '../../../static/images/logo.png';
+import DrawerAppBar from './templates/DrawerAppBar';
 
 function LoginPage() {
+
     const [isLoginView, setIsLoginView] = useState(true);  // Toggle between login and signup view
     const [role, setRole] = useState('');  // Role state for login
     const [username, setUsername] = useState('');
