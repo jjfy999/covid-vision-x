@@ -3,6 +3,7 @@ import axios from "axios";
 import "../theme/login.css";
 import logo from "../../../static/images/logo.png";
 import { useAuth } from "./templates/AuthContexr";
+import DrawerAppBar from "./templates/DrawerAppBar";
 
 function LoginPage() {
   const [isLoginView, setIsLoginView] = useState(true); // Toggle between login and signup view

@@ -6,7 +6,8 @@ import '../../../static/patient/css/EditProfile.css';
 function EditProfile() {
   return (
     <div>
-        <Header userRole={'patient'}/>
+      <Header userRole={'patient'} />
+
 
       {/* Edit Profile section starts */}
       <section>
