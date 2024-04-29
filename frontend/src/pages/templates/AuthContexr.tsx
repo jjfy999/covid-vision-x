@@ -4,7 +4,7 @@ import { redirect } from "react-router-dom";
 
 interface AuthContextProps {
   authTokens: string | null;
-  user: { username: string; role: string };
+  user: { username: string; role: string } | null;
   //isAuthenticated: boolean;
   loginUser(username: string, password: string): Promise<void>;
   logoutUser: () => void;
@@ -15,17 +15,28 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [authTokens, setAuthTokens] = useState<string | null>(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
+  // const [authTokens, setAuthTokens] = useState<string | null>(() =>
+  //   localStorage.getItem("authTokens")
+  //     ? JSON.parse(localStorage.getItem("authTokens"))
+  //     : null
+  // );
 
-  const [user, setUser] = useState<any>(() =>
-    localStorage.getItem("authTokens")
-      ? jwtDecode(localStorage.getItem("authTokens"))
-      : null
-  );
+  // const [user, setUser] = useState<any>(() =>
+  //   localStorage.getItem("authTokens")
+  //     ? jwtDecode(localStorage.getItem("authTokens"))
+  //     : null
+  // );
+
+  const [authTokens, setAuthTokens] = useState<string | null>(() => {
+    const tokens = localStorage.getItem("authTokens");
+    return tokens ? JSON.parse(tokens) : null;
+  });
+  
+  const [user, setUser] = useState<{ username: string; role: string } | null>(() => {
+    const tokens = localStorage.getItem("authTokens");
+    return tokens ? jwtDecode(tokens) : null;
+  });
+  
 
   const [loading, setLoading] = useState(true);
 
@@ -70,26 +81,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const updateToken = async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refresh: authTokens?.refresh }),
-    });
 
-    const data = await response.json();
+    // const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ refresh: authTokens?.refresh }),
+    // });
+    if (typeof authTokens === 'object' && authTokens !== null && 'refresh' in authTokens) {
+      const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh: (authTokens as { refresh: string }).refresh }),
+      });
 
-    if (response.status === 200) {
-      setAuthTokens(data);
-      setUser(jwtDecode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-    } else {
-      logoutUser();
-    }
+      const data = await response.json();
 
-    if (loading) {
-      setLoading(false);
+      if (response.status === 200) {
+        setAuthTokens(data);
+        setUser(jwtDecode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+      } else {
+        logoutUser();
+      }
+
+      if (loading) {
+        setLoading(false);
+      }
     }
   };
 
