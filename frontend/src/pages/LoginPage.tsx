@@ -21,11 +21,39 @@ function LoginPage() {
         fetchCsrfToken();
     }, []);
 
+<<<<<<< HEAD
     const handleLogin = async (event: any) => {
         event.preventDefault();
         if (!role || !username || !password) {
             alert('Please fill in all required fields.');
             return;
+=======
+      {
+        /* 
+      const config = {
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrfToken,
+            },
+        };
+        const result = await axios.post('/login/', loginData, config);
+    */
+      }
+      // Redirect based on role
+      if (user) {
+        switch (user.role) {
+          case "patient":
+            window.location.href = "/Report";
+            break;
+          case "doctor":
+            window.location.href = "/";
+            break;
+          case "system_admin":
+            window.location.href = "/UserAcc";
+            break;
+          default:
+            break;
+>>>>>>> 19d41af3e3b1dd949b733dee8bfec5d7a9f4e779
         }
 
         const loginData = {
