@@ -20,12 +20,15 @@ import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
+import DoctorProfile from "./pages/DoctorProfile"; // Import the DoctorProfile component
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/loginpage" element={<LoginPage />} />
+
       <Route path="/" element={<PrivateRoute />}>
+        <Route path="/doctorprofile" element={<DoctorProfile />} />
         <Route element={<RoleRoute requiredRole={"patient"} />}>
           <Route path="/report" element={<Report />} />
           <Route path="/PatientProfile" element={<PatientProfile />} />
