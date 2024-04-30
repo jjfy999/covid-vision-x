@@ -64,7 +64,7 @@ function LoginPage() {
           case "doctor":
             window.location.href = "/";
             break;
-          case "sysad":
+          case "system_admin":
             window.location.href = "/UserAcc";
             break;
           default:
