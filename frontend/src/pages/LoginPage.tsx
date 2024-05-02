@@ -4,6 +4,7 @@ import "../theme/login.css";
 import logo from "../../../static/images/logo.png";
 import { useAuth } from "./templates/AuthContexr";
 import DrawerAppBar from "./templates/DrawerAppBar";
+import { Navigate } from "react-router-dom";
 
 function LoginPage() {
   const [isLoginView, setIsLoginView] = useState(true); // Toggle between login and signup view
@@ -11,71 +12,39 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  //const [csrfToken, setCsrfToken] = useState('');
-  let { user, loginUser } = useAuth();
-  {
-    /** 
-  React.useEffect(() => {
-      const fetchCsrfToken = async () => {
-          const response = await axios.get('/api/csrf_token/');
-          setCsrfToken(response.data.csrfToken);
-        };
-        fetchCsrfToken();
-    }, []);
-*/
-  }
+  const { user, loginUser } = useAuth();
+  const [loggedInUser, setLoggedInUser] = useState(false);
+
   const handleLogin = async (username: string, password: string) => {
     //preventDefault();
     if (!role || !username || !password) {
       alert("Please fill in all required fields.");
       return;
     }
-    {
-      /** 
-    const loginData = {
-        role,
-        username,
-        password,
-    };
-*/
-    }
+
     try {
       console.log("Username before login: ", username);
       console.log("Password before login: ", password);
       await loginUser(username, password);
-
-      {
-        /* 
-      const config = {
-          headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrfToken,
-            },
-        };
-        const result = await axios.post('/login/', loginData, config);
-    */
-      }
-      // Redirect based on role
-      if (user) {
-        switch (user.role) {
-          case "patient":
-            window.location.href = "/Report";
-            break;
-          case "doctor":
-            window.location.href = "/";
-            break;
-          case "system_admin":
-            window.location.href = "/UserAcc";
-            break;
-          default:
-            break;
-        }
-      }
+      setLoggedInUser(true);
     } catch (error) {
       console.error("Login error", error);
       alert("Login failed");
     }
   };
+  if (loggedInUser) {
+    // If user is authenticated, redirect based on user role
+    switch (user.role) {
+      case "patient":
+        return <Navigate to="/Report" replace />;
+      case "doctor":
+        return <Navigate to="/" replace />;
+      case "system_admin":
+        return <Navigate to="/UserAcc" replace />;
+      default:
+        return null; // or any other default behavior
+    }
+  }
 
   const handleSignup = async (event: any) => {
     event.preventDefault();
@@ -243,110 +212,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-/* import React, { useState } from 'react';
-import axios from 'axios';
-import '../theme/login.css';
-
-function LoginPage() {
-    const [role, setRole] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [csrfToken, setCsrfToken] = useState('');
-
-    React.useEffect(() => {
-        const fetchCsrfToken = async () => {
-            const response = await axios.get('/api/csrf_token/'); //Change endpoint
-            setCsrfToken(response.data.csrfToken);
-        };
-        fetchCsrfToken();
-    }, []);
-
-    const validateLogin = async (event) => {
-        event.preventDefault();
-        if (!role || !username || !password) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-
-        const loginData = {
-            role,
-            username,
-            password
-        };
-
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                },
-            };
-            const result = await axios.post('/login/', loginData, config); //Change this too
-            //Redirect user based on role
-            switch (role) {
-                case 'patient':
-                    window.location.href = '/PatientUI/Report.html';
-                    break;
-                case 'doctor':
-                    window.location.href = '/';
-                    break;
-                case 'sysad':
-                    window.location.href = '/SystemAdminUI/UserAcc.html';
-                    break;
-                default:
-                    break;
-            }
-        } catch (error) {
-            console.error('Login error', error);
-        }
-    };
-
-    return (
-        <div id="container">
-            <div id="loginSection">
-                <div>
-                    <h1 id="loginHeading">LOGIN</h1>
-                    <form onSubmit={validateLogin}>
-                        <label htmlFor="role"><b>Login As</b></label>
-                        <select value={role} onChange={e => setRole(e.target.value)} required id="roleInput">
-                            <option value="" disabled selected>Select a role</option>
-                            <option value="patient">Patient</option>
-                            <option value="doctor">Doctor</option>
-                            <option value="sysad">System Administrator</option>
-                        </select>
-
-                        <label htmlFor="uname"><b>Username</b></label>
-                        <input
-                            type="text"
-                            placeholder="Enter Username"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            required
-                        />
-
-                        <label htmlFor="psw"><b>Password</b></label>
-                        <input
-                            type="password"
-                            placeholder="Enter Password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            required
-                        />
-
-                        <button type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="logoSection">
-                <div id="img-box">
-                    <img src="/images/logo.png" id="logoImg" alt="Company Logo" />
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export default LoginPage;
- */

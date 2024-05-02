@@ -5,5 +5,4 @@ const PrivateRoute = () => {
   const { authTokens } = useAuth();
   return authTokens ? <Outlet /> : <Navigate to="/loginpage" replace />;
 };
-
 export default PrivateRoute;
