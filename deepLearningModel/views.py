@@ -14,6 +14,7 @@ from django.conf import settings
 import boto3
 from covidVisionX.settings import AWS_STORAGE_BUCKET_NAME,AWS_S3_REGION_NAME #,AWS_STORAGE_BUCKET_NAME_MODELS
 import io
+from rest_framework.decorators import api_view
 # Create your views here.
 # views.py
 '''
@@ -102,7 +103,7 @@ def analyze_image(request):                                 #not serializing the
 
         # Retrieve the patient instance using the provided ID
         try:
-            patient = Patient.objects.get(account_id=patient_id)
+            patient = Patient.objects.get(pk=patient_id)
         except Patient.DoesNotExist:
             return JsonResponse({"error": "Patient not found."}, status=400)
         
@@ -112,7 +113,7 @@ def analyze_image(request):                                 #not serializing the
 
 
         print (patient.name)
-        print(patient.account_id)
+        print(patient.id)
         print(status)
         print(patient.email)
         print(patient.phone_number)
@@ -123,7 +124,7 @@ def analyze_image(request):                                 #not serializing the
             status=status,
             patient_name=patient.name,
             date=date.today(),
-            patient_id=patient,  # Use the account_id of the patient
+            patient_id=patient,  
             approved=False,
             image=image_file
         )
@@ -199,6 +200,7 @@ def analyze_image(request):
 '''
 
 
+@api_view(['GET'])
 def listNonUploadedReports(request):        #for doctor to view all non uploaded reports            
     reports = Report.objects.filter(approved=False)
     for report in reports:
@@ -211,7 +213,7 @@ def listNonUploadedReports(request):        #for doctor to view all non uploaded
     #return JsonResponse(data, json_dumps_params={'indent': 2})
     return render(request, 'nonUpdatedReport.html', {'reports': reports})
 
-
+@api_view(['GET'])
 def listUploadedReports(request):       #for doctor to view all uploaded reports
     reports = Report.objects.filter(approved=True)
     for report in reports:
@@ -222,6 +224,7 @@ def listUploadedReports(request):       #for doctor to view all uploaded reports
     return JsonResponse(data, json_dumps_params={'indent': 2})
 
 
+@api_view(['GET'])
 def listAllReports(request):           #for testing to view all reports
     reports = Report.objects.all()
     for report in reports:
@@ -231,7 +234,7 @@ def listAllReports(request):           #for testing to view all reports
     return JsonResponse(data, json_dumps_params={'indent': 2})
     
 
-
+@api_view(['POST'])
 def uploadReport(request):                     #for doctor to upload report             #haven code for dropdown overwrite status!!
     report_id = request.POST.get('report_id')
     try:
@@ -256,7 +259,7 @@ def uploadReport(request):                     #for doctor to upload report     
 
 
 
-
+@api_view(['DELETE'])
 def deleteReport(request):                                  #for doctor to delete non uploaded report
     report_id = request.POST.get('report_id')
     try:
@@ -267,6 +270,7 @@ def deleteReport(request):                                  #for doctor to delet
         return JsonResponse({'error': 'Report not found.'}, status=400)
     
 
+@api_view(['GET'])
 def reportView(request):                                     #for patient to view their reports      
     account_id = request.GET.get('account_id')
     print("Received account_id:", account_id) 

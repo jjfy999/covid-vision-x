@@ -24,11 +24,13 @@ class Account(AbstractUser):
 
 class Patient(Account):
     STATUS_CHOICES = [
-        ('covid', 'COVID'),
-        ('normal', 'Normal'),
+        ('Covid', 'Covid'),
+        ('Normal', 'Normal'),
+        ('Pneumonia', 'Pneumonia'),
+        ('Not_Applicable', 'Not_Applicable'),
     ]
     status = models.CharField(
-        max_length=20, choices=STATUS_CHOICES, default='not_applicable')
+        max_length=20, choices=STATUS_CHOICES, default='Not_Applicable')
 
     def save(self, *args, **kwargs):
         self.role = 'patient'

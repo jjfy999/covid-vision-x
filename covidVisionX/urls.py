@@ -41,6 +41,7 @@ urlpatterns = [
          name='updateDetails'),  # for patient to update own details
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,  # for system admin to update another person details!!!!!!!!!! (linked to below)
          name='updateUserDetails'),  # to update another person details
+     path('testPatient/<int:pk>/', userAccount.testPatient, name='testPatient'),  # testing to see patient details
 
 
 

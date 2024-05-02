@@ -5,6 +5,7 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.db import connection
 from faker import Faker
+from random import choice
 
 from userAccount.models import Account, Doctor, Patient, SystemAdmin
 
@@ -37,7 +38,7 @@ class Command(BaseCommand):
             admin = SystemAdmin.objects.create(
                 username='admin1',
                 email='admin1@gmail.com',
-                phone_number='12121212',
+                phone_number='99999999',
                 name='admin1'
             )
             admin.password = make_password('admin1')
@@ -46,7 +47,7 @@ class Command(BaseCommand):
             patient = Patient.objects.create(
                 username='patient1',
                 email='patient1@gmail.com',
-                phone_number='44444444',
+                phone_number='99998888',
                 name='patient1',
                 status='covid'
             )
@@ -56,7 +57,7 @@ class Command(BaseCommand):
             doctor = Doctor.objects.create(
                 username='doctor1',
                 email='doctor1@gmail.com',
-                phone_number='55555555',
+                phone_number='88888888',
                 name='doctor1'
             )
             doctor.password = make_password('doctor1')
@@ -68,11 +69,11 @@ class Command(BaseCommand):
                 role = random.choice(['patient', 'doctor'])
                 username = f'{role}{i+1}'
                 email = f'{username}@gmail.com'
-                phone_number = fake.phone_number()
+                phone_number = f'{choice([8, 9])}{fake.random_number(digits=7)}'
                 name = fake.name()
 
                 if role == 'patient':
-                    status = random.choice(['covid', 'normal'])
+                    status = "Not_Applicable"
 
                     patient = Patient.objects.create(
                         username=username,

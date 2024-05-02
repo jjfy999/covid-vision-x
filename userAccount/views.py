@@ -93,34 +93,34 @@ def logout(request):
     return redirect('login')
 
 
-# @api_view(['GET']) # yc need to look at again              #for users to view own details
-# @permission_classes([IsAuthenticated])
+@api_view(['GET'])              #for users to view own details
+#@permission_classes([IsAuthenticated])
 def getDetails(request):
     user = request.user
     print("User role:", user.role)
 
     if user.role == 'patient':
         patient_instance = Patient.objects.get(
-            pk=user.account_id)  # Retrieve patient instance
+            pk=user.id)  # Retrieve patient instance
         serializer = PatientSerializer(patient_instance)
     elif user.role == 'doctor' or user.role == 'system_admin':
-        serializer = DoctorSysAdminGetDetailsSerializer(user)
+        serializer = DoctorSysAdminSerializer(user)
     else:
         return JsonResponse({'error': 'User role is not recognized'}, status=404)
 
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
 
-
+@api_view(['GET'])
 def getUserDetails(request, pk):  # for system admin to view specific user details
     try:
-        doctor = Doctor.objects.get(account_id=pk)
+        doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminGetDetailsSerializer(doctor)
     except Doctor.DoesNotExist:
         doctor = None
 
     if doctor is None:
         try:
-            patient = Patient.objects.get(account_id=pk)
+            patient = Patient.objects.get(pk=pk)
             serializer = PatientGetDetailsSerializer(patient)
         except Patient.DoesNotExist:
             patient = None
@@ -128,16 +128,15 @@ def getUserDetails(request, pk):  # for system admin to view specific user detai
     # If not found in Patient model, try the SystemAdmin model
     if doctor is None and patient is None:
         try:
-            system_admin = SystemAdmin.objects.get(account_id=pk)
+            system_admin = SystemAdmin.objects.get(pk=pk)
             serializer = DoctorSysAdminGetDetailsSerializer(system_admin)
         except SystemAdmin.DoesNotExist:
             return HttpResponseNotFound("User not found")
 
-    return render(request, 'AccDetail.html', {'user': serializer.data})
-    # return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
 
 
-# @api_view(['GET'])
+@api_view(['GET'])
 def listUsers(request):  # for system admin to view list of users
     # Serialize patients
     patients = Patient.objects.all()
@@ -157,22 +156,21 @@ def listUsers(request):  # for system admin to view list of users
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-    return render(request, 'UserAcc.html', {'users_data': users_data})
-    # return JsonResponse(users_data, json_dumps_params={'indent': 2})
+    return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
-@api_view(['GET'])
-# for doctor to view list of patients !! have not updated url, waiting for UI
+
+@api_view(['GET'])                           # for doctor to view list of patients !! 
 def listPatients(request):
     # Serialize patients
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
 
     users_data = {'patients': patient_serializer.data}
-    return render(request, 'UserAcc.html', {'users_data': users_data})
+    return JsonResponse(users_data, json_dumps_params={'indent': 2})    
 
 
-@login_required
+@api_view(['POST'])
 def updateDetails(request):  # for users to update own details
 
     user = request.user
@@ -183,29 +181,27 @@ def updateDetails(request):  # for users to update own details
     elif user.role == 'patient':
         serializer = PatientUpdateSerializer(user, data=request.POST)
     else:
-        messages.error(request, "Invalid user type")
-        return HttpResponseBadRequest("Invalid user type")
+        return JsonResponse({"error": "Invalid user type"}, status=400)
 
     if serializer.is_valid():
-        serializer.save()
-        messages.success(request, "Details updated successfully!")
+        updated_user = serializer.save()
+        serialized_user = serializer.serialize('json', [updated_user])
+        return JsonResponse(serialized_user, status=200)
     else:
-        messages.error(request, "Failed to update details")
-
-    return redirect('getDetails')
+        return JsonResponse(serializer.errors, status=400)
 
 
-@login_required
+@api_view(['POST'])
 def updateUserDetails(request, pk):  # for system admin to update another person details
     try:
-        doctor = Doctor.objects.get(account_id=pk)
+        doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.POST)
     except Doctor.DoesNotExist:
         doctor = None
 
     if doctor is None:
         try:
-            patient = Patient.objects.get(account_id=pk)
+            patient = Patient.objects.get(pk=pk)
             serializer = PatientUpdateSerializer(patient, data=request.POST)
         except Patient.DoesNotExist:
             patient = None
@@ -213,21 +209,21 @@ def updateUserDetails(request, pk):  # for system admin to update another person
     # If not found in Patient model, try the SystemAdmin model
     if doctor is None and patient is None:
         try:
-            system_admin = SystemAdmin.objects.get(account_id=pk)
+            system_admin = SystemAdmin.objects.get(pk=pk)
             serializer = DoctorSysAdminUpdateSerializer(
                 system_admin, data=request.POST)
         except SystemAdmin.DoesNotExist:
-            return HttpResponseNotFound("User not found")
+            return JsonResponse({"error": "User not found"}, status=404)
 
     if serializer.is_valid():
         serializer.save()
-        return redirect(reverse('getUserDetails', kwargs={'pk': pk}))
+        return JsonResponse(serializer.data)
     else:
         # Return errors if serializer is not valid
-        return Response(serializer.errors, status=400)
+        return JsonResponse(serializer.errors, status=400)
 
 
-# for doctor to search for patients and for system admin to search for both doctor and patient
+@api_view(['GET'])                   # for doctor to search for patients and for system admin to search for both doctor and patient
 def searchUser(request, pk):
     if pk:
         try:
@@ -248,15 +244,16 @@ def searchUser(request, pk):
     return JsonResponse({"error": "User not found"}, status=400)
 
 
+@api_view(['DELETE'])
 def deleteUser(request, pk):  # for system admin to delete a user
     try:
-        user = Doctor.objects.get(account_id=pk)
+        user = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         user = None
 
     if user is None:
         try:
-            user = Patient.objects.get(account_id=pk)
+            user = Patient.objects.get(pk=pk)
         except Patient.DoesNotExist:
             user = None
 
@@ -266,7 +263,7 @@ def deleteUser(request, pk):  # for system admin to delete a user
     else:
         return JsonResponse({'error': 'User not found.'}, status=404)
 
-
+@api_view(['POST'])
 def createUser(request):  # for patient to register and for system admin to create a user
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -299,3 +296,9 @@ def createUser(request):  # for patient to register and for system admin to crea
     else:
         # Handle non-POST request
         return JsonResponse({'error': 'User not created.'}, status=405)
+
+
+def testPatient(request,pk):
+    patient = Patient.objects.get(pk=pk)
+    serializer = PatientSerializer(patient)
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
