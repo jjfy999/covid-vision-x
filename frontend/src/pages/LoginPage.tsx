@@ -38,7 +38,7 @@ function LoginPage() {
       case "patient":
         return <Navigate to="/Report" replace />;
       case "doctor":
-        return <Navigate to="/" replace />;
+        return <Navigate to="/doctorprofile" replace />;
       case "system_admin":
         return <Navigate to="/UserAcc" replace />;
       default:
