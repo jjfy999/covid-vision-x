@@ -21,6 +21,7 @@ import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
 import DoctorProfile from "./pages/DoctorProfile"; // Import the DoctorProfile component
+import ErrorPage from "./pages/ErrorPage"; // Catch all for any invalid urls
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
           <Route path="/sysAdEditProfile" element={<SysadEditProfile />} />
         </Route>
       </Route>
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );
