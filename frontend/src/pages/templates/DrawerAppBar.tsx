@@ -9,15 +9,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useAuth } from "./AuthContexr";
+import { useNavigate } from "react-router-dom";
 
-/* interface Props {
-    window?: () => Window;
-} 
+interface DrawerAppBarProps {
+  firstText: string;
+  userRole: "doctor" | "patient" | "system_admin" | "researcher";
+}
 
-export default function DrawerAppBar(props: Props)
-*/
-
-export default function DrawerAppBar() {
+export default function DrawerAppBar({
+  firstText,
+  userRole,
+}: DrawerAppBarProps) {
   const [patientMenuAnchorEl, setPatientMenuAnchorEl] =
     React.useState<null | HTMLElement>(null);
   const openPatient = Boolean(patientMenuAnchorEl);
@@ -36,7 +38,38 @@ export default function DrawerAppBar() {
     setProfileMenuAnchorEl(event.currentTarget);
   };
   const { logoutUser } = useAuth();
+  const navigate = useNavigate();
+  const getMenuItems = (
+    userRole: "doctor" | "patient" | "system_admin" | "researcher"
+  ) => {
+    switch (userRole) {
+      case "doctor":
+        return [
+          {
+            name: "Upload X-Ray Image",
+            onClick: () => navigate("/upload-xray"), // navigate to be updated
+          },
+          { name: "Report", onClick: () => navigate("/doctor-report") }, // navigate to be updated
+          {
+            name: "Non-Uploaded Report",
+            onClick: () => navigate("/non-uploaded-report"), // navigate to be updated
+          },
+        ];
+      case "patient":
+        return [{ name: "Report", onClick: () => navigate("/report") }];
 
+      case "system_admin":
+        return [
+          { name: "User Accounts", onClick: () => navigate("/UserAcc") },
+          { name: "Create User", onClick: () => navigate("/createUser") }, // navigate to be updated
+        ];
+      case "researcher":
+        return [
+          { name: "Upload Model", onClick: () => navigate("/uploadModel") }, // navigate to be updated
+        ];
+    }
+  };
+  const menuItems = getMenuItems(userRole);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -60,7 +93,7 @@ export default function DrawerAppBar() {
               aria-expanded={openPatient ? "true" : undefined}
               onClick={handlePatientClick}
             >
-              Patient
+              {firstText}
             </Button>
             <Menu
               id="patient-menu"
@@ -73,21 +106,11 @@ export default function DrawerAppBar() {
               TransitionComponent={Fade}
               sx={{ mt: "45px" }}
             >
-              <MenuItem
-                onClick={() => window.open("https://www.google.com", "_blank")}
-              >
-                Upload X-Ray Image
-              </MenuItem>
-              <MenuItem
-                onClick={() => window.open("https://www.fb.com", "_blank")}
-              >
-                Report
-              </MenuItem>
-              <MenuItem
-                onClick={() => window.open("https://www.twitter.com", "_blank")}
-              >
-                Non-Uploaded Report
-              </MenuItem>
+              {menuItems.map((item, index) => (
+                <MenuItem key={index} onClick={item.onClick}>
+                  {item.name}
+                </MenuItem>
+              ))}
             </Menu>
 
             <div style={{ width: "100px" }}></div>
@@ -119,9 +142,7 @@ export default function DrawerAppBar() {
               TransitionComponent={Fade}
               sx={{ mt: "45px" }}
             >
-              <MenuItem
-                onClick={() => window.open("https://www.yahoo.com", "_blank")}
-              >
+              <MenuItem onClick={() => navigate("/doctorprofile")}>
                 View Profile
               </MenuItem>
               <MenuItem onClick={logoutUser}>Logout</MenuItem>
