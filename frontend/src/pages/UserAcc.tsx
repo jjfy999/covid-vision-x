@@ -6,6 +6,7 @@ import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
 import { Link } from 'react-router-dom';
 
+
 // Combined Component
 const UserAccount = () => {
   const [users, setUsers] = useState<UserAccountDetails[]>(sampleUsers);

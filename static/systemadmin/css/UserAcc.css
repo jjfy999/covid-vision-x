@@ -26,6 +26,26 @@ body{
 }
 /* Basic css ends */
 
+/* CreateUserAcc css starts */
+#createUser{
+    margin: auto; 
+    width: 30rem; 
+    height: fit-content;
+    text-align: center; 
+    padding-top: 80px;
+    font-size: 2rem;
+    color: black;
+    background: var(--yellow);
+    border-radius: .5rem;
+    cursor: pointer;
+    line-height: 5rem;
+}
+#createUser:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+}
+
 /* UserAcc css starts */
 section{
     padding: 2rem 9%;
