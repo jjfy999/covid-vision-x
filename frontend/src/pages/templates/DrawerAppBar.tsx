@@ -17,21 +17,6 @@ export default function DrawerAppBar(props: Props)
 */
 
 export default function DrawerAppBar() {
-    //const [patientMenuAnchorEl, setPatientMenuAnchorEl] = useState<null | HTMLElement>(null);
-    //const [profileMenuAnchorEl, setProfileMenuAnchorEl] = useState<null | HTMLElement>(null);
-
-    // const handlePatientMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //     setPatientMenuAnchorEl(event.currentTarget);
-    // };
-
-    // const handleProfileMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //     setProfileMenuAnchorEl(event.currentTarget);
-    // };
-
-    // const handleMenuClose = () => {
-    //     setPatientMenuAnchorEl(null);
-    //     setProfileMenuAnchorEl(null);
-    // };
 
     const [patientMenuAnchorEl, setPatientMenuAnchorEl] = React.useState<null | HTMLElement>(null);
     const openPatient = Boolean(patientMenuAnchorEl);
@@ -67,7 +52,6 @@ export default function DrawerAppBar() {
                                 padding: '6px 12px',
                                 '&:hover': { backgroundColor: '#b2a434' },
                             }}
-                            // onMouseOver={handlePatientMenuOpen}
                             id="patient-button"
                             aria-controls={openPatient ? 'fade-menu' : undefined}
                             aria-haspopup="true"
@@ -78,10 +62,6 @@ export default function DrawerAppBar() {
                         </Button>
                         <Menu
                             id="patient-menu"
-                            // anchorEl={patientMenuAnchorEl}
-                            // open={Boolean(patientMenuAnchorEl)}
-                            // onClose={handleMenuClose}
-                            // MenuListProps={{ onMouseLeave: handleMenuClose }}
                             MenuListProps={{
                                 'aria-labelledby': 'fade-button',
                             }}
@@ -116,10 +96,6 @@ export default function DrawerAppBar() {
                         </Button>
                         <Menu
                             id="profile-menu"
-                            // anchorEl={profileMenuAnchorEl}
-                            // open={Boolean(profileMenuAnchorEl)}
-                            // onClose={handleMenuClose}
-                            // MenuListProps={{ onMouseLeave: handleMenuClose }}
                             MenuListProps={{
                                 'aria-labelledby': 'fade-button',
                             }}
