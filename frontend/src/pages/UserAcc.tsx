@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import UserBox from './UserBox';
 import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
+import { Link } from 'react-router-dom';
 
 // Combined Component
 const UserAccount = () => {
@@ -30,6 +31,11 @@ const UserAccount = () => {
   return (
     <div>
         <Header userRole={'sysad'}/>
+
+        {/* Create User Account Section */}
+        <div id="createUser">
+          <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
+        </div>
 
         {/* User Account Section */}
         <section>

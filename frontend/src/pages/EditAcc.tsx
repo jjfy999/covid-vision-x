@@ -105,8 +105,8 @@ const EditAccountDetails = () => {
           </form>
         </div>
         <div className="btn">
-          {/* <Link id="doneBtn" to={`/AccDetail/${userId}`}>Done</Link> */}
-          <button id="doneBtn" type="submit">Done</button>
+          <Link id="doneBtn" to={`/AccDetail/${userId}`}>Done</Link>
+          {/* <button id="doneBtn" type="submit">Done</button> */}
 
           <Link id="cancelBtn" to={`/AccDetail/${userId}`}>Cancel</Link>
         </div>
