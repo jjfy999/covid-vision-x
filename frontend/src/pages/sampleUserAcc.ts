@@ -54,52 +54,52 @@ export const sampleUsers: UserAccountDetails[] = [
     role: "patient",
     phone: "111-111-1111",
     email: "patient1@example.com"
+  },
+  {
+    id: "0001",
+    name: "Patient Two",
+    username: "patient2",
+    password: "patientpass2",
+    role: "patient",
+    phone: "222-222-2222",
+    email: "patient2@example.com"
+  },
+  {
+    id: "0001",
+    name: "Dr. Emily White",
+    username: "dremily",
+    password: "doctorpass123",
+    role: "doctor",
+    phone: "333-333-3333",
+    email: "dremily@example.com"
+  },
+  {
+    id: "0001",
+    name: "Patient Three",
+    username: "patient3",
+    password: "patientpass3",
+    role: "patient",
+    phone: "333-333-3333",
+    email: "patient3@example.com"
+  },
+  {
+    id: "0001",
+    name: "Dr. Michael Brown",
+    username: "drmichael",
+    password: "doctorpass456",
+    role: "doctor",
+    phone: "666-666-6666",
+    email: "drmichael@example.com"
+  },
+  {
+    id: "0001",
+    name: "Patient Four",
+    username: "patient4",
+    password: "patientpass4",
+    role: "patient",
+    phone: "444-444-4444",
+    email: "patient4@example.com"
   }
-  // {
-  //   id: "0001",
-  //   name: "Patient Two",
-  //   username: "patient2",
-  //   password: "patientpass2",
-  //   role: "patient",
-  //   phone: "222-222-2222",
-  //   email: "patient2@example.com"
-  // },
-  // {
-  //   id: "0001",
-  //   name: "Dr. Emily White",
-  //   username: "dremily",
-  //   password: "doctorpass123",
-  //   role: "doctor",
-  //   phone: "333-333-3333",
-  //   email: "dremily@example.com"
-  // },
-  // {
-  //   id: "0001",
-  //   name: "Patient Three",
-  //   username: "patient3",
-  //   password: "patientpass3",
-  //   role: "patient",
-  //   phone: "333-333-3333",
-  //   email: "patient3@example.com"
-  // },
-  // {
-  //   id: "0001",
-  //   name: "Dr. Michael Brown",
-  //   username: "drmichael",
-  //   password: "doctorpass456",
-  //   role: "doctor",
-  //   phone: "666-666-6666",
-  //   email: "drmichael@example.com"
-  // },
-  // {
-  //   id: "0001",
-  //   name: "Patient Four",
-  //   username: "patient4",
-  //   password: "patientpass4",
-  //   role: "patient",
-  //   phone: "444-444-4444",
-  //   email: "patient4@example.com"
-  // },
   // {
   //   id: "0001",
   //   name: "Patient Five",

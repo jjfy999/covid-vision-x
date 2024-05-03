@@ -69,17 +69,18 @@ const UserAccount = () => {
                 <div id="createUser">
                   <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
                 </div>
+              </div>
 
+              <div id="userListContainer">
+                <div id="userList">
+                  {filteredUsers.length === 0 ? (
+                    <p className="errorMessage">User not found...</p>
+                  ) : (
+                    <UserBox users={filteredUsers} />
+                  )}
+                </div>
               </div>
-            
-              <div id="userList">
-                {/* <UserBox users={users} /> */}
-                {filteredUsers.length === 0 ? (
-                  <p className="errorMessage">User not found...</p>
-                ) : (
-                  <UserBox users={filteredUsers} />
-                )}
-              </div>
+              
           </section>
         </body>
     </div>

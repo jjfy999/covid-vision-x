@@ -24,6 +24,7 @@ html{
 
 body{
     padding-top: 250px;
+    overflow: hidden;
 }
 /* Basic css ends */
 
@@ -101,12 +102,26 @@ body{
 }
 
 .errorMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: grey;
     font-size: 5rem;
 }
 /* Search and Create user css starts */
 
 /* User Acc css starts */
+#userListContainer {
+    position: fixed;
+    top: 210px; /* Adjust the top position as needed */
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    max-height: calc(100vh - 250px); /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scroll if needed */
+}
+
 #userList {
     display: flex; 
     align-items: center;
