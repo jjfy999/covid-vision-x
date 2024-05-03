@@ -75,7 +75,7 @@ section:nth-child(even){
 }
 
 
-.btn{
+/* .btn{
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -89,7 +89,7 @@ section:nth-child(even){
     color: var(--light-color);
     background: var(--orange);
     letter-spacing: .1rem;
-}
+} */
 #userList {
     display: flex; 
     align-items: center;
