@@ -2,9 +2,9 @@
     background: rgb(233, 232, 232);
     padding: 2rem;
     border-radius: 1.5rem;
-    font-size: .5rem;
+    font-size: 1.5rem;
     width: 100rem;
-    height: 10rem;
+    height: 8rem;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -24,16 +24,15 @@
 }
 
 .userImg{
-    width: 7rem; 
-    height: 7rem;
+    width: 6rem; 
+    height: 6rem;
     margin: 0;
 }
 
 .userID, .userName, .role {
     position: absolute;
     color: black;
-    font-size: 2rem;
-    bottom: 3.5rem;
+    line-height: 4rem;
 }
 
 .userID {
@@ -45,7 +44,7 @@
 }
 
 .role {
-    right: 30rem; 
+    right: 35rem; 
 }
 
 .viewInfoBtn:hover{
@@ -58,16 +57,15 @@
 .viewInfoBtn {
     position: absolute;
     right: 2rem;
-    font-size: 2rem;
     color: black;
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
     margin: 3rem;
-    width: 20rem; 
-    height: 5rem;
+    width: 15rem; 
+    height: 4rem;
     text-align: center;
-    line-height: 5rem;
+    line-height: 4rem;
 }
 
 .viewInfoBtn a {

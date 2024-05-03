@@ -1,24 +1,132 @@
 import { UserAccountDetails } from './UserAccInterface';
 
 export const sampleUsers: UserAccountDetails[] = [
-  { id: "T0992", name: "Bryant Ng", role: "Doctor", gender: "Male", contact: "+65 7788 9900", email: "bryantng@gmail.com" },
-  { id: "T0993", name: "Jane", role: "Patient", gender: "Male", contact: "+65 7788 9900", email: "bryantng@gmail.com"  },
-  { id: "T0994", name: "Alice", role: "Nurse", gender: "Female", contact: "+65 7788 9901", email: "alice@example.com" },
-  { id: "T0995", name: "John", role: "Doctor", gender: "Male", contact: "+65 7788 9902", email: "john@example.com" },
-  { id: "T0996", name: "Emily", role: "Patient", gender: "Female", contact: "+65 7788 9903", email: "emily@example.com" },
-  { id: "T0997", name: "David", role: "Nurse", gender: "Male", contact: "+65 7788 9904", email: "david@example.com" },
-  { id: "T0998", name: "Sarah", role: "Doctor", gender: "Female", contact: "+65 7788 9905", email: "sarah@example.com" },
-//   { id: "T0999", name: "Michael", role: "Patient", gender: "Male", contact: "+65 7788 9906", email: "michael@example.com" },
-//   { id: "T1000", name: "Olivia", role: "Nurse", gender: "Female", contact: "+65 7788 9907", email: "olivia@example.com" },
-//   { id: "T1001", name: "James", role: "Doctor", gender: "Male", contact: "+65 7788 9908", email: "james@example.com" },
-//   { id: "T1002", name: "Sophia", role: "Patient", gender: "Female", contact: "+65 7788 9909", email: "sophia@example.com" },
-//   { id: "T1003", name: "William", role: "Nurse", gender: "Male", contact: "+65 7788 9910", email: "william@example.com" },
-//   { id: "T1004", name: "Ava", role: "Doctor", gender: "Female", contact: "+65 7788 9911", email: "ava@example.com" },
-//   { id: "T1005", name: "Joseph", role: "Patient", gender: "Male", contact: "+65 7788 9912", email: "joseph@example.com" },
-//   { id: "T1006", name: "Charlotte", role: "Nurse", gender: "Female", contact: "+65 7788 9913", email: "charlotte@example.com" },
-//   { id: "T1007", name: "Henry", role: "Doctor", gender: "Male", contact: "+65 7788 9914", email: "henry@example.com" },
-//   { id: "T1008", name: "Amelia", role: "Patient", gender: "Female", contact: "+65 7788 9915", email: "amelia@example.com" },
-//   { id: "T1009", name: "Daniel", role: "Nurse", gender: "Male", contact: "+65 7788 9916", email: "daniel@example.com" },
-//   { id: "T1010", name: "Mia", role: "Doctor", gender: "Female", contact: "+65 7788 9917", email: "mia@example.com" },
-//   { id: "T1011", name: "Alexander", role: "Patient", gender: "Male", contact: "+65 7788 9918", email: "alexander@example.com" },
+  {
+    name: "John Doe",
+    username: "johndoe123",
+    password: "jd@1234",
+    role: "patient",
+    phone: "123-456-7890",
+    email: "johndoe@example.com"
+  },
+  {
+    name: "Jane Smith",
+    username: "janesmith456",
+    password: "js@5678",
+    role: "patient",
+    phone: "987-654-3210",
+    email: "janesmith@example.com"
+  },
+  {
+    name: "Dr. David Johnson",
+    username: "drdavid",
+    password: "doctorpass",
+    role: "doctor",
+    phone: "555-555-5555",
+    email: "drdavid@example.com"
+  },
+  {
+    name: "Dr. Sarah Parker",
+    username: "drsarah",
+    password: "doctor123",
+    role: "doctor",
+    phone: "444-444-4444",
+    email: "drsarah@example.com"
+  },
+  {
+    name: "Admin Admin",
+    username: "admin123",
+    password: "adminpass",
+    role: "system admin",
+    phone: "777-777-7777",
+    email: "admin@example.com"
+  },
+  {
+    name: "Patient One",
+    username: "patient1",
+    password: "patientpass1",
+    role: "patient",
+    phone: "111-111-1111",
+    email: "patient1@example.com"
+  },
+  {
+    name: "Patient Two",
+    username: "patient2",
+    password: "patientpass2",
+    role: "patient",
+    phone: "222-222-2222",
+    email: "patient2@example.com"
+  },
+  {
+    name: "Dr. Emily White",
+    username: "dremily",
+    password: "doctorpass123",
+    role: "doctor",
+    phone: "333-333-3333",
+    email: "dremily@example.com"
+  },
+  {
+    name: "Patient Three",
+    username: "patient3",
+    password: "patientpass3",
+    role: "patient",
+    phone: "333-333-3333",
+    email: "patient3@example.com"
+  },
+  {
+    name: "Dr. Michael Brown",
+    username: "drmichael",
+    password: "doctorpass456",
+    role: "doctor",
+    phone: "666-666-6666",
+    email: "drmichael@example.com"
+  },
+  {
+    name: "Patient Four",
+    username: "patient4",
+    password: "patientpass4",
+    role: "patient",
+    phone: "444-444-4444",
+    email: "patient4@example.com"
+  },
+  {
+    name: "Patient Five",
+    username: "patient5",
+    password: "patientpass5",
+    role: "patient",
+    phone: "555-555-5555",
+    email: "patient5@example.com"
+  },
+  {
+    name: "Admin Two",
+    username: "admin2",
+    password: "adminpass2",
+    role: "system admin",
+    phone: "888-888-8888",
+    email: "admin2@example.com"
+  },
+  {
+    name: "Dr. Olivia Garcia",
+    username: "drolivia",
+    password: "doctorpass789",
+    role: "doctor",
+    phone: "777-777-7777",
+    email: "drolivia@example.com"
+  },
+  {
+    name: "Patient Six",
+    username: "patient6",
+    password: "patientpass6",
+    role: "patient",
+    phone: "666-666-6666",
+    email: "patient6@example.com"
+  },
+  {
+    name: "Patient Seven",
+    username: "patient7",
+    password: "patientpass7",
+    role: "patient",
+    phone: "777-777-7777",
+    email: "patient7@example.com"
+  }
 ];

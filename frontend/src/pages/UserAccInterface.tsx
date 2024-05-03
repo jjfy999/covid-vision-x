@@ -1,9 +1,9 @@
 export interface UserAccountDetails {
-    id: string;
     name: string;
+    username: string;
+    password: string;
     role: string;
-    gender: string,
-    contact: string,
+    phone: string,
     email: string
   }
   
