@@ -46,9 +46,9 @@ class PatientUpdateSerializer(serializers.ModelSerializer):
 class DoctorSysAdminGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
-        fields = ['account_id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
+        fields = ['id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
 
-    account_id = serializers.IntegerField(required=True)
+    id = serializers.IntegerField(required=True)
     username = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     name = serializers.CharField(required=True)
@@ -60,9 +60,9 @@ class DoctorSysAdminGetDetailsSerializer(serializers.ModelSerializer):
 class PatientGetDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['account_id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
+        fields = ['id', 'username', 'email', 'name', 'phone_number', 'password', 'role']
 
-    account_id = serializers.IntegerField(required=True)
+    id = serializers.IntegerField(required=True)
     username = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
     name = serializers.CharField(required=True)

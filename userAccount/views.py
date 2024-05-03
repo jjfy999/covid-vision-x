@@ -110,6 +110,7 @@ def getDetails(request):
 
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
 
+#Postman tested
 @api_view(['GET'])
 def getUserDetails(request, pk):  # for system admin to view specific user details
     try:
@@ -135,7 +136,7 @@ def getUserDetails(request, pk):  # for system admin to view specific user detai
 
     return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
 
-
+#Postman tested
 @api_view(['GET'])
 def listUsers(request):  # for system admin to view list of users
     # Serialize patients
@@ -159,7 +160,7 @@ def listUsers(request):  # for system admin to view list of users
     return JsonResponse(users_data, json_dumps_params={'indent': 2})
 
 
-
+#Postman tested
 @api_view(['GET'])                           # for doctor to view list of patients !! 
 def listPatients(request):
     # Serialize patients
@@ -190,19 +191,19 @@ def updateDetails(request):  # for users to update own details
     else:
         return JsonResponse(serializer.errors, status=400)
 
-
+#Postman tested
 @api_view(['POST'])
 def updateUserDetails(request, pk):  # for system admin to update another person details
     try:
         doctor = Doctor.objects.get(pk=pk)
-        serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.POST)
+        serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
     except Doctor.DoesNotExist:
         doctor = None
 
     if doctor is None:
         try:
             patient = Patient.objects.get(pk=pk)
-            serializer = PatientUpdateSerializer(patient, data=request.POST)
+            serializer = PatientUpdateSerializer(patient, data=request.data)
         except Patient.DoesNotExist:
             patient = None
 
@@ -211,7 +212,7 @@ def updateUserDetails(request, pk):  # for system admin to update another person
         try:
             system_admin = SystemAdmin.objects.get(pk=pk)
             serializer = DoctorSysAdminUpdateSerializer(
-                system_admin, data=request.POST)
+                system_admin, data=request.data)
         except SystemAdmin.DoesNotExist:
             return JsonResponse({"error": "User not found"}, status=404)
 
@@ -243,7 +244,7 @@ def searchUser(request, pk):
             return JsonResponse({"error": "User not found"}, status=404)
     return JsonResponse({"error": "User not found"}, status=400)
 
-
+#Postman tested
 @api_view(['DELETE'])
 def deleteUser(request, pk):  # for system admin to delete a user
     try:
@@ -263,19 +264,20 @@ def deleteUser(request, pk):  # for system admin to delete a user
     else:
         return JsonResponse({'error': 'User not found.'}, status=404)
 
+#Postman tested
 @api_view(['POST'])
 def createUser(request):  # for patient to register and for system admin to create a user
     if request.method == 'POST':
-        name = request.POST.get('name')
-        phone_number = request.POST.get('phone_number')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = make_password(request.POST.get('password'))
-        role = request.POST.get('role')
+        name = request.data.get('name')
+        phone_number = request.data.get('phone_number')
+        email = request.data.get('email')
+        username = request.data.get('username')
+        password = make_password(request.data.get('password'))
+        role = request.data.get('role')
 
         # Create the user based on the role
         if role == 'patient':
-            status = 'not_applicable'  # Set default status for patient
+            status = 'Not_Applicable'  # Set default status for patient
             user = Patient.objects.create_user(
                 username=username, password=password, email=email, name=name, phone_number=phone_number, role=role, status=status)
 
