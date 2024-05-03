@@ -37,7 +37,7 @@ const router = createBrowserRouter(
           <Route path="/patientEditProfile" element={<PatientEditProfile />} />
         </Route>
         <Route element={<RoleRoute requiredRole={"system_admin"} />}>
-          <Route path="/userAcc" element={<UserAccount />} />
+          <Route path="/UserAcc" element={<UserAccount />} />
           <Route path="/AccDetail/:userId" element={<AccountDetails />} />
           <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
           <Route path="/sysAdProfile" element={<SysadProfile />} />

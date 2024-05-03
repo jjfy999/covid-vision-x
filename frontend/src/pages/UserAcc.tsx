@@ -51,7 +51,6 @@ const UserAccount = () => {
           {/* User Account Section */}
           <section>
               <h1 id="userAcc">User Accounts</h1>
-
               <div className="searchCreate">
                 
                 {/* Search bar */}
@@ -65,12 +64,13 @@ const UserAccount = () => {
                   <button className="searchButton" onClick={handleSearch}><FaSearch /></button>
                 </div>
                 
-                {/* Create User Account Section */}
+                {/* Create User Account button */}
                 <div id="createUser">
                   <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
                 </div>
               </div>
 
+              {/* User Acc list */}
               <div id="userListContainer">
                 <div id="userList">
                   {filteredUsers.length === 0 ? (
@@ -80,7 +80,7 @@ const UserAccount = () => {
                   )}
                 </div>
               </div>
-              
+
           </section>
         </body>
     </div>

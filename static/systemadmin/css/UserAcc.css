@@ -114,12 +114,12 @@ body{
 /* User Acc css starts */
 #userListContainer {
     position: fixed;
-    top: 210px; /* Adjust the top position as needed */
+    top: 210px; 
     left: 0;
     width: 100%;
     bottom: 0;
-    max-height: calc(100vh - 250px); /* Adjust the height as needed */
-    overflow-y: auto; /* Enable vertical scroll if needed */
+    max-height: calc(100vh - 250px); 
+    overflow-y: auto; 
 }
 
 #userList {
