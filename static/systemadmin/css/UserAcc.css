@@ -6,6 +6,7 @@
     --yellow:#ecbb50d7;
     --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
 }
+
 *{
     font-family: 'Joan', serif;
     margin: 0; padding: 0;
@@ -15,20 +16,18 @@
     text-transform: capitalize;
     transition: all .2s linear;
 }
+
 html{
-    /* font-size: 62.5%; */
-    /* overflow-x: hidden; */
     scroll-padding-top: 1rem;
     scroll-behavior: smooth;
-    
 }
+
 body{
     padding-top: 250px;
-    /* background-color: white; */
-    /* background-image: linear-gradient(to bottom, var(--green), white); */    
 }
 /* Basic css ends */
 
+/* Title css starts */
 #userAcc{
     padding-bottom: 15px;
     font-size: 3rem;
@@ -44,40 +43,70 @@ body{
     width: 100%; 
     text-align: center;
 }
+/* Title css ends */
 
-/* CreateUserAcc css starts */
+/* Search and Create user css starts */
+.searchCreate {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1001;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #createUser{
     margin: 5rem auto; 
-    width: 20rem; 
-    height: fit-content;
+    width: 15rem; 
+    height: 40px;
     text-align: center; 
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: black;
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
-    line-height: 5rem;
-    /* margin-top: 40rem; */
-    position: fixed;
-    left: 50%;
+    line-height: 4.2rem;
+    margin-left: 1rem;
 }
+
 #createUser:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
 }
-/* CreateUserAcc css ends */
 
-/* UserAcc css starts */
-/* section{
-    padding: 2rem 9%;
-    background: white;
-    grid-template-columns: 1fr 3fr;
+.searchContainer {
+    display: flex;
+    align-items: center;
 }
-section:nth-child(even){
-    background: white;
-} */
 
+.searchContainer input[type="text"] {
+    width: calc(100% - 40px); 
+    padding-right: 40px;
+    background-color: #eee0c2d7;
+}
+
+.searchButton {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 40px; 
+    height: 40px; 
+    cursor: pointer;
+    background: var(--yellow);
+    border-radius: .5rem;
+}
+
+.errorMessage {
+    color: grey;
+    font-size: 5rem;
+}
+/* Search and Create user css starts */
+
+/* User Acc css starts */
 #userList {
     display: flex; 
     align-items: center;
@@ -86,8 +115,6 @@ section:nth-child(even){
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap; 
-    /* padding-bottom: 100px; */
-    overflow: auto;
 }
 /* User Acc css ends */
 

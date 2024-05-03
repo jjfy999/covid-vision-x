@@ -5,12 +5,14 @@ import UserBox from './UserBox';
 import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
 import { Link } from 'react-router-dom';
-
+import { FaSearch } from 'react-icons/fa';
 
 // Combined Component
 const UserAccount = () => {
   const [users, setUsers] = useState<UserAccountDetails[]>(sampleUsers);
   const [error, setError] = useState<string | null>(null);
+  const [filteredUsers, setFilteredUsers] = useState<UserAccountDetails[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     // Fetch user data from the API endpoint when component mounts
@@ -19,7 +21,6 @@ const UserAccount = () => {
         // const response = await axios.get('API_ENDPOINT_URL');
         // setUsers(response.data);
         setUsers(sampleUsers);
-
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError('Error fetching user data');
@@ -27,7 +28,20 @@ const UserAccount = () => {
     };
 
     fetchData(); // Call the fetchData function
-  }, []); // Empty dependency array means this effect runs only once after the first render
+
+    const filtered = users.filter(user =>
+      user.id.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }, [searchTerm, users]); // Empty dependency array means this effect runs only once after the first render
+
+  // Function to handle search
+  const handleSearch = () => {
+    const filtered = users.filter(user =>
+      user.id.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  };
 
   return (
     <div>
@@ -37,14 +51,34 @@ const UserAccount = () => {
           {/* User Account Section */}
           <section>
               <h1 id="userAcc">User Accounts</h1>
-              
-              {/* Create User Account Section */}
-              <div id="createUser">
-                <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
+
+              <div className="searchCreate">
+                
+                {/* Search bar */}
+                <div className="searchContainer">
+                  <input
+                    type="text"
+                    placeholder="Search user by ID..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <button className="searchButton" onClick={handleSearch}><FaSearch /></button>
+                </div>
+                
+                {/* Create User Account Section */}
+                <div id="createUser">
+                  <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
+                </div>
+
               </div>
-              
+            
               <div id="userList">
-                <UserBox users={users} />
+                {/* <UserBox users={users} /> */}
+                {filteredUsers.length === 0 ? (
+                  <p className="errorMessage">User not found...</p>
+                ) : (
+                  <UserBox users={filteredUsers} />
+                )}
               </div>
           </section>
         </body>
