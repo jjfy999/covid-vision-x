@@ -22,7 +22,9 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background-color: white;
+    /* background-color: white; */
+    background-image: linear-gradient(to bottom, var(--green), white);
+    
 }
 /* Basic css ends */
 
