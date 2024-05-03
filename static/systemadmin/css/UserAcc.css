@@ -20,21 +20,20 @@ html{
     /* overflow-x: hidden; */
     scroll-padding-top: 3rem;
     scroll-behavior: smooth;
+    
 }
 body{
     /* background-color: white; */
-    /* background-image: linear-gradient(to bottom, var(--green), white); */
-    
+    /* background-image: linear-gradient(to bottom, var(--green), white); */    
 }
 /* Basic css ends */
 
 /* CreateUserAcc css starts */
 #createUser{
-    margin: auto; 
-    width: 30rem; 
+    margin: 5rem; 
+    width: 20rem; 
     height: fit-content;
     text-align: center; 
-    padding-top: 80px;
     font-size: 2rem;
     color: black;
     background: var(--yellow);
@@ -53,17 +52,25 @@ body{
     padding: 2rem 9%;
     background: white;
     grid-template-columns: 1fr 3fr;
-} */
-/* section:nth-child(even){
+}
+section:nth-child(even){
     background: white;
 } */
 
 #userAcc{
-    padding-top: 70px; 
     padding-bottom: 15px;
     font-size: 3rem;
-    margin-left: 3rem;
     color: var(--green);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 70px; /* Adjust as needed */
+    font-size: 3rem;
+    color: var(--green);
+    z-index: 1000; /* Ensure it's above other content */
+    width: 100%; /* Make it span the full width */
+    text-align: center;
 }
 
 
@@ -88,6 +95,9 @@ body{
     grid-template-columns: repeat(auto-fit, minmax(220px, auto)); 
     gap: 1.8rem;
     flex-direction: column;
+    justify-content: center; /* Center align the items */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    padding-bottom: 100px;
 }
 /* User Acc css ends */
 
