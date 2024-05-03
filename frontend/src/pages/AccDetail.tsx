@@ -14,7 +14,7 @@ const AccountDetails = () => {
         // Find the user with the matching ID from the sampleUsers array
         const foundUser = sampleUsers.find(user => user.id === userId);
         setUser(foundUser || null); // Set the user details in state
-    }, [name]); // Re-run the effect when the user ID changes
+    }, [userId]); // Re-run the effect when the user ID changes
 
     // If the user is not found, display a message
     if (!user) {
