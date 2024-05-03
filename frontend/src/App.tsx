@@ -40,8 +40,8 @@ const router = createBrowserRouter(
           <Route path="/UserAcc" element={<UserAccount />} />
           <Route path="/AccDetail/:userId" element={<AccountDetails />} />
           <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
-          <Route path="/sysAdProfile" element={<SysadProfile />} />
-          <Route path="/sysAdEditProfile" element={<SysadEditProfile />} />
+          <Route path="/SysAdProfile" element={<SysadProfile />} />
+          <Route path="/SysAdEditProfile" element={<SysadEditProfile />} />
           <Route path="/CreateUser" element={<CreateUser />} />
         </Route>
       </Route>

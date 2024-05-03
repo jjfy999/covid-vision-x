@@ -27,7 +27,7 @@ const AccountDetails = () => {
 
             {/* Account Details Section */}
             <section>
-                <h1 id="userAccDeatails">Account Details</h1>
+                <h1 id="userAccDetails">Account Details</h1>
                 <div id="tablediv">
                     <img src={profileImg} id="userImg" alt="User" />
                     <table id="infoTable">

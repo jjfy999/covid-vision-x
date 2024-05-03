@@ -26,6 +26,7 @@ body{
     padding-top: 250px;
     overflow: hidden;
 }
+
 /* Basic css ends */
 
 /* Title css starts */
@@ -40,7 +41,7 @@ body{
     padding-top: 80px; 
     font-size: 3rem;
     color: var(--green);
-    z-index: 1000; 
+    /* z-index: 1000;  */
     width: 100%; 
     text-align: center;
 }
