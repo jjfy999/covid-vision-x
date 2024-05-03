@@ -16,14 +16,14 @@
     transition: all .2s linear;
 }
 html{
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
     /* overflow-x: hidden; */
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 3rem;
     scroll-behavior: smooth;
 }
 body{
     /* background-color: white; */
-    background-image: linear-gradient(to bottom, var(--green), white);
+    /* background-image: linear-gradient(to bottom, var(--green), white); */
     
 }
 /* Basic css ends */
@@ -49,14 +49,14 @@ body{
 }
 
 /* UserAcc css starts */
-section{
+/* section{
     padding: 2rem 9%;
     background: white;
     grid-template-columns: 1fr 3fr;
-}
-section:nth-child(even){
+} */
+/* section:nth-child(even){
     background: white;
-}
+} */
 
 #userAcc{
     padding-top: 70px; 
@@ -88,58 +88,6 @@ section:nth-child(even){
     grid-template-columns: repeat(auto-fit, minmax(220px, auto)); 
     gap: 1.8rem;
     flex-direction: column;
-
-}
-.userBox {
-    background: rgb(219, 219, 219);
-    padding: 1rem;
-    border-radius: .5rem;
-    font-size: 1.5rem;
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.user-img-box {
-    position: relative;
-    height: fit-content;
-    width: fit-content;
-    border-radius: .5rem;
-    overflow: hidden;
-}
-.userImg{
-    width: 15rem; 
-    height: 15rem;
-    margin: 3rem;
-}
-.userID, .userName, .role {
-    color: black;
-    font-size: 2rem;
-    width: fit-content;
-    margin: 3rem;
-
-}
-
-.viewInfoBtn {
-    font-size: 2rem;
-    color: black;
-    background: var(--yellow);
-    border-radius: .5rem;
-    cursor: pointer;
-    margin: 3rem;
-    width: 20rem; 
-    height: 5rem;
-    text-align: center;
-    line-height: 5rem;
-}
-
-.viewInfoBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
 }
 /* User Acc css ends */
 

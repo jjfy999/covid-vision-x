@@ -1,0 +1,77 @@
+.userBox {
+    background: rgb(233, 232, 232);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    font-size: .5rem;
+    width: 100rem;
+    height: 10rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.user-img-box {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);    
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.userImg{
+    width: 7rem; 
+    height: 7rem;
+    margin: 0;
+}
+
+.userID, .userName, .role {
+    position: absolute;
+    color: black;
+    font-size: 2rem;
+    bottom: 3.5rem;
+}
+
+.userID {
+    left: 20rem; 
+}
+
+.userName {
+    left: calc(45% - 5rem);
+}
+
+.role {
+    right: 30rem; 
+}
+
+.viewInfoBtn:hover{
+    color: white;
+    background: var(--green);
+    letter-spacing: .1rem;
+    display: block;
+}
+
+.viewInfoBtn {
+    position: absolute;
+    right: 2rem;
+    font-size: 2rem;
+    color: black;
+    background: var(--yellow);
+    border-radius: .5rem;
+    cursor: pointer;
+    margin: 3rem;
+    width: 20rem; 
+    height: 5rem;
+    text-align: center;
+    line-height: 5rem;
+}
+
+.viewInfoBtn a {
+    display: block; 
+    width: 100%;
+    height: 100%; 
+}

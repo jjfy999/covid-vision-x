@@ -33,18 +33,21 @@ const UserAccount = () => {
     <div>
         <Header userRole={'sysad'}/>
 
-        {/* Create User Account Section */}
-        <div id="createUser">
-          <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
-        </div>
-
-        {/* User Account Section */}
-        <section>
-            <h1 id="userAcc">User Accounts</h1>
-            <div id="userList">
-              <UserBox users={users} />
-            </div>
-        </section>
+        <body>
+          {/* User Account Section */}
+          <section>
+              <h1 id="userAcc">User Accounts</h1>
+              
+              {/* Create User Account Section */}
+              <div id="createUser">
+                <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
+              </div>
+              
+              <div id="userList">
+                <UserBox users={users} />
+              </div>
+          </section>
+        </body>
     </div>
   );
 };
