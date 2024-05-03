@@ -18,19 +18,36 @@
 html{
     /* font-size: 62.5%; */
     /* overflow-x: hidden; */
-    scroll-padding-top: 3rem;
+    scroll-padding-top: 1rem;
     scroll-behavior: smooth;
     
 }
 body{
+    padding-top: 250px;
     /* background-color: white; */
     /* background-image: linear-gradient(to bottom, var(--green), white); */    
 }
 /* Basic css ends */
 
+#userAcc{
+    padding-bottom: 15px;
+    font-size: 3rem;
+    color: var(--green);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 80px; 
+    font-size: 3rem;
+    color: var(--green);
+    z-index: 1000; 
+    width: 100%; 
+    text-align: center;
+}
+
 /* CreateUserAcc css starts */
 #createUser{
-    margin: 5rem; 
+    margin: 5rem auto; 
     width: 20rem; 
     height: fit-content;
     text-align: center; 
@@ -40,13 +57,16 @@ body{
     border-radius: .5rem;
     cursor: pointer;
     line-height: 5rem;
-    margin-top: 40rem;
+    /* margin-top: 40rem; */
+    position: fixed;
+    left: 50%;
 }
 #createUser:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
 }
+/* CreateUserAcc css ends */
 
 /* UserAcc css starts */
 /* section{
@@ -58,47 +78,16 @@ section:nth-child(even){
     background: white;
 } */
 
-#userAcc{
-    padding-bottom: 15px;
-    font-size: 3rem;
-    color: var(--green);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 80px; /* Adjust as needed */
-    font-size: 3rem;
-    color: var(--green);
-    z-index: 1000; /* Ensure it's above other content */
-    width: 100%; /* Make it span the full width */
-    text-align: center;
-}
-
-
-/* .btn{
-    margin-top: 1rem;
-    display: inline-block;
-    font-size: 1.7rem;
-    color: var(--black);
-    background: var(--orange);
-    border-radius: .5rem;
-    cursor: pointer;
-    padding: .8rem 3rem;
-}
-.btn:hover{
-    color: var(--light-color);
-    background: var(--orange);
-    letter-spacing: .1rem;
-} */
 #userList {
     display: flex; 
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(220px, auto)); 
     gap: 1.8rem;
     flex-direction: column;
-    justify-content: center; /* Center align the items */
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    padding-bottom: 100px;
+    justify-content: center;
+    flex-wrap: wrap; 
+    /* padding-bottom: 100px; */
+    overflow: auto;
 }
 /* User Acc css ends */
 

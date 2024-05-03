@@ -16,11 +16,11 @@ const UserBox: React.FC<UserBoxProps> = ({ users }) => {
           <div className="user-img-box">
             <img src={profileImg} alt={user.name} className="userImg" />
           </div>
+          <p className="id">{user.id}</p>
           <p className="name">{user.name}</p>
-          <p className="username">{user.username}</p>
           <p className="role">{user.role}</p>
           <div className="viewInfoBtn">
-            <Link id={`infoBtn${index}`} to={`/AccDetail/${user.name}`}>View Details</Link>
+            <Link id={`infoBtn${index}`} to={`/AccDetail/${user.id}`}>View Details</Link>
           </div>
         </div>
       ))}

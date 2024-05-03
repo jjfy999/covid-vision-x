@@ -2,6 +2,7 @@ import { UserAccountDetails } from './UserAccInterface';
 
 export const sampleUsers: UserAccountDetails[] = [
   {
+    id: "0001",
     name: "John Doe",
     username: "johndoe123",
     password: "jd@1234",
@@ -10,6 +11,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "johndoe@example.com"
   },
   {
+    id: "0001",
     name: "Jane Smith",
     username: "janesmith456",
     password: "js@5678",
@@ -18,6 +20,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "janesmith@example.com"
   },
   {
+    id: "0001",
     name: "Dr. David Johnson",
     username: "drdavid",
     password: "doctorpass",
@@ -26,6 +29,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "drdavid@example.com"
   },
   {
+    id: "0001",
     name: "Dr. Sarah Parker",
     username: "drsarah",
     password: "doctor123",
@@ -34,6 +38,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "drsarah@example.com"
   },
   {
+    id: "0001",
     name: "Admin Admin",
     username: "admin123",
     password: "adminpass",
@@ -42,6 +47,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "admin@example.com"
   },
   {
+    id: "0001",
     name: "Patient One",
     username: "patient1",
     password: "patientpass1",
@@ -50,6 +56,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient1@example.com"
   },
   {
+    id: "0001",
     name: "Patient Two",
     username: "patient2",
     password: "patientpass2",
@@ -58,6 +65,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient2@example.com"
   },
   {
+    id: "0001",
     name: "Dr. Emily White",
     username: "dremily",
     password: "doctorpass123",
@@ -66,6 +74,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "dremily@example.com"
   },
   {
+    id: "0001",
     name: "Patient Three",
     username: "patient3",
     password: "patientpass3",
@@ -74,6 +83,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient3@example.com"
   },
   {
+    id: "0001",
     name: "Dr. Michael Brown",
     username: "drmichael",
     password: "doctorpass456",
@@ -82,6 +92,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "drmichael@example.com"
   },
   {
+    id: "0001",
     name: "Patient Four",
     username: "patient4",
     password: "patientpass4",
@@ -90,6 +101,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient4@example.com"
   },
   {
+    id: "0001",
     name: "Patient Five",
     username: "patient5",
     password: "patientpass5",
@@ -98,6 +110,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient5@example.com"
   },
   {
+    id: "0001",
     name: "Admin Two",
     username: "admin2",
     password: "adminpass2",
@@ -106,6 +119,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "admin2@example.com"
   },
   {
+    id: "0001",
     name: "Dr. Olivia Garcia",
     username: "drolivia",
     password: "doctorpass789",
@@ -114,6 +128,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "drolivia@example.com"
   },
   {
+    id: "0001",
     name: "Patient Six",
     username: "patient6",
     password: "patientpass6",
@@ -122,6 +137,7 @@ export const sampleUsers: UserAccountDetails[] = [
     email: "patient6@example.com"
   },
   {
+    id: "0001",
     name: "Patient Seven",
     username: "patient7",
     password: "patientpass7",
@@ -129,4 +145,5 @@ export const sampleUsers: UserAccountDetails[] = [
     phone: "777-777-7777",
     email: "patient7@example.com"
   }
+  
 ];

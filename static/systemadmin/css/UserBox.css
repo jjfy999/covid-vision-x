@@ -29,17 +29,17 @@
     margin: 0;
 }
 
-.name, .username, .role {
+.id, .name, .role {
     position: absolute;
     color: black;
     line-height: 4rem;
 }
 
-.name {
+.id {
     left: 20rem; 
 }
 
-.username {
+.name {
     left: calc(45% - 5rem);
 }
 

@@ -38,8 +38,8 @@ const router = createBrowserRouter(
         </Route>
         <Route element={<RoleRoute requiredRole={"system_admin"} />}>
           <Route path="/userAcc" element={<UserAccount />} />
-          <Route path="/AccDetail/:name" element={<AccountDetails />} />
-          <Route path="/EditAcc/:name" element={<EditAccountDetails />} />
+          <Route path="/AccDetail/:userId" element={<AccountDetails />} />
+          <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
           <Route path="/sysAdProfile" element={<SysadProfile />} />
           <Route path="/sysAdEditProfile" element={<SysadEditProfile />} />
           <Route path="/CreateUser" element={<CreateUser />} />
