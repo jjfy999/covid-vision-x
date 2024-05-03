@@ -51,7 +51,8 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
               className={
                 location.pathname === "/UserAcc" ||
                 location.pathname === "/AccDetail" ||
-                location.pathname === "/EditAcc"
+                location.pathname === "/EditAcc"||
+                location.pathname === "/CreateUser"
                   ? "active"
                   : "useracc"
               }

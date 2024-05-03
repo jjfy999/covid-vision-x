@@ -40,6 +40,7 @@ body{
     border-radius: .5rem;
     cursor: pointer;
     line-height: 5rem;
+    margin-top: 40rem;
 }
 #createUser:hover{
     color: white;
@@ -65,7 +66,7 @@ section:nth-child(even){
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    padding-top: 70px; /* Adjust as needed */
+    padding-top: 80px; /* Adjust as needed */
     font-size: 3rem;
     color: var(--green);
     z-index: 1000; /* Ensure it's above other content */
