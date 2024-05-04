@@ -85,16 +85,20 @@ const EditAccountDetails = () => {
                     <td><input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} /></td>
                   </tr>
                   <tr>
+                    <th><label htmlFor="name">User Name:</label></th>
+                    <td><input type="text" id="username" name="username" value={formData.username} onChange={handleInputChange} /></td>
+                  </tr>
+                  <tr>
+                    <th><label htmlFor="name">User Name:</label></th>
+                    <td><input type="text" id="password" name="password" value={formData.password} onChange={handleInputChange} /></td>
+                  </tr>
+                  <tr>
                     <th><label htmlFor="role">Role:</label></th>
                     <td><input type="text" id="role" name="role" value={formData.role} onChange={handleInputChange} /></td>
                   </tr>
                   <tr>
-                    <th><label htmlFor="gender">Gender:</label></th>
-                    <td><input type="text" id="gender" name="gender" value={formData.gender} onChange={handleInputChange} /></td>
-                  </tr>
-                  <tr>
                     <th><label htmlFor="contact">Contact number:</label></th>
-                    <td><input type="text" id="contact" name="contact" value={formData.contact} onChange={handleInputChange} /></td>
+                    <td><input type="text" id="contact" name="contact" value={formData.phone} onChange={handleInputChange} /></td>
                   </tr>
                   <tr>
                     <th><label htmlFor="email">Email:</label></th>
