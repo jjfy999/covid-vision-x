@@ -64,8 +64,7 @@ const AccountDetails = () => {
                     </table>
                 </div>
                 <div className="btn">
-                    {/* <Link id="editBtn" to="/EditAcc">Edit</Link> */}
-                    <Link id="editBtn" to={`/EditAcc/${name}`}>Edit</Link>
+                    <Link id="editBtn" to={`/EditAcc/${userId}`}>Edit</Link>
                     <Link id="backBtn" to="/UserAcc">Back</Link>
                 </div>
             </section>
