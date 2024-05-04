@@ -13,4 +13,4 @@ $ py manage.py makemigrations <ModelName>
 $ py manage.py migrate
 
 online site below (Currently using postgres RDS and images S3 private bucket) For backend
-http://fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com
+http://fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/sysUserAccList/
