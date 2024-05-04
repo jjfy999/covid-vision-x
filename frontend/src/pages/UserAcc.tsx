@@ -55,13 +55,13 @@ const UserAccount = () => {
                 
                 {/* Search bar */}
                 <div className="searchContainer">
+                  <button className="searchButton" ><FaSearch /></button>
                   <input
                     type="text"
                     placeholder="Search user by ID..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
-                  <button className="searchButton" onClick={handleSearch}><FaSearch /></button>
                 </div>
                 
                 {/* Create User Account button */}
