@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import ProfileCard from "./templates/ProfileCard";
 import DrawerAppBar from "./templates/DrawerAppBar";
 import UploadImage from "./templates/UploadImage";
+import NonUpdatedReport from "./templates/NonUpdatedReport";
 
 const App = () => {
   return (
@@ -55,6 +56,16 @@ const App = () => {
             }}
           />
         </div>
+      </div>
+
+
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <NonUpdatedReport
+          patientName="John Tan"
+          date="23 March 2024"
+          imageUrl="path_to_xray_image.png"
+          initialStatus="covid"
+        />
       </div>
     </>
   );
