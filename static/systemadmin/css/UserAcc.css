@@ -115,7 +115,7 @@ body{
 #itemTitleBar {
     display: flex;
     align-items: center;
-    background-color: var(--yellow);
+    background-color: rgb(182, 180, 180);
     padding: 5px 0;
     font-weight: bold;
     position: fixed;

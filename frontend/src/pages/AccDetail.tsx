@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
+import ProfileCard from './templates/ProfileCard';
 
 const AccountDetails = () => {
     const { userId } = useParams(); // Get the user ID from URL parameters
@@ -28,7 +29,15 @@ const AccountDetails = () => {
             {/* Account Details Section */}
             <section>
                 <h1 id="userAccDetails">Account Details</h1>
-                <div id="tablediv">
+                <div id="profileCardContainer"> {/* Replace tablediv with profileCardContainer */}
+                    <ProfileCard
+                        doctorId={user.id} // Assuming id is equivalent to doctorId
+                        name={user.name}
+                        contactNumber={user.phone} // Assuming phone is equivalent to contactNumber
+                        email={user.email}
+                    />
+                </div>
+                {/* <div id="tablediv">
                     <img src={profileImg} id="userImg" alt="User" />
                     <table id="infoTable">
                         <tbody>
@@ -62,7 +71,7 @@ const AccountDetails = () => {
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> */}
                 <div className="btn">
                     <Link id="editBtn" to={`/EditAcc/${userId}`}>Edit</Link>
                     <Link id="deleteBtn" to="/UserAcc">Delete</Link>
