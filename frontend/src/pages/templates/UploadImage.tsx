@@ -45,7 +45,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload }) => {
                     mb: 2
                 }}>
                     <IconButton color="primary" component="label" sx={{ mb: 1 }}>
-                        <input hidden accept=".jpg, .png, .pdf" type="file" onChange={handleFileChange} />
+                        <input hidden accept=".jpg, .png" type="file" onChange={handleFileChange} />
                         <UploadIcon sx={{ fontSize: 40 }} />
                     </IconButton>
                     {previewUrl && (
