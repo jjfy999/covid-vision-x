@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
 
             
-            patient = Patient.objects.get(pk=97)
+            patient = Patient.objects.get(pk=115)
 
             report = Report.objects.create(
                 status="Normal",
@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 image="abc.jpg",
             )
 
-            patient = Patient.objects.get(pk=106)
+            patient = Patient.objects.get(pk=123)
 
             report = Report.objects.create(
                 status="Covid",
@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 image="abc.jpg",
             )
 
-            patient = Patient.objects.get(pk=98)
+            patient = Patient.objects.get(pk=116)
 
             report = Report.objects.create(
                 status="Normal",
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 image="abc.jpg",
             )
 
-            patient = Patient.objects.get(pk=109)
+            patient = Patient.objects.get(pk=124)
 
             report = Report.objects.create(
                 status="Normal",
@@ -61,7 +61,7 @@ class Command(BaseCommand):
             )
 
 
-            patient = Patient.objects.get(pk=111)
+            patient = Patient.objects.get(pk=128)
 
             report = Report.objects.create(
                 status="Normal",
