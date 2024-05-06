@@ -50,3 +50,9 @@ class SystemAdmin(Account):
         self.role = 'system_admin'
         self.is_staff = True
         super().save(*args, **kwargs)
+
+class Researcher(Account):
+
+    def save(self, *args, **kwargs):
+        self.role = 'researcher'
+        super().save(*args, **kwargs)
