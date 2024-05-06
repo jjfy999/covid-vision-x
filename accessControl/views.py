@@ -24,12 +24,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Add custom claims
         token['username'] = user.username
         token['role'] = user.role
-        # ...
 
         return token
 
+
 class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class  = MyTokenObtainPairSerializer
+    serializer_class = MyTokenObtainPairSerializer
+
 
 @api_view(['GET'])
 def getRoutes(request):
