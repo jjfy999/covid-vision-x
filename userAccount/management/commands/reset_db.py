@@ -28,6 +28,7 @@ class Command(BaseCommand):
         Doctor.objects.all().delete()
         Patient.objects.all().delete()
         SystemAdmin.objects.all().delete()
+        Researcher.objects.all().delete()
 
     def handle(self, *args, **options):
         # Delete all rows from the tables

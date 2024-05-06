@@ -20,7 +20,7 @@ from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
                                      PatientSerializer,
                                      PatientUpdateSerializer)
 
-from .models import Doctor, Patient, SystemAdmin
+from .models import Doctor, Patient, SystemAdmin, Researcher
 
 # Create your views here.
 
@@ -149,13 +149,16 @@ def listUsers(request):  # for system admin to view list of users
 
     # Serialize system admins
     system_admins = SystemAdmin.objects.all()
-    system_admin_serializer = DoctorSysAdminSerializer(
-        system_admins, many=True)
+    system_admin_serializer = DoctorSysAdminSerializer(system_admins, many=True)
+    
+    researchers = Researcher.objects.all()
+    researcher_serializer = DoctorSysAdminSerializer(researchers, many=True)
 
     users_data = {
         'patients': patient_serializer.data,
         'doctors': doctor_serializer.data,
-        'system_admins': system_admin_serializer.data
+        'system_admins': system_admin_serializer.data,
+        'researchers': researcher_serializer.data
     }
     return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
