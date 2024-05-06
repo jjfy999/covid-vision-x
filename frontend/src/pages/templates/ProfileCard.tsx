@@ -3,10 +3,13 @@ import { Card, CardContent, Typography, Button, CardMedia, List, ListItem, TextF
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 interface ProfileProps {
-    doctorId: string;
+    id: string;
     name: string;
+    role: string
     contactNumber: string;
     email: string;
+    username: string;
+    password: string;
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
@@ -28,7 +31,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     };
 
     return (
-        <Card sx={{ maxWidth: 345, boxShadow: 3, borderRadius: 2, m: 2 }}>
+        <Card sx={{ maxWidth: 600, boxShadow: 3, borderRadius: 2, m: 2 }}>
             <CardMedia
                 sx={{
                     display: 'flex',
@@ -47,31 +50,49 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                     {editMode ? (
                         <>
                             <ListItem>
-                                <TextField label="Doctor ID" variant="outlined" fullWidth value={profile.doctorId} onChange={handleChange('doctorId')} />
+                                <TextField label="ID" variant="outlined" fullWidth value={profile.id} onChange={handleChange('id')} />
                             </ListItem>
                             <ListItem>
-                                <TextField label="Doctor Name" variant="outlined" fullWidth value={profile.name} onChange={handleChange('name')} />
+                                <TextField label="Name" variant="outlined" fullWidth value={profile.name} onChange={handleChange('name')} />
+                            </ListItem>
+                            <ListItem>
+                                <TextField label="Role" variant="outlined" fullWidth value={profile.role} onChange={handleChange('role')} />
+                            </ListItem>
+                            <ListItem>
+                                <TextField label="Email" variant="outlined" fullWidth value={profile.email} onChange={handleChange('email')} />
                             </ListItem>
                             <ListItem>
                                 <TextField label="Contact Number" variant="outlined" fullWidth value={profile.contactNumber} onChange={handleChange('contactNumber')} />
                             </ListItem>
                             <ListItem>
-                                <TextField label="Email" variant="outlined" fullWidth value={profile.email} onChange={handleChange('email')} />
+                                <TextField label="Username" variant="outlined" fullWidth value={profile.username} onChange={handleChange('username')} />
+                            </ListItem>
+                            <ListItem>
+                                <TextField label="Password" variant="outlined" fullWidth value={profile.password} onChange={handleChange('password')} />
                             </ListItem>
                         </>
                     ) : (
                         <>
                             <ListItem>
-                                <ListItemText primary="Doctor ID:" secondary={profile.doctorId} />
+                                <ListItemText primary="ID:" secondary={profile.id} />
                             </ListItem>
                             <ListItem>
-                                <ListItemText primary="Doctor Name:" secondary={profile.name} />
+                                <ListItemText primary="Name:" secondary={profile.name} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText primary="Role:" secondary={profile.role} />
                             </ListItem>
                             <ListItem>
                                 <ListItemText primary="Contact Number:" secondary={profile.contactNumber} />
                             </ListItem>
                             <ListItem>
                                 <ListItemText primary="Email:" secondary={profile.email} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText primary="Username:" secondary={profile.username} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText primary="Password:" secondary={profile.password} />
                             </ListItem>
                         </>
                     )}

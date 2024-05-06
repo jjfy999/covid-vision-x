@@ -31,10 +31,13 @@ const AccountDetails = () => {
                 <h1 id="userAccDetails">Account Details</h1>
                 <div id="profileCardContainer"> {/* Replace tablediv with profileCardContainer */}
                     <ProfileCard
-                        doctorId={user.id} // Assuming id is equivalent to doctorId
+                        id={user.id} // Assuming id is equivalent to doctorId
                         name={user.name}
+                        role={user.role}
                         contactNumber={user.phone} // Assuming phone is equivalent to contactNumber
                         email={user.email}
+                        username={user.username}
+                        password={user.password}
                     />
                 </div>
                 {/* <div id="tablediv">
