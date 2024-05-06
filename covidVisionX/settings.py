@@ -33,7 +33,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 DEBUG = os.environ.get("DEBUG")
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236','fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236',
+                 'fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -205,8 +206,8 @@ REST_FRAMEWORK = {
 }
 '''
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
@@ -244,4 +245,5 @@ SIMPLE_JWT = {
 }
 
 # Setting for cors header
-CORS_ALLOW_ALL_ORIGINS = True # All all url to hit apis. Changed once we can confirm the whitelisted url
+# All all url to hit apis. Changed once we can confirm the whitelisted url
+CORS_ALLOW_ALL_ORIGINS = True

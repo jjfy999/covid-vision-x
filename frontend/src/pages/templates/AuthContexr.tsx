@@ -98,7 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       updateToken();
     }
 
-    const updateTime = 1000 * 60 * 4;
+    const updateTime = 1000 * 60 * 60 * 10; // Change this to minutes later
 
     let interval = setInterval(() => {
       if (authTokens) {
