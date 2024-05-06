@@ -90,9 +90,14 @@ urlpatterns = [
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
 
+    # for researcher to upload model
+    path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),
+
+
     path('api/', include('accessControl.urls'))
     # path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     # path('logout/', accessControl.LogoutView.as_view(), name='logout'),
+
 
 
 
