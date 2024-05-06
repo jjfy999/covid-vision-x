@@ -202,11 +202,11 @@ function LoginPage() {
         )}
       </div>
 
-      <div id="logoSection">
+      {/* <div id="logoSection">
         <div id="img-box">
           <img src={logo} id="logoImg" alt="Company Logo" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

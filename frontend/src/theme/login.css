@@ -19,6 +19,11 @@
     /* text-transform: capitalize; */
     transition: all .2s linear;
 }
+body {
+    /* Linear gradient background */
+    background-image: linear-gradient(to left, var(--green), var(--white));
+}
+
 
 /* The entire web container */
 #container {
@@ -34,15 +39,10 @@
 }
 
 #loginSection {
-    background-color: white;
+    /* background-color: white; */
     display: grid;
     align-items: center;
-}
-
-#logoSection {
-    background-color: var(--green);
-    display: grid;
-    align-items: center;
+    justify-content: center;
 }
 
 #loginHeading {
@@ -50,18 +50,28 @@
     max-width: 400px;
 }
 
+#logoSection {
+    /* background-color: var(--green); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #img-box {
     position: relative;
-    height: fit-content;
-    width: fit-content;
+    height: 100%;
+    width: 100%;
     margin-bottom: 2rem;
     border-radius: .5rem;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #logoImg {
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
 }
 
 #welcomeHeading {
@@ -71,7 +81,7 @@
 
 /* Bordered form */
 form {
-    border: 3px solid rgb(149, 149, 149);
+    border: 2px solid rgb(57, 57, 57);
     margin: 0 auto;
     max-width: 400px;
     padding: 16px 16px 30px;
