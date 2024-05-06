@@ -112,14 +112,44 @@ body{
 /* Search and Create user css starts */
 
 /* User Acc css starts */
-#userListContainer {
+#itemTitleBar {
+    display: flex;
+    align-items: center;
+    background-color: var(--yellow);
+    padding: 5px 0;
+    font-weight: bold;
     position: fixed;
     top: 230px; 
-    left: 0;
+    /* margin-right: 11px; */
+    width: 100rem;
+    z-index: 1000;
+    border-radius: 1.5rem;
+    font-size: 1.5rem;
+}
+
+#titleId {
+    margin-left: 19rem; 
+    padding: 8px ;
+}
+
+#titleName {
+    margin-left: 16rem;
+    padding: 8px ;
+}
+
+#titleRole {
+    margin-left: 16rem;
+    padding: 8px ;
+}
+
+#userListContainer {
+    position: fixed;
+    top: 290px; 
     width: 100%;
-    bottom: 0;
     max-height: calc(100vh - 250px); 
     overflow-y: auto; 
+    align-items: center;
+    justify-content: center;
 }
 
 #userList {

@@ -99,7 +99,7 @@ input{
     padding-left: 1rem;
 }
 
-#editBtn, #backBtn{
+#editBtn, #deleteBtn, #backBtn{
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -111,7 +111,7 @@ input{
     margin-right: .1cm;
 }
 
-#editBtn, #backBtn:hover{
+#editBtn, #deleteBtn, #backBtn:hover{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;

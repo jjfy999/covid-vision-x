@@ -70,6 +70,13 @@ const UserAccount = () => {
                 </div>
               </div>
 
+              {/* Item title bar */}
+              <div id="itemTitleBar">
+                <p id="titleId">UserID</p>
+                <p id="titleName">Name</p>
+                <p id="titleRole">Role</p>
+              </div>
+
               {/* User Acc list */}
               <div id="userListContainer">
                 <div id="userList">

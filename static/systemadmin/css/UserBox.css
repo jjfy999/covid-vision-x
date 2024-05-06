@@ -40,11 +40,11 @@
 }
 
 .name {
-    left: calc(45% - 5rem);
+    left: calc(43% - 5rem);
 }
 
 .role {
-    right: 35rem; 
+    right: 32rem; 
 }
 
 .viewInfoBtn:hover{
