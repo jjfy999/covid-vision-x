@@ -21,6 +21,7 @@ import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
 import DoctorProfile from "./pages/DoctorProfile"; // Import the DoctorProfile component
+import RsProfile from "./pages/RsProfile"; // Import the RsProfile component
 import ErrorPage from "./pages/ErrorPage"; // Catch all for any invalid urls
 import CreateUser from "./pages/CreateUser";
 
@@ -28,9 +29,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/loginpage" element={<LoginPage />} />
-
       <Route path="/" element={<PrivateRoute />}>
         <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/Rsprofile" element={<RsProfile />} />
         <Route element={<RoleRoute requiredRole={"patient"} />}>
           <Route path="/report" element={<Report />} />
           <Route path="/PatientProfile" element={<PatientProfile />} />

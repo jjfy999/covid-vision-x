@@ -61,10 +61,10 @@ const App = () => {
 
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         <NonUpdatedReport
-          patientName="John Tan"
-          date="23 March 2024"
-          imageUrl="path_to_xray_image.png"
-          initialStatus="covid"
+        // patientName="John Tan"
+        // date="23 March 2024"
+        // imageUrl="path_to_xray_image.png"
+        // initialStatus="covid"
         />
       </div>
     </>
