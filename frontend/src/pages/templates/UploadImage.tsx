@@ -60,7 +60,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload }) => {
                         Upload Patient X-Ray Image
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        Supports: .jpg, .png,
+                        Supports: .jpg, .png
                     </Typography>
                 </Box>
                 <TextField
