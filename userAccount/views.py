@@ -108,7 +108,7 @@ def getDetails(request):
     else:
         return JsonResponse({'error': 'User role is not recognized'}, status=404)
 
-    return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2})
+    return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2}, status=200)
 
 #Postman tested
 @api_view(['GET'])
@@ -134,7 +134,7 @@ def getUserDetails(request, pk):  # for system admin to view specific user detai
         except SystemAdmin.DoesNotExist:
             return HttpResponseNotFound("User not found")
 
-    return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, status=200)
 
 #Postman tested
 @api_view(['GET'])
@@ -157,7 +157,7 @@ def listUsers(request):  # for system admin to view list of users
         'doctors': doctor_serializer.data,
         'system_admins': system_admin_serializer.data
     }
-    return JsonResponse(users_data, json_dumps_params={'indent': 2})
+    return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
 #Postman tested
@@ -168,7 +168,7 @@ def listPatients(request):
     patient_serializer = PatientSerializer(patients, many=True)
 
     users_data = {'patients': patient_serializer.data}
-    return JsonResponse(users_data, json_dumps_params={'indent': 2})    
+    return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)    
 
 
 @api_view(['POST'])
@@ -218,7 +218,7 @@ def updateUserDetails(request, pk):  # for system admin to update another person
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data)
+        return JsonResponse({'message': 'User updated successfully.'}, status=200)
     else:
         # Return errors if serializer is not valid
         return JsonResponse(serializer.errors, status=400)
@@ -239,9 +239,9 @@ def searchUser(request, pk):
                     searchUser = Doctor.objects.get(pk=pk)
                     serializer = DoctorSysAdminGetDetailsSerializer(searchUser)
 
-            return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
+            return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, status=200)
         except (Patient.DoesNotExist, Doctor.DoesNotExist):
-            return JsonResponse({"error": "User not found"}, status=404)
+            return JsonResponse({"error": "User not found"}, status=400)
     return JsonResponse({"error": "User not found"}, status=400)
 
 #Postman tested
@@ -260,9 +260,9 @@ def deleteUser(request, pk):  # for system admin to delete a user
 
     if user is not None:
         user.delete()
-        return JsonResponse({'message': 'User deleted successfully.'})
+        return JsonResponse({'message': 'User deleted successfully.'}, status=200)
     else:
-        return JsonResponse({'error': 'User not found.'}, status=404)
+        return JsonResponse({'error': 'User not found.'}, status=400)
 
 #Postman tested
 @api_view(['POST'])
@@ -293,11 +293,11 @@ def createUser(request):  # for patient to register and for system admin to crea
             # Handle invalid role
             return JsonResponse({'error': 'Invalid role'}, status=400)
 
-        return JsonResponse({'message': 'User created successfully.'})
+        return JsonResponse({'message': 'User created successfully.'}, status=200)
 
     else:
         # Handle non-POST request
-        return JsonResponse({'error': 'User not created.'}, status=405)
+        return JsonResponse({'error': 'User not created.'}, status=400)
 
 
 def testPatient(request,pk):
