@@ -45,6 +45,13 @@ body {
     justify-content: center;
 }
 
+#loginForm {
+    background-color: white;
+    border-radius: 8%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow with 20px blur and 0.1 opacity */
+
+}
+
 #loginHeading {
     margin: 0 auto;
     max-width: 400px;
@@ -81,7 +88,6 @@ body {
 
 /* Bordered form */
 form {
-    border: 2px solid rgb(57, 57, 57);
     margin: 0 auto;
     max-width: 400px;
     padding: 16px 16px 30px;

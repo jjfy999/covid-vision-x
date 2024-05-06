@@ -84,7 +84,7 @@ function LoginPage() {
     <div id="container">
       <div id="loginSection">
         {isLoginView ? (
-          <div>
+          <div id="loginForm">
             <h1 id="loginHeading">LOGIN</h1>
             <form onSubmit={handleSubmit}>
               <label htmlFor="role">
