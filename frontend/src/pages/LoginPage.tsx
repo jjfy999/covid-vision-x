@@ -81,7 +81,8 @@ function LoginPage() {
   };
 
   return (
-    <div id="container">
+    // <body className="loginPage">
+          <div id="container">
       <div id="loginSection">
         {isLoginView ? (
           <div id="loginForm">
@@ -208,6 +209,8 @@ function LoginPage() {
         </div>
       </div> */}
     </div>
+    // </body>
+
   );
 }
 

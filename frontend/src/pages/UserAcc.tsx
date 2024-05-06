@@ -47,7 +47,7 @@ const UserAccount = () => {
     <div>
         <Header userRole={'sysad'}/>
 
-        <body>
+        <body className="userAccPage">
           {/* User Account Section */}
           <section>
               <h1 id="userAcc">User Accounts</h1>
