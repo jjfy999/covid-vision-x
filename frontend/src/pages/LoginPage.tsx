@@ -85,11 +85,12 @@ function LoginPage() {
       <div id="img-box">
         <img src={logo} id="logo_login" alt="Company Logo" />
       </div>
+      
       {isLoginView ? (
         <div id="loginForm">
           <h1 className="heading">Login</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="role">
+            <label className="label" htmlFor="role">
               <b>Login As</b>
             </label>
             <select
@@ -106,10 +107,11 @@ function LoginPage() {
               <option value="sysad">System Administrator</option>
             </select>
 
-            <label htmlFor="uname">
+            <label className="label" htmlFor="uname">
               <b>Username</b>
             </label>
             <input
+              className="label"
               type="text"
               placeholder="Enter Username"
               value={username}
@@ -117,10 +119,11 @@ function LoginPage() {
               required
             />
 
-            <label htmlFor="psw">
+            <label className="label" htmlFor="psw">
               <b>Password</b>
             </label>
             <input
+              className="label"
               type="password"
               placeholder="Enter Password"
               value={password}
@@ -150,10 +153,11 @@ function LoginPage() {
         <div id="signUpForm">
           <h1 className="heading">Sign Up</h1>
           <form onSubmit={handleSignup}>
-            <label htmlFor="uname">
+            <label className="label" htmlFor="uname">
               <b>Username</b>
             </label>
             <input
+              className="label"
               type="text"
               placeholder="Enter Username"
               value={username}
@@ -161,10 +165,11 @@ function LoginPage() {
               required
             />
 
-            <label htmlFor="psw">
+            <label className="label" htmlFor="psw">
               <b>Password</b>
             </label>
             <input
+              className="label"
               type="password"
               placeholder="Enter Password"
               value={password}
@@ -172,10 +177,11 @@ function LoginPage() {
               required
             />
 
-            <label htmlFor="confirmPsw">
+            <label className="label" htmlFor="confirmPsw">
               <b>Confirm Password</b>
             </label>
             <input
+              className="label"
               type="password"
               placeholder="Confirm Password"
               value={confirmPassword}

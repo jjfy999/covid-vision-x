@@ -1,3 +1,4 @@
+/* Global css starts */
 :root {
     --green: #267b83;
     --yellow:#ecbb50d7;
@@ -19,11 +20,12 @@
 body {
     background-image: linear-gradient(to bottom, var(--green), white);
 }
+/* Global css ends */
 
+/* Login Page css starts*/
 #loginSection {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     height: 100vh;
     flex-direction: column;
 }
@@ -52,6 +54,8 @@ body {
     text-align: center; 
     margin-bottom: 20px;
     font-size: 3rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 form {
@@ -59,7 +63,7 @@ form {
     max-width: 400px;
 }
 
-label, select, option, input {
+.label, select, option, button {
     font-size: 1.5rem;
 }
 
@@ -111,3 +115,4 @@ button {
 .message {
     color: #1c7226;
 }
+/* Login Page css ends*/
