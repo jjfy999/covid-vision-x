@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../../../static/login/login.css";
-import logo from "../../../static/images/logo.png";
+import logo from "../../../static/images/logo_transparent.png";
 import { useAuth } from "./templates/AuthContexr";
 import DrawerAppBar from "./templates/DrawerAppBar";
 import { Navigate } from "react-router-dom";
@@ -82,6 +82,9 @@ function LoginPage() {
 
   return (
     <div id="loginSection">
+      <div id="img-box">
+        <img src={logo} id="logoImg" alt="Company Logo" />
+      </div>
       {isLoginView ? (
         <div id="loginForm">
           <h1 className="heading">Login</h1>
