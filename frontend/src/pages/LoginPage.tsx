@@ -83,7 +83,7 @@ function LoginPage() {
   return (
     <div id="loginSection">
       <div id="img-box">
-        <img src={logo} id="logoImg" alt="Company Logo" />
+        <img src={logo} id="logo_login" alt="Company Logo" />
       </div>
       {isLoginView ? (
         <div id="loginForm">
