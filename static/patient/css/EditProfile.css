@@ -3,7 +3,8 @@
 /* Basic css starts */
 :root{
     --green:#267b83;
-    --yellow:#ecbb50d7;
+    /* --yellow:#ecbb50d7; */
+    --yellow:#f7f2ec;
     --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
 }
 *{

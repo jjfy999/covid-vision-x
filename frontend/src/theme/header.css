@@ -1,32 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
-
-/* Basic css starts */
-:root{
-    /* --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255); */
-}
-*{
-    /* font-family: 'Joan', serif; */
-    /* margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear; */
-}
-html{
-    /* font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 5.5rem;
-    scroll-behavior: smooth; */
-}
-body{
-    /* background-color: white; */
-}
-/* Basic css ends */
-
-/* Header part css starts */
+/* Header css starts */
 header{
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -38,6 +10,7 @@ header{
     z-index: 1000;
     box-shadow: var(--box-shadow);
 }
+
 #logoImgBox {
     position: relative;
     height: fit-content;
@@ -47,6 +20,7 @@ header{
     display: grid;
     align-items: center;
 }
+
 #logoImg {
     width: 12rem; 
     height: 5rem;
@@ -59,6 +33,7 @@ header .navbar a{
     color: white;
     margin-right: 10px;
 }
+
 header .navbar a.active{
     color:white;
     background: var(--yellow);
@@ -88,7 +63,7 @@ header .icons i:hover, header .icons a:hover{
 header .icons #menu-bars{
     display: none;
 }
-/* Header part css ends*/
+/* Header css ends*/
 
 /* Media queries starts */
 @media (max-width:991px){
