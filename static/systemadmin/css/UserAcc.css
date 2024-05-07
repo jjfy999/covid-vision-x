@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
 
 /* Basic css starts */
 :root{
@@ -8,21 +8,21 @@
 }
 
 *{
-    font-family: 'Joan', serif;
-    box-sizing: border-box;
+    /* font-family: 'Joan', serif; */
+    /* box-sizing: border-box;
     text-transform: capitalize;
-    transition: all .2s linear;
+    transition: all .2s linear; */
 }
 
 html{
-    scroll-padding-top: 1rem;
+    /* scroll-padding-top: 1rem;
     scroll-behavior: smooth;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 body.userAccPage{
-    overflow: hidden;
-    background-color: white;
+    /* overflow: hidden;
+    background-color: white; */
 }
 
 /* Basic css ends */

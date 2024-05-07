@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
 
 /* Basic css starts */
 :root{
@@ -7,22 +7,22 @@
     --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
 }
 *{
-    font-family: 'Joan', serif;
-    margin: 0; padding: 0;
+    /* font-family: 'Joan', serif; */
+    /* margin: 0; padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     outline: none; border: none;
     text-transform: capitalize;
-    transition: all .2s linear;
+    transition: all .2s linear; */
 }
 html{
-    scroll-padding-top: 1rem;
-    scroll-behavior: smooth;
+    /* scroll-padding-top: 1rem;
+    scroll-behavior: smooth; */
 }
 
 body{
-    padding-top: 250px;
-    overflow: hidden;
+    /* padding-top: 250px;
+    overflow: hidden; */
 }
 
 /* Basic css ends */

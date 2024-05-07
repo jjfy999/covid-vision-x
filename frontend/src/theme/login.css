@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
 
 :root {
     --green: #267b83;
@@ -7,7 +7,8 @@
 
 * {
     /* margin: 0; */
-    font-family: 'Joan', serif;
+    /* font-family: 'Joan', serif; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     color: #333;
     /* margin: 0;
@@ -20,8 +21,9 @@
     transition: all .2s linear;
     
 }
-body {
-    /* background-image: linear-gradient(to left, var(--green), white); */
+.loginPageContainer {
+    background-image: linear-gradient(to left, var(--green), white);
+    font-family: Calibri;
 }
 
 
