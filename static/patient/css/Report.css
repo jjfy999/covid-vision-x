@@ -1,83 +1,45 @@
-/* Report css starts */
-section{
-    padding: 2rem 9%;
-    background: white;
-    grid-template-columns: 1fr 3fr;
+#reportPage{
+    background: var(--yellow);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align items horizontally in the center */
-    justify-content: center; /* Align items vertically in the center */
-    height: 100vh; /* Set the height to full viewport height */
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
 }
 
-#patientProfile {
-    /* padding-bottom: 15px; */
-    font-size: 3rem;
-    color: var(--green);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 90px; 
-    font-size: 3rem;
+/* Title css starts */
+#patientReport{
     color: var(--green);
     width: 100%; 
+    font-size: 3rem;
+    padding-top: 10rem;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    
 }
-#tablediv {
-    margin-top: 5rem; /* Add some spacing between the image and table */
-}
-#infoTable {
-    font-size: 2rem; /* Increase the font size of table text */
-  }
-/* Report css ends */
+/* Title css ends */
 
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
+/* Report css starts */
+#reportBox {
+    margin-top: 5rem;
+    background-color: #9f947d;
+    border-radius: 8%;
+    box-shadow: 0 0 20px rgba(93, 92, 92, 0.6);
+    padding: 40px 30px 30px;
+    max-width: 800px; 
+    width: fit-content;
 }
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
+
+#reportTable {
+    font-size: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5rem;
 }
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
+
+#xrayImg {
+    width: 50rem;
+    height: 40rem;
+    padding: 5rem;
 }
-/* Media queries ends */
+/* Report css ends */

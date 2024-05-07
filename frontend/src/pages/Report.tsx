@@ -9,12 +9,12 @@ const Report = () => {
     <div>
       <Header userRole={'patient'}/>
 
-      <section>
-        <h1 id="patientProfile">My Report</h1>
+      <section id="reportPage">
+        <h1 id="patientReport">My Report</h1>
 
-        <div id="tablediv">
-          <img src={xrayImg} id="patientImg" alt="Patient X-ray" />
-          <table id="infoTable">
+        <div id="reportBox">
+          <img src={xrayImg} id="xrayImg" alt="Patient X-ray" />
+          <table id="reportTable">
             <tbody>
               <tr>
                 <th><label htmlFor="id">Patient ID</label></th>
