@@ -41,7 +41,8 @@ urlpatterns = [
          name='updateDetails'),  # for patient to update own details
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,  # for system admin to update another person details!!!!!!!!!! (linked to below)
          name='updateUserDetails'),  # to update another person details
-     path('testPatient/<int:pk>/', userAccount.testPatient, name='testPatient'),  # testing to see patient details
+    path('testPatient/<int:pk>/', userAccount.testPatient,
+         name='testPatient'),  # testing to see patient details
 
 
 
@@ -91,7 +92,7 @@ urlpatterns = [
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
 
     # for researcher to upload model
-    path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),
+    # path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),
 
 
     path('api/', include('accessControl.urls'))
