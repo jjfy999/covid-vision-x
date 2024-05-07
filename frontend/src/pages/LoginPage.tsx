@@ -81,136 +81,125 @@ function LoginPage() {
   };
 
   return (
-    <body className="loginPageContainer">
-      <div id="container">
-        <div id="loginSection">
-          {isLoginView ? (
-            <div id="loginForm">
-              <h1 id="loginHeading">LOGIN</h1>
-              <form onSubmit={handleSubmit}>
-                <label htmlFor="role">
-                  <b>Login As</b>
-                </label>
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  required
-                  id="roleInput"
-                >
-                  <option value="" disabled selected>
-                    Select a role
-                  </option>
-                  <option value="patient">Patient</option>
-                  <option value="doctor">Doctor</option>
-                  <option value="sysad">System Administrator</option>
-                </select>
+    <div id="loginSection">
+      {isLoginView ? (
+        <div id="loginForm">
+          <h1 className="heading">Login</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="role">
+              <b>Login As</b>
+            </label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+              id="roleInput"
+            >
+              <option value="" disabled selected>
+                Select a role
+              </option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="sysad">System Administrator</option>
+            </select>
 
-                <label htmlFor="uname">
-                  <b>Username</b>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
+            <label htmlFor="uname">
+              <b>Username</b>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
 
-                <label htmlFor="psw">
-                  <b>Password</b>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+            <label htmlFor="psw">
+              <b>Password</b>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-                <button type="submit">Login</button>
+            <button type="submit">Login</button>
 
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsLoginView(false);
-                  }}
-                  style={{
-                    color: "blue",
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                  }}
-                >
-                  Don't have an account? Sign up
-                </a>
-              </form>
-            </div>
-          ) : (
-            <div>
-              <h1 id="loginHeading">SIGN UP</h1>
-              <form onSubmit={handleSignup}>
-                <label htmlFor="uname">
-                  <b>Username</b>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-
-                <label htmlFor="psw">
-                  <b>Password</b>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-
-                <label htmlFor="confirmPsw">
-                  <b>Confirm Password</b>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-
-                <button type="submit">Sign Up</button>
-
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsLoginView(true);
-                  }}
-                  style={{
-                    color: "blue",
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                  }}
-                >
-                  Already have an account? Log in
-                </a>
-              </form>
-            </div>
-          )}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsLoginView(false);
+              }}
+              style={{
+                color: "blue",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Don't have an account? Sign up
+            </a>
+          </form>
         </div>
+      ) : (
+        <div id="signUpForm">
+          <h1 className="heading">Sign Up</h1>
+          <form onSubmit={handleSignup}>
+            <label htmlFor="uname">
+              <b>Username</b>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
 
-        {/* <div id="logoSection">
-          <div id="img-box">
-            <img src={logo} id="logoImg" alt="Company Logo" />
-          </div>
-        </div> */}
-      </div>
-    </body>
+            <label htmlFor="psw">
+              <b>Password</b>
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
+            <label htmlFor="confirmPsw">
+              <b>Confirm Password</b>
+            </label>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+
+            <button type="submit">Sign Up</button>
+
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsLoginView(true);
+              }}
+              style={{
+                color: "blue",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Already have an account? Log in
+            </a>
+          </form>
+        </div>
+      )}
+    </div>
   );
 }
 
