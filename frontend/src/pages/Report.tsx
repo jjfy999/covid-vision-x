@@ -17,21 +17,21 @@ const Report = () => {
           <table id="infoTable">
             <tbody>
               <tr>
-                <th><label htmlFor="id">Patient ID:</label></th>
-                <td>T0992</td>
+                <th><label htmlFor="id">Patient ID</label></th>
+                <td>: T0992</td>
               </tr>
 
               <tr>
-                <th><label htmlFor="name">Patient Name:</label></th>
-                <td>Bryant Ng</td>
+                <th><label htmlFor="name">Patient Name</label></th>
+                <td>: Bryant Ng</td>
               </tr>
               <tr>
-                <th><label htmlFor="status">Covid-19 Diagnosis status:</label></th>
-                <td>Completed</td>
+                <th><label htmlFor="status">Covid-19 Diagnosis status</label></th>
+                <td>: Completed</td>
               </tr>
               <tr>
-                <th><label htmlFor="status">Covid-19 Diagnosis outcome:</label></th>
-                <td>Positive</td>
+                <th><label htmlFor="status">Covid-19 Diagnosis outcome</label></th>
+                <td>: Positive</td>
               </tr>
             </tbody>
           </table>

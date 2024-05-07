@@ -21,8 +21,9 @@
 }
 
 body {
-    background-image: linear-gradient(to bottom, var(--green), white);
+    background-color: var(--yellow);
 }
+
 /* Global css ends */
 
 /* Login Page css starts*/
@@ -31,6 +32,7 @@ body {
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    background-image: linear-gradient(to bottom, var(--green), white);
 }
 
 #img-box {

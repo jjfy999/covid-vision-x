@@ -1,31 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
-
-/* Basic css starts */
-:root{
-    /* --green: #1e4b43;
-    --yellow:#f7f2ec;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255); */
-}
-*{
-    /* font-family: 'Joan', serif; */
-    /* margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear; */
-}
-html{
-    /* font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 5.5rem;
-    scroll-behavior: smooth; */
-}
-body{
-    /* background-color: white; */
-}
-/* Basic css ends */
-
 /* Report css starts */
 section{
     padding: 2rem 9%;
@@ -37,15 +9,23 @@ section{
     justify-content: center; /* Align items vertically in the center */
     height: 100vh; /* Set the height to full viewport height */
 }
-section:nth-child(even){
-    background: white;
-}
+
 #patientProfile {
-    padding-top: 10px; 
-    padding-bottom: 15px;
+    /* padding-bottom: 15px; */
     font-size: 3rem;
-    margin-left: 3rem;
     color: var(--green);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 90px; 
+    font-size: 3rem;
+    color: var(--green);
+    width: 100%; 
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
 }
 #tablediv {
     margin-top: 5rem; /* Add some spacing between the image and table */
