@@ -57,6 +57,7 @@ const UserAccount = () => {
                 <div className="searchContainer">
                   <button className="searchButton" ><FaSearch /></button>
                   <input
+                    id="searchInput"
                     type="text"
                     placeholder="Search user by ID..."
                     value={searchTerm}

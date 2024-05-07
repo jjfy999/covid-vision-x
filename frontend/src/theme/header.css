@@ -30,17 +30,13 @@ header .navbar a{
     font-size: 1.7rem;
     border-radius: .5rem;
     padding: .5rem 1.5rem;
-    color: white;
+    color: var(--yellow);
     margin-right: 10px;
 }
 
 header .navbar a.active{
-    color:white;
+    color:var(--brown);
     background: var(--yellow);
-}
-
-header .navbar a:hover {
-    color:var(--yellow);
 }
 
 header .icons i, header .icons a{
@@ -51,22 +47,28 @@ header .icons i, header .icons a{
     width: 3rem;
     text-align: center;
     font-size: 1.7rem;
-    color: var(--green);
+    color: var(--brown);
     border-radius: 50%;
     background: white;
 }
+
 header .icons i:hover, header .icons a:hover{
-    color: white;
-    background: var(--yellow);
+    color: var(--yellow);
+    background: var(--brown);
     transform: rotate(360deg);
 }
+
 header .icons #menu-bars{
     display: none;
 }
+/* header .navbar a:hover {
+    color:var(--brown);
+} */
+
 /* Header css ends*/
 
 /* Media queries starts */
-@media (max-width:991px){
+/* @media (max-width:991px){
     html{
         font-size: 55%;
     }
@@ -109,5 +111,5 @@ header .icons #menu-bars{
     html{
         font-size: 50%;
     } 
-}
+} */
 /* Media queries ends */

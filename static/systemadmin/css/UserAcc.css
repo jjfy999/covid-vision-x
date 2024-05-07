@@ -1,31 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
-
-/* Basic css starts */
-:root{
-    --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
-}
-
-*{
-    /* font-family: 'Joan', serif; */
-    /* box-sizing: border-box;
-    text-transform: capitalize;
-    transition: all .2s linear; */
-}
-
-html{
-    /* scroll-padding-top: 1rem;
-    scroll-behavior: smooth;
-    overflow: hidden; */
-}
-
-body.userAccPage{
-    /* overflow: hidden;
-    background-color: white; */
-}
-
-/* Basic css ends */
+/* body {
+    background-color: var(--yellow);
+} */
 
 /* Title css starts */
 #userAcc{
@@ -36,11 +11,13 @@ body.userAccPage{
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    padding-top: 100px; 
+    padding-top: 90px; 
     font-size: 3rem;
     color: var(--green);
     width: 100%; 
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Title css ends */
 
@@ -63,17 +40,17 @@ body.userAccPage{
     height: 40px;
     text-align: center; 
     font-size: 1.5rem;
-    color: black;
+    color: var(--green);
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
     line-height: 4.2rem;
     margin-left: 1rem;
+    box-shadow: 0 0 20px rgba(93, 92, 92, 0.3);
+
 }
 
 #createUser:hover{
-    color: white;
-    background: var(--green);
     letter-spacing: .1rem;
 }
 
@@ -85,7 +62,11 @@ body.userAccPage{
 .searchContainer input[type="text"] {
     width: calc(100% - 40px); 
     padding-right: 40px;
-    background-color: #eee0c2d7;
+    background-color: #cfc4b0;
+}
+
+#searchInput {
+    color: var(--yellow);
 }
 
 .searchButton {
@@ -95,8 +76,9 @@ body.userAccPage{
     width: 40px; 
     height: 40px; 
     cursor: pointer;
-    background: var(--yellow);
+    background: #9f947d;
     border-radius: .5rem;
+    color: var(--yellow);
 }
 
 .errorMessage {
@@ -160,50 +142,3 @@ body.userAccPage{
     flex-wrap: wrap; 
 }
 /* User Acc css ends */
-
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
-}
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
-}
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
-}
-/* Media queries ends */

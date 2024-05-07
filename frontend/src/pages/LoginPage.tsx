@@ -131,7 +131,7 @@ function LoginPage() {
               required
             />
 
-            <button type="submit">Login</button>
+            <button className="loginPageBtn" type="submit">Login</button>
 
             <a
               href="#"
@@ -189,7 +189,7 @@ function LoginPage() {
               required
             />
 
-            <button type="submit">Sign Up</button>
+            <button className="loginPageBtn" type="submit">Sign Up</button>
 
             <a
               href="#"

@@ -57,7 +57,7 @@
 .viewInfoBtn {
     position: absolute;
     right: 2rem;
-    color: black;
+    color: var(--brown);
     background: var(--yellow);
     border-radius: .5rem;
     cursor: pointer;
