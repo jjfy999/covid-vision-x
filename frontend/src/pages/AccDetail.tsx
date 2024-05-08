@@ -1,5 +1,4 @@
 import '../../../static/systemadmin/css/AccDetail.css';
-import profileImg from '../../../static/images/unknownPerson.jpg';
 import Header from './Header';
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -27,7 +26,7 @@ const AccountDetails = () => {
             <Header userRole={'sysad'}/>
 
             {/* Account Details Section */}
-            <section>
+            <section id="accDetailPage">
                 <h1 id="userAccDetails">Account Details</h1>
                 <div id="profileCardContainer"> {/* Replace tablediv with profileCardContainer */}
                     <ProfileCard
@@ -40,46 +39,11 @@ const AccountDetails = () => {
                         password={user.password}
                     />
                 </div>
-                {/* <div id="tablediv">
-                    <img src={profileImg} id="userImg" alt="User" />
-                    <table id="infoTable">
-                        <tbody>
-                            <tr>
-                                <th><label htmlFor="id">User ID</label></th>
-                                <td>: {user.id}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="name">Name</label></th>
-                                <td>: {user.name}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="username">Username</label></th>
-                                <td>: {user.username}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="password">Password</label></th>
-                                <td>: {user.password}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="role">Role</label></th>
-                                <td>: {user.role}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="phone">Contact number</label></th>
-                                <td>: {user.phone}</td>
-                            </tr>
-                            <tr>
-                                <th><label htmlFor="email">Email</label></th>
-                                <td>: {user.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
-                <div className="btn">
+                {/* <div className="btn">
                     <Link id="editBtn" to={`/EditAcc/${userId}`}>Edit</Link>
                     <Link id="deleteBtn" to="/UserAcc">Delete</Link>
                     <Link id="backBtn" to="/UserAcc">Back</Link>
-                </div>
+                </div> */}
             </section>
         </div>
     );

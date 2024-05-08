@@ -1,76 +1,41 @@
+/* Acc Detail css starts */
+#accDetailPage{
+    background: var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    overflow-y: auto;
+    position: relative;
+}
+
 /* Title css starts */
 #userAccDetails{
-    padding-bottom: 15px;
-    font-size: 3rem;
-    color: var(--green);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 100px; 
-    font-size: 3rem;
     color: var(--green);
     width: 100%; 
+    font-size: 2rem;
+    padding-top: 13rem;
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Title css ends */
 
-/* Acc Deatil css starts */
-/* #tablediv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 2px solid grey; 
+#profileCardContainer {
+    margin-top: 1rem;
+    border-radius: 8%;
+    max-width: 800px; 
+    width: 30rem;
+    align-items: center; 
+    justify-content: center; 
+    align-items: center; 
+    justify-content: center; 
+    margin-left: auto; 
+    margin-right: auto;
 }
 
-#userImg{
-    height: auto;
-    padding: 30px; 
-    width: 100%; 
-    max-width: 100%;
-    max-height: 20rem; 
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-#infoTable{
-    background: rgba(188, 187, 187, 0.428);
-    border-radius: .5rem;
-    font-size: 1.5rem;
-    width: fit-content;
-    height: fit-content;
-    padding: 3rem;
-    justify-content: center;
-}
-
-label{
-    font-size: 1.8rem;
-}
-
-th{
-    padding-bottom: .7rem;
-    text-align: left;
-}
-
-.btn{
-    margin: auto; 
-    width: 50%; 
-    text-align: center;
-    padding-top: 2rem;
-}
-
-input{
-    color: black;
-    background-color: #64948a4d;
-    width: 50rem;
-    height: 4rem;
-    border-radius: .5rem;
-    font-size: 1.7rem;
-    padding-left: 1rem;
-}
-
-#editBtn, #deleteBtn, #backBtn{
+/* #editBtn, #deleteBtn, #backBtn{
     margin-top: 1rem;
     display: inline-block;
     font-size: 1.7rem;
@@ -86,5 +51,5 @@ input{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
-} */
+}  */
 /* Acc Detail css ends */

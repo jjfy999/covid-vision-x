@@ -50,7 +50,7 @@ const UserAccount = () => {
         <body className="userAccPage">
           {/* User Account Section */}
           <section>
-              <h1 id="userAcc">User Accounts</h1>
+              <h1 id="userAccTitle">User Accounts</h1>
               <div className="searchCreate">
                 
                 {/* Search bar */}
