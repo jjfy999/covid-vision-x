@@ -1,30 +1,5 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
-
-/* Basic css starts */
-:root{
-    /* --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255); */
-}
-*{
-    /* font-family: 'Joan', serif; */
-    /* margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear; */
-}
-html{
-    /* font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 5.5rem;
-    scroll-behavior: smooth; */
-}
-/* Basic css ends */
-
 /* Report css starts */
-section{
+/* section{
     padding: 2rem 9%;
     background: white;
     grid-template-columns: 1fr 3fr;
@@ -99,52 +74,5 @@ input{
     color: white;
     background: var(--green);
     letter-spacing: .1rem;
-}
+} */
 /* Report css ends */
-
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
-}
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
-}
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
-}
-/* Media queries ends */

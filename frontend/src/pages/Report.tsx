@@ -1,5 +1,3 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import Header from './Header';
 import '../../../static/patient/css/Report.css';
 import xrayImg from '../../../static/images/xray.png';
@@ -17,20 +15,20 @@ const Report = () => {
           <table id="reportTable">
             <tbody>
               <tr>
-                <th><label htmlFor="id">Patient ID</label></th>
+                <th><label className="reportLabel" htmlFor="id">Patient ID</label></th>
                 <td>: T0992</td>
               </tr>
 
               <tr>
-                <th><label htmlFor="name">Patient Name</label></th>
+                <th><label className="reportLabel" htmlFor="name">Patient Name</label></th>
                 <td>: Bryant Ng</td>
               </tr>
               <tr>
-                <th><label htmlFor="status">Covid-19 Diagnosis status</label></th>
+                <th><label className="reportLabel" htmlFor="status">Covid-19 Diagnosis status</label></th>
                 <td>: Completed</td>
               </tr>
               <tr>
-                <th><label htmlFor="status">Covid-19 Diagnosis outcome</label></th>
+                <th><label className="reportLabel" htmlFor="status">Covid-19 Diagnosis outcome</label></th>
                 <td>: Positive</td>
               </tr>
             </tbody>

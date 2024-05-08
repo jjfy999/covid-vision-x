@@ -1,13 +1,13 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Joan&display=swap'); */
 
 /* Basic CSS */
-:root {
+/* :root {
   --green: #267b83;
   --yellow: #ecbb50d7;
   --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .2);
 }
 
-* {
+* { */
   /* font-family: 'Joan', serif; */
   /* margin: 0;
   padding: 0;
@@ -17,14 +17,14 @@
   border: none;
   text-transform: capitalize;
   transition: all .2s linear; */
-}
+/* }
 
-html {
+html { */
   /* font-size: 62.5%;
   overflow-x: hidden;
   scroll-padding-top: 5.5rem;
   scroll-behavior: smooth; */
-}
+/* } */
 
 /* Header CSS */
 header {

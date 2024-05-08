@@ -1,7 +1,5 @@
 import Header from './Header';
 import '../../../static/patient/css/Profile.css';
-import profileImg from '../../../static/images/unknownPerson.jpg';
-import { Link } from 'react-router-dom';
 import ProfileCard from '../pages/templates/ProfileCard';
 
 function PatientProfile() {
@@ -22,7 +20,7 @@ function PatientProfile() {
 
             {/* Profile starts */}
             <section id="patientProfilePage">
-                <h1 id="patientProfile">My Profile</h1>
+                <h1 id="profileTitle">My Profile</h1>
                 <div id="patientProfileCard">
                     <ProfileCard
                     id={patientProfile.id}
@@ -34,12 +32,9 @@ function PatientProfile() {
                     email={patientProfile.email}
                 />
                 </div>
-
-                {/* <div className="btn">
-                    <Link id="editBtn" to="/PatientEditProfile">Edit</Link>
-                </div> */}
             </section>
             {/* Profile ends */}
+
         </div>
     );
 }

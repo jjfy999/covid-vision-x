@@ -11,8 +11,8 @@
 #patientReport{
     color: var(--green);
     width: 100%; 
-    font-size: 3rem;
-    padding-top: 10rem;
+    font-size: 2rem;
+    padding-top: 5rem;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -21,25 +21,38 @@
 
 /* Report css starts */
 #reportBox {
-    margin-top: 5rem;
-    background-color: #9f947d;
-    border-radius: 8%;
-    box-shadow: 0 0 20px rgba(93, 92, 92, 0.6);
-    padding: 40px 30px 30px;
+    margin-top: 2rem;
+    background-color: #b3a994;
+    border-radius: 5%;
+    box-shadow: 0 0 15px rgba(93, 92, 92, 0.6);
+    padding: 20px 15px 15px;
     max-width: 800px; 
     width: fit-content;
 }
 
 #reportTable {
-    font-size: 2rem;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
+    vertical-align: top;
+}
+
+.reportLabel {
+    font-size: 1rem;
+    display: inline-block; 
+    width: 100%; 
+    text-align: left;
+}
+
+#reportTable td {
+    font-size: 1rem;
+    vertical-align: top; 
+    padding-left: 1rem; 
 }
 
 #xrayImg {
-    width: 50rem;
-    height: 40rem;
-    padding: 5rem;
+    width: 30rem;
+    height: 25rem;
+    padding: 3rem;
 }
 /* Report css ends */

@@ -1,57 +1,37 @@
 /* Patient Profile css starts */
 #patientProfilePage{
-    padding: 2rem 9%;
     background: var(--yellow);
-    /* display: flex; */
+    display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
     height: 100vh; 
+    overflow-y: auto;
+    position: relative;
 }
 
-#patientProfile{
+/* Title css starts */
+#profileTitle{
     color: var(--green);
     width: 100%; 
+    font-size: 2rem;
+    padding-top: 13rem;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+/* Title css ends */
 
 #patientProfileCard {
-    margin-top: 5rem;
+    margin-top: 1rem;
     border-radius: 8%;
     max-width: 800px; 
-    width: 50rem;
+    width: 30rem;
     align-items: center; 
     justify-content: center; 
-    /* display: flex;
-    flex-direction: column;  */
     align-items: center; 
     justify-content: center; 
     margin-left: auto; 
     margin-right: auto;
 }
-
-/* .btn{
-    margin: auto; 
-    width: 50%; 
-    text-align: center;
-    padding-top: 2rem;
-}
-#editBtn{
-    margin-top: 1rem;
-    display: inline-block;
-    font-size: 1.7rem;
-    color: black;
-    background: var(--yellow);
-    border-radius: .5rem;
-    cursor: pointer;
-    padding: .8rem 7rem;
-    margin-right: .1cm;
-}
-#editBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
-} */
-/* Report css ends */
+/* Patient Profile css ends */
