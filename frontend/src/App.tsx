@@ -11,12 +11,12 @@ import React from "react";
 import Report from "./pages/Report";
 import PatientProfile from "./pages/PatientProfile";
 import LoginPage from "./pages/LoginPage";
-import PatientEditProfile from "./pages/PatientEditProfile";
+// import PatientEditProfile from "./pages/PatientEditProfile";
 import UserAccount from "./pages/UserAcc";
 import AccountDetails from "./pages/AccDetail";
 import EditAccountDetails from "./pages/EditAcc";
 import SysadProfile from "./pages/SysAdProfile";
-import SysadEditProfile from "./pages/SysAdEditProfile";
+// import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
@@ -35,14 +35,14 @@ const router = createBrowserRouter(
         <Route element={<RoleRoute requiredRole={"patient"} />}>
           <Route path="/report" element={<Report />} />
           <Route path="/PatientProfile" element={<PatientProfile />} />
-          <Route path="/patientEditProfile" element={<PatientEditProfile />} />
+          {/* <Route path="/patientEditProfile" element={<PatientEditProfile />} /> */}
         </Route>
         <Route element={<RoleRoute requiredRole={"system_admin"} />}>
           <Route path="/UserAcc" element={<UserAccount />} />
           <Route path="/AccDetail/:userId" element={<AccountDetails />} />
           <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
           <Route path="/SysAdProfile" element={<SysadProfile />} />
-          <Route path="/SysAdEditProfile" element={<SysadEditProfile />} />
+          {/* <Route path="/SysAdEditProfile" element={<SysadEditProfile />} /> */}
           <Route path="/CreateUser" element={<CreateUser />} />
         </Route>
       </Route>
