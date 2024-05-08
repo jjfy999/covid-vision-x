@@ -1,0 +1,64 @@
+/* Acc Detail css starts */
+#createUserPage{
+    background: var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Title css starts */
+#createUserTitle{
+    color: var(--green);
+    width: 100%; 
+    font-size: 2rem;
+    padding-top: 22rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+/* Title css ends */
+
+#createUserTable {
+    margin-top: 2rem;
+    background-color: #b3a994;
+    border-radius: 2rem;
+    box-shadow: 0 0 15px rgba(93, 92, 92, 0.6);
+    padding: 20px 15px 15px;
+    max-width: 800px; 
+    width: fit-content;
+}
+#infoTable {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 3rem;
+    vertical-align: top;
+}
+
+#userImg {
+    width: 20rem;
+    height: 20rem;
+    padding: 3rem;
+}
+
+#doneBtn, #cancelBtn{
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    color: var(--brown);
+    background: #97b89b;
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem 7rem;
+    margin-right: .1cm;
+}
+
+#doneBtn:hover, #cancelBtn:hover{
+    color: var(--yellow);
+    background: var(--green);
+    letter-spacing: .1rem;
+} 
+/* Acc Detail css ends */

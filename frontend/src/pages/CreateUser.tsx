@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import profileImg from '../../../static/images/unknownPerson.jpg';
 import Header from './Header';
-import '../../../static/patient/css/EditProfile.css';
+import '../../../static/systemadmin/css/CreateUser.css';
 
 function EditProfile() {
   return (
@@ -10,41 +10,44 @@ function EditProfile() {
 
 
       {/* Edit Profile section starts */}
-      <section>
-        <h1 id="patientProfile">Add New User</h1>
+      <section id="createUserPage">
+        <h1 id="createUserTitle">Add New User</h1>
 
-        <div id="tablediv">
-          <img src={profileImg} id="patientImg" alt="Patient" />
+        <div id="createUserTable">
+          <img src={profileImg} id="userImg" alt="Patient" />
           <table id="infoTable">
             <tbody>
               <tr>
-                <th><label htmlFor="id">Patient ID:</label></th>
+                <th><label htmlFor="id">ID</label></th>
                 <th><input type="text" id="id" name="id" /></th>
               </tr>
 
               <tr>
-                <th><label htmlFor="name">Patient Name:</label></th>
+                <th><label htmlFor="name">Name</label></th>
                 <th><input type="text" id="name" name="name" /></th>
               </tr>
 
               <tr>
-                <th><label htmlFor="age">Age:</label></th>
-                <th><input type="text" id="age" name="age" /></th>
+                <th><label htmlFor="role">Role</label></th>
+                <th><input type="text" id="role" name="role" /></th>
               </tr>
 
               <tr>
-                <th><label htmlFor="gender">Gender:</label></th>
-                <th><input type="text" id="gender" name="gender" /></th>
-              </tr>
-
-              <tr>
-                <th><label htmlFor="contact">Contact number:</label></th>
+                <th><label htmlFor="contact">Contact number</label></th>
                 <th><input type="text" id="contact" name="contact" /></th>
               </tr>
 
               <tr>
-                <th><label htmlFor="email">Email:</label></th>
+                <th><label htmlFor="email">Email</label></th>
                 <th><input type="text" id="email" name="email" /></th>
+              </tr>
+              <tr>
+                <th><label htmlFor="username">Username</label></th>
+                <th><input type="text" id="username" name="username" /></th>
+              </tr>
+              <tr>
+                <th><label htmlFor="password">Password</label></th>
+                <th><input type="text" id="password" name="password" /></th>
               </tr>
             </tbody>
           </table>
