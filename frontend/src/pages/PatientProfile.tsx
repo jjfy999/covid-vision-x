@@ -34,10 +34,10 @@ function PatientProfile() {
                     email={patientProfile.email}
                 />
                 </div>
-                
-                <div className="btn">
+
+                {/* <div className="btn">
                     <Link id="editBtn" to="/PatientEditProfile">Edit</Link>
-                </div>
+                </div> */}
             </section>
             {/* Profile ends */}
         </div>

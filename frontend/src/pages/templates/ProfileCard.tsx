@@ -30,8 +30,13 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
         setEditMode(false);
     };
 
+    const handleBack = () => {
+        // Navigate back to the previous page
+        window.history.back();
+    };
+
     return (
-        <Card sx={{ maxWidth: 600, boxShadow: 3, borderRadius: 2, m: 2 }}>
+        <Card sx={{ maxWidth: 600, boxShadow: 3, borderRadius: 2, m: 2, fontFamily: 'Open Sans' }}>
             <CardMedia
                 sx={{
                     display: 'flex',
@@ -43,9 +48,9 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                 <AccountCircleIcon sx={{ fontSize: 100, mt: 2 }} />
             </CardMedia>
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div" sx={{ marginLeft: '15px', fontWeight: 'bold' }}>
+                {/* <Typography gutterBottom variant="h5" component="div" sx={{ marginLeft: '15px', fontWeight: 'bold' }}>
                     Doctor Profile
-                </Typography>
+                </Typography> */}
                 <List>
                     {editMode ? (
                         <>
@@ -107,7 +112,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                         </Button>
                     </div>
                 ) : (
-                    <Button variant="contained" color="primary" sx={{ mt: 1 }} onClick={() => setEditMode(true)}>
+                    <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
                         Edit
                     </Button>
                 )}
