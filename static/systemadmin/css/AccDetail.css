@@ -34,22 +34,4 @@
     margin-left: auto; 
     margin-right: auto;
 }
-
-/* #editBtn, #deleteBtn, #backBtn{
-    margin-top: 1rem;
-    display: inline-block;
-    font-size: 1.7rem;
-    color: black;
-    background: var(--yellow);
-    border-radius: .5rem;
-    cursor: pointer;
-    padding: .8rem 7rem;
-    margin-right: .1cm;
-}
-
-#editBtn, #deleteBtn, #backBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
-}  */
 /* Acc Detail css ends */
