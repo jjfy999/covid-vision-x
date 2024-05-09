@@ -118,9 +118,6 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                         </Button>
                     </div>
                 ) : (
-                    // <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
-                    //     Edit
-                    // </Button>
                     <>
                         {props.pageContext === 'useracc' && (
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
