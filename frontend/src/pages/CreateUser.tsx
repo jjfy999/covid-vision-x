@@ -14,7 +14,9 @@ function EditProfile() {
         <h1 id="createUserTitle">Add New User</h1>
 
         <div id="createUserTable">
-          <img src={profileImg} id="userImg" alt="Patient" />
+          <div id="userImgBox">
+            <img src={profileImg} id="userImg" alt="Patient" />
+          </div>
           <table id="infoTable">
             <tbody>
               <tr>
