@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage";
 // import PatientEditProfile from "./pages/PatientEditProfile";
 import UserAccount from "./pages/UserAcc";
 import AccountDetails from "./pages/AccDetail";
-import EditAccountDetails from "./pages/EditAcc";
+// import EditAccountDetails from "./pages/EditAcc";
 import SysadProfile from "./pages/SysAdProfile";
 // import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
         <Route element={<RoleRoute requiredRole={"system_admin"} />}>
           <Route path="/UserAcc" element={<UserAccount />} />
           <Route path="/AccDetail/:userId" element={<AccountDetails />} />
-          <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
+          {/* <Route path="/EditAcc/:userId" element={<EditAccountDetails />} /> */}
           <Route path="/SysAdProfile" element={<SysadProfile />} />
           {/* <Route path="/SysAdEditProfile" element={<SysadEditProfile />} /> */}
           <Route path="/CreateUser" element={<CreateUser />} />
