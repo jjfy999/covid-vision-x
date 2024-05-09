@@ -43,11 +43,14 @@
     line-height: 3rem;
     margin-left: 1rem;
     box-shadow: 0 0 15px rgba(93, 92, 92, 0.3);
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
 
 }
 
 #createUser:hover{
-    letter-spacing: .1rem;
+    letter-spacing: .05rem;
 }
 
 .searchContainer {
@@ -94,7 +97,7 @@
 #itemTitleBar {
     display: flex;
     align-items: center;
-    background-color: rgb(182, 180, 180);
+    background-color: rgb(213, 212, 212);
     padding: .5rem 0;
     font-weight: bold;
     position: fixed;

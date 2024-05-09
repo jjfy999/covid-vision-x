@@ -50,9 +50,9 @@
 }
 
 .viewInfoBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
+    /* color: var(--);
+    background: var(--green); */
+    letter-spacing: .05rem;
     display: block;
 }
 
@@ -60,7 +60,7 @@
     position: absolute;
     right: 1rem;
     color: var(--brown);
-    background: var(--yellow);
+    background: #9f947d;
     border-radius: .5rem;
     cursor: pointer;
     margin: 3rem;
