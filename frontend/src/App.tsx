@@ -20,9 +20,9 @@ import SysadProfile from "./pages/SysAdProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
-import DoctorProfile from "./pages/DoctorProfile"; // Import the DoctorProfile component
-import RsProfile from "./pages/RsProfile"; // Import the RsProfile component
-import ErrorPage from "./pages/ErrorPage"; // Catch all for any invalid urls
+import DoctorProfile from "./pages/DoctorProfile"; 
+import RsProfile from "./pages/RsProfile";
+import ErrorPage from "./pages/ErrorPage"; 
 import CreateUser from "./pages/CreateUser";
 
 const router = createBrowserRouter(

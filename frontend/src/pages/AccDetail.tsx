@@ -40,11 +40,6 @@ const AccountDetails = () => {
                         pageContext='useracc'
                     />
                 </div>
-                {/* <div className="btn">
-                    <Link id="editBtn" to={`/EditAcc/${userId}`}>Edit</Link>
-                    <Link id="deleteBtn" to="/UserAcc">Delete</Link>
-                    <Link id="backBtn" to="/UserAcc">Back</Link>
-                </div> */}
             </section>
         </div>
     );

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import profileImg from '../../../static/images/unknownPerson.jpg';
 import Header from './Header';
 import '../../../static/systemadmin/css/CreateUser.css';
-import { useState, ChangeEvent, FormEvent } from 'react'; 
+import { useState, ChangeEvent, FormEvent, FormEventHandler } from 'react'; 
 import axios from 'axios'; 
 
 function EditProfile() {
@@ -24,7 +24,7 @@ function EditProfile() {
     });
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e: FormEvent<HTMLInputElement>) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('your-api-endpoint', formData); // Replace 'your-api-endpoint' with your actual API endpoint
@@ -89,7 +89,6 @@ function EditProfile() {
 
         <div className="btn">
           <button id="doneBtn" type="submit" form="infoForm">Done</button>
-          {/* <Link id="doneBtn" to="/UserAcc">Done</Link> */}
           <Link id="cancelBtn" to="/UserAcc">Cancel</Link>
         </div>
       </section>
