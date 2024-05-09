@@ -64,6 +64,8 @@
 #searchInput {
     color: var(--brown);
     font-size: 1rem;
+    border-radius: .3rem;
+    height: 2.5rem; 
 }
 
 .searchButton {
