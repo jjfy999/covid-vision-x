@@ -30,6 +30,7 @@ const SysadProfile = () => {
                     role={adminProfile.role}
                     contactNumber={adminProfile.phone}
                     email={adminProfile.email}
+                    pageContext='profile'
                 />
                 </div>
             </section>

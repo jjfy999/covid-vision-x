@@ -10,6 +10,7 @@ interface ProfileProps {
     email: string;
     username: string;
     password: string;
+    pageContext: 'profile' | 'useracc';
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
@@ -33,6 +34,11 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     const handleBack = () => {
         // Navigate back to the previous page
         window.history.back();
+    };
+
+    const handleDelete = () => {
+        // Placeholder function for handling delete action
+        console.log("Profile deleted");
     };
 
     return (
@@ -112,9 +118,29 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                         </Button>
                     </div>
                 ) : (
-                    <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
-                        Edit
-                    </Button>
+                    // <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
+                    //     Edit
+                    // </Button>
+                    <>
+                        {props.pageContext === 'useracc' && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                                <Button variant="outlined" color="error" onClick={handleBack}>
+                                    Back
+                                </Button>
+                                <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
+                                    Edit
+                                </Button>
+                                <Button variant="contained" color="error" onClick={handleDelete}>
+                                    Delete
+                                </Button>
+                            </div>
+                        )}
+                        {props.pageContext === 'profile' && (
+                            <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
+                                Edit
+                            </Button>
+                        )}
+                    </>
                 )}
             </CardContent>
         </Card>

@@ -13,6 +13,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userRole }) => {
   const location = useLocation();
   const { logoutUser } = useAuth();
+  const isAccDetailPage = location.pathname.includes("/AccDetail");
 
   return (
     <header>
@@ -48,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
               to="/UserAcc"
               className={
                 location.pathname === "/UserAcc" ||
-                location.pathname === "/AccDetail" ||
+                isAccDetailPage ||
                 location.pathname === "/EditAcc"||
                 location.pathname === "/CreateUser"
                   ? "active"
