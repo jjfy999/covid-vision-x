@@ -112,8 +112,8 @@ DATABASES = {
 }
 
 
-AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY'
-AWS_SECRET_ACCESS_KEY = 'AWS_SECRET_KEY'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 AWS_S3_SIGNATURE_NAME = 's3v4'
 AWS_S3_REGION_NAME = 'ap-southeast-1'
 AWS_S3_FILE_OVERWRITE = False
@@ -121,8 +121,9 @@ AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
 
 AWS_STORAGE_BUCKET_NAME = 'fypimagess'
-# AWS_STORAGE_BUCKET_NAME_MODELS = 'fypmodelss'
+AWS_SECOND_STORAGE_BUCKET_NAME = 'fypmodelss'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 '''
 # Define storage backends for different buckets
 class CustomS3Boto3Storage(S3Boto3Storage):
