@@ -191,16 +191,15 @@ def updateDetails(request):  # for users to update own details
 
     # Check if the user is a Doctor or a SystemAdmin
     if user.role == 'doctor' or user.role == 'system_admin' or user.role == 'researcher':
-        serializer = DoctorSysAdminUpdateSerializer(user, data=request.PUT)
+        serializer = DoctorSysAdminUpdateSerializer(user, data=request.data)
     elif user.role == 'patient':
-        serializer = PatientUpdateSerializer(user, data=request.PUT)
+        serializer = PatientUpdateSerializer(user, data=request.data)
     else:
         return JsonResponse({"error": "Invalid user type"}, status=400)
 
     if serializer.is_valid():
-        updated_user = serializer.save()
-        serialized_user = serializer.serialize('json', [updated_user])
-        return JsonResponse(serialized_user, status=200)
+        serializer.save()
+        return JsonResponse(serializer.data, safe=False, status=200)
     else:
         return JsonResponse(serializer.errors, status=400)
 
