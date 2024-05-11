@@ -6,9 +6,10 @@ import '../../../../static/systemadmin/css/UserBox.css';
 
 interface UserBoxProps {
   users: UserAccountDetails[];
+  context: 'account' | 'patient';
 }
 
-const UserBox: React.FC<UserBoxProps> = ({ users }) => {
+const UserBox: React.FC<UserBoxProps> = ({ users, context }) => {
   return (
     <div>
       {users.map((user, index) => (
@@ -16,12 +17,29 @@ const UserBox: React.FC<UserBoxProps> = ({ users }) => {
           <div className="user-img-box">
             <img src={profileImg} alt={user.name} className="userImg" />
           </div>
-          <p className="id">{user.id}</p>
-          <p className="name">{user.name}</p>
-          <p className="role">{user.role}</p>
-          <div className="viewInfoBtn">
-            <Link id={`infoBtn${index}`} to={`/AccDetail/${user.id}`}>View Details</Link>
-          </div>
+          {context === 'account' && ( 
+            <p className="id">{user.id}</p>
+          )}          
+          {context === 'account' && ( 
+            <p className="name">{user.name}</p>
+          )}          
+          {context === 'account' && ( 
+            <p className="role">{user.role}</p>
+          )}          
+          {context === 'account' && ( 
+            <div className="viewInfoBtn">
+              <Link id={`infoBtn${index}`} to={`/AccDetail/${user.id}`}>View Details</Link>
+            </div>
+          )}
+          {context === 'patient' && (
+            <p className="pid">{user.id}</p>
+          )}
+          {context === 'patient' && (
+            <p className="pname">{user.name}</p>
+          )}
+          {context === 'patient' && (
+            <p className="presult">{user.result}</p>
+          )}
         </div>
       ))}
     </div>

@@ -10,6 +10,7 @@ interface ProfileProps {
     email: string;
     username: string;
     password: string;
+    result?: any;
     pageContext: 'profile' | 'useracc';
 }
 

@@ -1,14 +1,14 @@
-import '../../../static/systemadmin/css/UserAcc.css';
-import Header from './templates/Header';
+import '../../../static/doctor/css/DoctorReport.css';
 import { useState, useEffect } from 'react';
 import UserBox from './templates/UserBox';
 import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
+import DrawerAppBar from "./templates/DrawerAppBar";
 
 // Combined Component
-const UserAccount = () => {
+const DoctorReport = () => {
   const [users, setUsers] = useState<UserAccountDetails[]>(sampleUsers);
   const [error, setError] = useState<string | null>(null);
   const [filteredUsers, setFilteredUsers] = useState<UserAccountDetails[]>([]);
@@ -45,46 +45,41 @@ const UserAccount = () => {
 
   return (
     <div>
-        <Header userRole={'sysad'}/>
+        <DrawerAppBar userRole="doctor" firstText="Patient" />
 
-        <div className="userAccPage">
+        <div className="doctorReportPage">
           {/* User Account Section */}
           <section>
-              <h1 id="userAccTitle">User Accounts</h1>
-              <div className="searchCreate">
+              <h1 id="doctorReportTitle">Reports</h1>
+              <div className="searchBox">
                 
                 {/* Search bar */}
-                <div className="searchContainer">
+                <div className="searchBar">
                   <button className="searchButton" ><FaSearch /></button>
                   <input
-                    id="searchInput"
+                    id="searchInputPatient"
                     type="text"
                     placeholder="Search user by ID..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                
-                {/* Create User Account button */}
-                <div id="createUser">
-                  <Link className='btns' to="/CreateUser">&#43; Add New User</Link>
-                </div>
               </div>
 
               {/* Item title bar */}
               <div id="itemTitleBar">
-                <p id="titleId">UserID</p>
-                <p id="titleName">Name</p>
-                <p id="titleRole">Role</p>
+                <p id="patientId">Patient ID</p>
+                <p id="patientName">Patient Name</p>
+                <p id="patientResult">Result</p>
               </div>
 
               {/* User Acc list */}
               <div id="userListContainer">
                 <div id="userList">
                   {filteredUsers.length === 0 ? (
-                    <p className="errorMessage">User not found...</p>
+                    <p className="errorMessage">Patient not found...</p>
                   ) : (
-                    <UserBox users={filteredUsers} context='account' />
+                    <UserBox users={filteredUsers.filter(user => user.role === 'patient')} context='patient' />
                   )}
                 </div>
               </div>
@@ -95,4 +90,4 @@ const UserAccount = () => {
   );
 };
 
-export default UserAccount;
+export default DoctorReport;
