@@ -184,16 +184,16 @@ def listPatients(request):
     return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])  # Update should be a PUT request
 def updateDetails(request):  # for users to update own details
 
     user = request.user
 
     # Check if the user is a Doctor or a SystemAdmin
     if user.role == 'doctor' or user.role == 'system_admin' or user.role == 'researcher':
-        serializer = DoctorSysAdminUpdateSerializer(user, data=request.POST)
+        serializer = DoctorSysAdminUpdateSerializer(user, data=request.PUT)
     elif user.role == 'patient':
-        serializer = PatientUpdateSerializer(user, data=request.POST)
+        serializer = PatientUpdateSerializer(user, data=request.PUT)
     else:
         return JsonResponse({"error": "Invalid user type"}, status=400)
 
