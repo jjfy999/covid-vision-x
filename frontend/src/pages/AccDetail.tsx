@@ -1,5 +1,5 @@
 import '../../../static/systemadmin/css/AccDetail.css';
-import Header from './Header';
+import Header from './templates/Header';
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { sampleUsers } from './sampleUserAcc';

@@ -1,8 +1,8 @@
 import React from "react";
-import logo_tran from "../../../static/images/logo_transparent.png";
+import logo_tran from "../../../../static/images/logo_transparent.png";
 import { Link, useLocation } from "react-router-dom";
-import "../theme/header.css";
-import { useAuth } from "./templates/AuthContexr";
+import "../../theme/header.css";
+import { useAuth } from "./AuthContexr";
 
 type UserRole = "patient" | "sysad";
 

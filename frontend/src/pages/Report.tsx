@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './templates/Header';
 import '../../../static/patient/css/Report.css';
 import xrayImg from '../../../static/images/xray.png';
 

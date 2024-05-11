@@ -1,5 +1,5 @@
 import '../../../static/systemadmin/css/UserAcc.css';
-import Header from './Header';
+import Header from './templates/Header';
 import { useState, useEffect } from 'react';
 import UserBox from './UserBox';
 import { sampleUsers } from './sampleUserAcc';
