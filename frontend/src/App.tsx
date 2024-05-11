@@ -14,15 +14,15 @@ import LoginPage from "./pages/LoginPage";
 // import PatientEditProfile from "./pages/PatientEditProfile";
 import UserAccount from "./pages/UserAcc";
 import AccountDetails from "./pages/AccDetail";
-import EditAccountDetails from "./pages/EditAcc";
+// import EditAccountDetails from "./pages/EditAcc";
 import SysadProfile from "./pages/SysAdProfile";
 // import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";
-import DoctorProfile from "./pages/DoctorProfile"; // Import the DoctorProfile component
-import RsProfile from "./pages/RsProfile"; // Import the RsProfile component
-import ErrorPage from "./pages/ErrorPage"; // Catch all for any invalid urls
+import DoctorProfile from "./pages/DoctorProfile"; 
+import RsProfile from "./pages/RsProfile";
+import ErrorPage from "./pages/ErrorPage"; 
 import CreateUser from "./pages/CreateUser";
 
 const router = createBrowserRouter(
@@ -40,7 +40,7 @@ const router = createBrowserRouter(
         <Route element={<RoleRoute requiredRole={"system_admin"} />}>
           <Route path="/UserAcc" element={<UserAccount />} />
           <Route path="/AccDetail/:userId" element={<AccountDetails />} />
-          <Route path="/EditAcc/:userId" element={<EditAccountDetails />} />
+          {/* <Route path="/EditAcc/:userId" element={<EditAccountDetails />} /> */}
           <Route path="/SysAdProfile" element={<SysadProfile />} />
           {/* <Route path="/SysAdEditProfile" element={<SysadEditProfile />} /> */}
           <Route path="/CreateUser" element={<CreateUser />} />

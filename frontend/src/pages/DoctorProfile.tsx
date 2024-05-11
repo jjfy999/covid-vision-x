@@ -26,10 +26,12 @@ const App = () => {
           }}
         >
           <ProfileCard
-            doctorId="D1987"
+            id="D1987"
             name="Dr. Jane Smith"
             contactNumber="+1 234 567 8900"
             email="dr.janesmith@example.com"
+            pageContext='profile'
+
           />
         </div>
       </div>

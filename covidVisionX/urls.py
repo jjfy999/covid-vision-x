@@ -90,6 +90,8 @@ urlpatterns = [
          name='docListAllReports'),
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
+    #path('loadModel/', deepLearningModel.download_and_load_model, name='loadModel'),
+    path('predictImage/', deepLearningModel.predict, name='predictImage'),
 
     # for researcher to upload model
     # path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),

@@ -30,6 +30,7 @@ function PatientProfile() {
                     role={patientProfile.role}
                     contactNumber={patientProfile.phone}
                     email={patientProfile.email}
+                    pageContext='profile'
                 />
                 </div>
             </section>

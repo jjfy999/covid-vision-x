@@ -30,20 +30,16 @@ const AccountDetails = () => {
                 <h1 id="userAccDetails">Account Details</h1>
                 <div id="profileCardContainer"> {/* Replace tablediv with profileCardContainer */}
                     <ProfileCard
-                        id={user.id} // Assuming id is equivalent to doctorId
+                        id={user.id} 
                         name={user.name}
                         role={user.role}
-                        contactNumber={user.phone} // Assuming phone is equivalent to contactNumber
+                        contactNumber={user.phone} 
                         email={user.email}
                         username={user.username}
                         password={user.password}
+                        pageContext='useracc'
                     />
                 </div>
-                {/* <div className="btn">
-                    <Link id="editBtn" to={`/EditAcc/${userId}`}>Edit</Link>
-                    <Link id="deleteBtn" to="/UserAcc">Delete</Link>
-                    <Link id="backBtn" to="/UserAcc">Back</Link>
-                </div> */}
             </section>
         </div>
     );

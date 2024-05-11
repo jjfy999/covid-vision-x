@@ -10,11 +10,13 @@ interface ProfileProps {
     email: string;
     username: string;
     password: string;
+    pageContext: 'profile' | 'useracc';
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [profile, setProfile] = useState({ ...props });
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
     const handleChange = (prop: keyof typeof profile) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setProfile({ ...profile, [prop]: event.target.value });
@@ -33,6 +35,30 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     const handleBack = () => {
         // Navigate back to the previous page
         window.history.back();
+    };
+
+    const handleDelete = async () => {
+        try {
+            // Send delete request to API
+            const response = await fetch(`your-api-url/${profile.id}`, {
+                method: 'DELETE',
+                // Additional headers or credentials if needed
+            });
+            
+            if (response.ok) {
+                console.log("Profile deleted successfully");
+                // Handle any further UI updates or navigation
+            } else {
+                console.error("Failed to delete profile");
+                // Handle error scenarios
+            }
+        } catch (error) {
+            console.error("Error deleting profile:", error);
+            // Handle network errors or other exceptions
+        } finally {
+            // Close delete confirmation dialog
+            setDeleteConfirmationOpen(false);
+        }
     };
 
     return (
@@ -112,9 +138,26 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                         </Button>
                     </div>
                 ) : (
-                    <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
-                        Edit
-                    </Button>
+                    <>
+                        {props.pageContext === 'useracc' && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                                <Button variant="outlined" color="error" onClick={handleBack}>
+                                    Back
+                                </Button>
+                                <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
+                                    Edit
+                                </Button>
+                                <Button variant="contained" color="error" onClick={handleDelete}>
+                                    Delete
+                                </Button>
+                            </div>
+                        )}
+                        {props.pageContext === 'profile' && (
+                            <Button variant="contained" color="primary" sx={{ mt: 1, mx: 'auto', display: 'block' }} onClick={() => setEditMode(true)}>
+                                Edit
+                            </Button>
+                        )}
+                    </>
                 )}
             </CardContent>
         </Card>

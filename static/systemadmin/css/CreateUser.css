@@ -1,4 +1,4 @@
-/* Acc Detail css starts */
+/* Create user css starts */
 #createUserPage{
     background: var(--yellow);
     display: flex;
@@ -28,32 +28,60 @@
     border-radius: 2rem;
     box-shadow: 0 0 15px rgba(93, 92, 92, 0.6);
     padding: 20px 15px 15px;
-    max-width: 800px; 
-    width: fit-content;
+    width: 30rem;
+    align-items: center;
 }
 #infoTable {
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     vertical-align: top;
 }
 
+#userImgBox {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
 #userImg {
-    width: 20rem;
-    height: 20rem;
-    padding: 3rem;
+    width: 13rem;
+    height: 13rem;
+}
+
+.inputLabel {
+    display: inline-block;
+    width: 10rem; 
+    text-align: left;
+    margin-right: 1rem;
+}
+
+.inputField {
+    border-radius: 1rem;
+    background-color: rgba(219, 219, 218, 0.703);
+    width: 18rem;
 }
 
 #doneBtn, #cancelBtn{
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
     display: inline-block;
-    font-size: 1.7rem;
-    color: var(--brown);
-    background: #97b89b;
+    font-size: 1rem;
     border-radius: .5rem;
     cursor: pointer;
-    padding: .8rem 7rem;
-    margin-right: .1cm;
+    padding: .8rem 4rem;
+    margin-right: .3cm;
+}
+
+#doneBtn {
+    color: rgb(76, 75, 75);
+    background: #97b89b;
+}
+
+#cancelBtn {
+    color: var(--green);
+    background-color: none;
+    border: 1.3px solid var(--green);
 }
 
 #doneBtn:hover, #cancelBtn:hover{
@@ -61,4 +89,4 @@
     background: var(--green);
     letter-spacing: .1rem;
 } 
-/* Acc Detail css ends */
+/* Create user css ends */

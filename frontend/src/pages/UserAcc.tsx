@@ -47,7 +47,7 @@ const UserAccount = () => {
     <div>
         <Header userRole={'sysad'}/>
 
-        <body className="userAccPage">
+        <div className="userAccPage">
           {/* User Account Section */}
           <section>
               <h1 id="userAccTitle">User Accounts</h1>
@@ -90,7 +90,7 @@ const UserAccount = () => {
               </div>
 
           </section>
-        </body>
+        </div>
     </div>
   );
 };
