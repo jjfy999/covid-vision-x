@@ -32,11 +32,7 @@ const App = () => {
             role="doctor"
             contactNumber="+1 234 567 8900"
             email="dr.janesmith@example.com"
-<<<<<<< HEAD
             pageContext="profile"
-=======
-            pageContext='profile'
->>>>>>> 302b18298bb2c2d8f14a6607e181b5a06e7fe844
           />
         </div>
       </div>
