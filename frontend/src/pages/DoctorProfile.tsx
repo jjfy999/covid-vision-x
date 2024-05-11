@@ -40,7 +40,7 @@ const App = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "calc(100vh - 450px)",
-          marginTop: "100px",
+          marginTop: "300px",
         }}
       >
         <div
@@ -50,11 +50,21 @@ const App = () => {
             maxWidth: "600px",
           }}
         >
+
           <UploadImage
+            userRole="doctor"
             onFileUpload={(file, patientName) => {
               console.log(file, patientName);
             }}
           />
+
+          <UploadImage
+            userRole="researcher"
+            onFileUpload={(file, patientName) => {
+              console.log(file, patientName);
+            }}
+          />
+
         </div>
       </div>
 
