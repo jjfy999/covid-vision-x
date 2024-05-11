@@ -3,7 +3,6 @@ import axios from "axios";
 import "../../../static/login/login.css";
 import logo from "../../../static/images/logo_transparent.png";
 import { useAuth } from "./templates/AuthContexr";
-import DrawerAppBar from "./templates/DrawerAppBar";
 import { Navigate } from "react-router-dom";
 
 function LoginPage() {
@@ -85,7 +84,7 @@ function LoginPage() {
       <div id="img-box">
         <img src={logo} id="logo_login" alt="Company Logo" />
       </div>
-      
+
       {isLoginView ? (
         <div id="loginForm">
           <h1 className="heading">Login</h1>

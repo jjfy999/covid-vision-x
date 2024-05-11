@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Button, TextField, Box, IconButton, CardMedia, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 
@@ -13,7 +13,22 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [patientName, setPatientName] = useState('');
-    const [modelType, setModelType] = useState('');
+    //const [modelType, setModelType] = useState('');
+    const [modelTypes, setModelTypes] = useState<Array<{ id: string, name: string }>>([]);
+
+    useEffect(() => {
+        const fetchModelTypes = async () => {
+            try {
+                const response = await fetch('https://api.example.com/etcetc'); // Change this accordingly
+                const data = await response.json();
+                setModelTypes(data);
+            } catch (error) {
+                console.error('Failed to fetch model types:', error);
+            }
+        };
+
+        fetchModelTypes();
+    }, []);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
@@ -90,8 +105,14 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                                 label="Model Type"
                                 onChange={handleTypeChange}
                             >
-                                <MenuItem value="M1">M1</MenuItem>
-                                <MenuItem value="M2">M2</MenuItem>
+                                {/* <MenuItem value="M1">M1</MenuItem>
+                                <MenuItem value="M2">M2</MenuItem> */}
+
+                                {modelTypes.map((item, index) => (
+                                    <MenuItem key={index} value={item.id}>
+                                        {item.name}
+                                    </MenuItem>
+                                ))}
 
                             </Select>
                         </FormControl>

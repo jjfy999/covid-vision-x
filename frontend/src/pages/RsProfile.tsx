@@ -26,7 +26,9 @@ const App = () => {
                         maxWidth: "600px",
                     }}
                 >
+
                     <UploadImage
+                        userRole="researcher"
                         onFileUpload={(file, patientName) => {
                             console.log(file, patientName);
                         }}
