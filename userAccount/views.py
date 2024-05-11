@@ -12,6 +12,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
                                      DoctorSysAdminSerializer,
@@ -20,7 +21,7 @@ from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
                                      PatientSerializer,
                                      PatientUpdateSerializer)
 
-from .models import Doctor, Patient, SystemAdmin, Researcher
+from .models import Doctor, Patient, Researcher, SystemAdmin
 
 # Create your views here.
 
@@ -93,8 +94,8 @@ def logout(request):
     return redirect('login')
 
 
-@api_view(['GET'])              #for users to view own details
-#@permission_classes([IsAuthenticated])
+@api_view(['GET'])  # for users to view own details
+# @permission_classes([IsAuthenticated])
 def getDetails(request):
     user = request.user
     print("User role:", user.role)
@@ -111,8 +112,7 @@ def getDetails(request):
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2}, status=200)
 
 
-
-#Postman tested
+# Postman tested
 @api_view(['GET'])
 def getUserDetails(request, pk):  # for system admin to view specific user details
     try:
@@ -143,10 +143,8 @@ def getUserDetails(request, pk):  # for system admin to view specific user detai
     except SystemAdmin.DoesNotExist:
         return JsonResponse({"error": "User not found"}, status=404)
 
-    
 
-
-#Postman tested
+# Postman tested
 @api_view(['GET'])
 def listUsers(request):  # for system admin to view list of users
     # Serialize patients
@@ -159,8 +157,9 @@ def listUsers(request):  # for system admin to view list of users
 
     # Serialize system admins
     system_admins = SystemAdmin.objects.all()
-    system_admin_serializer = DoctorSysAdminSerializer(system_admins, many=True)
-    
+    system_admin_serializer = DoctorSysAdminSerializer(
+        system_admins, many=True)
+
     researchers = Researcher.objects.all()
     researcher_serializer = DoctorSysAdminSerializer(researchers, many=True)
 
@@ -173,15 +172,16 @@ def listUsers(request):  # for system admin to view list of users
     return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
-#Postman tested
-@api_view(['GET'])                           # for doctor to view list of patients 
+# Postman tested
+# for doctor to view list of patients
+@api_view(['GET'])
 def listPatients(request):
     # Serialize patients
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
 
     users_data = {'patients': patient_serializer.data}
-    return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)    
+    return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
 @api_view(['POST'])
@@ -204,9 +204,12 @@ def updateDetails(request):  # for users to update own details
     else:
         return JsonResponse(serializer.errors, status=400)
 
-#Postman tested
+# Postman tested
+
+
 @api_view(['POST'])
-def updateUserDetails(request, pk):  # for system admin to update another person's details
+# for system admin to update another person's details
+def updateUserDetails(request, pk):
     try:
         doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
@@ -223,7 +226,8 @@ def updateUserDetails(request, pk):  # for system admin to update another person
     if doctor is None and patient is None:
         try:
             researcher = Researcher.objects.get(pk=pk)
-            serializer = DoctorSysAdminUpdateSerializer(researcher, data=request.data)
+            serializer = DoctorSysAdminUpdateSerializer(
+                researcher, data=request.data)
         except Researcher.DoesNotExist:
             researcher = None
 
@@ -238,9 +242,9 @@ def updateUserDetails(request, pk):  # for system admin to update another person
         return JsonResponse(serializer.errors, status=400)
 
 
-
-@api_view(['GET'])              
-def searchUser(request, pk):                # for doctor to search for a patient, and for system admin to search for everyone
+@api_view(['GET'])
+# for doctor to search for a patient, and for system admin to search for everyone
+def searchUser(request, pk):
     if pk:
         try:
             if request.user.role == 'doctor':
@@ -267,7 +271,7 @@ def searchUser(request, pk):                # for doctor to search for a patient
     return JsonResponse({"error": "User not found"}, status=400)
 
 
-#Postman tested
+# Postman tested
 @api_view(['DELETE'])
 def deleteUser(request, pk):  # for system admin to delete a user
     user = None
@@ -287,7 +291,7 @@ def deleteUser(request, pk):  # for system admin to delete a user
         try:
             user = Researcher.objects.get(pk=pk)
         except Researcher.DoesNotExist:
-            pass            
+            pass
 
     if user is not None:
         user.delete()
@@ -296,9 +300,10 @@ def deleteUser(request, pk):  # for system admin to delete a user
         return JsonResponse({'error': 'User not found.'}, status=404)
 
 
-#Postman tested
+# Postman tested
 @api_view(['POST'])
-def createUser(request):            # for patient to register and for system admin to create a user
+# for patient to register and for system admin to create a user
+def createUser(request):
     if request.method == 'POST':
         name = request.data.get('name')
         phone_number = request.data.get('phone_number')
@@ -320,7 +325,7 @@ def createUser(request):            # for patient to register and for system adm
         elif role == 'system_admin':
             user = SystemAdmin.objects.create_user(
                 username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
-            
+
         elif role == 'researcher':
             user = Researcher.objects.create_user(
                 username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
@@ -336,7 +341,7 @@ def createUser(request):            # for patient to register and for system adm
         return JsonResponse({'error': 'User not created.'}, status=400)
 
 
-def testPatient(request,pk):
+def testPatient(request, pk):
     patient = Patient.objects.get(pk=pk)
     serializer = PatientSerializer(patient)
     return JsonResponse(serializer.data, json_dumps_params={'indent': 2})
