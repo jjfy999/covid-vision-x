@@ -30,7 +30,7 @@
     margin: 0;
 }
 
-.id, .name, .role, .pid, .pname .result {
+.id, .name, .role, .pid, .pname, .presult {
     position: absolute;
     color: black;
     line-height: 3rem;
@@ -54,11 +54,11 @@
 }
 
 .pname {
-    left: calc(40% - 3rem);
+    left: calc(53% - 5rem);
 }
 
 .presult {
-    right: 15rem;
+    right: 9rem;
 }
 
 .viewInfoBtn:hover{
