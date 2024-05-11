@@ -1,7 +1,7 @@
 import '../../../static/systemadmin/css/UserAcc.css';
 import Header from './templates/Header';
 import { useState, useEffect } from 'react';
-import UserBox from './UserBox';
+import UserBox from './templates/UserBox';
 import { sampleUsers } from './sampleUserAcc';
 import { UserAccountDetails } from './UserAccInterface';
 import { Link } from 'react-router-dom';

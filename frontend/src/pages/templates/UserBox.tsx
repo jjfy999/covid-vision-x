@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import profileImg from '../../../static/images/unknownPerson.jpg';
-import { UserAccountDetails } from './UserAccInterface';
-import '../../../static/systemadmin/css/UserBox.css';
+import profileImg from '../../../../static/images/unknownPerson.jpg';
+import { UserAccountDetails } from '../UserAccInterface';
+import '../../../../static/systemadmin/css/UserBox.css';
 
 interface UserBoxProps {
   users: UserAccountDetails[];
