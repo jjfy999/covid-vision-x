@@ -58,7 +58,38 @@ header .icons i:hover, header .icons a:hover{
     transform: rotate(360deg);
 }
 
+header .icons {
+    position: relative;
+    z-index: 2;
+    display: flex;
+}
 header .icons #menu-bars{
     display: none;
+}
+
+header .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+header .dropdown-menu a {
+    color: var(--brown);
+    padding: 5px;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+header .dropdown-menu a:hover {
+    color: var(--yellow);
+    background-color: var(--brown);
 }
 /* Header css ends */

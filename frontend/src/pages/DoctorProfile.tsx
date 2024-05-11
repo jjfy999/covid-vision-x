@@ -1,14 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import ProfileCard from "./templates/ProfileCard";
 import DrawerAppBar from "./templates/DrawerAppBar";
 import UploadImage from "./templates/UploadImage";
 import NonUpdatedReport from "./templates/NonUpdatedReport";
+import Header from "./templates/Header";
 
 const App = () => {
   return (
     <>
-      <DrawerAppBar userRole="doctor" firstText="Patient" />
+      <Header userRole="doctor" />
       <div
         style={{
           display: "flex",
@@ -30,8 +29,7 @@ const App = () => {
             name="Dr. Jane Smith"
             contactNumber="+1 234 567 8900"
             email="dr.janesmith@example.com"
-            pageContext='profile'
-
+            pageContext="profile"
           />
         </div>
       </div>
@@ -52,7 +50,6 @@ const App = () => {
             maxWidth: "600px",
           }}
         >
-
           <UploadImage
             userRole="doctor"
             onFileUpload={(file, patientName) => {
@@ -66,12 +63,17 @@ const App = () => {
               console.log(file, patientName);
             }}
           />
-
         </div>
       </div>
 
-
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <NonUpdatedReport
         // patientName="John Tan"
         // date="23 March 2024"

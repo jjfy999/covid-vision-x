@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "../../theme/header.css";
 import { useAuth } from "./AuthContexr";
 
-type UserRole = "patient" | "sysad";
+type UserRole = "patient" | "sysad" | "doctor" | "researcher";
 
 interface HeaderProps {
   userRole: UserRole; // Define the type of the userRole prop
@@ -14,6 +14,13 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
   const location = useLocation();
   const { logoutUser } = useAuth();
   const isAccDetailPage = location.pathname.includes("/AccDetail");
+
+  const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
+
+  const handlePatientMenuClick = () => {
+    setPatientMenuOpen(!patientMenuOpen);
+    console.log("Patient menu clicked");
+  };
 
   return (
     <header>
@@ -50,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
               className={
                 location.pathname === "/UserAcc" ||
                 isAccDetailPage ||
-                location.pathname === "/EditAcc"||
+                location.pathname === "/EditAcc" ||
                 location.pathname === "/CreateUser"
                   ? "active"
                   : "useracc"
@@ -63,6 +70,64 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
               className={
                 location.pathname === "/SysAdProfile" ||
                 location.pathname === "/SysAdEditProfile"
+                  ? "active"
+                  : "profile"
+              }
+            >
+              Profile
+            </Link>
+          </>
+        )}
+        {userRole === "doctor" && (
+          <>
+            <div onClick={handlePatientMenuClick}>
+              <Link
+                to="#"
+                className={
+                  location.pathname === "/doctor-report"
+                    ? "active"
+                    : "doctor-report"
+                }
+              >
+                Patient
+              </Link>
+            </div>
+            {patientMenuOpen && (
+              <div
+                className="dropdown-menu"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <Link to="/doctor-report">Patient Report</Link>
+                <Link to="/upload-xray">Upload X-ray Image</Link>
+                <Link to="/non-uploaded-report">Non-Uploaded Report</Link>
+              </div>
+            )}
+            <Link
+              to="/doctorprofile"
+              className={
+                location.pathname === "/doctorprofile" ||
+                location.pathname === "/doctorEditProfile"
+                  ? "active"
+                  : "profile"
+              }
+            >
+              Profile
+            </Link>
+          </>
+        )}
+        {userRole === "researcher" && (
+          <>
+            <Link
+              to="/Model"
+              className={location.pathname === "/Model" ? "active" : "model"}
+            >
+              Model
+            </Link>
+            <Link
+              to="/RsProfile"
+              className={
+                location.pathname === "/RsProfile" ||
+                location.pathname === "/RsEditProfile"
                   ? "active"
                   : "profile"
               }
