@@ -333,7 +333,7 @@ def createUser(request):
             # Handle invalid role
             return JsonResponse({'error': 'Invalid role'}, status=400)
 
-        return JsonResponse({'message': 'User created successfully.'}, status=200)
+        return JsonResponse({'message': 'User created successfully.'}, status=201)
 
     else:
         # Handle non-POST request
