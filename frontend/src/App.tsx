@@ -24,6 +24,7 @@ import DoctorProfile from "./pages/DoctorProfile";
 import RsProfile from "./pages/RsProfile";
 import ErrorPage from "./pages/ErrorPage"; 
 import CreateUser from "./pages/CreateUser";
+import DoctorReport from "./pages/DoctorReport";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="/loginpage" element={<LoginPage />} />
       <Route path="/" element={<PrivateRoute />}>
         <Route path="/doctorprofile" element={<DoctorProfile />} />
+        <Route path="/DoctorReport" element={<DoctorReport />} />
         <Route path="/Rsprofile" element={<RsProfile />} />
         <Route element={<RoleRoute requiredRole={"patient"} />}>
           <Route path="/report" element={<Report />} />

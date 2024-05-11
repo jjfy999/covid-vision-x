@@ -37,6 +37,7 @@ const AccountDetails = () => {
                         email={user.email}
                         username={user.username}
                         password={user.password}
+                        result={user.role === 'patient' ? user.result : undefined}
                         pageContext='useracc'
                     />
                 </div>

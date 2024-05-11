@@ -8,7 +8,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "jd@1234",
     role: "patient",
     phone: "123-456-7890",
-    email: "johndoe@example.com"
+    email: "johndoe@example.com",
+    result: "Positive"
   },
   {
     id: "0002",
@@ -17,7 +18,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "js@5678",
     role: "patient",
     phone: "987-654-3210",
-    email: "janesmith@example.com"
+    email: "janesmith@example.com",
+    result: "Negative"
   },
   {
     id: "0003",
@@ -53,7 +55,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "patientpass1",
     role: "patient",
     phone: "111-111-1111",
-    email: "patient1@example.com"
+    email: "patient1@example.com",
+    result: "Positive"
   },
   {
     id: "0001",
@@ -62,7 +65,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "patientpass2",
     role: "patient",
     phone: "222-222-2222",
-    email: "patient2@example.com"
+    email: "patient2@example.com",
+    result: "Negative"
   },
   {
     id: "0001",
@@ -80,7 +84,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "patientpass3",
     role: "patient",
     phone: "333-333-3333",
-    email: "patient3@example.com"
+    email: "patient3@example.com",
+    result: "Positive"
   },
   {
     id: "0001",
@@ -98,7 +103,8 @@ export const sampleUsers: UserAccountDetails[] = [
     password: "patientpass4",
     role: "patient",
     phone: "444-444-4444",
-    email: "patient4@example.com"
+    email: "patient4@example.com",
+    result: "Negative"
   }
   // {
   //   id: "0001",

@@ -49,7 +49,7 @@ export default function DrawerAppBar({
             name: "Upload X-Ray Image",
             onClick: () => navigate("/upload-xray"), // navigate to be updated
           },
-          { name: "Report", onClick: () => navigate("/doctor-report") }, // navigate to be updated
+          { name: "Report", onClick: () => navigate("../DoctorReport") }, // navigate to be updated
           {
             name: "Non-Uploaded Report",
             onClick: () => navigate("/non-uploaded-report"), // navigate to be updated
