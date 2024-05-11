@@ -1,41 +1,60 @@
-import Header from './templates/Header';
-import '../../../static/patient/css/Profile.css';
-import ProfileCard from '../pages/templates/ProfileCard';
+import Header from "./templates/Header";
+import "../../../static/patient/css/Profile.css";
+import ProfileCard from "../pages/templates/ProfileCard";
+import { useEffect, useState } from "react";
 
 function PatientProfile() {
+    const [patientProfile, setPatientProfile] = useState<any>(null);
 
-    const patientProfile = {
-        id: "0001",
-        name: "John Doe",
-        username: "johndoe123",
-        password: "jd@1234",
-        role: "patient",
-        phone: "123-456-7890",
-        email: "johndoe@example.com"
-    };
+    useEffect(() => {
+        const fetchdata = async () => {
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const res = await fetch("/baseUrl/patientProfile/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error("http error: status " + res.status);
+                }
+                const data = await res.json();
+                setPatientProfile(data);
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+        fetchdata();
+    }, []);
 
     return (
         <div>
-            <Header userRole={'patient'} />
+            <Header userRole={"patient"} />
 
             {/* Profile starts */}
             <section id="patientProfilePage">
                 <h1 id="profileTitle">My Profile</h1>
                 <div id="patientProfileCard">
-                    <ProfileCard
-                    id={patientProfile.id}
-                    name={patientProfile.name}
-                    username={patientProfile.username}
-                    password={patientProfile.password}
-                    role={patientProfile.role}
-                    contactNumber={patientProfile.phone}
-                    email={patientProfile.email}
-                    pageContext='profile'
-                />
+                    {patientProfile && (
+                        <ProfileCard
+                            id={patientProfile.id}
+                            name={patientProfile.name}
+                            username={patientProfile.username}
+                            password={patientProfile.password}
+                            role={patientProfile.role}
+                            contactNumber={patientProfile.phone_number}
+                            email={patientProfile.email}
+                            pageContext="profile"
+                        />
+                    )}
                 </div>
             </section>
             {/* Profile ends */}
-
         </div>
     );
 }
