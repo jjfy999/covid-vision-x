@@ -56,6 +56,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             setUser(jwtDecode(data.access));
             localStorage.setItem("authTokens", JSON.stringify(data));
         } else {
+            console.log("Response status: ", response.status);
+            console.log("Response data: ", data);
             alert("Something went wrong");
         }
     };
