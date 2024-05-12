@@ -125,7 +125,8 @@ def listUploadedReports(request):  # for doctor to view all uploaded reports
 def listAllReports(request):  # for testing to view all reports
     reports = Report.objects.all()
     for report in reports:
-        report.image = report.image.url
+        if report.image:
+            report.image =  f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"  # Construct S3 URL
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
