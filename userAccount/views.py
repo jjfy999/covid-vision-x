@@ -198,6 +198,8 @@ def updateDetails(request):  # for users to update own details
         return JsonResponse({"error": "Invalid user type"}, status=400)
 
     if serializer.is_valid():
+        if 'password' in serializer.validated_data:
+            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
         serializer.save()
         return JsonResponse(serializer.data, safe=False, status=200)
     else:
