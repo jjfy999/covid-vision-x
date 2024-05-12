@@ -10,9 +10,8 @@ import { FaSearch } from "react-icons/fa";
 const UserAccount = () => {
     const [users, setUsers] = useState<UserAccountDetails[]>([]);
     const [error, setError] = useState<string | null>(null);
-    const [filteredUsers, setFilteredUsers] = useState<UserAccountDetails[]>(
-        []
-    );
+    const [filteredUsers, setFilteredUsers] =
+        useState<UserAccountDetails[]>(users);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
@@ -60,6 +59,16 @@ const UserAccount = () => {
         );
         setFilteredUsers(filtered);
     };
+
+    useEffect(() => {
+        return () => {
+            setSearchTerm("");
+        };
+    }, []);
+
+    useEffect(() => {
+        setFilteredUsers(users);
+    }, [users]);
 
     return (
         <div>
