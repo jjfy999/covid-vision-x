@@ -1,41 +1,62 @@
-import Header from './templates/Header';
-import '../../../static/patient/css/Profile.css';
-import ProfileCard from '../pages/templates/ProfileCard';
+import Header from "./templates/Header";
+import "../../../static/patient/css/Profile.css";
+import ProfileCard from "../pages/templates/ProfileCard";
+import { useEffect, useState } from "react";
 
 const SysadProfile = () => {
+    const [adminProfile, setAdminProfile] = useState(null);
 
-    const adminProfile = {
-        id: "0007",
-        name: "Admin Admin",
-        username: "admin123",
-        password: "adminpass",
-        role: "system admin",
-        phone: "777-777-7777",
-        email: "admin@example.com"
-    };
+    useEffect(() => {
+        const fetchdata = async () => {
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const res = await fetch("/baseUrl/sysProfileView/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error("http error: status " + res.status);
+                }
+                const data = await res.json();
+                setAdminProfile(data);
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+        fetchdata();
+    }, []);
 
     return (
         <div>
-            <Header userRole={'sysad'} />
+            <Header userRole={"sysad"} />
 
             {/* Profile starts */}
             <section id="patientProfilePage">
                 <h1 id="profileTitle">My Profile</h1>
                 <div id="patientProfileCard">
-                    <ProfileCard
-                    id={adminProfile.id}
-                    name={adminProfile.name}
-                    username={adminProfile.username}
-                    password={adminProfile.password}
-                    role={adminProfile.role}
-                    contactNumber={adminProfile.phone}
-                    email={adminProfile.email}
-                    pageContext='profile'
-                />
+                    {adminProfile ? (
+                        <ProfileCard
+                            id={adminProfile.id}
+                            name={adminProfile.name}
+                            username={adminProfile.username}
+                            password={adminProfile.password}
+                            role={adminProfile.role}
+                            contactNumber={adminProfile.phone}
+                            email={adminProfile.email}
+                            pageContext="profile"
+                        />
+                    ) : (
+                        <div>Loading ...</div>
+                    )}
                 </div>
             </section>
             {/* Profile ends */}
-
         </div>
     );
 };
