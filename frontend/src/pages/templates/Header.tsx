@@ -80,24 +80,25 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
         )}
         {userRole === "doctor" && (
           <>
-            <div onClick={handlePatientMenuClick}>
+            {/* <div onClick={handlePatientMenuClick}> */}
               <Link
                 to="#"
                 className={
-                  location.pathname === "/doctor-report"
+                  location.pathname === "/DoctorReport"
                     ? "active"
                     : "doctor-report"
                 }
+                onClick={handlePatientMenuClick}
               >
                 Patient
               </Link>
-            </div>
+            {/* </div> */}
             {patientMenuOpen && (
               <div
                 className="dropdown-menu"
                 onClick={(event) => event.stopPropagation()}
               >
-                <Link to="/doctor-report">Patient Report</Link>
+                <Link to="/DoctorReport">Patient Report</Link>
                 <Link to="/upload-xray">Upload X-ray Image</Link>
                 <Link to="/non-uploaded-report">Non-Uploaded Report</Link>
               </div>
