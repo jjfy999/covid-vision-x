@@ -314,20 +314,20 @@ def createUser(request):
         # Create the user based on the role
         if role == 'patient':
             status = 'Not_Applicable'  # Set default status for patient
-            user = Patient.objects.create_user(
-                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role, status=status)
+            user = Patient.objects.create(
+                username=username, password=password, email=email, name=name, phone_number=phone_number, status=status)
 
         elif role == 'doctor':
-            user = Doctor.objects.create_user(
-                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
+            user = Doctor.objects.create(
+                username=username, password=password, email=email, name=name, phone_number=phone_number)
 
         elif role == 'system_admin':
-            user = SystemAdmin.objects.create_user(
-                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
-
+            user = SystemAdmin.objects.create(
+                username=username, password=password, email=email, name=name, phone_number=phone_number)
+            
         elif role == 'researcher':
-            user = Researcher.objects.create_user(
-                username=username, password=password, email=email, name=name, phone_number=phone_number, role=role)
+            user = Researcher.objects.create(
+                username=username, password=password, email=email, name=name, phone_number=phone_number)
 
         else:
             # Handle invalid role
