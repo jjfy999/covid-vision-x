@@ -1,91 +1,125 @@
 import ProfileCard from "./templates/ProfileCard";
-import DrawerAppBar from "./templates/DrawerAppBar";
 import UploadImage from "./templates/UploadImage";
 import NonUpdatedReport from "./templates/NonUpdatedReport";
 import Header from "./templates/Header";
+import { useEffect, useState } from "react";
 
 const App = () => {
-  return (
-    <>
-      <Header userRole="doctor" />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "calc(100vh - 450px)",
-          marginTop: "100px",
-        }}
-      >
-        <div
-          style={{
-            flexShrink: 0, // Prevents the ProfileCard from shrinking
-            width: "100%", // Use 100% of the width of the parent to center the card properly
-            maxWidth: "380px", // Ensures the card does not stretch beyond 500px
-          }}
-        >
-          <ProfileCard
-            id="0004"
-            name="Dr. Sarah Parker"
-            username="drsarah"
-            password="doctor123"
-            role="doctor"
-            contactNumber="+1 234 567 8900"
-            email="dr.janesmith@example.com"
-            pageContext="profile"
-          />
-        </div>
-      </div>
+    console.log("DoctorProfile.tsx: App(), is being rendered.");
+    const [docProfile, setDocProfile] = useState<any>(null);
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "calc(100vh - 450px)",
-          marginTop: "300px",
-        }}
-      >
-        <div
-          style={{
-            flexShrink: 0,
-            width: "100%",
-            maxWidth: "600px",
-          }}
-        >
-          <UploadImage
-            userRole="doctor"
-            onFileUpload={(file, patientName) => {
-              console.log(file, patientName);
-            }}
-          />
+    useEffect(() => {
+        const fetchdata = async () => {
+            console.log("Inside fetchdata()");
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                console.log("Token: ", token);
+                const res = await fetch("/baseUrl/docProfileView/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                console.log("fetch Completed");
+                if (!res.ok) {
+                    throw new Error("http error: status " + res.status);
+                }
+                const data = await res.json();
+                setDocProfile(data);
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+        fetchdata();
+    }, []);
 
-          <UploadImage
-            userRole="researcher"
-            onFileUpload={(file, patientName) => {
-              console.log(file, patientName);
-            }}
-          />
-        </div>
-      </div>
+    return (
+        <>
+            <Header userRole="doctor" />
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "calc(100vh - 450px)",
+                    marginTop: "100px",
+                }}
+            >
+                <div
+                    style={{
+                        flexShrink: 0, // Prevents the ProfileCard from shrinking
+                        width: "100%", // Use 100% of the width of the parent to center the card properly
+                        maxWidth: "380px", // Ensures the card does not stretch beyond 500px
+                    }}
+                >
+                    {docProfile && (
+                        <ProfileCard
+                            id={docProfile.id}
+                            name={docProfile.name}
+                            username={docProfile.username}
+                            password={docProfile.password}
+                            role={docProfile.role}
+                            contactNumber={docProfile.phone_number}
+                            email={docProfile.email}
+                            pageContext="profile"
+                        />
+                    )}
+                </div>
+            </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <NonUpdatedReport
-        // patientName="John Tan"
-        // date="23 March 2024"
-        // imageUrl="path_to_xray_image.png"
-        // initialStatus="covid"
-        />
-      </div>
-    </>
-  );
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "calc(100vh - 450px)",
+                    marginTop: "300px",
+                }}
+            >
+                <div
+                    style={{
+                        flexShrink: 0,
+                        width: "100%",
+                        maxWidth: "600px",
+                    }}
+                >
+                    <UploadImage
+                        userRole="doctor"
+                        onFileUpload={(file, patientName) => {
+                            console.log(file, patientName);
+                        }}
+                    />
+
+                    <UploadImage
+                        userRole="researcher"
+                        onFileUpload={(file, patientName) => {
+                            console.log(file, patientName);
+                        }}
+                    />
+                </div>
+            </div>
+
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                }}
+            >
+                <NonUpdatedReport
+                // patientName="John Tan"
+                // date="23 March 2024"
+                // imageUrl="path_to_xray_image.png"
+                // initialStatus="covid"
+                />
+            </div>
+        </>
+    );
 };
 
 export default App;
