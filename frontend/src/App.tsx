@@ -22,6 +22,7 @@ import ErrorPage from "./pages/ErrorPage";
 import CreateUser from "./pages/CreateUser";
 import DoctorReport from "./pages/DoctorReport";
 import Model from "./pages/Model";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
                 <Route path="/doctorprofile" element={<DoctorProfile />} />
                 <Route path="/DoctorReport" element={<DoctorReport />} />
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
+                    <Route path="/HomePage" element={<HomePage />} />
                     <Route path="/report" element={<Report />} />
                     <Route
                         path="/PatientProfile"

@@ -37,6 +37,16 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "patient" && (
                     <>
                         <Link
+                            to="/HomePage"
+                            className={
+                                location.pathname === "/HomePage"
+                                    ? "active"
+                                    : "home"
+                            }
+                        >
+                            Home
+                        </Link>
+                        <Link
                             to="/Report"
                             className={
                                 location.pathname === "/Report"

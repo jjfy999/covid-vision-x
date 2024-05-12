@@ -1,0 +1,64 @@
+/* AboutUs.css */
+.about-us-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.about-us-paragraph {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.image-container {
+  flex: 0 0 auto; /* Don't grow or shrink */
+}
+
+.image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.content-container {
+  position: relative;
+  max-width: 50%;
+  height: max-content;
+  padding: 2rem;
+  background-color: var(--yellow); /* Add opacity to make the background slightly transparent */
+}
+
+#header {
+  font-family: 'Times New Roman', Times, serif;
+  padding-bottom: .5rem;
+  font-size: 3rem;
+  color: var(--green);
+}
+
+#subtitle {
+  padding-bottom: 1rem;
+}
+
+#viewBtn {
+  color: var(--yellow);
+  position: absolute;
+  background: #9f947d;
+  border-radius: .5rem;
+  cursor: pointer;
+  width: 10rem; 
+  height: 3rem;
+  text-align: center;
+  line-height: 3rem;
+}
+
+#viewBtn:hover{
+  color: var(--yellow);
+  background: var(--green);
+  letter-spacing: .1rem;
+} 
