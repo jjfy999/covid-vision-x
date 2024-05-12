@@ -38,11 +38,13 @@ function LoginPage() {
         // If user is authenticated, redirect based on user role
         switch (user.role) {
             case "patient":
-                return <Navigate to="/Report" replace />;
+                return <Navigate to="/PatientProfile" replace />;
             case "doctor":
                 return <Navigate to="/doctorprofile" replace />;
             case "system_admin":
-                return <Navigate to="/UserAcc" replace />;
+                return <Navigate to="/SysAdProfile" replace />;
+            case "researcher":
+                return <Navigate to="/Rsprofile" replace />;
             default:
                 return null; // or any other default behavior
         }
@@ -114,6 +116,7 @@ function LoginPage() {
                             <option value="patient">Patient</option>
                             <option value="doctor">Doctor</option>
                             <option value="sysad">System Administrator</option>
+                            <option value="researcher">Researcher</option>
                         </select>
 
                         <label className="label" htmlFor="uname">
