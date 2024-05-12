@@ -21,15 +21,19 @@ import RsProfile from "./pages/RsProfile";
 import ErrorPage from "./pages/ErrorPage";
 import CreateUser from "./pages/CreateUser";
 import DoctorReport from "./pages/DoctorReport";
+import Model from "./pages/Model";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route>
             <Route path="/loginpage" element={<LoginPage />} />
             <Route path="/" element={<PrivateRoute />}>
+                <Route element={<RoleRoute requiredRole={"researcher"} />}>
+                    <Route path="/Rsprofile" element={<RsProfile />} />
+                    <Route path="/model" element={<Model />} />
+                </Route>
                 <Route path="/doctorprofile" element={<DoctorProfile />} />
                 <Route path="/DoctorReport" element={<DoctorReport />} />
-                <Route path="/Rsprofile" element={<RsProfile />} />
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
                     <Route path="/report" element={<Report />} />
                     <Route
