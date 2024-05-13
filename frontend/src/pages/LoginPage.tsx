@@ -49,7 +49,7 @@ function LoginPage() {
             case "patient":
                 return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             case "doctor":
-                return <Navigate to="/HomePage" state={{ userRole: role }} replace />
+                return <Navigate to="/DoctorProfile" replace />
             case "system_admin":
                 return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             case "researcher":

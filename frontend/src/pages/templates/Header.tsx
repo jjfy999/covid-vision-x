@@ -16,7 +16,21 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const isAccDetailPage = location.pathname.includes("/AccDetail");
 
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
-    const [activeLink, setActiveLink] = React.useState("Profile");
+    const [activeLink, setActiveLink] = React.useState(() => {
+        if (
+            location.pathname.includes("/DoctorReport") ||
+            location.pathname.includes("/DoctorUploadImage") ||
+            location.pathname.includes("/DoctorNonUpdatedReport")
+        ) {
+            return "Patient";
+        } else if (
+            location.pathname.includes("/HomePage")
+        ) {
+            return "Home";
+        } else {
+            return "Profile";
+        }
+    });
 
     const handlePatientMenuClick = () => {
         setPatientMenuOpen(!patientMenuOpen);
@@ -26,6 +40,23 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
             console.log("after close: ", patientMenuOpen);
         }
     };
+
+    React.useEffect(() => {
+        // Update activeLink when the pathname changes
+        if (
+            location.pathname.includes("/DoctorReport") ||
+            location.pathname.includes("/DoctorUploadImage") ||
+            location.pathname.includes("/DoctorNonUpdatedReport")
+        ) {
+            setActiveLink("Patient");
+        } else if (
+            location.pathname.includes("/HomePage")
+        ) {
+            setActiveLink("Home");
+        }else {
+            setActiveLink("Profile");
+        }
+    }, [location.pathname]);
 
     return (
         <header>
