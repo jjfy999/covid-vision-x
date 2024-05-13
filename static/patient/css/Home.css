@@ -1,5 +1,4 @@
-/* AboutUs.css */
-.about-us-container {
+#home-container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -7,17 +6,11 @@
   height: 100vh;
 }
 
-.about-us-paragraph {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 2rem;
+#image-container {
+  flex: 0 0 auto; 
 }
 
-.image-container {
-  flex: 0 0 auto; /* Don't grow or shrink */
-}
-
-.image {
+#homeImage {
   position: absolute;
   left: 0;
   top: 0;
@@ -26,12 +19,13 @@
   opacity: 0.5;
 }
 
-.content-container {
+#content-container {
   position: relative;
   max-width: 50%;
   height: max-content;
   padding: 2rem;
-  background-color: var(--yellow); /* Add opacity to make the background slightly transparent */
+  background-color: var(--yellow); 
+  border-radius: 2rem;
 }
 
 #header {
@@ -43,17 +37,30 @@
 
 #subtitle {
   padding-bottom: 1rem;
+  color: var(--brown);
+}
+
+#about-us-paragraph {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.btn-container {
+  position: relative; 
 }
 
 #viewBtn {
   color: var(--yellow);
-  position: absolute;
+  position: relative;
   background: #9f947d;
   border-radius: .5rem;
   cursor: pointer;
-  width: 10rem; 
+  width: auto; 
   height: 3rem;
   text-align: center;
+  padding: 0rem 2rem;
+  display: inline-block;
   line-height: 3rem;
 }
 
