@@ -171,8 +171,6 @@ def deleteReport(request):  # for doctor to delete non uploaded report
 
 @api_view(['GET'])
 def reportView(request):  # for patient to view their reports
-    # account_id = request.GET.get('id')
-    # print("Received account_id:", account_id)
     user = request.user
     try:
         patient = Patient.objects.get(pk=user.id)
@@ -181,9 +179,15 @@ def reportView(request):  # for patient to view their reports
 
     reports = Report.objects.filter(patient_id=patient, approved=True)
     for report in reports:
-        report.image = report.image.url
+        print(report.id)
+        print(report.patient_id_id)
+        print(report.patient_name)
+        print(report.status)
+        if report.image:
+            report.image =  f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
+
     serializer = ReportSerializer(reports, many=True)
-    return JsonResponse({serializer.data}, json_dumps_params={'indent': 2}, safe=False, status=200)
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, safe=False, status=200)
 
 
 def analyze_image2(request):
