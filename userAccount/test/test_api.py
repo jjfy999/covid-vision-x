@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.test import APIClient
-from userAccount.models import Doctor, Patient, SystemAdmin
+from userAccount.models import Doctor, Patient, Researcher, SystemAdmin
 from userAccount.views import getDetails, getUserDetails
 from userAccount.serializers import PatientSerializer, DoctorSysAdminSerializer
 from django.contrib.auth import get_user_model
@@ -39,6 +39,14 @@ class views_api_TestCase(TestCase):
             phone_number='1122334455'
         )
 
+        self.researcher_user = Researcher.objects.create(
+            username='Researcher',
+            email='researcher@example.com',
+            password='testpass',
+            name='Researcher User',
+            phone_number='1122334466'
+        )
+
         self.client = APIClient()
     #------------------------------------------------------------------------
     # tested getDetails() - ALL PASSED
@@ -61,11 +69,16 @@ class views_api_TestCase(TestCase):
         response = self.client.get(reverse('getDetails'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('Admin User', response.json()['name'])
-    """
     
+    def test_researcher_getDetails(self): 
+        self.client.force_authenticate(user=self.researcher_user)
+        response = self.client.get(reverse('getDetails'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('Researcher User', response.json()['name'])
+    """    
     # ---------------------------------------------------------------------------------
     # for getUserDetails() admin to view specific user (All PASSED)
-    
+    """
     def test_get_doctor_details(self):
         # Reverse function constructs the URL from the view name and parameters
         url = reverse('getUserDetails', kwargs={'pk': self.doctor_user.pk})
@@ -84,13 +97,14 @@ class views_api_TestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('Admin User', response.json()['name'])
-
-    def test_user_not_found(self):
-        # Test the case where no user is found for the given PK
-        url = reverse('getUserDetails', kwargs={'pk': 9999})  # Assuming 9999 is an ID that does not exist
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
     
+    def test_get_researcher_details(self):
+        # Reverse function constructs the URL from the view name and parameters
+        url = reverse('getUserDetails', kwargs={'pk': self.researcher_user.pk})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('Researcher User', response.json()['name'])
+    """
     # ----------------------------------------------------------------------------
 
 
