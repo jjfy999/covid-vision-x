@@ -267,7 +267,7 @@ models = {}
 
 def download_and_load_model(model_path):
     """Downloads and loads the model from S3."""
-    model_path = 'newtest.h5'
+
 
     if model_path not in models:
         s3_client = boto3.client('s3')
@@ -293,12 +293,12 @@ def download_and_load_model(model_path):
     return models[model_path]
 
 
-def predict(request):
+def predict(request,model_path):
     """
     Predicts using the specified model.
     Downloads and loads the model if not already loaded.
     """
-    model_path = 'newtest.h5'
+
     model = download_and_load_model(model_path)
     print('model')
     if model:
