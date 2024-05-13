@@ -31,13 +31,20 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
     const [modelTypes, setModelTypes] = useState<
         Array<{ id: string; name: string }>
     >([]);
+    const [selectModelType, setSelectModelType] = useState<string>("");
 
     useEffect(() => {
         const fetchModelTypes = async () => {
             try {
-                const response = await fetch("https://api.example.com/etcetc"); // Change this accordingly
+                const response = await fetch("baseUrl/docListModels/");
                 const data = await response.json();
-                setModelTypes(data);
+                const modelTypes = data.keys.map(
+                    (key: string, index: number) => ({
+                        id: index.toString(),
+                        name: key,
+                    })
+                );
+                setModelTypes(modelTypes);
             } catch (error) {
                 console.error("Failed to fetch model types:", error);
             }
@@ -63,10 +70,8 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
         }
     };
 
-    const handleTypeChange = (
-        event: SelectChangeEvent<{ id: string; name: string }[]>
-    ) => {
-        setModelTypes([{ id: event.target.value as string, name: "" }]);
+    const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setSelectModelType(event.target.value as string);
     };
 
     const renderRoleSpecificUI = () => {
@@ -139,16 +144,16 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                             <Select
                                 labelId="xray-type-label"
                                 id="xray-type-select"
-                                value={modelTypes}
+                                value={selectModelType}
                                 label="Model Type"
                                 onChange={handleTypeChange}
                             >
-                                {/* <MenuItem value="M1">M1</MenuItem>
-                                <MenuItem value="M2">M2</MenuItem> */}
-
-                                {modelTypes.map((item, index) => (
-                                    <MenuItem key={index} value={item.id}>
-                                        {item.name}
+                                {modelTypes.map((modelType) => (
+                                    <MenuItem
+                                        key={modelType.id}
+                                        value={modelType.id}
+                                    >
+                                        {modelType.name}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -158,7 +163,10 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                             color="primary"
                             onClick={handleUpload}
                             disabled={
-                                !selectedFile || !patientName || !modelTypes
+                                !selectedFile ||
+                                !patientName ||
+                                !selectModelType ||
+                                modelTypes.length === 0
                             }
                         >
                             Analyse
