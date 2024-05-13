@@ -23,7 +23,7 @@ const AccountDetails = () => {
 
     return (
         <div>
-            <Header userRole={'sysad'}/>
+            <Header userRole={'system_admin'}/>
 
             {/* Account Details Section */}
             <section id="accDetailPage">

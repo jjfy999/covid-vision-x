@@ -4,6 +4,7 @@ import "../../../static/login/login.css";
 import logo from "../../../static/images/logo_transparent.png";
 import { useAuth } from "./templates/AuthContexr";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
     const [isLoginView, setIsLoginView] = useState(true); // Toggle between login and signup view
@@ -16,6 +17,7 @@ function LoginPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const { user, loginUser } = useAuth();
     const [loggedInUser, setLoggedInUser] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -45,13 +47,13 @@ function LoginPage() {
         // If user is authenticated, redirect based on user role
         switch (user.role) {
             case "patient":
-                return <Navigate to="/PatientProfile" replace />;
+                return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             case "doctor":
-                return <Navigate to="/doctorprofile" replace />;
+                return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             case "system_admin":
-                return <Navigate to="/SysAdProfile" replace />;
+                return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             case "researcher":
-                return <Navigate to="/Rsprofile" replace />;
+                return <Navigate to="/HomePage" state={{ userRole: role }} replace />
             default:
                 return null; // or any other default behavior
         }
@@ -122,7 +124,7 @@ function LoginPage() {
                             </option>
                             <option value="patient">Patient</option>
                             <option value="doctor">Doctor</option>
-                            <option value="sysad">System Administrator</option>
+                            <option value="system_admin">System Administrator</option>
                             <option value="researcher">Researcher</option>
                         </select>
 

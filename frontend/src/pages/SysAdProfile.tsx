@@ -34,7 +34,7 @@ const SysadProfile = () => {
 
     return (
         <div>
-            <Header userRole={"sysad"} />
+            <Header userRole={"system_admin"} />
 
             {/* Profile starts */}
             <section id="patientProfilePage">
