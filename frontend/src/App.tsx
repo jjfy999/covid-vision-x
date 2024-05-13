@@ -7,12 +7,9 @@ import {
 import Report from "./pages/Report";
 import PatientProfile from "./pages/PatientProfile";
 import LoginPage from "./pages/LoginPage";
-// import PatientEditProfile from "./pages/PatientEditProfile";
 import UserAccount from "./pages/UserAcc";
 import AccountDetails from "./pages/AccDetail";
-// import EditAccountDetails from "./pages/EditAcc";
 import SysadProfile from "./pages/SysAdProfile";
-// import SysadEditProfile from "./pages/SysAdEditProfile";
 import PrivateRoute from "./pages/templates/PrivateRoute";
 import { AuthProvider } from "./pages/templates/AuthContexr";
 import RoleRoute from "./pages/templates/RoleRoute";

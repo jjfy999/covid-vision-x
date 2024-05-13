@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 function AboutUs() {
     const location = useLocation();
-    const userRole = location.state.userRole || "doctor";;
+    const userRole = location.state.userRole || "patient";
 
     return (
         
