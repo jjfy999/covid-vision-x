@@ -160,10 +160,9 @@ def uploadReport(request):
 
 
 @api_view(['DELETE'])
-def deleteReport(request):  # for doctor to delete non uploaded report
-    report_id = request.POST.get('report_id')
+def deleteReport(request,pk):  # for doctor to delete non uploaded report
     try:
-        report = Report.objects.get(pk=report_id)
+        report = Report.objects.get(pk=pk)
         report.delete()
         return JsonResponse({'message': 'Report deleted successfully.'}, status=200)
     except Report.DoesNotExist:
