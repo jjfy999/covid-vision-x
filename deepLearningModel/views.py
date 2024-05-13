@@ -375,7 +375,7 @@ def listModels(request):
     bucket_name = 'fypmodelss'
 
     # Create an S3 client
-    s3_client = boto3.client('s3')
+    s3_client = boto3.client('s3',aws_access_key_id=settings.AWS_ACCESS_KEY_ID,aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,region_name=settings.AWS_S3_REGION_NAME)
 
     # List objects in the bucket
     response = s3_client.list_objects_v2(Bucket=bucket_name)
