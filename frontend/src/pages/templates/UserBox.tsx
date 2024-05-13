@@ -71,12 +71,15 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps> = ({
                     const reportUser = user as ReportDetails;
                     return (
                         <div className="userBox" key={index}>
-                            <div className="user-img-box">Hi</div>
+                            <div className="user-img-box"> </div>
                             <p className="id">{reportUser.id}</p>
                             <p className="name">{reportUser.patient_name}</p>
                             <p className="role">{reportUser.status}</p>
                             <div className="viewInfoBtn">
-                                <Link id={`infoBtn${index}`} to={"/Homepage/"}>
+                                <Link
+                                    id={`infoBtn${index}`}
+                                    to={`/reportDetails/${reportUser.id}`}
+                                >
                                     View Details
                                 </Link>
                             </div>

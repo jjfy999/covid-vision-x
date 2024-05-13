@@ -19,9 +19,10 @@ import ErrorPage from "./pages/ErrorPage";
 import CreateUser from "./pages/CreateUser";
 import DoctorReport from "./pages/DoctorReport";
 import DoctorUploadImage from "./pages/DoctorUploadImage";
-import DNUR from "./pages/DoctorNonUpdatedReport";
+import DoctorNUR from "./pages/DoctorNonUpdatedReport";
 import Model from "./pages/Model";
 import HomePage from "./pages/HomePage";
+import ViewReportDetails from "./pages/doctorViewReports";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -32,8 +33,18 @@ const router = createBrowserRouter(
                 <Route element={<RoleRoute requiredRole={"doctor"} />}>
                     <Route path="/doctorprofile" element={<DoctorProfile />} />
                     <Route path="/DoctorReport" element={<DoctorReport />} />
-                    <Route path="/DoctorNonUpdatedReport" element={<DNUR />} />
-                    <Route path="/DoctorUploadImage" element={<DoctorUploadImage />} />
+                    <Route
+                        path="/DoctorNonUpdatedReport"
+                        element={<DoctorNUR />}
+                    />
+                    <Route
+                        path="/reportDetails/:reportId"
+                        element={<ViewReportDetails />}
+                    />
+                    <Route
+                        path="/DoctorUploadImage"
+                        element={<DoctorUploadImage />}
+                    />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
                     <Route path="/Rsprofile" element={<RsProfile />} />
@@ -41,11 +52,17 @@ const router = createBrowserRouter(
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
                     <Route path="/report" element={<Report />} />
-                    <Route path="/PatientProfile" element={<PatientProfile />}/>
+                    <Route
+                        path="/PatientProfile"
+                        element={<PatientProfile />}
+                    />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"system_admin"} />}>
                     <Route path="/UserAcc" element={<UserAccount />} />
-                    <Route path="/AccDetail/:userId" element={<AccountDetails />} />
+                    <Route
+                        path="/AccDetail/:userId"
+                        element={<AccountDetails />}
+                    />
                     <Route path="/SysAdProfile" element={<SysadProfile />} />
                     <Route path="/CreateUser" element={<CreateUser />} />
                 </Route>
