@@ -108,8 +108,8 @@ def listNonUploadedReports(request):
         print(report.image)
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
-    # return JsonResponse(data, json_dumps_params={'indent': 2})
-    return render(request, 'nonUpdatedReport.html', {'reports': reports})
+    return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
+    # return render(request, 'nonUpdatedReport.html', {'reports': reports})
 
 
 @api_view(['GET'])
