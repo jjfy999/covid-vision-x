@@ -126,7 +126,8 @@ def listAllReports(request):  # for testing to view all reports
     reports = Report.objects.all()
     for report in reports:
         if report.image:
-            report.image =  f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"  # Construct S3 URL
+            # Construct S3 URL
+            report.image = f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
@@ -184,7 +185,7 @@ def reportView(request):  # for patient to view their reports
         print(report.patient_name)
         print(report.status)
         if report.image:
-            report.image =  f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
+            report.image = f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
 
     serializer = ReportSerializer(reports, many=True)
     return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, safe=False, status=200)
@@ -268,7 +269,6 @@ models = {}
 def download_and_load_model(model_path):
     """Downloads and loads the model from S3."""
 
-
     if model_path not in models:
         s3_client = boto3.client('s3')
 
@@ -293,20 +293,21 @@ def download_and_load_model(model_path):
     return models[model_path]
 
 
-def predict(request,model_path):
+@api_view(['POST'])
+def predict(request):
     """
     Predicts using the specified model.
     Downloads and loads the model if not already loaded.
     """
 
-    model = download_and_load_model(model_path)
+    model = download_and_load_model(request.model_path)
     print('model')
     if model:
         print("hello111")
         if request.method == 'POST':
             print("hello")
             # Get the image from the request
-            image_file = request.FILES['image']
+            image_file = request.file['image']
 
             # Perform any preprocessing on the image
             # For example, resize the image to match the input size of your model
@@ -346,19 +347,12 @@ def predict(request,model_path):
                 image=image_name  # Save the image path instead of the file itself
             )
 
-            # Return the result to the user
-            result = {"status": status, "patientName": patient.name,
-                      "date": str(date.today())}
-            return JsonResponse(result, json_dumps_params={'indent': 2}, safe=False)
-
-        return JsonResponse({}, status=400)
-        # Use the loaded model for prediction
-        # ... your prediction logic using the model
-
-        return prediction_result
+            return JsonResponse({}, json_dumps_params={'indent': 2}, safe=False, status=200)
+        else:
+            return JsonResponse({}, status=400)
     else:
         # Handle the case where model download/loading failed
-        return None
+        return JsonResponse({"error": "Failed to download the model.", "status": 400})
 
 
 def listModels(request):
