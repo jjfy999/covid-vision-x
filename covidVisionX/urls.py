@@ -95,6 +95,7 @@ urlpatterns = [
 
     # for researcher to upload model
     # path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),
+    path('docListModels/', deepLearningModel.listModels, name='listModels'),
 
 
     path('api/', include('accessControl.urls'))
