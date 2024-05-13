@@ -36,33 +36,20 @@ const router = createBrowserRouter(
                     <Route path="/doctorprofile" element={<DoctorProfile />} />
                     <Route path="/DoctorReport" element={<DoctorReport />} />
                     <Route path="/DoctorNonUpdatedReport" element={<DNUR />} />
-                    <Route
-                        path="/DoctorUploadImage"
-                        element={<DoctorUploadImage />}
-                    />
+                    <Route path="/DoctorUploadImage" element={<DoctorUploadImage />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
                     <Route path="/Rsprofile" element={<RsProfile />} />
                     <Route path="/model" element={<Model />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
-                    {/* <Route path="/HomePage" element={<HomePage />} /> */}
                     <Route path="/report" element={<Report />} />
-                    <Route
-                        path="/PatientProfile"
-                        element={<PatientProfile />}
-                    />
-                    {/* <Route path="/patientEditProfile" element={<PatientEditProfile />} /> */}
+                    <Route path="/PatientProfile" element={<PatientProfile />}/>
                 </Route>
                 <Route element={<RoleRoute requiredRole={"system_admin"} />}>
                     <Route path="/UserAcc" element={<UserAccount />} />
-                    <Route
-                        path="/AccDetail/:userId"
-                        element={<AccountDetails />}
-                    />
-                    {/* <Route path="/EditAcc/:userId" element={<EditAccountDetails />} /> */}
+                    <Route path="/AccDetail/:userId" element={<AccountDetails />} />
                     <Route path="/SysAdProfile" element={<SysadProfile />} />
-                    {/* <Route path="/SysAdEditProfile" element={<SysadEditProfile />} /> */}
                     <Route path="/CreateUser" element={<CreateUser />} />
                 </Route>
             </Route>
