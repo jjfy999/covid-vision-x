@@ -30,6 +30,7 @@ const viewReportDetails = () => {
                 console.error("Error fetching report data:", error);
             }
         };
+        fetchData();
     }, [id]);
 
     return (
