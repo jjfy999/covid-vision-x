@@ -33,26 +33,27 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
         Array<{ id: string; name: string }>
     >([]);
     const [selectModelType, setSelectModelType] = useState<string>("");
-
     useEffect(() => {
-        const fetchModelTypes = async () => {
-            try {
-                const response = await fetch("baseUrl/docListModels/");
-                const data = await response.json();
-                const modelTypes = data.keys.map(
-                    (key: string, index: number) => ({
-                        id: index.toString(),
-                        name: key,
-                    })
-                );
-                setModelTypes(modelTypes);
-            } catch (error) {
-                console.error("Failed to fetch model types:", error);
-            }
-        };
+        if (userRole === "doctor") {
+            const fetchModelTypes = async () => {
+                try {
+                    const response = await fetch("baseUrl/docListModels/");
+                    const data = await response.json();
+                    const modelTypes = data.keys.map(
+                        (key: string, index: number) => ({
+                            id: index.toString(),
+                            name: key,
+                        })
+                    );
+                    setModelTypes(modelTypes);
+                } catch (error) {
+                    console.error("Failed to fetch model types:", error);
+                }
+            };
 
-        fetchModelTypes();
-    }, []);
+            fetchModelTypes();
+        }
+    }, [userRole]);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
@@ -103,6 +104,43 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
 
     const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setSelectModelType(event.target.value as string);
+    };
+
+    const handleUploadModel = async () => {
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("model_name", patientId);
+            formData.append("file", selectedFile);
+
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const response = await fetch("baseUrl/uploadModel/", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.status === 200) {
+                    URL.revokeObjectURL(previewUrl!);
+                    alert("Model uploaded successfully");
+                }
+            } catch (error) {
+                console.error(
+                    "There was a problem with the fetch operation: ",
+                    error
+                );
+            }
+        }
     };
 
     const renderRoleSpecificUI = () => {
@@ -268,10 +306,10 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={handleUpload}
+                            onClick={handleUploadModel}
                             disabled={!selectedFile || !patientId}
                         >
-                            Analyse
+                            Submit
                         </Button>
                     </>
                 );

@@ -1,5 +1,4 @@
 import UploadImage from "./templates/UploadImage";
-import NonUpdatedReport from "./templates/NonUpdatedReport";
 import Header from "./templates/Header";
 
 const App = () => {
