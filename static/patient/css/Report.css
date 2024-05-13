@@ -1,167 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
-
-/* Basic css starts */
-:root{
-    --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
-}
-*{
-    font-family: 'Joan', serif;
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear;
-}
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 5.5rem;
-    scroll-behavior: smooth;
-}
-body{
-    background-color: white;
-}
-/* Basic css ends */
-
-/* Header part css starts */
-header{
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: var(--green);
-    padding: 1rem 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: var(--box-shadow);
-}
-#logoImgBox {
-    position: relative;
-    height: fit-content;
-    width: fit-content;
-    border-radius: .5rem;
-    overflow: hidden;
-    display: grid;
-    align-items: center;
-}
-#logoImg {
-    width: 12rem; 
-    height: 5rem;
-}
-
-header .navbar a{
-    font-size: 1.7rem;
-    border-radius: .5rem;
-    padding: .5rem 1.5rem;
-    color: white;
-    margin-right: 10px;
-}
-header .navbar a.active{
-    color:white;
+#reportPage{
     background: var(--yellow);
-}
-
-header .navbar a:hover {
-    color:var(--yellow);
-}
-
-header .icons i, header .icons a{
-    cursor: pointer;
-    margin-left: .5rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    width: 3rem;
-    text-align: center;
-    font-size: 1.7rem;
-    color: var(--green);
-    border-radius: 50%;
-    background: white;
-}
-header .icons i:hover, header .icons a:hover{
-    color: white;
-    background: var(--yellow);
-    transform: rotate(360deg);
-}
-header .icons #menu-bars{
-    display: none;
-}
-/* Header part css ends*/
-
-/* Report css starts */
-section{
-    padding: 2rem 9%;
-    background: white;
-    grid-template-columns: 1fr 3fr;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align items horizontally in the center */
-    justify-content: center; /* Align items vertically in the center */
-    height: 100vh; /* Set the height to full viewport height */
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
 }
-section:nth-child(even){
-    background: white;
-}
-#patientProfile {
-    padding-top: 10px; 
-    padding-bottom: 15px;
-    font-size: 3rem;
-    margin-left: 3rem;
-    color: var(--green);
-}
-#tablediv {
-    margin-top: 5rem; /* Add some spacing between the image and table */
-}
-#infoTable {
-    font-size: 2rem; /* Increase the font size of table text */
-  }
-/* Report css ends */
 
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
+/* Title css starts */
+#patientReport{
+    color: var(--green);
+    width: 100%; 
+    font-size: 2rem;
+    padding-top: 5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
+/* Title css ends */
+
+/* Report css starts */
+#reportBox {
+    margin-top: 2rem;
+    background-color: #b3a994;
+    border-radius: 5%;
+    box-shadow: 0 0 15px rgba(93, 92, 92, 0.6);
+    padding: 20px 15px 15px;
+    max-width: 800px; 
+    width: fit-content;
 }
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
+
+#reportTable {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 3rem;
+    vertical-align: top;
 }
-/* Media queries ends */
+
+.reportLabel {
+    font-size: 1rem;
+    display: inline-block; 
+    width: 100%; 
+    text-align: left;
+}
+
+#reportTable td {
+    font-size: 1rem;
+    vertical-align: top; 
+    padding-left: 1rem; 
+}
+
+#xrayImg {
+    width: 30rem;
+    height: 25rem;
+    padding: 3rem;
+}
+/* Report css ends */

@@ -1,166 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
-
-/* Basic css starts */
-:root{
-    --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
+/* Acc Detail css starts */
+#accDetailPage{
+    background: var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    overflow-y: auto;
+    position: relative;
 }
-*{
-    font-family: 'Joan', serif;
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear;
-}
-html{
-    scroll-padding-top: 1rem;
-    scroll-behavior: smooth;
-}
-
-body{
-    padding-top: 250px;
-    overflow: hidden;
-}
-
-/* Basic css ends */
 
 /* Title css starts */
 #userAccDetails{
-    padding-bottom: 15px;
-    font-size: 3rem;
-    color: var(--green);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 100px; 
-    font-size: 3rem;
     color: var(--green);
     width: 100%; 
+    font-size: 2rem;
+    padding-top: 13rem;
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Title css ends */
 
-/* Acc Deatil css starts */
-#tablediv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 2px solid grey; 
-}
-
-#userImg{
-    height: auto;
-    padding: 30px; 
-    width: 100%; 
-    max-width: 100%;
-    max-height: 20rem; 
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-#infoTable{
-    background: rgba(188, 187, 187, 0.428);
-    border-radius: .5rem;
-    font-size: 1.5rem;
-    width: fit-content;
-    height: fit-content;
-    padding: 3rem;
-    justify-content: center;
-}
-
-label{
-    font-size: 1.8rem;
-}
-
-th{
-    padding-bottom: .7rem;
-    text-align: left;
-}
-
-.btn{
-    margin: auto; 
-    width: 50%; 
-    text-align: center;
-    padding-top: 2rem;
-}
-
-input{
-    color: black;
-    background-color: #64948a4d;
-    width: 50rem;
-    height: 4rem;
-    border-radius: .5rem;
-    font-size: 1.7rem;
-    padding-left: 1rem;
-}
-
-#editBtn, #deleteBtn, #backBtn{
+#profileCardContainer {
     margin-top: 1rem;
-    display: inline-block;
-    font-size: 1.7rem;
-    color: black;
-    background: var(--yellow);
-    border-radius: .5rem;
-    cursor: pointer;
-    padding: .8rem 7rem;
-    margin-right: .1cm;
-}
-
-#editBtn, #deleteBtn, #backBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
+    border-radius: 8%;
+    max-width: 800px; 
+    width: 30rem;
+    align-items: center; 
+    justify-content: center; 
+    align-items: center; 
+    justify-content: center; 
+    margin-left: auto; 
+    margin-right: auto;
 }
 /* Acc Detail css ends */
-
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
-}
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
-}
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
-}
-/* Media queries ends */

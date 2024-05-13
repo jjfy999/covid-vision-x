@@ -41,7 +41,8 @@ urlpatterns = [
          name='updateDetails'),  # for patient to update own details
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,  # for system admin to update another person details!!!!!!!!!! (linked to below)
          name='updateUserDetails'),  # to update another person details
-     path('testPatient/<int:pk>/', userAccount.testPatient, name='testPatient'),  # testing to see patient details
+    path('testPatient/<int:pk>/', userAccount.testPatient,
+         name='testPatient'),  # testing to see patient details
 
 
 
@@ -83,16 +84,26 @@ urlpatterns = [
     path('docReportView/', deepLearningModel.listUploadedReports,
          name='docReportView'),
     # for doctor to view xray image result (for testing)
-    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),
+    path('docXrayResult/', deepLearningModel.analyze_image2, name='analyze_image'),
     # for doctor to view list of all reports (for testing)
     path('docListAllReports/', deepLearningModel.listAllReports,
          name='docListAllReports'),
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
+    path('loadModel/', deepLearningModel.download_and_load_model, name='loadModel'),
+    path('predictImage/', deepLearningModel.predict, name='predictImage'),
+
+    # for researcher to upload model
+    path('researcherUploadModel/',
+         deepLearningModel.uploadModel, name='uploadModel'),
+    path('researcherDeleteModel/',deepLearningModel.deleteModel, name='deleteModel'),     
+    path('docListModels/', deepLearningModel.listModels, name='listModels'),
+
 
     path('api/', include('accessControl.urls'))
     # path('login/', accessControl.LoginView.as_view(), name='loginAuth'),
     # path('logout/', accessControl.LogoutView.as_view(), name='logout'),
+
 
 
 

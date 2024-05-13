@@ -1,10 +1,11 @@
+/* User box css starts */
 .userBox {
     background: rgb(233, 232, 232);
-    padding: 2rem;
-    border-radius: 1.5rem;
-    font-size: 1.5rem;
-    width: 100rem;
-    height: 8rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    width: 57rem;
+    height: 5rem;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -17,26 +18,27 @@
 .user-img-box {
     position: absolute;
     top: 50%;
-    left: 2rem;
+    left: 1.5rem;
     transform: translateY(-50%);    
     padding: 1rem;
-    border-radius: .5rem;
+    border-radius: .3rem;
 }
 
 .userImg{
-    width: 6rem; 
-    height: 6rem;
+    width: 3rem; 
+    height: 3rem;
     margin: 0;
 }
 
-.id, .name, .role {
+.id, .name, .role, .pid, .pname, .presult {
     position: absolute;
     color: black;
-    line-height: 4rem;
+    line-height: 3rem;
+    text-align: center;
 }
 
 .id {
-    left: 20rem; 
+    left: 10rem; 
 }
 
 .name {
@@ -44,28 +46,40 @@
 }
 
 .role {
-    right: 32rem; 
+    right: 17rem; 
+}
+
+.pid {
+    left: 11rem; 
+}
+
+.pname {
+    left: calc(53% - 5rem);
+}
+
+.presult {
+    right: 9rem;
 }
 
 .viewInfoBtn:hover{
-    color: white;
-    background: var(--green);
-    letter-spacing: .1rem;
+    /* color: var(--);
+    background: var(--green); */
+    letter-spacing: .05rem;
     display: block;
 }
 
 .viewInfoBtn {
     position: absolute;
-    right: 2rem;
-    color: black;
-    background: var(--yellow);
+    right: 1rem;
+    color: var(--brown);
+    background: #9f947d;
     border-radius: .5rem;
     cursor: pointer;
     margin: 3rem;
-    width: 15rem; 
-    height: 4rem;
+    width: 10rem; 
+    height: 3rem;
     text-align: center;
-    line-height: 4rem;
+    line-height: 3rem;
 }
 
 .viewInfoBtn a {
@@ -73,3 +87,4 @@
     width: 100%;
     height: 100%; 
 }
+/* User box css ends */

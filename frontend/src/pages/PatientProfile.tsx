@@ -1,61 +1,57 @@
-import Header from './Header';
-import '../../../static/patient/css/Profile.css';
-import profileImg from '../../../static/images/unknownPerson.jpg';
-import { Link } from 'react-router-dom';
+import Header from "./templates/Header";
+import "../../../static/patient/css/Profile.css";
+import ProfileCard from "../pages/templates/ProfileCard";
+import { useEffect, useState } from "react";
 
 function PatientProfile() {
+    const [patientProfile, setPatientProfile] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const res = await fetch("/baseUrl/patientProfile/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                if (!res.ok) {
+                    throw new Error("http error: status " + res.status);
+                }
+                const data = await res.json();
+                setPatientProfile(data);
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+        };
+        fetchdata();
+    }, []);
+
     return (
         <div>
-            <Header userRole={'patient'} />
+            <Header userRole={"patient"} />
 
             {/* Profile starts */}
-            <section>
-                <h1 id="patientProfile">My Profile</h1>
-
-                <div id="tablediv">
-                    <img src={profileImg} id="patientImg" alt="Patient" />
-                    <table id="infoTable">
-                        <tbody>
-                            <tr>
-                                <th><label htmlFor="id">Patient ID:</label></th>
-                                <td>T0992</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="name">Patient Name:</label></th>
-                                <td>Bryant Ng</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="age">Age:</label></th>
-                                <td>37</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="gender">Gender:</label></th>
-                                <td>Male</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="contact">Contact number:</label></th>
-                                <td>+65 7788 9900</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="email">Email:</label></th>
-                                <td>bryantng@gmail.com</td>
-                            </tr>
-
-                            <tr>
-                                <th><label htmlFor="status">Covid-19 Diagnosis status:</label></th>
-                                <td>Pending</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="btn">
-                    <Link id="editBtn" to="/PatientEditProfile">Edit</Link>
+            <section id="patientProfilePage">
+                <h1 id="profileTitle">My Profile</h1>
+                <div id="patientProfileCard">
+                    {patientProfile && (
+                        <ProfileCard
+                            id={patientProfile.id}
+                            name={patientProfile.name}
+                            username={patientProfile.username}
+                            password={patientProfile.password}
+                            role={patientProfile.role}
+                            phone_number={patientProfile.phone_number}
+                            email={patientProfile.email}
+                            pageContext="profile"
+                        />
+                    )}
                 </div>
             </section>
             {/* Profile ends */}

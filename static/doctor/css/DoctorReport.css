@@ -1,5 +1,5 @@
 /* Title css starts */
-#userAccTitle{
+#doctorReportTitle{
     padding-bottom: 10px;
     font-size: 2rem;
     color: var(--green);
@@ -17,54 +17,30 @@
 /* Title css ends */
 
 /* Search and Create user css starts */
-.searchCreate {
+.searchBox {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     position: fixed;
-    z-index: 1001;
-    top: 15%;
+    /* z-index: 1001; */
+    top: 20%;
     left: 50%;
     transform: translateX(-50%);
 }
 
-#createUser{
-    margin: 3rem auto; 
-    width: 10rem; 
-    height: 2.5rem;
-    text-align: center; 
-    justify-content: center;
-    font-size: 1rem;
-    color: var(--green);
-    background: var(--yellow);
-    border-radius: .3rem;
-    cursor: pointer;
-    line-height: 3rem;
-    margin-left: 1rem;
-    box-shadow: 0 0 15px rgba(93, 92, 92, 0.3);
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-
-}
-
-#createUser:hover{
-    letter-spacing: .05rem;
-}
-
-.searchContainer {
+.searchBar {
     display: flex;
     align-items: center;
 }
 
-.searchContainer input[type="text"] {
+.searchBar input[type="text"] {
     width: calc(100% - 40px); 
     padding-right: 30px;
     background-color: #cfc4b0;
 }
 
-#searchInput {
+#searchInputPatient {
     color: var(--brown);
     font-size: 1rem;
     border-radius: .3rem;
@@ -110,17 +86,17 @@
     transform: translateX(-50%);
 }
 
-#titleId {
+#patientId {
     margin-left: 9rem; 
     padding: 6px ;
 }
 
-#titleName {
-    margin-left: 7rem;
+#patientName {
+    margin-left: 9rem;
     padding: 6px ;
 }
 
-#titleRole {
+#patientResult {
     margin-left: 12rem;
     padding: 6px ;
 }

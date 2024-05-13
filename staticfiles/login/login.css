@@ -21,7 +21,7 @@
 /* The entire web container */
 #container {
     display: flex;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 /* Side by side section */

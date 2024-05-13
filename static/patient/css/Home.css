@@ -1,0 +1,72 @@
+#home-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#image-container {
+  flex: 0 0 auto; 
+}
+
+#homeImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+}
+
+#content-container {
+  position: relative;
+  max-width: 50%;
+  height: max-content;
+  padding: 2rem;
+  background-color: var(--yellow); 
+  border-radius: 2rem;
+}
+
+#header {
+  font-family: 'Times New Roman', Times, serif;
+  padding-bottom: .5rem;
+  font-size: 3rem;
+  color: var(--green);
+  text-shadow: 2px 2px 4px rgba(109, 107, 107, 0.5);
+}
+
+#subtitle {
+  padding-bottom: 1rem;
+  color: var(--brown);
+}
+
+#about-us-paragraph {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.btn-container {
+  position: relative; 
+}
+
+#viewBtn {
+  color: var(--yellow);
+  position: relative;
+  background: #9f947d;
+  border-radius: .5rem;
+  cursor: pointer;
+  width: auto; 
+  height: 3rem;
+  text-align: center;
+  padding: 0rem 2rem;
+  display: inline-block;
+  line-height: 3rem;
+}
+
+#viewBtn:hover{
+  color: var(--yellow);
+  background: var(--green);
+  letter-spacing: .1rem;
+} 

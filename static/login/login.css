@@ -1,94 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
-
-:root{
-  --green:#267b83;
-  --white:#D1D0D0;
-  --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
+/* Global css starts */
+:root {
+    --green: #1e4b43;
+    --yellow:#f7f2ec;
+    --brown: #7a644a;
+    --box-shadow: 0 .5rem 1.5rem rgb(255, 255, 255);
 }
 
 *{
-    margin: 0;
-    font-family: 'Joan', serif;
-    color: #333;
-    margin: 0; padding: 0;
+    font-family: 'Open Sans';
+    color: #4a4a4a;
     box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
+    outline: none;
+    border: none;
     transition: all .2s linear;
-  }
-
-/* The entire web container */
-#container {
-    display: flex;
-    height: 100vh;
+    margin: 0; padding: 0;
+    text-decoration: none;
 }
 
-/* Side by side section */
-#loginSection,
-#logoSection {
-  flex: 1;
-  padding: 20px;
+body {
+    background-color: var(--yellow);
 }
 
+/* Global css ends */
+
+/* Login Page css starts*/
 #loginSection {
-    background-color: white; 
-    display: grid;
+    display: flex;
     align-items: center;
-}
-  
-#logoSection{
-    background-color: var(--green); 
-    display: grid;
-    align-items: center;
-}
-
-#loginHeading {
-    margin: 0 auto;
-    max-width: 400px;
+    height: 100vh;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, var(--green), white);
 }
 
 #img-box {
-    position: relative;
-    height: fit-content;
+    padding-bottom: 3rem;
+    padding-top: 7rem;
     width: fit-content;
-    margin-bottom: 2rem;
-    border-radius: .5rem;
-    overflow: hidden;
+    height: fit-content;
 }
 
-#logoImg {
-    width: 90%; 
-    height: 90%;
+#logo_login {
+    width: 18rem;
+    height: 7rem;
 }
 
-#welcomeHeading {
-    margin: 0 auto;
-    max-width: 400px;
+#loginForm, #signUpForm {
+    background-color: white;
+    border-radius: 5%;
+    box-shadow: 0 0 20px rgba(93, 92, 92, 0.5);
+    padding: 40px 30px 30px;
+    font-size: 1rem;
 }
 
-/* Bordered form */
+.heading {
+    text-align: center; 
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 form {
-    border: 3px solid rgb(149, 149, 149);
     margin: 0 auto;
     max-width: 400px;
-    padding: 16px 16px 30px;
 }
-    
+
+.label, select, option, button {
+    font-size: 1rem;
+}
+
 /* Full-width inputs and drop down list*/
-input[type=password], input[type=text], select {
+input[type=password],
+input[type=text],
+select {
     border: 1px solid #ccc;
     display: inline-block;
     margin: 8px 0;
     padding: 12px 20px;
     width: 100%;
+    height: 3rem;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-    
+
 /* Buttons */
-button {
+.loginPageBtn {
     background-color: var(--green);
     border-radius: 20px;
     color: white;
@@ -98,25 +95,13 @@ button {
     padding: 14px 20px;
     width: 100%;
 }
-  
-/* Center the logo image inside this container
-.imgcontainer {
-    margin: 24px 0 12px 0;
-    text-align: center;
-}
-  
-/* Logo image */
-/* .logo {
-    border-radius: 50%;
-    width: 40%;
-} */
-  
+
 /* The "Forgot password" text */
 .forget-password {
     float: right;
     font-size: 13px;
 }
-  
+
 /* Custom alert */
 .custom-alert {
     background-color: #f8d7da;
@@ -128,8 +113,9 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-  
+
 /* Message */
 .message {
     color: #1c7226;
 }
+/* Login Page css ends*/

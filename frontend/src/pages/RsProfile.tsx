@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import ProfileCard from "./templates/ProfileCard";
 import Header from "./templates/Header";
-import { useEffect, useState } from "react";
 import "../../../static/patient/css/Profile.css";
 
 const App = () => {
-    const [docProfile, setDocProfile] = useState<any>(null);
+    const [researcherProfile, setResearcherProfile] = useState<any>(null);
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -24,7 +24,7 @@ const App = () => {
                     throw new Error("http error: status " + res.status);
                 }
                 const data = await res.json();
-                setDocProfile(data);
+                setResearcherProfile(data);
             } catch (error) {
                 console.error("Fetch error:", error);
             }
@@ -34,25 +34,24 @@ const App = () => {
 
     return (
         <div>
-            <Header userRole="doctor" />
+            <Header userRole="researcher" />
             <section id="patientProfilePage">
                 <h1 id="profileTitle">My Profile</h1>
                 <div id="patientProfileCard">
-                    {docProfile && (
+                    {researcherProfile && (
                         <ProfileCard
-                            id={docProfile.id}
-                            name={docProfile.name}
-                            username={docProfile.username}
-                            password={docProfile.password}
-                            role={docProfile.role}
-                            phone_number={docProfile.phone_number}
-                            email={docProfile.email}
+                            id={researcherProfile.id}
+                            name={researcherProfile.name}
+                            username={researcherProfile.username}
+                            password={researcherProfile.password}
+                            role={researcherProfile.role}
+                            phone_number={researcherProfile.phone_number}
+                            email={researcherProfile.email}
                             pageContext="profile"
                         />
                     )}
                 </div>
             </section>
-            {/* Profile ends */}
         </div>
     );
 };

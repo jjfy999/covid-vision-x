@@ -33,7 +33,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 DEBUG = os.environ.get("DEBUG")
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236','fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236',
+                 'fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'accessControl',
     'userAccount',
     'deepLearningModel',
+    'storages',
     'test'
 
 ]
@@ -112,8 +114,8 @@ DATABASES = {
 }
 
 
-AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY'
-AWS_SECRET_ACCESS_KEY = 'AWS_SECRET_KEY'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
 AWS_S3_SIGNATURE_NAME = 's3v4'
 AWS_S3_REGION_NAME = 'ap-southeast-1'
 AWS_S3_FILE_OVERWRITE = False
@@ -121,8 +123,9 @@ AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
 
 AWS_STORAGE_BUCKET_NAME = 'fypimagess'
-# AWS_STORAGE_BUCKET_NAME_MODELS = 'fypmodelss'
+AWS_SECOND_STORAGE_BUCKET_NAME = 'fypmodelss'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 '''
 # Define storage backends for different buckets
 class CustomS3Boto3Storage(S3Boto3Storage):
@@ -206,8 +209,8 @@ REST_FRAMEWORK = {
 }
 '''
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,
@@ -245,4 +248,5 @@ SIMPLE_JWT = {
 }
 
 # Setting for cors header
-CORS_ALLOW_ALL_ORIGINS = True # All all url to hit apis. Changed once we can confirm the whitelisted url
+# All all url to hit apis. Changed once we can confirm the whitelisted url
+CORS_ALLOW_ALL_ORIGINS = True

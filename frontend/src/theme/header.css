@@ -1,138 +1,116 @@
-@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
-
-/* Basic css starts */
-:root{
-    --green:#267b83;
-    --yellow:#ecbb50d7;
-    --box-shadow:0 .5rem 1.5rem rgb(255, 255, 255);
-}
-*{
-    font-family: 'Joan', serif;
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border: none;
-    text-transform: capitalize;
-    transition: all .2s linear;
-}
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 5.5rem;
-    scroll-behavior: smooth;
-}
-body{
-    background-color: white;
-}
-/* Basic css ends */
-
-/* Header part css starts */
+/* Header css starts */
 header{
     position: fixed;
     top: 0; left: 0; right: 0;
     background: var(--green);
-    padding: 1rem 7%;
+    padding: 0.75rem 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
     box-shadow: var(--box-shadow);
 }
+
 #logoImgBox {
     position: relative;
     height: fit-content;
     width: fit-content;
-    border-radius: .5rem;
+    border-radius: .25rem;
     overflow: hidden;
     display: grid;
     align-items: center;
 }
+
 #logoImg {
-    width: 12rem; 
-    height: 5rem;
+    width: 9rem; 
+    height: 3.75rem;
 }
 
 header .navbar a{
-    font-size: 1.7rem;
-    border-radius: .5rem;
-    padding: .5rem 1.5rem;
-    color: white;
-    margin-right: 10px;
-}
-header .navbar a.active{
-    color:white;
-    background: var(--yellow);
+    font-size: 1rem;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    color: var(--yellow);
+    margin-right: 8px;
 }
 
-header .navbar a:hover {
-    color:var(--yellow);
+header .navbar a.active{
+    color:var(--brown);
+    background: var(--yellow);
 }
 
 header .icons i, header .icons a{
     cursor: pointer;
-    margin-left: .5rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    width: 3rem;
+    margin-left: .25rem;
+    height: 3rem;
+    line-height: 3rem;
+    width: 2rem;
     text-align: center;
-    font-size: 1.7rem;
-    color: var(--green);
+    font-size: 1.2rem;
+    color: var(--brown);
     border-radius: 50%;
     background: white;
 }
+
 header .icons i:hover, header .icons a:hover{
-    color: white;
-    background: var(--yellow);
+    color: var(--yellow);
+    background: var(--brown);
     transform: rotate(360deg);
+}
+
+header .icons {
+    position: relative;
+    z-index: 2;
+    display: flex;
 }
 header .icons #menu-bars{
     display: none;
 }
-/* Header part css ends*/
 
-/* Media queries starts */
-@media (max-width:991px){
-    html{
-        font-size: 55%;
-    }
-    header{
-        padding: 1rem 2rem;
-    }
-    section{
-    padding: 2rem;
-    }
+header .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1;
 }
-@media (max-width:768px){
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-    header .navbar{
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: #2E2E2E;
-        border-top: 1rem solid var(--black);
-        border-bottom: 1rem solid var(--black);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-    header .navbar.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    }
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #2E2E2E;
-    }
-    #search-form #search-box{
-        width: 90%;
-        margin: 0 1rem;
-    }
+
+header .dropdown-menu a {
+    color: var(--brown);
+    padding: 5px;
+    text-decoration: none;
+    margin-bottom: 5px;
 }
-@media (max-width:991px){
-    html{
-        font-size: 50%;
-    } 
+
+header .dropdown-menu a:hover {
+    color: var(--yellow);
+    background-color: var(--brown);
 }
-/* Media queries ends */
+
+header .patient-tab {
+    display: inline-block;
+}
+
+header .patient-tab button {
+    font-size: 1rem;
+    border: none;
+    background-color: transparent;
+    color: var(--yellow);
+    margin-right: 8px;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+header .patient-tab button.active {
+    color: var(--brown);
+    background-color: var(--yellow);
+}
+
+/* Header css ends */
