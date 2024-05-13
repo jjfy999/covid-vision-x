@@ -325,7 +325,7 @@ def predict(request):
             status = "Covid" if predictions < 0.5 else "Normal"
 
             # Get the patient ID from the request
-            patient_id = request.POST.get('id')
+            patient_id = request.POST.get('Id')
 
             # Retrieve the patient instance using the provided ID
             try:
