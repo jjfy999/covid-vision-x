@@ -40,7 +40,7 @@ const App = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     height: "calc(100vh - 350px)",
-                    marginTop: "100px",
+                    marginTop: "130px",
                 }}
             >
                 <section id="researcherProfilePage">
