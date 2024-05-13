@@ -2,6 +2,7 @@ import io
 import os
 import tempfile
 from datetime import date
+import cv2
 
 import boto3
 import h5py
@@ -318,8 +319,8 @@ def download_and_load_model(model_path):
     print(models[model_path])
     return models[model_path]
 
-
-@api_view(['POST'])
+'''
+@api_view(['POST'])             #DO NOT DELETE DO NOT DELETE AAAAAAAAAAAAAAAAAAAA
 def predict(request):
     """
     Predicts using the specified model.
@@ -369,6 +370,92 @@ def predict(request):
             # Create the report
             report = Report.objects.create(
                 status=status,
+                patient_name=patient.name,
+                date=date.today(),
+                patient_id=patient,
+                approved=False,
+                image=image_file.name  # Save the image path instead of the file itself
+            )
+
+            return JsonResponse({}, json_dumps_params={'indent': 2}, safe=False, status=200)
+        else:
+            return JsonResponse({}, status=400)
+    else:
+        # Handle the case where model download/loading failed
+        return JsonResponse({"error": "Failed to download the model.", "status": 400})
+'''
+
+
+@api_view(['POST'])
+def predict(request):           #yongchuen model
+    """
+    Predicts using the specified model.
+    Downloads and loads the model if not already loaded.
+    """
+    model_path = request.POST.get('model_path')
+    model = download_and_load_model(model_path)
+    if model:
+        if request.method == 'POST':
+            # Get the image from the request
+            image_file = request.FILES['file']
+            # Perform any preprocessing on the image
+            # For example, resize the image to match the input size of your model
+            image_data = image_file.read()
+
+            image_np = np.frombuffer(image_data, np.uint8)
+            image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+            # Resize the image to match the input size of your model
+            image = cv2.resize(image, (256,256))
+
+            # Normalize the image
+            image_array = image / 255.0
+
+            # Expand dimensions to match the model input shape
+            processed_image = np.expand_dims(image_array, axis=0)
+
+            #image_tensor = tf.image.decode_image(image_data, channels=3)
+            #resized_image = tf.image.resize(image_tensor, (256, 256))
+            #normalized_image = resized_image / 255.0
+            #processed_image = tf.expand_dims(normalized_image, axis=0)
+
+            bucket_name = 'fypimagess'
+
+            # Create an S3 client using settings
+            s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                                     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                                     region_name=settings.AWS_S3_REGION_NAME)
+
+            # Upload image to S3 bucket
+            s3_client.put_object(
+                Body=image_data, Bucket=bucket_name, Key=image_file.name)
+
+            # Make predictions using the model
+            prediction = model.predict(processed_image)
+
+
+            # Return the index of the highest probability class
+            prediction_index= np.argmax(prediction, axis=1)
+
+            class_labels = ['COVID', 'Normal', 'Pneumonia']
+            predicted_class = class_labels[prediction_index[0]]
+
+            # Determine status based on predictions
+
+
+            # Get the patient ID from the request
+            patient_id = request.POST.get('Id')
+
+            # Retrieve the patient instance using the provided ID
+            try:
+                patient = Patient.objects.get(pk=patient_id)
+            except Patient.DoesNotExist:
+                return JsonResponse({"error": "Patient not found."}, status=400)
+
+            # Create the report
+            report = Report.objects.create(
+                status=predicted_class,
                 patient_name=patient.name,
                 date=date.today(),
                 patient_id=patient,
