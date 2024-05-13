@@ -268,6 +268,30 @@ def uploadModel(request):
     return JsonResponse({}, status=400)
 
 
+@api_view(['DELETE'])
+def deleteModel(request):
+    if request.method == 'DELETE':
+        model_name = request.POST.get('model_name')
+
+        # Specify the bucket name
+        bucket_name = 'fypmodelss'
+        
+        # Initialize S3 client
+        s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                                 aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
+        
+        # Specify the key (filename) of the model to delete
+        key = model_name
+        
+        try:
+            # Delete the object from S3 bucket
+            s3_client.delete_object(Bucket=bucket_name, Key=key)
+            return JsonResponse({"success": True, "message": "Model deleted successfully."})
+        except Exception as e:
+            return JsonResponse({"success": False, "message": str(e)}, status=500)
+
+    return JsonResponse({}, status=400)
+
 models = {}
 
 

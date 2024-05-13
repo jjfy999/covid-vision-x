@@ -96,6 +96,7 @@ urlpatterns = [
     # for researcher to upload model
     path('researcherUploadModel/',
          deepLearningModel.uploadModel, name='uploadModel'),
+    path('researcherDeleteModel/',deepLearningModel.deleteModel, name='deleteModel'),     
     path('docListModels/', deepLearningModel.listModels, name='listModels'),
 
 
