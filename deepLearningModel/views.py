@@ -503,11 +503,11 @@ def listModels(request):
 
 
 @api_view(['GET'])
-def showReport(request):
+def showReport(request,pk):
     try:    
 
         # Retrieve the report instance based on pk
-        report = Report.objects.get(pk=request.GET.get('id'))
+        report = Report.objects.get(pk=pk)
     except Report.DoesNotExist:
         # If report with the given pk does not exist, return 404 error
         return JsonResponse({'error': 'Report not found.'}, status=404)
