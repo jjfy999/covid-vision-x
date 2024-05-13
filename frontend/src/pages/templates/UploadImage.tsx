@@ -117,7 +117,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const response = await fetch("baseUrl/uploadModel/", {
+                const response = await fetch("baseUrl/researcherUploadModel/", {
                     method: "POST",
                     body: formData,
                     headers: {
