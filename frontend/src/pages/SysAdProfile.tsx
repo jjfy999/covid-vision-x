@@ -4,7 +4,7 @@ import ProfileCard from "../pages/templates/ProfileCard";
 import { useEffect, useState } from "react";
 
 const SysadProfile = () => {
-    const [adminProfile, setAdminProfile] = useState(null);
+    const [adminProfile, setAdminProfile] = useState<any>(null);
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -47,7 +47,7 @@ const SysadProfile = () => {
                             username={adminProfile.username}
                             password={adminProfile.password}
                             role={adminProfile.role}
-                            contactNumber={adminProfile.phone}
+                            phone_number={adminProfile.phone}
                             email={adminProfile.email}
                             pageContext="profile"
                         />

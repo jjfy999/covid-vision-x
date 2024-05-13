@@ -47,7 +47,7 @@ function PatientProfile() {
                             username={patientProfile.username}
                             password={patientProfile.password}
                             role={patientProfile.role}
-                            contactNumber={patientProfile.phone_number}
+                            phone_number={patientProfile.phone_number}
                             email={patientProfile.email}
                             pageContext="profile"
                         />

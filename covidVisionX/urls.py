@@ -84,7 +84,7 @@ urlpatterns = [
     path('docReportView/', deepLearningModel.listUploadedReports,
          name='docReportView'),
     # for doctor to view xray image result (for testing)
-    path('docXrayResult/', deepLearningModel.analyze_image, name='analyze_image'),
+    path('docXrayResult/', deepLearningModel.analyze_image2, name='analyze_image'),
     # for doctor to view list of all reports (for testing)
     path('docListAllReports/', deepLearningModel.listAllReports,
          name='docListAllReports'),
@@ -95,6 +95,7 @@ urlpatterns = [
 
     # for researcher to upload model
     # path('researcherUploadModel/', deepLearningModel.uploadModel, name='uploadModel'),
+    path('docListModels/', deepLearningModel.listModels, name='listModels'),
 
 
     path('api/', include('accessControl.urls'))

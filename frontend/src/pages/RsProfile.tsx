@@ -60,7 +60,7 @@ const App = () => {
                                 username={researcherProfile.username}
                                 password={researcherProfile.password}
                                 role={researcherProfile.role}
-                                contactNumber={researcherProfile.phone_number}
+                                phone_number={researcherProfile.phone_number}
                                 email={researcherProfile.email}
                                 pageContext="profile"
                             />

@@ -212,7 +212,7 @@ def analyze_image2(request):
         predictions = model.predict(processed_image)
 
         # Determine status based on predictions
-        status = "covid" if predictions < 0.5 else "normal"
+        status = "Covid" if predictions < 0.5 else "Normal"
 
         # Get the patient ID from the request
         patient_id = request.POST.get('id')
@@ -241,7 +241,7 @@ def analyze_image2(request):
         # Return the result to the user
         result = {"status": status, "patientName": patient.name,
                   "date": str(date.today())}
-        return JsonResponse(result, json_dumps_params={'indent': 2}, safe=False)
+        return JsonResponse(result, json_dumps_params={'indent': 2}, safe=False, status=200)
 
     return JsonResponse({}, status=400)
 
@@ -359,3 +359,33 @@ def predict(request):
     else:
         # Handle the case where model download/loading failed
         return None
+
+
+def listModels(request):
+    """
+    List all objects in the specified S3 bucket.
+
+    Args:
+    - request: Django HttpRequest object.
+
+    Returns:
+    - JsonResponse: JSON response containing information about each object.
+    """
+    # Replace 'your_bucket_name' with your actual S3 bucket name
+    bucket_name = 'fypmodelss'
+
+    # Create an S3 client
+    s3_client = boto3.client('s3')
+
+    # List objects in the bucket
+    response = s3_client.list_objects_v2(Bucket=bucket_name)
+
+    # Extract keys from the objects
+    keys = [obj['Key'] for obj in response.get('Contents', [])]
+
+    # Construct JSON response
+    data = {
+        'keys': keys
+    }
+
+    return JsonResponse(data, safe=False, status=200)
