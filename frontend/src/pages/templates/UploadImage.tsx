@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import { SelectChangeEvent } from "@mui/material";
+import { prefetchDNS } from "react-dom";
 
 type UserRole = "doctor" | "researcher";
 
@@ -26,7 +27,7 @@ interface UploadProps {
 const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [patientName, setPatientName] = useState("");
+    const [patientId, setPatientId] = useState("");
     //const [modelType, setModelType] = useState('');
     const [modelTypes, setModelTypes] = useState<
         Array<{ id: string; name: string }>
@@ -60,10 +61,41 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
             setPreviewUrl(URL.createObjectURL(file));
         }
     };
+    const handleUpload = async () => {
+        if (selectedFile && patientId) {
+            const formData = new FormData();
+            formData.append("Id", patientId);
+            formData.append("file", selectedFile);
+            formData.append("model_path", selectModelType);
 
-    const handleUpload = () => {
-        if (selectedFile && patientName) {
-            onFileUpload(selectedFile, patientName);
+            console.log(formData);
+
+            try {
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const response = await fetch("baseUrl/predictImage/", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error(
+                    "There was a problem with the fetch operation: ",
+                    error
+                );
+            }
+
             URL.revokeObjectURL(previewUrl!);
         } else {
             alert("Please select a file and enter the name.");
@@ -131,10 +163,10 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                         </Box>
                         <TextField
                             fullWidth
-                            label="Patient Name"
+                            label="Patient Id"
                             variant="standard"
-                            value={patientName}
-                            onChange={(e) => setPatientName(e.target.value)}
+                            value={patientId}
+                            onChange={(e) => setPatientId(e.target.value)}
                             sx={{ mb: 2 }}
                         />
                         <FormControl fullWidth sx={{ mb: 2 }}>
@@ -151,7 +183,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                                 {modelTypes.map((modelType) => (
                                     <MenuItem
                                         key={modelType.id}
-                                        value={modelType.id}
+                                        value={modelType.name}
                                     >
                                         {modelType.name}
                                     </MenuItem>
@@ -164,7 +196,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                             onClick={handleUpload}
                             disabled={
                                 !selectedFile ||
-                                !patientName ||
+                                !patientId ||
                                 !selectModelType ||
                                 modelTypes.length === 0
                             }
@@ -230,15 +262,15 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                             fullWidth
                             label="Model Name"
                             variant="standard"
-                            value={patientName}
-                            onChange={(e) => setPatientName(e.target.value)}
+                            value={patientId}
+                            onChange={(e) => setPatientId(e.target.value)}
                             sx={{ mb: 2 }}
                         />
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleUpload}
-                            disabled={!selectedFile || !patientName}
+                            disabled={!selectedFile || !patientId}
                         >
                             Analyse
                         </Button>

@@ -270,7 +270,8 @@ def download_and_load_model(model_path):
     """Downloads and loads the model from S3."""
 
     if model_path not in models:
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                                 aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
 
         try:
             print(model_path)
@@ -284,7 +285,7 @@ def download_and_load_model(model_path):
             return JsonResponse({"error": "Failed to download the model."})
 
     # Write byte data to temporary HDF5 file
-        with tempfile.NamedTemporaryFile(suffix=".h5") as temp_file:
+        with tempfile.NamedTemporaryFile(suffix=".h5" or ".hdf5") as temp_file:
             temp_file.write(model_data)
             models[model_path] = tf.keras.models.load_model(temp_file.name)
             print(models)
@@ -299,15 +300,15 @@ def predict(request):
     Predicts using the specified model.
     Downloads and loads the model if not already loaded.
     """
-
-    model = download_and_load_model(request.model_path)
+    model_path = request.POST.get('model_path')
+    model = download_and_load_model(model_path)
     print('model')
     if model:
         print("hello111")
         if request.method == 'POST':
             print("hello")
             # Get the image from the request
-            image_file = request.file['image']
+            image_file = request.POST.get['image']
 
             # Perform any preprocessing on the image
             # For example, resize the image to match the input size of your model
@@ -369,7 +370,8 @@ def listModels(request):
     bucket_name = 'fypmodelss'
 
     # Create an S3 client
-    s3_client = boto3.client('s3',aws_access_key_id=settings.AWS_ACCESS_KEY_ID,aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,region_name=settings.AWS_S3_REGION_NAME)
+    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
 
     # List objects in the bucket
     response = s3_client.list_objects_v2(Bucket=bucket_name)
