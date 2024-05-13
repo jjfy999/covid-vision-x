@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'accessControl',
     'userAccount',
     'deepLearningModel',
+    'test'
 
 ]
 
