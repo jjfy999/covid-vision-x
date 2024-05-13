@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "../../theme/header.css";
 import { useAuth } from "./AuthContexr";
 
-type UserRole = "patient" | "sysad" | "doctor" | "researcher";
+type UserRole = "patient" | "system_admin" | "doctor" | "researcher";
 
 interface HeaderProps {
     userRole: UserRole; // Define the type of the userRole prop
@@ -37,12 +37,13 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "patient" && (
                     <>
                         <Link
-                            to="/HomePage"
+                            to="/HomePage" 
                             className={
                                 location.pathname === "/HomePage"
                                     ? "active"
                                     : "home"
                             }
+                            state={{ userRole: userRole }}
                         >
                             Home
                         </Link>
@@ -69,8 +70,19 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         </Link>
                     </>
                 )}
-                {userRole === "sysad" && (
+                {userRole === "system_admin" && (
                     <>
+                        <Link
+                            to="/HomePage" 
+                            className={
+                                location.pathname === "/HomePage"
+                                    ? "active"
+                                    : "home"
+                            }
+                            state={{ userRole: userRole }}
+                        >
+                            Home
+                        </Link>
                         <Link
                             to="/UserAcc"
                             className={
@@ -99,6 +111,17 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 )}
                 {userRole === "doctor" && (
                     <>
+                        <Link
+                            to="/HomePage" 
+                            className={
+                                location.pathname === "/HomePage"
+                                    ? "active"
+                                    : "home"
+                            }
+                            state={{ userRole: userRole }}
+                        >
+                            Home
+                        </Link>
                         {/* <div onClick={handlePatientMenuClick}> */}
                         <Link
                             to="#"
@@ -139,6 +162,17 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 )}
                 {userRole === "researcher" && (
                     <>
+                        <Link
+                            to="/HomePage" 
+                            className={
+                                location.pathname === "/HomePage"
+                                    ? "active"
+                                    : "home"
+                            }
+                            state={{ userRole: userRole }}
+                        >
+                            Home
+                        </Link>
                         <Link
                             to="/Model"
                             className={

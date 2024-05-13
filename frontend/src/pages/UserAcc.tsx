@@ -72,7 +72,7 @@ const UserAccount = () => {
 
     return (
         <div>
-            <Header userRole={"sysad"} />
+            <Header userRole={"system_admin"} />
 
             <div className="userAccPage">
                 {/* User Account Section */}

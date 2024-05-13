@@ -36,7 +36,7 @@ function EditProfile() {
 
   return (
     <div>
-      <Header userRole={'sysad'} />
+      <Header userRole={'system_admin'} />
 
 
       {/* Edit Profile section starts */}

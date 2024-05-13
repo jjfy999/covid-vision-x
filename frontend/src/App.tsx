@@ -31,6 +31,7 @@ const router = createBrowserRouter(
         <Route>
             <Route path="/loginpage" element={<LoginPage />} />
             <Route path="/HomePage" element={<HomePage />} />
+
             <Route path="/" element={<PrivateRoute />}>
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
                     <Route path="/Rsprofile" element={<RsProfile />} />
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
                 <Route path="/DoctorUploadImage" element={<DoctorUploadImage />} />
                 <Route path="/DoctorNonUpdatedReport" element={<DNUR />} />
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
+                    {/* <Route path="/HomePage" element={<HomePage />} /> */}
                     <Route path="/report" element={<Report />} />
                     <Route
                         path="/PatientProfile"
