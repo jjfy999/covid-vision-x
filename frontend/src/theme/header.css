@@ -92,4 +92,25 @@ header .dropdown-menu a:hover {
     color: var(--yellow);
     background-color: var(--brown);
 }
+
+header .patient-tab {
+    display: inline-block;
+}
+
+header .patient-tab button {
+    font-size: 1rem;
+    border: none;
+    background-color: transparent;
+    color: var(--yellow);
+    margin-right: 8px;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+header .patient-tab button.active {
+    color: var(--brown);
+    background-color: var(--yellow);
+}
+
 /* Header css ends */

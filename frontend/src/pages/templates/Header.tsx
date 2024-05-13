@@ -3,6 +3,7 @@ import logo_tran from "../../../../static/images/logo_transparent.png";
 import { Link, useLocation } from "react-router-dom";
 import "../../theme/header.css";
 import { useAuth } from "./AuthContexr";
+import { useNavigate } from 'react-router-dom';
 
 type UserRole = "patient" | "system_admin" | "doctor" | "researcher";
 
@@ -14,6 +15,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const location = useLocation();
     const { logoutUser } = useAuth();
     const isAccDetailPage = location.pathname.includes("/AccDetail");
+    const navigate = useNavigate();
 
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState(() => {
@@ -33,12 +35,25 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     });
 
     const handlePatientMenuClick = () => {
+        // setPatientMenuOpen(!patientMenuOpen);
+        // console.log(patientMenuOpen);
+        // if (patientMenuOpen == true) {
+        //     setActiveLink("Profile");
+        //     console.log("after close: ", patientMenuOpen);
+        // }
+
+        // if (!patientMenuOpen) {
+        //     // Open patient menu and change location to "/DoctorReport"
+        //     setPatientMenuOpen(true);
+        //     setActiveLink("Patient");
+        //     navigate("/DoctorReport");
+        // } else {
+        //     // Close patient menu and reset active link to "Profile"
+        //     setPatientMenuOpen(false);
+        //     setActiveLink("Profile");
+        // }
         setPatientMenuOpen(!patientMenuOpen);
-        console.log(patientMenuOpen);
-        if (patientMenuOpen == true) {
-            setActiveLink("Profile");
-            console.log("after close: ", patientMenuOpen);
-        }
+
     };
 
     React.useEffect(() => {
@@ -154,7 +169,23 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Home
                         </Link>
                         {/* <div onClick={handlePatientMenuClick}> */}
-                        <Link
+                        <div className="patient-tab">
+                            <button
+                                className={activeLink === "Patient" ? "active" : ""}
+                                onClick={handlePatientMenuClick}
+                            >
+                                Patient
+                            </button>
+                        {/* Render dropdown menu if the patientMenuOpen state is true */}
+                            {patientMenuOpen && (
+                                <div className="dropdown-menu">
+                                    <Link to="/DoctorReport">Patient Report</Link>
+                                    <Link to="/DoctorUploadImage">Upload X-ray Image</Link>
+                                    <Link to="/DoctorNonUpdatedReport">Non-Uploaded Report</Link>
+                                </div>
+                            )}
+                        </div>
+                        {/* <Link
                             to="#"
                             className={
                                 activeLink === "Patient" ? "active" : " "
@@ -167,7 +198,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Patient
                         </Link>
                         {/* </div> */}
-                        {patientMenuOpen && (
+                        {/* {patientMenuOpen && (
                             <div
                                 className="dropdown-menu"
                                 onClick={(event) => event.stopPropagation()}
@@ -180,7 +211,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                                     Non-Uploaded Report
                                 </Link>
                             </div>
-                        )}
+                        )} */} 
                         <Link
                             to="/doctorprofile"
                             className={
