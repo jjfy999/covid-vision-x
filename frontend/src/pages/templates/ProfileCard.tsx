@@ -28,6 +28,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [profile, setProfile] = useState({ ...props });
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+    const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
     const handleChange =
         (prop: keyof typeof profile) =>
@@ -48,13 +49,19 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
+            const updatedProfile = { ...profile };
+
+            if (!isPasswordChanged) {
+                delete updatedProfile.password;
+            }
+
             const response = await fetch("baseUrl/updateDetails/", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + token,
                 },
-                body: JSON.stringify(profile),
+                body: JSON.stringify(updatedProfile),
             });
 
             if (!response.ok) {
@@ -188,8 +195,10 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                     variant="outlined"
                                     fullWidth
                                     value={profile.password}
-                                    onChange={handleChange("password")}
-                                    disabled
+                                    onChange={(event) => {
+                                        handleChange("password")(event);
+                                        setIsPasswordChanged(true);
+                                    }}
                                 />
                             </ListItem>
                         </>
