@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'userAccount',
     'deepLearningModel',
     'storages',
+    'test'
 
 ]
 
