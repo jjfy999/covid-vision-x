@@ -24,6 +24,11 @@ from userAccount.models import Patient
 
 from .models import Report
 
+from storages.backends.s3boto3 import S3Boto3Storage
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+
+
 # Create your views here.
 # views.py
 
@@ -281,6 +286,7 @@ def download_and_load_model(model_path):
             print('success')
 
             model_data = response['Body'].read()
+            print("success2")
         except Exception as e:
             return JsonResponse({"error": "Failed to download the model."})
 
@@ -293,7 +299,7 @@ def download_and_load_model(model_path):
     print(models[model_path])
     return models[model_path]
 
-
+'''
 @api_view(['POST'])
 def predict(request):
     """
@@ -308,16 +314,20 @@ def predict(request):
         if request.method == 'POST':
             print("hello")
             # Get the image from the request
-            image_file = request.POST.get['image']
-
+            image_file = request.FILES['file']
+            print("bye")
             # Perform any preprocessing on the image
             # For example, resize the image to match the input size of your model
             image_data = image_file.read()
+            
             image_tensor = tf.image.decode_image(image_data, channels=3)
             resized_image = tf.image.resize(image_tensor, (256, 256))
             normalized_image = resized_image / 255.0
             processed_image = tf.expand_dims(normalized_image, axis=0)
+            print("jajaja")
 
+
+            image_name = default_storage.save(image_file.name, ContentFile(image_data))
             # Make predictions using the model
             predictions = model.predict(processed_image)
 
@@ -334,9 +344,13 @@ def predict(request):
                 return JsonResponse({"error": "Patient not found."}, status=400)
 
             # Save the image to the 'fypimagess' bucket
-            storage = get_storage_class(
-                'storages.backends.s3boto3.S3Boto3Storage')(bucket='fypimagess')
-            image_name = storage.save(image_file)
+            #storage = get_storage_class(
+                #'storages.backends.s3boto3.S3Boto3Storage')(bucket='fypimagess')
+            storage = get_storage_class('storages.backends.s3boto3.S3Boto3Storage')()
+            image_name = storage.save(image_name,image_data)
+
+
+
 
             # Create the report
             report = Report.objects.create(
@@ -346,6 +360,75 @@ def predict(request):
                 patient_id=patient,
                 approved=False,
                 image=image_name  # Save the image path instead of the file itself
+            )
+
+            return JsonResponse({}, json_dumps_params={'indent': 2}, safe=False, status=200)
+        else:
+            return JsonResponse({}, status=400)
+    else:
+        # Handle the case where model download/loading failed
+        return JsonResponse({"error": "Failed to download the model.", "status": 400})
+'''
+
+@api_view(['POST'])
+def predict(request):
+    """
+    Predicts using the specified model.
+    Downloads and loads the model if not already loaded.
+    """
+    model_path = request.POST.get('model_path')
+    model = download_and_load_model(model_path)
+    print('model')
+    if model:
+        print("hello111")
+        if request.method == 'POST':
+            print("hello")
+            # Get the image from the request
+            image_file = request.FILES['file']
+            print("bye")
+            # Perform any preprocessing on the image
+            # For example, resize the image to match the input size of your model
+            image_data = image_file.read()
+
+            image_tensor = tf.image.decode_image(image_data, channels=3)
+            resized_image = tf.image.resize(image_tensor, (256, 256))
+            normalized_image = resized_image / 255.0
+            processed_image = tf.expand_dims(normalized_image, axis=0)
+            print("jajaja")
+
+            bucket_name = 'fypimagess'
+
+            # Create an S3 client using settings
+            s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                                    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                                    region_name=settings.AWS_S3_REGION_NAME)
+
+            # Upload image to S3 bucket
+            s3_client.put_object(Body=image_data, Bucket=bucket_name, Key=image_file.name)
+
+            # Make predictions using the model
+            predictions = model.predict(processed_image)
+
+            # Determine status based on predictions
+            status = "Covid" if predictions < 0.5 else "Normal"
+
+            # Get the patient ID from the request
+            patient_id = request.POST.get('Id')
+
+            # Retrieve the patient instance using the provided ID
+            try:
+                patient = Patient.objects.get(pk=patient_id)
+            except Patient.DoesNotExist:
+                return JsonResponse({"error": "Patient not found."}, status=400)
+
+            # Create the report
+            report = Report.objects.create(
+                status=status,
+                patient_name=patient.name,
+                date=date.today(),
+                patient_id=patient,
+                approved=False,
+                image=image_file.name  # Save the image path instead of the file itself
             )
 
             return JsonResponse({}, json_dumps_params={'indent': 2}, safe=False, status=200)
