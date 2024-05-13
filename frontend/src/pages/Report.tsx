@@ -27,6 +27,7 @@ const Report = () => {
                 }
                 const data = await res.json();
                 setPatientReport(data);
+                console.log(data);
                 setOutcome(
                     data.status === "Positive" ? "covid" || "Covid" : "Negative"
                 );

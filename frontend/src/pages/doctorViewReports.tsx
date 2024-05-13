@@ -4,9 +4,9 @@ import NonUpdatedReport from "./templates/NonUpdatedReport";
 import { useParams } from "react-router-dom";
 import { ReportDetails } from "./UserAccInterface";
 
-const viewReportDetails = () => {
-    const { id } = useParams<{ id: string }>();
-    const [reportData, setReportData] = useState<ReportDetails[]>([]);
+const ViewReportDetails = () => {
+    const { id } = useParams();
+    const [reportData, setReportData] = useState<ReportDetails | null>(null);
 
     useEffect(() => {
         console.log(id);
@@ -16,7 +16,7 @@ const viewReportDetails = () => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const res = await fetch(`/baseUrl/docShowReport/${id}`, {
+                const res = await fetch(`/baseUrl/docShowReport/${id}/`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -24,6 +24,7 @@ const viewReportDetails = () => {
                     },
                 });
                 const data = await res.json();
+                console.log("id: ", id);
                 console.log(data);
                 setReportData(data);
             } catch (error) {
@@ -36,9 +37,17 @@ const viewReportDetails = () => {
     return (
         <>
             <Header userRole={"doctor"} />
-            <NonUpdatedReport ReportData={reportData} />
+            {reportData && (
+                <NonUpdatedReport
+                    id={reportData.patient_id}
+                    patient_name={reportData.patient_name}
+                    date={reportData.date}
+                    image={reportData.image}
+                    status={reportData.status}
+                />
+            )}
         </>
     );
 };
 
-export default viewReportDetails;
+export default ViewReportDetails;

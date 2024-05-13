@@ -2,9 +2,9 @@ import io
 import os
 import tempfile
 from datetime import date
-import cv2
 
 import boto3
+import cv2
 import h5py
 import numpy as np
 import tensorflow as tf
@@ -103,10 +103,7 @@ def analyze_image(request):  # not serializing the report data
 def listNonUploadedReports(request):
     reports = Report.objects.filter(approved=False)
     for report in reports:
-        print(report.image.name)
-        print(report.image)
         report.image = report.image.url
-        print(report.image)
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
@@ -182,10 +179,6 @@ def reportView(request):  # for patient to view their reports
 
     reports = Report.objects.filter(patient_id=patient, approved=True)
     for report in reports:
-        print(report.id)
-        print(report.patient_id_id)
-        print(report.patient_name)
-        print(report.status)
         if report.image:
             report.image = f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
 
@@ -275,14 +268,14 @@ def deleteModel(request):
 
         # Specify the bucket name
         bucket_name = 'fypmodelss'
-        
+
         # Initialize S3 client
         s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                                  aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
-        
+
         # Specify the key (filename) of the model to delete
         key = model_name
-        
+
         try:
             # Delete the object from S3 bucket
             s3_client.delete_object(Bucket=bucket_name, Key=key)
@@ -291,6 +284,7 @@ def deleteModel(request):
             return JsonResponse({"success": False, "message": str(e)}, status=500)
 
     return JsonResponse({}, status=400)
+
 
 models = {}
 
@@ -317,6 +311,7 @@ def download_and_load_model(model_path):
 
     print(models[model_path])
     return models[model_path]
+
 
 '''
 @api_view(['POST'])             #DO NOT DELETE DO NOT DELETE AAAAAAAAAAAAAAAAAAAA
@@ -386,7 +381,7 @@ def predict(request):
 
 
 @api_view(['POST'])
-def predict(request):           #yongchuen model
+def predict(request):  # yongchuen model
     """
     Predicts using the specified model.
     Downloads and loads the model if not already loaded.
@@ -406,7 +401,7 @@ def predict(request):           #yongchuen model
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
             # Resize the image to match the input size of your model
-            image = cv2.resize(image, (256,256))
+            image = cv2.resize(image, (256, 256))
 
             # Normalize the image
             image_array = image / 255.0
@@ -414,10 +409,10 @@ def predict(request):           #yongchuen model
             # Expand dimensions to match the model input shape
             processed_image = np.expand_dims(image_array, axis=0)
 
-            #image_tensor = tf.image.decode_image(image_data, channels=3)
-            #resized_image = tf.image.resize(image_tensor, (256, 256))
-            #normalized_image = resized_image / 255.0
-            #processed_image = tf.expand_dims(normalized_image, axis=0)
+            # image_tensor = tf.image.decode_image(image_data, channels=3)
+            # resized_image = tf.image.resize(image_tensor, (256, 256))
+            # normalized_image = resized_image / 255.0
+            # processed_image = tf.expand_dims(normalized_image, axis=0)
 
             bucket_name = 'fypimagess'
 
@@ -433,15 +428,13 @@ def predict(request):           #yongchuen model
             # Make predictions using the model
             prediction = model.predict(processed_image)
 
-
             # Return the index of the highest probability class
-            prediction_index= np.argmax(prediction, axis=1)
+            prediction_index = np.argmax(prediction, axis=1)
 
             class_labels = ['COVID', 'Normal', 'Pneumonia']
             predicted_class = class_labels[prediction_index[0]]
 
             # Determine status based on predictions
-
 
             # Get the patient ID from the request
             patient_id = request.POST.get('Id')
@@ -502,8 +495,8 @@ def listModels(request):
 
 
 @api_view(['GET'])
-def showReport(request,pk):
-    try:    
+def showReport(request, pk):
+    try:
 
         # Retrieve the report instance based on pk
         report = Report.objects.get(pk=pk)
@@ -518,4 +511,4 @@ def showReport(request,pk):
     data = serializer.data
 
     # Return the JSON response containing the serialized report data
-    return JsonResponse(data, json_dumps_params={'indent': 2},safe=False, status=200)
+    return JsonResponse(data, json_dumps_params={'indent': 2}, safe=False, status=200)

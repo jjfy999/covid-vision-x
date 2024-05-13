@@ -2,7 +2,6 @@ import "../../../static/systemadmin/css/AccDetail.css";
 import Header from "./templates/Header";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { sampleUsers } from "./sampleUserAcc";
 import { UserAccountDetails } from "./UserAccInterface";
 import ProfileCard from "./templates/ProfileCard";
 
