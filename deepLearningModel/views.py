@@ -212,7 +212,7 @@ def analyze_image2(request):
         predictions = model.predict(processed_image)
 
         # Determine status based on predictions
-        status = "covid" if predictions < 0.5 else "normal"
+        status = "Covid" if predictions < 0.5 else "Normal"
 
         # Get the patient ID from the request
         patient_id = request.POST.get('id')
