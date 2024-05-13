@@ -1,21 +1,21 @@
-import NonUpdatedReport from "./templates/NonUpdatedReport";
-import Header from "./templates/Header";
-import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import "../../../static/doctor/css/DoctorReport.css";
+import { useState, useEffect } from "react";
 import UserBox from "./templates/UserBox";
+import { FaSearch } from "react-icons/fa";
+import Header from "./templates/Header";
 
-const App = () => {
-    const [users, setUsers] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+// Combined Component
+const DoctorNUR = () => {
+    const [searchState, setSearchState] = useState<string>("");
+    const [reportData, setReportData] = useState<any>();
+
     useEffect(() => {
-        const fetchdata = async () => {
+        const fetchData = async () => {
             try {
                 const tokens = JSON.parse(
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                console.log("Token: ", token);
                 const res = await fetch("/baseUrl/docNonUploadedReports/", {
                     method: "GET",
                     headers: {
@@ -23,93 +23,51 @@ const App = () => {
                         Authorization: "Bearer " + token,
                     },
                 });
-                if (!res.ok) {
-                    throw new Error("http error: status " + res.status);
-                }
                 const data = await res.json();
-                setUsers(data);
+                console.log(data);
+                setReportData(data.reports);
             } catch (error) {
-                console.error("Fetch error:", error);
+                console.error("Error fetching user data:", error);
             }
         };
-        fetchdata();
+        fetchData();
     }, []);
-
-    const handleSearch = (searchTerm: string) => {
-        const filtered = users.filter(
-            (user) =>
-                user.id.toString().includes(searchTerm.toLowerCase()) ||
-                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                user.role.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredUsers(filtered);
-    };
-
-    useEffect(() => {
-        return () => {
-            setSearchTerm("");
-        };
-    }, []);
-
-    useEffect(() => {
-        setFilteredUsers(users);
-    }, [users]);
-
     return (
         <>
             <Header userRole="doctor" />
-            <div className="NUR">
-                {/* User Account Section */}
+            <div className="doctorReportPage">
                 <section>
-                    <h1 id="userAccTitle">User Accounts</h1>
-                    <div className="searchCreate">
-                        {/* Search bar */}
-                        <div className="searchContainer">
+                    <h1 id="doctorReportTitle">Non-Updated Reports</h1>
+                    <div className="searchBox">
+                        <div className="searchBar">
                             <button className="searchButton">
                                 <FaSearch />
                             </button>
                             <input
-                                id="searchInput"
+                                id="searchInputPatient"
                                 type="text"
-                                placeholder="Search user by ID..."
-                                value={searchTerm}
-                                onChange={(e) => {
-                                    setSearchTerm(e.target.value);
-                                    handleSearch(e.target.value);
-                                }}
+                                placeholder="Search"
+                                value={searchState}
+                                onChange={(e) => setSearchState(e.target.value)}
                             />
                         </div>
                     </div>
-                    {/* Item title bar */}
                     <div id="itemTitleBar">
-                        <p id="titleId">UserID</p>
-                        <p id="titleName">Name</p>
-                        <p id="titleRole">Role</p>
+                        <p id="titleId">Report ID</p>
+                        <p id="titleName">Patient Name</p>
+                        <p id="titleRole">Status</p>
                     </div>
                     <div id="userListContainer">
                         <div id="userList">
-                            {users && (
-                                <UserBox
-                                    users={filteredUsers}
-                                    context="account"
-                                />
+                            {reportData && (
+                                <UserBox users={reportData} context="report" />
                             )}
                         </div>
                     </div>
                 </section>
             </div>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                }}
-            >
-                <NonUpdatedReport />
-            </div>
         </>
     );
 };
 
-export default App;
+export default DoctorNUR;
