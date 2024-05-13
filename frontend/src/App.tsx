@@ -38,7 +38,7 @@ const router = createBrowserRouter(
                         element={<DoctorNUR />}
                     />
                     <Route
-                        path="/reportDetails/:reportId"
+                        path="/reportDetails/:id"
                         element={<ViewReportDetails />}
                     />
                     <Route

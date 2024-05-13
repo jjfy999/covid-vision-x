@@ -44,6 +44,7 @@ const CustomButton = styled(Button)({
 });
 
 interface ReportData {
+    id: string;
     patient_name: string;
     date: string;
     image: string;
@@ -51,34 +52,34 @@ interface ReportData {
 }
 
 const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
-    const [reportData, setReportData] = useState<ReportData>({
-        patient_name: "John Doe",
-        date: "2024-03-23",
-        image: "path_to_xray_image.png",
-        status: "covid", // Default status
-    });
+    const [overwrite, setOverwrite] = useState("");
 
-    useEffect(() => {
-        const fetchReportData = async () => {
-            try {
-                const response = await fetch("https://api.example.com/report");
-                const data = await response.json();
-                setReportData(data);
-            } catch (error) {
-                console.error("Failed to fetch report data:", error);
+    const handleStatusChange = (event) => {
+        setOverwrite(event.target.value as string);
+    };
+
+    const handleDelete = async () => {
+        // Add delete functionality here
+        try {
+            const tokens = JSON.parse(
+                localStorage.getItem("authTokens") || "{}"
+            );
+            const token = tokens.access;
+            const res = await fetch(`/baseUrl/deleteReport/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+                body: JSON.stringify({ report_id: ReportData.id }),
+            });
+            if (!res.ok) {
+                throw new Error("http error: status " + res.status);
             }
-        };
-
-        fetchReportData();
-    }, []);
-
-    const handleStatusChange = (
-        event: React.ChangeEvent<{ value: unknown }>
-    ) => {
-        setReportData((prev) => ({
-            ...prev,
-            status: event.target.value as string,
-        }));
+            console.log("Report deleted successfully");
+        } catch (error) {
+            console.error("Error deleting report:", error);
+        }
     };
 
     return (
@@ -96,22 +97,21 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                         </Typography>
                         <Image src={ReportData.image} alt="X-ray" />
                         <Typography variant="body1">
+                            PATIENT ID: {ReportData.id}
+                        </Typography>
+                        <Typography variant="body1">
                             NAME: {ReportData.patient_name}
                         </Typography>
                         <Typography variant="body1">
                             DATE: {ReportData.date}
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            gutterBottom
-                        >
-                            Detailed Report Information
+                        <Typography variant="body1">
+                            STATUS: {ReportData.status}
                         </Typography>
-                        <Typography variant="body2">Result</Typography>
+                        <Typography variant="body2">result</Typography>
                         <FormControl fullWidth margin="normal">
                             <Select
-                                value={ReportData.status}
+                                value={overwrite}
                                 onChange={handleStatusChange}
                                 displayEmpty
                                 inputProps={{ "aria-label": "Without label" }}
@@ -124,6 +124,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                             <CustomButton
                                 className="deleteButton"
                                 variant="contained"
+                                onClick={handleDelete}
                             >
                                 Delete
                             </CustomButton>
