@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Card,
     CardContent,
@@ -11,6 +11,7 @@ import {
     Container,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useParams, useNavigate } from "react-router-dom";
 
 const CustomCard = styled(Card)(({ theme }) => ({
     maxWidth: 400,
@@ -52,31 +53,34 @@ interface ReportData {
 }
 
 const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
+    const { id } = useParams();
     const [overwrite, setOverwrite] = useState("");
+    const navigate = useNavigate();
 
     const handleStatusChange = (event) => {
         setOverwrite(event.target.value as string);
     };
 
     const handleDelete = async () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         // Add delete functionality here
         try {
             const tokens = JSON.parse(
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
-            const res = await fetch(`/baseUrl/deleteReport/`, {
+            const res = await fetch(`/baseUrl/deleteReport/${id}/`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + token,
                 },
-                body: JSON.stringify({ report_id: ReportData.id }),
             });
             if (!res.ok) {
                 throw new Error("http error: status " + res.status);
             }
             console.log("Report deleted successfully");
+            navigate("/DoctorNonUpdatedReport", { replace: true });
         } catch (error) {
             console.error("Error deleting report:", error);
         }
