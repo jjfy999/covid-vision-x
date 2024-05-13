@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             to="/PatientProfile"
                             className={
                                 location.pathname === "/PatientProfile" ||
-                                location.pathname === "/PatientEditProfile"
+                                    location.pathname === "/PatientEditProfile"
                                     ? "active"
                                     : "profile"
                             }
@@ -75,9 +75,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             to="/UserAcc"
                             className={
                                 location.pathname === "/UserAcc" ||
-                                isAccDetailPage ||
-                                location.pathname === "/EditAcc" ||
-                                location.pathname === "/CreateUser"
+                                    isAccDetailPage ||
+                                    location.pathname === "/EditAcc" ||
+                                    location.pathname === "/CreateUser"
                                     ? "active"
                                     : "useracc"
                             }
@@ -88,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             to="/SysAdProfile"
                             className={
                                 location.pathname === "/SysAdProfile" ||
-                                location.pathname === "/SysAdEditProfile"
+                                    location.pathname === "/SysAdEditProfile"
                                     ? "active"
                                     : "profile"
                             }
@@ -119,10 +119,10 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                                 onClick={(event) => event.stopPropagation()}
                             >
                                 <Link to="/DoctorReport">Patient Report</Link>
-                                <Link to="/upload-xray">
+                                <Link to="/DoctorUploadImage">
                                     Upload X-ray Image
                                 </Link>
-                                <Link to="/non-uploaded-report">
+                                <Link to="/DoctorNonUpdatedReport">
                                     Non-Uploaded Report
                                 </Link>
                             </div>
@@ -153,7 +153,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             to="/RsProfile"
                             className={
                                 location.pathname === "/RsProfile" ||
-                                location.pathname === "/RsEditProfile"
+                                    location.pathname === "/RsEditProfile"
                                     ? "active"
                                     : "profile"
                             }

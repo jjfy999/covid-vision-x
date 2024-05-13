@@ -41,13 +41,13 @@ const App = () => {
     return (
         <>
             <Header userRole="doctor" />
-            <div
+            {/* <div
                 style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     height: "calc(100vh - 450px)",
-                    marginTop: "250px",
+                    marginTop: "100px",
                 }}
             >
                 <div
@@ -57,21 +57,16 @@ const App = () => {
                         maxWidth: "380px", // Ensures the card does not stretch beyond 500px
                     }}
                 >
-                    {docProfile && (
-                        <ProfileCard
-                            id={docProfile.id}
-                            name={docProfile.name}
-                            username={docProfile.username}
-                            password={docProfile.password}
-                            role={docProfile.role}
-                            contactNumber={docProfile.phone_number}
-                            email={docProfile.email}
-                            pageContext="profile"
-                        />
-                    )}
+
+
+
+
+
+
+
                 </div>
-            </div>
-            {/* 
+            </div> */}
+
             <div
                 style={{
                     display: "flex",
@@ -94,31 +89,8 @@ const App = () => {
                             console.log(file, patientName);
                         }}
                     />
-
-                    <UploadImage
-                        userRole="researcher"
-                        onFileUpload={(file, patientName) => {
-                            console.log(file, patientName);
-                        }}
-                    />
                 </div>
             </div>
-
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                }}
-            >
-                <NonUpdatedReport
-                // patientName="John Tan"
-                // date="23 March 2024"
-                // imageUrl="path_to_xray_image.png"
-                // initialStatus="covid"
-                />
-            </div> */}
         </>
     );
 };

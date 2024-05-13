@@ -6,6 +6,7 @@ import { UserAccountDetails } from './UserAccInterface';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import DrawerAppBar from "./templates/DrawerAppBar";
+import Header from './templates/Header';
 
 // Combined Component
 const DoctorReport = () => {
@@ -45,47 +46,48 @@ const DoctorReport = () => {
 
   return (
     <div>
-        <DrawerAppBar userRole="doctor" firstText="Patient" />
+      {/* <DrawerAppBar userRole="doctor" firstText="Patient" /> */}
+      <Header userRole="doctor" />
 
-        <div className="doctorReportPage">
-          {/* User Account Section */}
-          <section>
-              <h1 id="doctorReportTitle">Reports</h1>
-              <div className="searchBox">
-                
-                {/* Search bar */}
-                <div className="searchBar">
-                  <button className="searchButton" ><FaSearch /></button>
-                  <input
-                    id="searchInputPatient"
-                    type="text"
-                    placeholder="Search user by ID..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
+      <div className="doctorReportPage">
+        {/* User Account Section */}
+        <section>
+          <h1 id="doctorReportTitle">Reports</h1>
+          <div className="searchBox">
 
-              {/* Item title bar */}
-              <div id="itemTitleBar">
-                <p id="patientId">Patient ID</p>
-                <p id="patientName">Patient Name</p>
-                <p id="patientResult">Result</p>
-              </div>
+            {/* Search bar */}
+            <div className="searchBar">
+              <button className="searchButton" ><FaSearch /></button>
+              <input
+                id="searchInputPatient"
+                type="text"
+                placeholder="Search user by ID..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
 
-              {/* User Acc list */}
-              <div id="userListContainer">
-                <div id="userList">
-                  {filteredUsers.length === 0 ? (
-                    <p className="errorMessage">Patient not found...</p>
-                  ) : (
-                    <UserBox users={filteredUsers.filter(user => user.role === 'patient')} context='patient' />
-                  )}
-                </div>
-              </div>
+          {/* Item title bar */}
+          <div id="itemTitleBar">
+            <p id="patientId">Patient ID</p>
+            <p id="patientName">Patient Name</p>
+            <p id="patientResult">Result</p>
+          </div>
 
-          </section>
-        </div>
+          {/* User Acc list */}
+          <div id="userListContainer">
+            <div id="userList">
+              {filteredUsers.length === 0 ? (
+                <p className="errorMessage">Patient not found...</p>
+              ) : (
+                <UserBox users={filteredUsers.filter(user => user.role === 'patient')} context='patient' />
+              )}
+            </div>
+          </div>
+
+        </section>
+      </div>
     </div>
   );
 };

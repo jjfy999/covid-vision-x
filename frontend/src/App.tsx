@@ -21,6 +21,8 @@ import RsProfile from "./pages/RsProfile";
 import ErrorPage from "./pages/ErrorPage";
 import CreateUser from "./pages/CreateUser";
 import DoctorReport from "./pages/DoctorReport";
+import DoctorUploadImage from "./pages/DoctorUploadImage";
+import DNUR from "./pages/DoctorNonUpdatedReport";
 import Model from "./pages/Model";
 import HomePage from "./pages/HomePage";
 
@@ -36,6 +38,8 @@ const router = createBrowserRouter(
                 </Route>
                 <Route path="/doctorprofile" element={<DoctorProfile />} />
                 <Route path="/DoctorReport" element={<DoctorReport />} />
+                <Route path="/DoctorUploadImage" element={<DoctorUploadImage />} />
+                <Route path="/DoctorNonUpdatedReport" element={<DNUR />} />
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
                     <Route path="/report" element={<Report />} />
                     <Route
