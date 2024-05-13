@@ -82,7 +82,7 @@ urlpatterns = [
          name='updateDetails'),  # for doctor to update own details
     # for doctor to view reports that are uploaded to patients
     path('docUploadedReports/', deepLearningModel.listUploadedReports,
-         name='docReportView'),
+         name='docUploadedReports'),
     # for doctor to view xray image result (for testing)
     path('docXrayResult/', deepLearningModel.analyze_image2, name='analyze_image'),
     # for doctor to view list of all reports (for testing)
