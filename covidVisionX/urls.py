@@ -76,7 +76,7 @@ urlpatterns = [
          name='docEditProfileView'),  # for doctor to view edit own details page
     # for doctor to upload xray image page
     path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),
-    path('docNonUpdatedReport/', deepLearningModel.listNonUploadedReports,
+    path('docNonUploadedReports/', deepLearningModel.listNonUploadedReports,
          name='docListReports'),  # for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails,
          name='updateDetails'),  # for doctor to update own details
@@ -92,6 +92,7 @@ urlpatterns = [
     path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
     path('loadModel/', deepLearningModel.download_and_load_model, name='loadModel'),
     path('predictImage/', deepLearningModel.predict, name='predictImage'),
+    path('docShowReport/', deepLearningModel.showReport, name='showReport'),
 
     # for researcher to upload model
     path('researcherUploadModel/',

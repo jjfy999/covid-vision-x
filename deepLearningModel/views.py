@@ -108,8 +108,8 @@ def listNonUploadedReports(request):
         print(report.image)
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
-    # return JsonResponse(data, json_dumps_params={'indent': 2})
-    return render(request, 'nonUpdatedReport.html', {'reports': reports})
+    return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
+    # return render(request, 'nonUpdatedReport.html', {'reports': reports})
 
 
 @api_view(['GET'])
@@ -413,3 +413,23 @@ def listModels(request):
     }
 
     return JsonResponse(data, safe=False, status=200)
+
+
+@api_view(['GET'])
+def showReport(request):
+    try:    
+
+        # Retrieve the report instance based on pk
+        report = Report.objects.get(pk=request.GET.get('id'))
+    except Report.DoesNotExist:
+        # If report with the given pk does not exist, return 404 error
+        return JsonResponse({'error': 'Report not found.'}, status=404)
+
+    # Serialize the report instance
+    serializer = ReportSerializer(report)
+
+    # Convert serialized data into JSON format
+    data = serializer.data
+
+    # Return the JSON response containing the serialized report data
+    return JsonResponse(data, json_dumps_params={'indent': 2},safe=False, status=200)

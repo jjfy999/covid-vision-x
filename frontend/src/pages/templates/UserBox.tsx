@@ -32,7 +32,11 @@ const UserBox: React.FC<UserBoxProps> = ({ users, context }) => {
                         <div className="viewInfoBtn">
                             <Link
                                 id={`infoBtn${index}`}
-                                to={`/AccDetail/${user.id}`}
+                                to={
+                                    user.role === "doctor"
+                                        ? `/PNUR/${user.id}`
+                                        : `/AccDetail/${user.id}`
+                                }
                             >
                                 View Details
                             </Link>
