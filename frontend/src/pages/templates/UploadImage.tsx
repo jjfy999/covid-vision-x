@@ -110,7 +110,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
         if (selectedFile) {
             const formData = new FormData();
             formData.append("model_name", patientId);
-            formData.append("file", selectedFile);
+            formData.append("model", selectedFile);
 
             try {
                 const tokens = JSON.parse(

@@ -254,11 +254,14 @@ def uploadModel(request):
     if request.method == 'POST':
         # Get the model file from the request
         model_file = request.FILES['model']
+        model_name = request.POST.get('model_name')
 
         # Save the model to the 'fypmodelss' bucket
-        storage = get_storage_class(
-            'storages.backends.s3boto3.S3Boto3Storage')(bucket='fypmodelss')
-        model_name = storage.save(model_file)
+        bucket_name = 'fypmodelss'
+        s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                                 aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
+        s3_client.put_object(
+            Body=model_file, Bucket=bucket_name, Key=model_file.name)
 
         return JsonResponse({"success": True, "message": "Model uploaded successfully."})
 
