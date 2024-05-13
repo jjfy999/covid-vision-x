@@ -33,6 +33,7 @@
   padding-bottom: .5rem;
   font-size: 3rem;
   color: var(--green);
+  text-shadow: 2px 2px 4px rgba(109, 107, 107, 0.5);
 }
 
 #subtitle {

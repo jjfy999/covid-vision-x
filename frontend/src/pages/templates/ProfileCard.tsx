@@ -11,6 +11,7 @@ import {
     ListItemText,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { TextareaAutosize } from "@mui/material";
 
 interface ProfileProps {
     id: string;
@@ -243,7 +244,13 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                             <ListItem>
                                 <ListItemText
                                     primary="Password:"
-                                    secondary={profile.password}
+                                    secondary={
+                                        <TextareaAutosize
+                                            value={profile.password}
+                                            minRows={3} 
+                                            style={{ width: '100%', resize: 'none' }} 
+                                        />
+                                    }
                                 />
                             </ListItem>
                         </>

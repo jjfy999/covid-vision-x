@@ -1,6 +1,7 @@
 import ProfileCard from "./templates/ProfileCard";
 import Header from "./templates/Header";
 import { useEffect, useState } from "react";
+import "../../../static/patient/css/Profile.css";
 
 const App = () => {
     const [docProfile, setDocProfile] = useState<any>(null);
@@ -32,24 +33,11 @@ const App = () => {
     }, []);
 
     return (
-        <>
+        <div>
             <Header userRole="doctor" />
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "calc(100vh - 450px)",
-                    marginTop: "250px",
-                }}
-            >
-                <div
-                    style={{
-                        flexShrink: 0, // Prevents the ProfileCard from shrinking
-                        width: "100%", // Use 100% of the width of the parent to center the card properly
-                        maxWidth: "380px", // Ensures the card does not stretch beyond 500px
-                    }}
-                >
+            <section id="patientProfilePage">
+                <h1 id="profileTitle">My Profile</h1>
+                <div id="patientProfileCard">
                     {docProfile && (
                         <ProfileCard
                             id={docProfile.id}
@@ -63,8 +51,9 @@ const App = () => {
                         />
                     )}
                 </div>
-            </div>
-        </>
+            </section>
+            {/* Profile ends */}
+        </div>
     );
 };
 

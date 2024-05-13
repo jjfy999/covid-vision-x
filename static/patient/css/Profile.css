@@ -17,7 +17,7 @@
     font-size: 2rem;
     padding-top: 13rem;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(109, 107, 107, 0.5);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Title css ends */
@@ -25,10 +25,7 @@
 #patientProfileCard {
     margin-top: 1rem;
     border-radius: 8%;
-    max-width: 800px; 
-    width: 30rem;
-    align-items: center; 
-    justify-content: center; 
+    width: 35rem;
     align-items: center; 
     justify-content: center; 
     margin-left: auto; 
