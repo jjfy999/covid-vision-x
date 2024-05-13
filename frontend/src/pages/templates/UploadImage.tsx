@@ -68,8 +68,6 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
             formData.append("file", selectedFile);
             formData.append("model_path", selectModelType);
 
-            console.log(formData);
-
             try {
                 const tokens = JSON.parse(
                     localStorage.getItem("authTokens") || "{}"
@@ -88,15 +86,16 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                 }
 
                 const data = await response.json();
-                console.log(data);
+                if (data.status === 200) {
+                    URL.revokeObjectURL(previewUrl!);
+                    alert("Image uploaded and analysed successfully");
+                }
             } catch (error) {
                 console.error(
                     "There was a problem with the fetch operation: ",
                     error
                 );
             }
-
-            URL.revokeObjectURL(previewUrl!);
         } else {
             alert("Please select a file and enter the name.");
         }
