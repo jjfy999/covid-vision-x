@@ -89,7 +89,7 @@ urlpatterns = [
     path('docListAllReports/', deepLearningModel.listAllReports,
          name='docListAllReports'),
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
-    path('deleteReport/', deepLearningModel.deleteReport, name='deleteReport'),
+    path('deleteReport/<int:pk>/', deepLearningModel.deleteReport, name='deleteReport'),
     path('loadModel/', deepLearningModel.download_and_load_model, name='loadModel'),
     path('predictImage/', deepLearningModel.predict, name='predictImage'),
     path('docShowReport/<int:pk>/', deepLearningModel.showReport, name='showReport'),
