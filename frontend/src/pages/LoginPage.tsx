@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../../static/login/login.css";
 import logo from "../../../static/images/logo_transparent.png";
@@ -17,6 +17,12 @@ function LoginPage() {
     const { user, loginUser } = useAuth();
     const [loggedInUser, setLoggedInUser] = useState(false);
 
+    useEffect(() => {
+        if (user) {
+            setLoggedInUser(true);
+        }
+    }, [user]);
+
     const handleLogin = async (username: string, password: string) => {
         //preventDefault();
         if (!role || !username || !password) {
@@ -28,13 +34,14 @@ function LoginPage() {
             console.log("Username before login: ", username);
             console.log("Password before login: ", password);
             await loginUser(username, password);
-            setLoggedInUser(true);
         } catch (error) {
             console.error("Login error", error);
             alert("Login failed");
         }
     };
     if (loggedInUser) {
+        console.log("User role: ", user.role);
+        console.log("loggedInUser: ", loggedInUser);
         // If user is authenticated, redirect based on user role
         switch (user.role) {
             case "patient":

@@ -5,7 +5,6 @@ import { redirect } from "react-router-dom";
 interface AuthContextProps {
     authTokens: string | null;
     user: { username: string; role: string };
-    //isAuthenticated: boolean;
     loginUser(username: string, password: string): Promise<void>;
     logoutUser: () => void;
 }
@@ -29,14 +28,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const [loading, setLoading] = useState(true);
 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
     const loginUser: AuthContextProps["loginUser"] = async (
         username: string,
         password: string
     ) => {
-        // Perform authentication logic
-        //setIsAuthenticated(true);
         console.log("Username at login: ", username);
         console.log("Password at login: ", password);
         const response = await fetch("baseUrl/api/token/", {
@@ -58,17 +53,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         } else {
             console.log("Response status: ", response.status);
             console.log("Response data: ", data);
+            console.log("There is a response error", user);
             alert("Something went wrong");
         }
     };
 
     const logoutUser = () => {
-        // Perform logout logic
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem("authTokens");
         redirect("/loginpage");
-        //setIsAuthenticated(false);
     };
 
     const updateToken = async () => {
