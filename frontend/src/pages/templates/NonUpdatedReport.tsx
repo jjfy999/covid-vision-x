@@ -58,7 +58,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
     const [overwrite, setOverwrite] = useState(ReportData.status);
     const navigate = useNavigate();
 
-    const handleStatusChange = (event) => {
+    const handleStatusChange = (event: { target: { value: string } }) => {
         setOverwrite(event.target.value as string);
     };
 
