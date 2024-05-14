@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import profileImg from "../images/unknownPerson.jpg";
 import Header from "./templates/Header";
 import "../css/CreateUser.css";
-import { useState, ChangeEvent, FormEvent, FormEventHandler } from "react";
+import { useState, FormEventHandler } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +24,7 @@ function EditProfile() {
         password: password,
     };
 
-    const handleSubmit: FormEventHandler<HTMLButtonElement> = async (e) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         if (
             name === "" ||
@@ -215,12 +215,7 @@ function EditProfile() {
                 </div>
 
                 <div className="btn">
-                    <button
-                        id="doneBtn"
-                        type="submit"
-                        form="infoForm"
-                        onSubmit={handleSubmit}
-                    >
+                    <button id="doneBtn" type="submit" form="infoForm">
                         Done
                     </button>
                     <Link id="cancelBtn" to="/UserAcc">
