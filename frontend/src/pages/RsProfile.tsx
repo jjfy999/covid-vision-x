@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProfileCard from "./templates/ProfileCard";
 import Header from "./templates/Header";
-import "../../../static/patient/css/Profile.css";
+import "../css/Profile.css";
 
 const App = () => {
     const [researcherProfile, setResearcherProfile] = useState<any>(null);

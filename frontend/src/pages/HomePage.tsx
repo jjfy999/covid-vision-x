@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../static/patient/css/Home.css";
+import "../css/Home.css";
 import Header from "./templates/Header";
 import homeImg from '../../../static/images/homeImg.webp';
 import { useLocation } from "react-router-dom";
