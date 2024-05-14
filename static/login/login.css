@@ -27,7 +27,7 @@ body {
 #loginSection {
     display: flex;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
     background-image: linear-gradient(to bottom, var(--green), white);
 }
@@ -50,6 +50,10 @@ body {
     box-shadow: 0 0 20px rgba(93, 92, 92, 0.5);
     padding: 40px 30px 30px;
     font-size: 1rem;
+}
+
+#signUpForm {
+    margin-bottom: 5rem;
 }
 
 .heading {
