@@ -24,11 +24,16 @@ jobs:
     - name: Install Dependencies 
       run: |
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Apply migration
       run: |
         python manage.py makemigrations
         python manage.py migrate 
+    - name: drop database
+      run: |
+        DROP DATABASE IF EXISTS test_postgres;
     - name: Run Tests
       run: |
         python manage.py test userAccount
+    
+
 
