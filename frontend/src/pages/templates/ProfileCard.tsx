@@ -189,19 +189,23 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                     onChange={handleChange("username")}
                                 />
                             </ListItem>
-                            <ListItem>
-                                <TextField
-                                    autoCapitalize="none"
-                                    label="Password"
-                                    variant="outlined"
-                                    fullWidth
-                                    value={profile.password}
-                                    onChange={(event) => {
-                                        handleChange("password")(event);
-                                        setIsPasswordChanged(true);
-                                    }}
-                                />
-                            </ListItem>
+                            {profile.password ? (
+                                <ListItem>
+                                    <TextField
+                                        autoCapitalize="none"
+                                        label="Password"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={profile.password}
+                                        onChange={(event) => {
+                                            handleChange("password")(event);
+                                            setIsPasswordChanged(true);
+                                        }}
+                                    />
+                                </ListItem>
+                            ) : (
+                                <> </>
+                            )}
                         </>
                     ) : (
                         <>
@@ -241,21 +245,23 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                     secondary={profile.username}
                                 />
                             </ListItem>
-                            <ListItem>
-                                <ListItemText
-                                    primary="Password:"
-                                    secondary={
-                                        <TextareaAutosize
-                                            value={profile.password}
-                                            minRows={3}
-                                            style={{
-                                                width: "100%",
-                                                resize: "none",
-                                            }}
-                                        />
-                                    }
-                                />
-                            </ListItem>
+                            {profile.password && (
+                                <ListItem>
+                                    <ListItemText
+                                        primary="Password:"
+                                        secondary={
+                                            <TextareaAutosize
+                                                value={profile.password}
+                                                minRows={3}
+                                                style={{
+                                                    width: "100%",
+                                                    resize: "none",
+                                                }}
+                                            />
+                                        }
+                                    />
+                                </ListItem>
+                            )}
                         </>
                     )}
                 </List>
