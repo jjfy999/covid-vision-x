@@ -28,9 +28,9 @@ jobs:
       run: |
         python manage.py makemigrations --noinput
         python manage.py migrate --noinput
-    - name: drop database
-      run: |
-        DROP DATABASE IF EXISTS test_postgres;
+    #- name: drop database
+      #run: |
+       # DROP DATABASE IF EXISTS test_postgres;
     - name: Run Tests
       run: |
         python manage.py test userAccount --noinput
