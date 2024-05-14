@@ -15,8 +15,9 @@ class Image(models.Model):
 
 class Report(models.Model):
     STATUS_CHOICES = [
-        ('covid', 'COVID'),
-        ('normal', 'Normal'),
+        ('Covid', 'COVID'),
+        ('Normal', 'Normal'),
+        ('Pneumonia', 'Pneumonia'),
     ]
     id = models.AutoField(primary_key=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
