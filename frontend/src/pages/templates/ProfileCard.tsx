@@ -29,7 +29,6 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [secondary, setSecondary] = useState(false);
     const [profile, setProfile] = useState({ ...props });
-    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [isPasswordChanged, setIsPasswordChanged] = useState(false);
     const navigate = useNavigate();
 
@@ -238,7 +237,9 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                         fullWidth
                                         value={profile.password}
                                         onChange={(event) => {
-                                            handleChange("password")(event);
+                                            handleChange("password")(
+                                                event as React.ChangeEvent<HTMLInputElement>
+                                            );
                                             setIsPasswordChanged(true);
                                         }}
                                     />
