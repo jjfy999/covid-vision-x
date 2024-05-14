@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
     Card,
     CardContent,
-    Typography,
     Button,
     CardMedia,
     List,
@@ -27,6 +26,7 @@ interface ProfileProps {
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
     const [editMode, setEditMode] = useState(false);
+    const [secondary, setSecondary] = useState(false);
     const [profile, setProfile] = useState({ ...props });
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [isPasswordChanged, setIsPasswordChanged] = useState(false);
@@ -43,7 +43,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     };
 
     const handleSave = async () => {
-        // In a real application, you might also want to send these updates back to a server here
+        // Update your own profile details
         try {
             // Send update request to API
             const tokens = JSON.parse(
@@ -71,6 +71,41 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
         } catch (error) {
             console.error("Error updating profile:", error);
         }
+        setEditMode(false);
+    };
+
+    const handleSave2 = async () => {
+        console.log(secondary);
+        console.log("Start of call ...");
+        const tokens = JSON.parse(localStorage.getItem("authTokens") || "{}");
+        const token = tokens.access;
+        const updatedProfile = { ...profile };
+        console.log(profile.id);
+        if (!isPasswordChanged) {
+            delete updatedProfile.password;
+        }
+        try {
+            const res = await fetch(
+                `baseUrl/updateUserDetails/${profile.id}/`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                    body: JSON.stringify(updatedProfile),
+                }
+            );
+            if (!res.ok) {
+                console.log("erroro");
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+        console.log("End of call ...");
+        console.log(secondary, editMode);
+        setSecondary(false);
         setEditMode(false);
     };
 
@@ -280,13 +315,27 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                         >
                             Cancel
                         </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSave}
-                        >
-                            Save
-                        </Button>
+                        {secondary ? (
+                            <>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleSave2}
+                                >
+                                    Save
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleSave}
+                                >
+                                    Save
+                                </Button>
+                            </>
+                        )}
                     </div>
                 ) : (
                     <>
@@ -309,7 +358,10 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                     variant="contained"
                                     color="primary"
                                     sx={{ mt: 1, mx: "auto", display: "block" }}
-                                    onClick={() => setEditMode(true)}
+                                    onClick={() => {
+                                        setSecondary(true);
+                                        setEditMode(true);
+                                    }}
                                 >
                                     Edit
                                 </Button>

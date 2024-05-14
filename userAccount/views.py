@@ -108,7 +108,7 @@ def listPatients(request):
     return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
-@api_view(['PUT'])  
+@api_view(['PUT'])
 def updateDetails(request):  # for users to update own details
 
     user = request.user
@@ -122,15 +122,17 @@ def updateDetails(request):  # for users to update own details
 
     if serializer.is_valid():
         if 'password' in serializer.validated_data:
-            serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
+            serializer.validated_data['password'] = make_password(
+                serializer.validated_data['password'])
         serializer.save()
         return JsonResponse(serializer.data, safe=False, status=200)
     else:
         return JsonResponse(serializer.errors, status=400)
 
 
-@api_view(['POST'])
-def updateUserDetails(request, pk):     # for system admin to update another person's details
+@api_view(['PUT'])
+# for system admin to update another person's details
+def updateUserDetails(request, pk):
     try:
         doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
@@ -153,7 +155,7 @@ def updateUserDetails(request, pk):     # for system admin to update another per
             researcher = None
 
     if doctor is None and patient is None and researcher is None:
-        return JsonResponse({"error": "User not found"}, status=404)
+        return JsonResponse({"error": "WAHHHHHH"}, status=404)
 
     if serializer.is_valid():
         serializer.save()
@@ -163,7 +165,8 @@ def updateUserDetails(request, pk):     # for system admin to update another per
 
 
 @api_view(['GET'])
-def searchUser(request, pk):  # for doctor to search for a patient, and for system admin to search for everyone
+# for doctor to search for a patient, and for system admin to search for everyone
+def searchUser(request, pk):
     if pk:
         try:
             if request.user.role == 'doctor':
@@ -241,7 +244,7 @@ def createUser(request):    # for patient to register and for system admin to cr
         elif role == 'system_admin':
             user = SystemAdmin.objects.create(
                 username=username, password=password, email=email, name=name, phone_number=phone_number)
-            
+
         elif role == 'researcher':
             user = Researcher.objects.create(
                 username=username, password=password, email=email, name=name, phone_number=phone_number)
