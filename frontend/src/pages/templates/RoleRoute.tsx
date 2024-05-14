@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContexr"; // Assuming AuthContext
 
-const RoleRoute = ({ requiredRole }: { requiredRole: string[] }) => {
+const RoleRoute = ({ requiredRole }: { requiredRole: string }) => {
     const { user } = useAuth();
 
     if (!user || (user && !requiredRole.includes(user.role))) {
