@@ -12,4 +12,4 @@ class ReportSerializer(serializers.ModelSerializer):
 class ReportApprovalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
-        fields = ['approved']
+        fields = ['approved','status']

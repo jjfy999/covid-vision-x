@@ -133,14 +133,15 @@ def listAllReports(request):  # for testing to view all reports
     return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 # for doctor to upload report             #haven code for dropdown overwrite status!!
 def uploadReport(request):
-    report_id = request.POST.get('report_id')
+    report_id = request.PUT.get('report_id')
+    status = request.PUT.get('status')
     try:
         report = Report.objects.get(pk=report_id)
         serializer = ReportApprovalSerializer(
-            instance=report, data={'approved': True}, partial=True)
+            instance=report, data={'approved': True, 'status': status}, partial=True)
         if serializer.is_valid():
             # Update the report approval status
             serializer.save()
@@ -149,7 +150,7 @@ def uploadReport(request):
             patient = Patient.objects.get(pk=report.patient_id)
 
             # Update the patient's status based on the report's status
-            patient.status = report.status
+            patient.status = status
             patient.save()
 
             return JsonResponse({'message': 'Report updated successfully.'}, status=200)
@@ -178,9 +179,6 @@ def reportView(request):  # for patient to view their reports
         return JsonResponse({"error": "Patient not found."}, status=400)
 
     reports = Report.objects.filter(patient_id=patient, approved=True)
-    for report in reports:
-        if report.image:
-            report.image = f"http://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{report.image}"
 
     serializer = ReportSerializer(reports, many=True)
     return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, safe=False, status=200)
