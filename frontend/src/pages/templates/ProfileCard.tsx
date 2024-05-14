@@ -20,7 +20,7 @@ interface ProfileProps {
     email: string;
     username: string;
     password?: string;
-    result?: any;
+    status?: string;
     pageContext: "profile" | "useracc" | "doctor";
 }
 
@@ -85,17 +85,14 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
             delete updatedProfile.password;
         }
         try {
-            const res = await fetch(
-                "http://127.0.0.1:8000/updateUserDetails/",
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                    body: JSON.stringify(updatedProfile),
-                }
-            );
+            const res = await fetch("/baseUrl/updateUserDetails/", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+                body: JSON.stringify(updatedProfile),
+            });
             console.log(updatedProfile);
             if (!res.ok) {
                 console.log("erroro");
@@ -295,6 +292,14 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                                 }}
                                             />
                                         }
+                                    />
+                                </ListItem>
+                            )}
+                            {profile.status && (
+                                <ListItem>
+                                    <ListItemText
+                                        primary="Result:"
+                                        secondary={profile.status}
                                     />
                                 </ListItem>
                             )}

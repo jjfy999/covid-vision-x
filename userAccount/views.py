@@ -129,42 +129,7 @@ def updateDetails(request):  # for users to update own details
     else:
         return JsonResponse(serializer.errors, status=400)
 
-'''
-@api_view(['PUT'])
-# for system admin to update another person's details
-def updateUserDetails(request):
-    pk = request.data.get('id')
-    print(pk)
-    try:
-        doctor = Doctor.objects.get(pk=pk)
-        serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
-    except Doctor.DoesNotExist:
-        doctor = None
-    print("bbb")
-    if doctor is None:
-        try:
-            patient = Patient.objects.get(pk=pk)
-            serializer = PatientUpdateSerializer(patient, data=request.data)
-        except Patient.DoesNotExist:
-            patient = None
-    print("ccc")
-    if doctor is None and patient is None:
-        try:
-            researcher = Researcher.objects.get(pk=pk)
-            serializer = DoctorSysAdminUpdateSerializer(
-                researcher, data=request.data)
-        except Researcher.DoesNotExist:
-            researcher = None
 
-    if doctor is None and patient is None and researcher is None:
-        return JsonResponse({"error": "WAHHHHHH"}, status=404)
-
-    if serializer.is_valid():
-        serializer.save()
-        return JsonResponse({'message': 'User updated successfully.'}, status=200)
-    else:
-        return JsonResponse(serializer.errors, status=400)
-'''
 
 @api_view(['PUT'])
 # for system admin to update another person's details
@@ -185,6 +150,9 @@ def updateUserDetails(request):
         return JsonResponse({"error": "Invalid role"}, status=400)    
     
     if serializer.is_valid():
+        if 'password' in serializer.validated_data:
+            serializer.validated_data['password'] = make_password(
+                serializer.validated_data['password'])
         serializer.save()
         return JsonResponse({'message': 'User updated successfully.'}, status=200)
     else:
