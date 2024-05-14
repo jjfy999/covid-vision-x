@@ -63,7 +63,7 @@ const AccountDetails = () => {
                                 password={checkUser.password}
                                 status={
                                     checkUser.role === "patient"
-                                        ? checkUser.result
+                                        ? checkUser.status
                                         : undefined
                                 }
                                 pageContext="useracc"
