@@ -6,7 +6,7 @@ export interface UserAccountDetails {
     role: "patient" | "doctor" | "system admin" | "researcher";
     phone_number: string;
     email: string;
-    result?: any;
+    status?: any;
 }
 
 export interface ReportDetails {

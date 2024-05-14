@@ -61,7 +61,7 @@ const AccountDetails = () => {
                                 email={checkUser.email}
                                 username={checkUser.username}
                                 password={checkUser.password}
-                                result={
+                                status={
                                     checkUser.role === "patient"
                                         ? checkUser.result
                                         : undefined
@@ -87,11 +87,7 @@ const AccountDetails = () => {
                                 phone_number={checkUser.phone_number}
                                 email={checkUser.email}
                                 username={checkUser.username}
-                                result={
-                                    checkUser.role === "patient"
-                                        ? checkUser.result
-                                        : undefined
-                                }
+                                status={checkUser.status}
                                 pageContext="doctor"
                             />
                         </div>

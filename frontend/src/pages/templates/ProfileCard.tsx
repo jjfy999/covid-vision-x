@@ -20,7 +20,7 @@ interface ProfileProps {
     email: string;
     username: string;
     password?: string;
-    result?: any;
+    status?: string;
     pageContext: "profile" | "useracc" | "doctor";
 }
 
@@ -292,6 +292,14 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                                 }}
                                             />
                                         }
+                                    />
+                                </ListItem>
+                            )}
+                            {profile.status && (
+                                <ListItem>
+                                    <ListItemText
+                                        primary="Result:"
+                                        secondary={profile.status}
                                     />
                                 </ListItem>
                             )}
