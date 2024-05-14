@@ -50,6 +50,7 @@ interface ReportData {
     date: string;
     image: string;
     status: string;
+    approved: boolean;
 }
 
 const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
@@ -136,34 +137,45 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                         <Typography variant="body1">
                             STATUS: {ReportData.status}
                         </Typography>
-                        <Typography variant="body2">result</Typography>
-                        <FormControl fullWidth margin="normal">
-                            <Select
-                                value={overwrite}
-                                onChange={handleStatusChange}
-                                displayEmpty
-                                inputProps={{ "aria-label": "Without label" }}
-                            >
-                                <MenuItem value="Covid">Covid</MenuItem>
-                                <MenuItem value="Normal">Normal</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <Box display="flex" justifyContent="space-between">
-                            <CustomButton
-                                className="deleteButton"
-                                variant="contained"
-                                onClick={handleDelete}
-                            >
-                                Delete
-                            </CustomButton>
-                            <CustomButton
-                                className="uploadButton"
-                                variant="contained"
-                                onClick={() => handleUpload(overwrite)}
-                            >
-                                Upload
-                            </CustomButton>
-                        </Box>
+                        {!ReportData.approved && (
+                            <>
+                                <Typography variant="body2">result</Typography>
+                                <FormControl fullWidth margin="normal">
+                                    <Select
+                                        value={overwrite}
+                                        onChange={handleStatusChange}
+                                        displayEmpty
+                                        inputProps={{
+                                            "aria-label": "Without label",
+                                        }}
+                                    >
+                                        <MenuItem value="Covid">Covid</MenuItem>
+                                        <MenuItem value="Normal">
+                                            Normal
+                                        </MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <Box
+                                    display="flex"
+                                    justifyContent="space-between"
+                                >
+                                    <CustomButton
+                                        className="deleteButton"
+                                        variant="contained"
+                                        onClick={handleDelete}
+                                    >
+                                        Delete
+                                    </CustomButton>
+                                    <CustomButton
+                                        className="uploadButton"
+                                        variant="contained"
+                                        onClick={() => handleUpload(overwrite)}
+                                    >
+                                        Upload
+                                    </CustomButton>
+                                </Box>
+                            </>
+                        )}
                     </CardContent>
                 </CustomCard>
             </Box>

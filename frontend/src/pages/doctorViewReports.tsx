@@ -44,6 +44,7 @@ const ViewReportDetails = () => {
                     date={reportData.date}
                     image={reportData.image}
                     status={reportData.status}
+                    approved={reportData.approved}
                 />
             )}
         </>
