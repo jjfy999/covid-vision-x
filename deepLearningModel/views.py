@@ -183,7 +183,7 @@ def uploadModel(request):
 
 
 @api_view(['DELETE'])
-def deleteModel(request, model_name):
+def deleteModel(request, pk):
     if request.method == 'DELETE':
 
 
@@ -192,7 +192,7 @@ def deleteModel(request, model_name):
         s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                                  aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
 
-        key = model_name
+        key = pk
 
         try:
             s3_client.delete_object(Bucket=bucket_name, Key=key)
