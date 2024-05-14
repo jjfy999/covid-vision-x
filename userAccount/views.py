@@ -23,82 +23,10 @@ from userAccount.serializers import (DoctorSysAdminGetDetailsSerializer,
 
 from .models import Doctor, Patient, Researcher, SystemAdmin
 
-# Create your views here.
-
-
-def loginPage(request):
-
-    return render(request, 'login.html')
-
-
-def loginAuth(request):  # only a temporary login function for testing
-
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            print(type(user))
-            if user.role == 'doctor':
-                return redirect('docUploadXRay')
-            elif user.role == 'patient':
-                redirect_url = reverse('reportView') + \
-                    f'?account_id={user.account_id}'
-                return redirect(redirect_url)
-            elif user.role == 'system_admin':
-                return redirect('sysUserAccList')
-            else:
-                return HttpResponse('Who are you')
-        else:
-            return HttpResponse('Invalid credentials')
-
-
-def editProfileView(request):
-    return render(request, 'EditPatientProfile.html')
-
-
-def sysUserAccList(request):
-    return render(request, 'UserAcc.html')
-
-
-def sysProfileView(request):
-    return render(request, 'templates/SysadminProfile.html')
-
-
-def sysEditProfileView(request):
-    return render(request, 'EditSysadminProfile.html')
-
-
-def accDetails(request):
-    return render(request, 'AccDetail.html')
-
-
-def sysEditAccDetails(request, pk):
-    return render(request, 'EditAcc.html', {'pk': pk})
-
-
-def docEditProfileView(request):
-    return render(request, 'EditDoctorProfile.html')
-
-
-def docUploadXRay(request):
-    return render(request, 'uploadxray.html')
-
-
-def logout(request):
-    auth_logout(request)
-    messages.success(request, "Logged out successfully!")
-    return redirect('login')
-
 
 @api_view(['GET'])  # for users to view own details
 def getDetails(request):
     user = request.user
-
-
     if user.role == 'patient':
         patient_instance = Patient.objects.get(
             pk=user.id)  # Retrieve patient instance
