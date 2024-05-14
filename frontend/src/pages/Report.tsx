@@ -31,9 +31,7 @@ const Report = () => {
                 setPatientReport(data);
                 setIsLoading(false);
                 console.log(data);
-                setOutcome(
-                    data.status === "Positive" ? "covid" || "Covid" : "Negative"
-                );
+                setOutcome(data.date);
             } catch (error) {
                 console.error("Fetch error:", error);
                 setIsLoading(false);
@@ -101,7 +99,7 @@ const Report = () => {
                                                 className="reportLabel"
                                                 htmlFor="status"
                                             >
-                                                Covid-19 Diagnosis outcome
+                                                Covid-19 Diagnosis date
                                             </label>
                                         </th>
                                         <td>: {outcome}</td>
