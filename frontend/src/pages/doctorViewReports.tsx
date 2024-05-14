@@ -23,8 +23,6 @@ const ViewReportDetails = () => {
                     },
                 });
                 const data = await res.json();
-                console.log("id: ", id);
-                console.log(data);
                 setReportData(data);
             } catch (error) {
                 console.error("Error fetching report data:", error);
