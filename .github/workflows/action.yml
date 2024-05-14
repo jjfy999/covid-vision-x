@@ -10,6 +10,20 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_DB: test_postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     strategy:
       max-parallel: 4
       matrix:
@@ -21,15 +35,11 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: drop database
-      run: |
-          psql -c 'DROP DATABASE IF EXISTS test_postgres;' -U postgres
     - name: Install Dependencies 
       run: |
         pip install -r requirements.txt
     - name: Apply migration
       run: |
-        python manage.py makemigrations 
         python manage.py migrate 
     - name: Run Tests
       run: |
