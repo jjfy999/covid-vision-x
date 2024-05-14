@@ -1,4 +1,4 @@
-import "../../../static/systemadmin/css/UserAcc.css";
+import "../css/UserAcc.css";
 import Header from "./templates/Header";
 import { useState, useEffect } from "react";
 import UserBox from "./templates/UserBox";

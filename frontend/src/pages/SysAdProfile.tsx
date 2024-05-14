@@ -1,5 +1,5 @@
 import Header from "./templates/Header";
-import "../../../static/patient/css/Profile.css";
+import "../css/Profile.css";
 import ProfileCard from "../pages/templates/ProfileCard";
 import { useEffect, useState } from "react";
 

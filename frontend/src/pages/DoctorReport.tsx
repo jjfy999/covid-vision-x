@@ -1,4 +1,4 @@
-import "../../../static/doctor/css/DoctorReport.css";
+import "../css/DoctorReport.css";
 import { useState, useEffect } from "react";
 import UserBox from "./templates/UserBox";
 import { sampleUsers } from "./sampleUserAcc";
