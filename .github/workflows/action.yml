@@ -24,9 +24,9 @@ jobs:
     - name: Install Dependencies 
       run: |
         pip install -r requirements.txt
-    - name: Check for Existing Test Database
-      run: |
-          psql -c 'DROP DATABASE IF EXISTS test_postgres;' 
+    #- name: Check for Existing Test Database
+      #run: |
+          #psql -c 'DROP DATABASE IF EXISTS test_postgres;' 
     - name: Apply migration
       run: |
         python manage.py makemigrations
