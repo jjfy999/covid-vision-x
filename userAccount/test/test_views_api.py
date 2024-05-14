@@ -66,7 +66,6 @@ class views_api_TestCase(TestCase):
         )
 
         self.client = APIClient()
-        self.url = reverse('createUser') 
     #------------------------------------------------------------------------
     # test getDetails() for users to view own details - ALL PASSED
     
@@ -94,7 +93,7 @@ class views_api_TestCase(TestCase):
         response = self.client.get(reverse('getDetails'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('Researcher User', response.json()['name'])
-        
+    
     # ---------------------------------------------------------------------------------
     # test getUserDetails() admin to view specific user (All PASSED)
     
@@ -144,7 +143,7 @@ class views_api_TestCase(TestCase):
         self.assertIn('Admin User', response_data['system_admins'][0]['name'])
         self.assertEqual(len(response_data['researchers']), 1)
         self.assertIn('Researcher User', response_data['researchers'][0]['name'])
-        
+    
     #---------------------------------------------------------------------------------
     # test listPatients() for doctor to view list of patients (PASSED)
     
@@ -161,7 +160,7 @@ class views_api_TestCase(TestCase):
         names = [patient['name'] for patient in response_data['patients']]
         self.assertIn('Patient User', names)
         self.assertIn('Patient User 2', names)
-        
+    
     #---------------------------------------------------------------------------------
     # test updateDetails() for users to update own details (PASSED)
     
@@ -200,7 +199,7 @@ class views_api_TestCase(TestCase):
     
     #-------------------------------------------------------------------------------------
     # updateUserDetails() for system admin to update another person's details (PASSED)
-    
+    """
     def test_update_patient_details(self):
         url = reverse('updateUserDetails', kwargs={'pk': self.patient_user.pk})
         data = {'email': 'patientUpdatedbyADMIN@example.com', 'phone_number': '12345'}
@@ -226,6 +225,76 @@ class views_api_TestCase(TestCase):
         url = reverse('updateUserDetails', kwargs={'pk': 9999})  # Assuming 9999 is an ID that does not exist
         response = self.client.post(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    """
+    
+    def test_update_doctor_details(self):
+        data = {
+            'id': self.doctor_user.pk,
+            'name': 'updated Doctor name',
+            'phone_number': '0987654321',
+            'email': 'updateddoctor@example.com',
+            'username': 'updateddoctor',
+            'password': 'doctor123',
+            'role': 'doctor'
+        }
+        self.url = reverse('updateUserDetails')
+        response = self.client.put(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Doctor.objects.get(pk=self.doctor_user.pk).name, 'updated Doctor name')
+        
+    
+    def test_update_patient_details(self):
+        data = {
+            'id': self.patient_user.pk,
+            'name':'Updated Patient Name',
+            'phone_number':'1234567890',
+            'email':'updatedpatient@example.com',
+            'username':'updatedpatient',
+            'password':'patient123',
+            'role':'patient'
+        }
+        self.url = reverse('updateUserDetails')
+        response = self.client.put(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Patient.objects.get(pk=self.patient_user.pk).name, 'Updated Patient Name')
+    
+    def test_update_researcher_details(self):
+        data = {
+            'id': self.researcher_user.pk,
+            'name':'Updated researcher Name',
+            'phone_number':'1234567899',
+            'email':'updatedresearcher@example.com',
+            'username':'updatedresearcher',
+            'password':'researcher123',
+            'role':'researcher'
+        }
+        self.url = reverse('updateUserDetails')
+        response = self.client.put(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Researcher.objects.get(pk=self.researcher_user.pk).name, 'Updated researcher Name')
+        
+    
+    def test_invalid_role(self):
+        data = {
+            'id': self.doctor_user.pk,
+            'role': 'unknown',
+            'name': 'Should Fail',
+        }
+        self.url = reverse('updateUserDetails')
+        response = self.client.put(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('Invalid role', response.json()['error'])
+
+    def test_invalid_data(self):
+        data = {
+            'id': self.doctor_user.pk,
+            'role': 'doctor',
+            'name': '',  # Assuming name cannot be blank
+        }
+        self.url = reverse('updateUserDetails')
+        response = self.client.put(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('name', response.json())
     
     #---------------------------------------------------------------------------------------
     # # for doctor to search for a patient, and for system admin to search for everyone
@@ -244,8 +313,6 @@ class views_api_TestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()['name'], 'Patient User 2')
-
-
 
     def test_search_all_by_admin(self):
         self.client.force_authenticate(user=self.admin_user)
@@ -311,7 +378,7 @@ class views_api_TestCase(TestCase):
             'status':'Normal',
             'role':'patient'
         }
-        
+        self.url = reverse('createUser') 
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Patient.objects.count(), 3)
@@ -327,6 +394,7 @@ class views_api_TestCase(TestCase):
             'password': 'doctor123',
             'role': 'doctor'
         }
+        self.url = reverse('createUser') 
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Doctor.objects.count(), 2)
@@ -342,6 +410,7 @@ class views_api_TestCase(TestCase):
             'password': 'researcher123',
             'role': 'researcher'
         }
+        self.url = reverse('createUser') 
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Researcher.objects.count(), 2)
@@ -356,6 +425,7 @@ class views_api_TestCase(TestCase):
             'password': 'invalid123',
             'role': 'unknown'
         }
+        self.url = reverse('createUser') 
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('Invalid role', response.json()['error'])
