@@ -1,5 +1,5 @@
 import React from "react";
-import logo_tran from "../../../../static/images/logo_transparent.png";
+import logo_tran from "../../images/logo_transparent.png";
 import { Link, useLocation } from "react-router-dom";
 import "../../css/header.css";
 import { useAuth } from "./AuthContexr";

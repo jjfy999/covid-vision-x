@@ -1,6 +1,6 @@
 import Header from "./templates/Header";
 import "../css/Report.css";
-import xrayImg from "../../../static/images/xray.png";
+import xrayImg from "../images/xray.png";
 import { useEffect, useState } from "react";
 
 const Report = () => {

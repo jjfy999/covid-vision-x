@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import profileImg from '../../../static/images/unknownPerson.jpg';
+import profileImg from '../images/unknownPerson.jpg';
 import Header from './templates/Header';
 import '../css/CreateUser.css';
 import { useState, ChangeEvent, FormEvent, FormEventHandler } from 'react'; 

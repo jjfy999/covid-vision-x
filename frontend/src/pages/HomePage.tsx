@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Home.css";
 import Header from "./templates/Header";
-import homeImg from '../../../static/images/homeImg.webp';
+import homeImg from '../images/homeImg.webp';
 import { useLocation } from "react-router-dom";
 
 function AboutUs() {

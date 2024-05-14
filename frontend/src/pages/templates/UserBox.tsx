@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import profileImg from "../../../../static/images/unknownPerson.jpg";
+import profileImg from "../../images/unknownPerson.jpg";
 import { ReportDetails, UserAccountDetails } from "../UserAccInterface";
 import "../../css/UserBox.css";
 

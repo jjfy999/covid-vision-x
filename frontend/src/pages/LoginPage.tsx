@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/login.css";
-import logo from "../../../static/images/logo_transparent.png";
+import logo from "../images/logo_transparent.png";
 import { useAuth } from "./templates/AuthContexr";
 import { Navigate } from "react-router-dom";
 
