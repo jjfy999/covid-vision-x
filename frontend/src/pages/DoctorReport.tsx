@@ -8,7 +8,6 @@ import Header from "./templates/Header";
 // Combined Component
 const DoctorReport = () => {
     const [users, setUsers] = useState<ReportDetails[]>([]);
-    const [error, setError] = useState<string | null>(null);
     const [filteredUsers, setFilteredUsers] = useState<ReportDetails[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -32,7 +31,6 @@ const DoctorReport = () => {
                 setUsers(data.reports);
             } catch (error) {
                 console.error("Error fetching user data:", error);
-                setError("Error fetching user data");
             }
         };
 
