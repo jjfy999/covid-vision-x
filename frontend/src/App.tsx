@@ -55,7 +55,7 @@ const router = createBrowserRouter(
                     <Route path="/model" element={<Model />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
-                    <Route path="/report" element={<Report />} />
+                    <Route path="/report/:id" element={<Report />} />
                     <Route
                         path="/PatientProfile"
                         element={<PatientProfile />}

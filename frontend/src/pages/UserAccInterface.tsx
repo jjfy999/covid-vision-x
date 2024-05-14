@@ -13,7 +13,7 @@ export interface ReportDetails {
     id: string;
     patient_id: string;
     patient_name: string;
-    doctor_id: string;
+    doctor_id?: string;
     image: string;
     date: string;
     status: "Covid" | "Normal";

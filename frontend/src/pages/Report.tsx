@@ -1,11 +1,13 @@
 import Header from "./templates/Header";
 import "../css/Report.css";
-import xrayImg from "../images/xray.png";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Report = () => {
     const [patientReport, setPatientReport] = useState<any>(null);
     const [outcome, setOutcome] = useState("Negative");
+    const [isLoading, setIsLoading] = useState(true);
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -14,7 +16,7 @@ const Report = () => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const res = await fetch("/baseUrl/patientReport/", {
+                const res = await fetch(`/baseUrl/docShowReport/${id}/`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -27,16 +29,18 @@ const Report = () => {
                 }
                 const data = await res.json();
                 setPatientReport(data);
+                setIsLoading(false);
                 console.log(data);
                 setOutcome(
                     data.status === "Positive" ? "covid" || "Covid" : "Negative"
                 );
             } catch (error) {
                 console.error("Fetch error:", error);
+                setIsLoading(false);
             }
         };
         fetchdata();
-    }, []);
+    }, [id]);
 
     return (
         <div>
@@ -46,59 +50,67 @@ const Report = () => {
                 <h1 id="patientReport">My Report</h1>
 
                 <div id="reportBox">
-                    <img src={xrayImg} id="xrayImg" alt="Patient X-ray" />
-                    {patientReport ? (
-                        <table id="reportTable">
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        <label
-                                            className="reportLabel"
-                                            htmlFor="id"
-                                        >
-                                            Patient ID
-                                        </label>
-                                    </th>
-                                    <td>: {patientReport.patient_id}</td>
-                                </tr>
-
-                                <tr>
-                                    <th>
-                                        <label
-                                            className="reportLabel"
-                                            htmlFor="name"
-                                        >
-                                            Patient Name
-                                        </label>
-                                    </th>
-                                    <td>: {patientReport.patient_name}</td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <label
-                                            className="reportLabel"
-                                            htmlFor="status"
-                                        >
-                                            Covid-19 Diagnosis status
-                                        </label>
-                                    </th>
-                                    <td>: {patientReport.status}</td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <label
-                                            className="reportLabel"
-                                            htmlFor="status"
-                                        >
-                                            Covid-19 Diagnosis outcome
-                                        </label>
-                                    </th>
-                                    <td>: {outcome}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    ) : (
+                    {isLoading ? (
                         <div>Loading...</div>
+                    ) : patientReport ? (
+                        <>
+                            <img
+                                src={patientReport.image}
+                                id="xrayImg"
+                                alt="Patient X-ray"
+                            />
+                            <table id="reportTable">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label
+                                                className="reportLabel"
+                                                htmlFor="id"
+                                            >
+                                                Patient ID
+                                            </label>
+                                        </th>
+                                        <td>: {patientReport.patient_id}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            <label
+                                                className="reportLabel"
+                                                htmlFor="name"
+                                            >
+                                                Patient Name
+                                            </label>
+                                        </th>
+                                        <td>: {patientReport.patient_name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label
+                                                className="reportLabel"
+                                                htmlFor="status"
+                                            >
+                                                Covid-19 Diagnosis status
+                                            </label>
+                                        </th>
+                                        <td>: {patientReport.status}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label
+                                                className="reportLabel"
+                                                htmlFor="status"
+                                            >
+                                                Covid-19 Diagnosis outcome
+                                            </label>
+                                        </th>
+                                        <td>: {outcome}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </>
+                    ) : (
+                        <p>No data available</p>
                     )}
                 </div>
             </section>

@@ -81,9 +81,9 @@ const DoctorNUR = () => {
                         </div>
                     </div>
                     <div id="itemTitleBar">
-                        <p id="titleId">Report ID</p>
-                        <p id="titleName">Patient Name</p>
-                        <p id="titleRole">Status</p>
+                        <p id="patientId">Report ID</p>
+                        <p id="patientName">Patient Name</p>
+                        <p id="patientResult">Status</p>
                     </div>
                     <div id="userListContainer">
                         <div id="userList">

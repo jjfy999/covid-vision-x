@@ -11,7 +11,7 @@ interface UserBoxProps {
 
 interface ReportBoxProps {
     users: ReportDetails[];
-    context: "report";
+    context: "report" | "patientReport";
 }
 
 const UserBox: React.FC<UserBoxProps | ReportBoxProps> = ({
@@ -57,6 +57,24 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps> = ({
                                 <Link
                                     id={`infoBtn${index}`}
                                     to={`/reportDetails/${reportUser.id}`}
+                                >
+                                    View Details
+                                </Link>
+                            </div>
+                        </div>
+                    );
+                } else if (context === "patientReport") {
+                    const reportUser = user as ReportDetails;
+                    return (
+                        <div className="userBox" key={index}>
+                            <div className="user-img-box"> </div>
+                            <p className="id">{reportUser.id}</p>
+                            <p className="name">{reportUser.patient_name}</p>
+                            <p className="role">{reportUser.status}</p>
+                            <div className="viewInfoBtn">
+                                <Link
+                                    id={`infoBtn${index}`}
+                                    to={`/report/${reportUser.id}`}
                                 >
                                     View Details
                                 </Link>
