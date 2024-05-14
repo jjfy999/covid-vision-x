@@ -92,7 +92,7 @@ urlpatterns = [
     # for researcher to upload model to S3
     path('researcherUploadModel/',deepLearningModel.uploadModel, name='uploadModel'),
     # for researcher to delete model from S3
-    path('researcherDeleteModel/',deepLearningModel.deleteModel, name='deleteModel'), 
+    path('researcherDeleteModel/<int:pk>/',deepLearningModel.deleteModel, name='deleteModel'), 
     # for researcher to view list of models    
     path('docListModels/', deepLearningModel.listModels, name='listModels'),
 

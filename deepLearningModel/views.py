@@ -183,9 +183,9 @@ def uploadModel(request):
 
 
 @api_view(['DELETE'])
-def deleteModel(request):
+def deleteModel(request, model_name):
     if request.method == 'DELETE':
-        model_name = request.POST.get('model_name')
+
 
         bucket_name = 'fypmodelss'
 
