@@ -33,7 +33,7 @@ jobs:
        # DROP DATABASE IF EXISTS test_postgres;
     - name: Run Tests
       run: |
-        python manage.py test userAccount --noinput
+        python manage.py test userAccount
     
 
 
