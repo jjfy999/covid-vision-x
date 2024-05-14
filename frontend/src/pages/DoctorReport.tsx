@@ -9,9 +9,7 @@ import Header from "./templates/Header";
 const DoctorReport = () => {
     const [users, setUsers] = useState<ReportDetails[]>([]);
     const [error, setError] = useState<string | null>(null);
-    const [filteredUsers, setFilteredUsers] = useState<UserAccountDetails[]>(
-        []
-    );
+    const [filteredUsers, setFilteredUsers] = useState<ReportDetails[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {

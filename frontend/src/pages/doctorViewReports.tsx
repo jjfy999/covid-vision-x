@@ -9,7 +9,6 @@ const ViewReportDetails = () => {
     const [reportData, setReportData] = useState<ReportDetails | null>(null);
 
     useEffect(() => {
-        console.log(id);
         const fetchData = async () => {
             try {
                 const tokens = JSON.parse(

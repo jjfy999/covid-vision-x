@@ -20,9 +20,9 @@ interface ProfileProps {
     phone_number: string;
     email: string;
     username: string;
-    password: string;
+    password?: string;
     result?: any;
-    pageContext: "profile" | "useracc";
+    pageContext: "profile" | "useracc" | "doctor";
 }
 
 const ProfileCard: React.FC<ProfileProps> = (props) => {
@@ -247,8 +247,11 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                     secondary={
                                         <TextareaAutosize
                                             value={profile.password}
-                                            minRows={3} 
-                                            style={{ width: '100%', resize: 'none' }} 
+                                            minRows={3}
+                                            style={{
+                                                width: "100%",
+                                                resize: "none",
+                                            }}
                                         />
                                     }
                                 />
@@ -323,6 +326,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                                 Edit
                             </Button>
                         )}
+                        {props.pageContext === "doctor" && <></>}
                     </>
                 )}
             </CardContent>

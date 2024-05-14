@@ -4,10 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { UserAccountDetails } from "./UserAccInterface";
 import ProfileCard from "./templates/ProfileCard";
+import { useAuth } from "./templates/AuthContexr";
 
 const AccountDetails = () => {
     const { userId } = useParams(); // Get the user ID from URL parameters
-    const [user, setUser] = useState<UserAccountDetails | null>(null);
+    const { user } = useAuth();
+    const [users, setUsers] = useState<UserAccountDetails | null>(null);
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -27,7 +29,7 @@ const AccountDetails = () => {
                     throw new Error("http error: status " + res.status);
                 }
                 const data = await res.json();
-                setUser(data);
+                setUsers(data);
             } catch (error) {
                 console.error("Fetch error:", error);
             }
@@ -36,36 +38,67 @@ const AccountDetails = () => {
     }, [userId]); // Re-run the effect when the user ID changes
 
     // If the user is not found, display a message
-    if (!user) {
+    if (!users) {
         return <Link to="/HomePage">User not found {userId}</Link>;
     }
 
     return (
-        <div>
-            <Header userRole={"system_admin"} />
+        <>
+            {user.role === "system_admin" ? (
+                <div>
+                    <Header userRole={"system_admin"} />
 
-            {/* Account Details Section */}
-            <section id="accDetailPage">
-                <h1 id="userAccDetails">Account Details</h1>
-                <div id="profileCardContainer">
-                    {" "}
-                    {/* Replace tablediv with profileCardContainer */}
-                    <ProfileCard
-                        id={user.id}
-                        name={user.name}
-                        role={user.role}
-                        phone_number={user.phone}
-                        email={user.email}
-                        username={user.username}
-                        password={user.password}
-                        result={
-                            user.role === "patient" ? user.result : undefined
-                        }
-                        pageContext="useracc"
-                    />
+                    {/* Account Details Section */}
+                    <section id="accDetailPage">
+                        <h1 id="userAccDetails">Account Details</h1>
+                        <div id="profileCardContainer">
+                            {" "}
+                            <ProfileCard
+                                id={users.id}
+                                name={users.name}
+                                role={users.role}
+                                phone_number={users.phone}
+                                email={users.email}
+                                username={users.username}
+                                password={users.password}
+                                result={
+                                    users.role === "patient"
+                                        ? users.result
+                                        : undefined
+                                }
+                                pageContext="useracc"
+                            />
+                        </div>
+                    </section>
                 </div>
-            </section>
-        </div>
+            ) : (
+                <div>
+                    <Header userRole={"doctor"} />
+
+                    {/* Account Details Section */}
+                    <section id="accDetailPage">
+                        <h1 id="userAccDetails">Patient Details</h1>
+                        <div id="profileCardContainer">
+                            {" "}
+                            <ProfileCard
+                                id={users.id}
+                                name={users.name}
+                                role={users.role}
+                                phone_number={users.phone}
+                                email={users.email}
+                                username={users.username}
+                                result={
+                                    users.role === "patient"
+                                        ? users.result
+                                        : undefined
+                                }
+                                pageContext="doctor"
+                            />
+                        </div>
+                    </section>
+                </div>
+            )}
+        </>
     );
 };
 

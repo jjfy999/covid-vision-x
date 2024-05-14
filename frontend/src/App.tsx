@@ -23,12 +23,14 @@ import DoctorNUR from "./pages/DoctorNonUpdatedReport";
 import Model from "./pages/Model";
 import HomePage from "./pages/HomePage";
 import ViewReportDetails from "./pages/doctorViewReports";
+import PatientList from "./pages/PatientList";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route>
             <Route path="/loginpage" element={<LoginPage />} />
             <Route path="/HomePage" element={<HomePage />} />
+            <Route path="/AccDetail/:userId" element={<AccountDetails />} />
             <Route path="/" element={<PrivateRoute />}>
                 <Route element={<RoleRoute requiredRole={"doctor"} />}>
                     <Route path="/doctorprofile" element={<DoctorProfile />} />
@@ -45,6 +47,7 @@ const router = createBrowserRouter(
                         path="/DoctorUploadImage"
                         element={<DoctorUploadImage />}
                     />
+                    <Route path="/patientList" element={<PatientList />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
                     <Route path="/Rsprofile" element={<RsProfile />} />
@@ -59,10 +62,6 @@ const router = createBrowserRouter(
                 </Route>
                 <Route element={<RoleRoute requiredRole={"system_admin"} />}>
                     <Route path="/UserAcc" element={<UserAccount />} />
-                    <Route
-                        path="/AccDetail/:userId"
-                        element={<AccountDetails />}
-                    />
                     <Route path="/SysAdProfile" element={<SysadProfile />} />
                     <Route path="/CreateUser" element={<CreateUser />} />
                 </Route>
