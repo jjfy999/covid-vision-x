@@ -24,6 +24,7 @@ import Model from "./pages/Model";
 import HomePage from "./pages/HomePage";
 import ViewReportDetails from "./pages/doctorViewReports";
 import PatientList from "./pages/PatientList";
+import PatientReports from "./pages/PatientReports";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -58,6 +59,10 @@ const router = createBrowserRouter(
                     <Route
                         path="/PatientProfile"
                         element={<PatientProfile />}
+                    />
+                    <Route
+                        path="/PatientReports"
+                        element={<PatientReports />}
                     />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"system_admin"} />}>
