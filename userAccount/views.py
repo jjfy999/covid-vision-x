@@ -95,10 +95,9 @@ def logout(request):
 
 
 @api_view(['GET'])  # for users to view own details
-# @permission_classes([IsAuthenticated])
 def getDetails(request):
     user = request.user
-    print("User role:", user.role)
+
 
     if user.role == 'patient':
         patient_instance = Patient.objects.get(
@@ -112,7 +111,6 @@ def getDetails(request):
     return JsonResponse(serializer.data, safe=False, json_dumps_params={'indent': 2}, status=200)
 
 
-# Postman tested
 @api_view(['GET'])
 def getUserDetails(request, pk):  # for system admin to view specific user details
     try:
@@ -147,15 +145,13 @@ def getUserDetails(request, pk):  # for system admin to view specific user detai
 # Postman tested
 @api_view(['GET'])
 def listUsers(request):  # for system admin to view list of users
-    # Serialize patients
+
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
 
-    # Serialize doctors
     doctors = Doctor.objects.all()
     doctor_serializer = DoctorSysAdminSerializer(doctors, many=True)
 
-    # Serialize system admins
     system_admins = SystemAdmin.objects.all()
     system_admin_serializer = DoctorSysAdminSerializer(
         system_admins, many=True)
@@ -176,7 +172,7 @@ def listUsers(request):  # for system admin to view list of users
 # for doctor to view list of patients
 @api_view(['GET'])
 def listPatients(request):
-    # Serialize patients
+
     patients = Patient.objects.all()
     patient_serializer = PatientSerializer(patients, many=True)
 
@@ -184,12 +180,11 @@ def listPatients(request):
     return JsonResponse(users_data, json_dumps_params={'indent': 2}, status=200)
 
 
-@api_view(['PUT'])  # Update should be a PUT request
+@api_view(['PUT'])  
 def updateDetails(request):  # for users to update own details
 
     user = request.user
 
-    # Check if the user is a Doctor or a SystemAdmin
     if user.role == 'doctor' or user.role == 'system_admin' or user.role == 'researcher':
         serializer = DoctorSysAdminUpdateSerializer(user, data=request.data)
     elif user.role == 'patient':
@@ -205,12 +200,9 @@ def updateDetails(request):  # for users to update own details
     else:
         return JsonResponse(serializer.errors, status=400)
 
-# Postman tested
-
 
 @api_view(['POST'])
-# for system admin to update another person's details
-def updateUserDetails(request, pk):
+def updateUserDetails(request, pk):     # for system admin to update another person's details
     try:
         doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
@@ -239,13 +231,11 @@ def updateUserDetails(request, pk):
         serializer.save()
         return JsonResponse({'message': 'User updated successfully.'}, status=200)
     else:
-        # Return errors if serializer is not valid
         return JsonResponse(serializer.errors, status=400)
 
 
 @api_view(['GET'])
-# for doctor to search for a patient, and for system admin to search for everyone
-def searchUser(request, pk):
+def searchUser(request, pk):  # for doctor to search for a patient, and for system admin to search for everyone
     if pk:
         try:
             if request.user.role == 'doctor':
@@ -272,7 +262,6 @@ def searchUser(request, pk):
     return JsonResponse({"error": "User not found"}, status=400)
 
 
-# Postman tested
 @api_view(['DELETE'])
 def deleteUser(request, pk):  # for system admin to delete a user
     user = None
@@ -301,10 +290,8 @@ def deleteUser(request, pk):  # for system admin to delete a user
         return JsonResponse({'error': 'User not found.'}, status=404)
 
 
-# Postman tested
 @api_view(['POST'])
-# for patient to register and for system admin to create a user
-def createUser(request):
+def createUser(request):    # for patient to register and for system admin to create a user
     if request.method == 'POST':
         name = request.data.get('name')
         phone_number = request.data.get('phone_number')
@@ -332,13 +319,10 @@ def createUser(request):
                 username=username, password=password, email=email, name=name, phone_number=phone_number)
 
         else:
-            # Handle invalid role
             return JsonResponse({'error': 'Invalid role'}, status=400)
 
         return JsonResponse({'message': 'User created successfully.'}, status=201)
-
     else:
-        # Handle non-POST request
         return JsonResponse({'error': 'User not created.'}, status=400)
 
 
