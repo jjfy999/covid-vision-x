@@ -9,7 +9,6 @@ import { FaSearch } from "react-icons/fa";
 // Combined Component
 const UserAccount = () => {
     const [users, setUsers] = useState<UserAccountDetails[]>([]);
-    const [error, setError] = useState<string | null>(null);
     const [filteredUsers, setFilteredUsers] =
         useState<UserAccountDetails[]>(users);
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -43,7 +42,6 @@ const UserAccount = () => {
                 setUsers(allUsers);
             } catch (error) {
                 console.error("Error fetching user data:", error);
-                setError("Error fetching user data");
             }
         };
         fetchData(); // Call the fetchData function
