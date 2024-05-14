@@ -25,6 +25,7 @@ import HomePage from "./pages/HomePage";
 import ViewReportDetails from "./pages/doctorViewReports";
 import PatientList from "./pages/PatientList";
 import PatientReports from "./pages/PatientReports";
+import ModelUpload from "./pages/ModelUpload";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
                     <Route path="/Rsprofile" element={<RsProfile />} />
                     <Route path="/model" element={<Model />} />
+                    <Route path="/ModelUpload" element={<ModelUpload />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
                     <Route path="/report/:id" element={<Report />} />

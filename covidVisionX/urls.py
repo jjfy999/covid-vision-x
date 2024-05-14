@@ -29,19 +29,19 @@ urlpatterns = [
     path('system-admin/', system_admin_site.urls),
 
 
-    #For Patients !!!!!!!!!!!!!!!!!!
+    # For Patients !!!!!!!!!!!!!!!!!!
     # for patient to register account
     path('register/', userAccount.createUser, name='createUser'),
-     # for patient to view all their reports
+    # for patient to view all their reports
     path('patientReport/', deepLearningModel.reportView, name='reportView'),
-     # for patient to view own profile
+    # for patient to view own profile
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
     # for patient to update own details
-    path('updateDetails/', userAccount.updateDetails, name='updateDetails'),  
+    path('updateDetails/', userAccount.updateDetails, name='updateDetails'),
 
 
 
-    #For System Admin !!!!!!!!!!!!!!!!!! 
+    # For System Admin !!!!!!!!!!!!!!!!!!
     # for system admin to view list of users
     path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),
     # for system admin to view own details
@@ -53,47 +53,55 @@ urlpatterns = [
     # for system admin to search for a doctor or patient
     path('sysSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),
     # for system admin to delete a user
-    path('sysDeleteUser/<int:pk>/', userAccount.deleteUser, name='deleteUser'),  
+    path('sysDeleteUser/<int:pk>/', userAccount.deleteUser, name='deleteUser'),
     # for system admin to create a user
     path('sysCreateUser/', userAccount.createUser, name='createUser'),
     # for system admin to update another person details
-    #path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails, name='updateUserDetails'),
-    path('updateUserDetails/', userAccount.updateUserDetails, name='updateUserDetails'),
+    # path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails, name='updateUserDetails'),
+    path('updateUserDetails/', userAccount.updateUserDetails,
+         name='updateUserDetails'),
 
 
 
-    #For Doctors !!!!!!!!!!!!!!!!!!
+    # For Doctors !!!!!!!!!!!!!!!!!!
     # for doctor to search for a patient
-    path('docSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),  
-    # for doctor to view list of patients 
+    path('docSearchUser/<int:pk>/', userAccount.searchUser, name='searchUser'),
+    # for doctor to view list of patients
     path('docPatientAccList/', userAccount.listPatients, name='docUserAccList'),
     # for doctor to view own details
-    path('docProfileView/', userAccount.getDetails, name='getDetails'), 
+    path('docProfileView/', userAccount.getDetails, name='getDetails'),
     # for doctor to view all non updated reports of patients
-    path('docNonUploadedReports/', deepLearningModel.listNonUploadedReports, name='docListReports'),
+    path('docNonUploadedReports/',
+         deepLearningModel.listNonUploadedReports, name='docListReports'),
     # for doctor to update own details
-    path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),  
+    path('docUpdateDetails/', userAccount.updateDetails, name='updateDetails'),
     # for doctor to view all reports that are uploaded to patients
-    path('docUploadedReports/', deepLearningModel.listUploadedReports, name='docUploadedReports'),
-    # for doctor to view list of all reports (for testing) 
-    path('docListAllReports/', deepLearningModel.listAllReports, name='docListAllReports'),
+    path('docUploadedReports/', deepLearningModel.listUploadedReports,
+         name='docUploadedReports'),
+    # for doctor to view list of all reports (for testing)
+    path('docListAllReports/', deepLearningModel.listAllReports,
+         name='docListAllReports'),
     # for doctor to upload report to patient
     path('uploadReport/', deepLearningModel.uploadReport, name='uploadReport'),
     # for doctor to delete report
-    path('deleteReport/<int:pk>/', deepLearningModel.deleteReport, name='deleteReport'),
+    path('deleteReport/<int:pk>/',
+         deepLearningModel.deleteReport, name='deleteReport'),
     # for doctor to upload images for ML prediction
     path('predictImage/', deepLearningModel.predict, name='predictImage'),
     # for doctor to view 1 specific report
-    path('docShowReport/<int:pk>/', deepLearningModel.showReport, name='showReport'),
+    path('docShowReport/<int:pk>/',
+         deepLearningModel.showReport, name='showReport'),
 
 
 
-    #For Researchers !!!!!!!!!!!!!!!!!!
+    # For Researchers !!!!!!!!!!!!!!!!!!
     # for researcher to upload model to S3
-    path('researcherUploadModel/',deepLearningModel.uploadModel, name='uploadModel'),
+    path('researcherUploadModel/',
+         deepLearningModel.uploadModel, name='uploadModel'),
     # for researcher to delete model from S3
-    path('researcherDeleteModel/<int:pk>/',deepLearningModel.deleteModel, name='deleteModel'), 
-    # for researcher to view list of models    
+    path('researcherDeleteModel/<str:name>/',
+         deepLearningModel.deleteModel, name='deleteModel'),
+    # for researcher to view list of models
     path('docListModels/', deepLearningModel.listModels, name='listModels'),
 
 

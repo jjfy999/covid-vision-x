@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import profileImg from "../../images/unknownPerson.jpg";
-import { ReportDetails, UserAccountDetails } from "../UserAccInterface";
+import {
+    ReportDetails,
+    UserAccountDetails,
+    ModelList,
+} from "../UserAccInterface";
 import "../../css/UserBox.css";
+import { useNavigate } from "react-router-dom";
 
 interface UserBoxProps {
     users: UserAccountDetails[];
@@ -14,10 +19,39 @@ interface ReportBoxProps {
     context: "report" | "patientReport";
 }
 
-const UserBox: React.FC<UserBoxProps | ReportBoxProps> = ({
+interface ModelBoxProps {
+    users: ModelList[];
+    context: "model";
+}
+
+const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
     users,
     context,
 }) => {
+    const navigate = useNavigate();
+    const handleDelete = async (id: string) => {
+        try {
+            const tokens = JSON.parse(
+                localStorage.getItem("authTokens") || "{}"
+            );
+            const token = tokens.access;
+            const res = await fetch(`/baseUrl/researcherDeleteModel/${id}/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            });
+            if (!res.ok) {
+                throw new Error("HTTP error, status = " + res.status);
+            } else {
+                alert("Model deleted successfully");
+                navigate("/model", { replace: true });
+            }
+        } catch (error) {
+            console.error("Error deleting model:", error);
+        }
+    };
     return (
         <div>
             {users.map((user, index) => {
@@ -78,6 +112,23 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps> = ({
                                 >
                                     View Details
                                 </Link>
+                            </div>
+                        </div>
+                    );
+                } else if (context === "model") {
+                    const model = user as ModelList;
+                    return (
+                        <div className="userBox" key={index}>
+                            <div className="user-img-box"> </div>
+                            <p className="id">{model.id}</p>
+                            <p className="name">{model.name}</p>
+                            <div className="viewInfoBtn">
+                                <button
+                                    id={`infoBtn${index}`}
+                                    onClick={() => handleDelete(model.name)}
+                                >
+                                    Delete Model
+                                </button>
                             </div>
                         </div>
                     );

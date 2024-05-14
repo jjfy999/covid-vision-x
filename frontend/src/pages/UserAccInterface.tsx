@@ -19,3 +19,8 @@ export interface ReportDetails {
     status: "Covid" | "Normal";
     approved: boolean;
 }
+
+export interface ModelList {
+    id: string;
+    name: string;
+}

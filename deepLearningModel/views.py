@@ -2,6 +2,7 @@ import io
 import os
 import tempfile
 from datetime import date
+
 import boto3
 import cv2
 import h5py
@@ -17,11 +18,13 @@ from keras.models import load_model
 from rest_framework.decorators import api_view
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from storages.backends.s3boto3 import S3Boto3Storage
+
 from covidVisionX.settings import (  # ,AWS_STORAGE_BUCKET_NAME_MODELS
     AWS_S3_REGION_NAME, AWS_STORAGE_BUCKET_NAME)
 from deepLearningModel.serializers import (ReportApprovalSerializer,
                                            ReportSerializer)
 from userAccount.models import Patient
+
 from .models import Report
 
 
@@ -34,6 +37,7 @@ def listNonUploadedReports(request):
     serializer = ReportSerializer(reports, many=True)
     data = {"reports": serializer.data}
     return JsonResponse(data, json_dumps_params={'indent': 2}, status=200)
+
 
 @api_view(['GET'])
 def listUploadedReports(request):  # for doctor to view all uploaded reports
@@ -183,16 +187,15 @@ def uploadModel(request):
 
 
 @api_view(['DELETE'])
-def deleteModel(request, pk):
+def deleteModel(request, name):
     if request.method == 'DELETE':
-
 
         bucket_name = 'fypmodelss'
 
         s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                                  aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
 
-        key = pk
+        key = name
 
         try:
             s3_client.delete_object(Bucket=bucket_name, Key=key)
@@ -227,7 +230,6 @@ def download_and_load_model(model_path):
 
     print(models[model_path])
     return models[model_path]
-
 
 
 @api_view(['POST'])
