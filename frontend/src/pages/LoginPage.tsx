@@ -212,7 +212,7 @@ function LoginPage() {
                         <input
                             className="label"
                             type="text"
-                            placeholder="Enter contace number"
+                            placeholder="Enter contact number"
                             value={contact}
                             onChange={(e) => setContact(e.target.value)}
                             required
