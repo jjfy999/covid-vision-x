@@ -16,13 +16,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const [authTokens, setAuthTokens] = useState<string | null>(() =>
         localStorage.getItem("authTokens")
-            ? JSON.parse(localStorage.getItem("authTokens"))
+            ? JSON.parse(localStorage.getItem("authTokens") || "")
             : null
     );
 
     const [user, setUser] = useState<any>(() =>
         localStorage.getItem("authTokens")
-            ? jwtDecode(localStorage.getItem("authTokens"))
+            ? jwtDecode(localStorage.getItem("authTokens") || "")
             : null
     );
 
@@ -71,7 +71,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ refresh: authTokens?.refresh }),
+            body: JSON.stringify({
+                refresh: (authTokens as unknown as { refresh: string })
+                    ?.refresh,
+            }),
         });
 
         const data = await response.json();
