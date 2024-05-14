@@ -57,7 +57,8 @@ urlpatterns = [
     # for system admin to create a user
     path('sysCreateUser/', userAccount.createUser, name='createUser'),
     # for system admin to update another person details
-    path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails, name='updateUserDetails'), 
+    #path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails, name='updateUserDetails'),
+    path('updateUserDetails/', userAccount.updateUserDetails, name='updateUserDetails'),
 
 
 

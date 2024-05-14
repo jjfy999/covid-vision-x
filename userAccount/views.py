@@ -132,20 +132,22 @@ def updateDetails(request):  # for users to update own details
 
 @api_view(['PUT'])
 # for system admin to update another person's details
-def updateUserDetails(request, pk):
+def updateUserDetails(request):
+    pk = request.data.get('id')
+    print(pk)
     try:
         doctor = Doctor.objects.get(pk=pk)
         serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
     except Doctor.DoesNotExist:
         doctor = None
-
+    print("bbb")
     if doctor is None:
         try:
             patient = Patient.objects.get(pk=pk)
             serializer = PatientUpdateSerializer(patient, data=request.data)
         except Patient.DoesNotExist:
             patient = None
-
+    print("ccc")
     if doctor is None and patient is None:
         try:
             researcher = Researcher.objects.get(pk=pk)
