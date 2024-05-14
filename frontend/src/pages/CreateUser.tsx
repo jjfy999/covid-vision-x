@@ -26,6 +26,17 @@ function EditProfile() {
 
     const handleSubmit: FormEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
+        if (
+            name === "" ||
+            role === "" ||
+            phone_number === "" ||
+            email === "" ||
+            username === "" ||
+            password === ""
+        ) {
+            alert("Please fill all fields");
+            return;
+        }
         try {
             const tokens = JSON.parse(
                 localStorage.getItem("authTokens") || "{}"
