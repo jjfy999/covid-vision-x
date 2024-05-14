@@ -3,7 +3,6 @@ import logo_tran from "../../images/logo_transparent.png";
 import { Link, useLocation } from "react-router-dom";
 import "../../css/header.css";
 import { useAuth } from "./AuthContexr";
-import { useNavigate } from "react-router-dom";
 
 type UserRole = "patient" | "system_admin" | "doctor" | "researcher";
 
@@ -15,7 +14,6 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const location = useLocation();
     const { logoutUser } = useAuth();
     const isAccDetailPage = location.pathname.includes("/AccDetail");
-    const navigate = useNavigate();
 
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState(() => {
