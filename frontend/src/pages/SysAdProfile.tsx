@@ -47,7 +47,7 @@ const SysadProfile = () => {
                             username={adminProfile.username}
                             password={adminProfile.password}
                             role={adminProfile.role}
-                            phone_number={adminProfile.phone}
+                            phone_number={adminProfile.phone_number}
                             email={adminProfile.email}
                             pageContext="profile"
                         />

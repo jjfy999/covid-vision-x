@@ -9,7 +9,7 @@ import { useAuth } from "./templates/AuthContexr";
 const AccountDetails = () => {
     const { userId } = useParams(); // Get the user ID from URL parameters
     const { user } = useAuth();
-    const [users, setUsers] = useState<UserAccountDetails | null>(null);
+    const [checkUser, setCheckUser] = useState<UserAccountDetails | null>(null);
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -29,7 +29,7 @@ const AccountDetails = () => {
                     throw new Error("http error: status " + res.status);
                 }
                 const data = await res.json();
-                setUsers(data);
+                setCheckUser(data);
             } catch (error) {
                 console.error("Fetch error:", error);
             }
@@ -38,7 +38,7 @@ const AccountDetails = () => {
     }, [userId]); // Re-run the effect when the user ID changes
 
     // If the user is not found, display a message
-    if (!users) {
+    if (!checkUser) {
         return <Link to="/HomePage">User not found {userId}</Link>;
     }
 
@@ -54,16 +54,16 @@ const AccountDetails = () => {
                         <div id="profileCardContainer">
                             {" "}
                             <ProfileCard
-                                id={users.id}
-                                name={users.name}
-                                role={users.role}
-                                phone_number={users.phone}
-                                email={users.email}
-                                username={users.username}
-                                password={users.password}
+                                id={checkUser.id}
+                                name={checkUser.name}
+                                role={checkUser.role}
+                                phone_number={checkUser.phone_number}
+                                email={checkUser.email}
+                                username={checkUser.username}
+                                password={checkUser.password}
                                 result={
-                                    users.role === "patient"
-                                        ? users.result
+                                    checkUser.role === "patient"
+                                        ? checkUser.result
                                         : undefined
                                 }
                                 pageContext="useracc"
@@ -81,15 +81,15 @@ const AccountDetails = () => {
                         <div id="profileCardContainer">
                             {" "}
                             <ProfileCard
-                                id={users.id}
-                                name={users.name}
-                                role={users.role}
-                                phone_number={users.phone}
-                                email={users.email}
-                                username={users.username}
+                                id={checkUser.id}
+                                name={checkUser.name}
+                                role={checkUser.role}
+                                phone_number={checkUser.phone_number}
+                                email={checkUser.email}
+                                username={checkUser.username}
                                 result={
-                                    users.role === "patient"
-                                        ? users.result
+                                    checkUser.role === "patient"
+                                        ? checkUser.result
                                         : undefined
                                 }
                                 pageContext="doctor"

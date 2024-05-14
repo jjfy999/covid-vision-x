@@ -4,7 +4,7 @@ export interface UserAccountDetails {
     username: string;
     password: string;
     role: "patient" | "doctor" | "system admin" | "researcher";
-    phone: string;
+    phone_number: string;
     email: string;
     result?: any;
 }
