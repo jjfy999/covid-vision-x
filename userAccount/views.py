@@ -129,7 +129,7 @@ def updateDetails(request):  # for users to update own details
     else:
         return JsonResponse(serializer.errors, status=400)
 
-
+'''
 @api_view(['PUT'])
 # for system admin to update another person's details
 def updateUserDetails(request):
@@ -164,7 +164,31 @@ def updateUserDetails(request):
         return JsonResponse({'message': 'User updated successfully.'}, status=200)
     else:
         return JsonResponse(serializer.errors, status=400)
+'''
 
+@api_view(['PUT'])
+# for system admin to update another person's details
+def updateUserDetails(request):
+    print("heelo")
+    role = request.data.get('role')
+    pk = request.data.get('id')
+    if role == 'doctor':
+        doctor = Doctor.objects.get(pk=pk)
+        serializer = DoctorSysAdminUpdateSerializer(doctor, data=request.data)
+    elif role == 'patient':
+        patient = Patient.objects.get(pk=pk)
+        serializer = PatientUpdateSerializer(patient, data=request.data)
+    elif role == 'researcher':
+        researcher = Researcher.objects.get(pk=pk)
+        serializer = DoctorSysAdminUpdateSerializer(researcher, data=request.data)
+    else:
+        return JsonResponse({"error": "Invalid role"}, status=400)    
+    
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'message': 'User updated successfully.'}, status=200)
+    else:
+        return JsonResponse(serializer.errors, status=400)
 
 @api_view(['GET'])
 # for doctor to search for a patient, and for system admin to search for everyone
