@@ -12,10 +12,9 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
+    SelectChangeEvent,
 } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
-import { SelectChangeEvent } from "@mui/material";
-import { prefetchDNS } from "react-dom";
 
 type UserRole = "doctor" | "researcher";
 
@@ -24,7 +23,7 @@ interface UploadProps {
     userRole: UserRole;
 }
 
-const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
+const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [patientId, setPatientId] = useState("");
@@ -102,7 +101,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
         }
     };
 
-    const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleTypeChange = (event: SelectChangeEvent) => {
         setSelectModelType(event.target.value as string);
     };
 
@@ -211,6 +210,7 @@ const UploadImage: React.FC<UploadProps> = ({ onFileUpload, userRole }) => {
                                 Choose Model
                             </InputLabel>
                             <Select
+                                native
                                 labelId="xray-type-label"
                                 id="xray-type-select"
                                 value={selectModelType}
