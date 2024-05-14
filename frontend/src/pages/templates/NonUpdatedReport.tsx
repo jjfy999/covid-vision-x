@@ -54,7 +54,7 @@ interface ReportData {
 
 const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
     const { id } = useParams();
-    const [overwrite, setOverwrite] = useState("");
+    const [overwrite, setOverwrite] = useState(ReportData.status);
     const navigate = useNavigate();
 
     const handleStatusChange = (event) => {
@@ -139,7 +139,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                         <Typography variant="body2">result</Typography>
                         <FormControl fullWidth margin="normal">
                             <Select
-                                value={overwrite || ReportData.status}
+                                value={overwrite}
                                 onChange={handleStatusChange}
                                 displayEmpty
                                 inputProps={{ "aria-label": "Without label" }}
