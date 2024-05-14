@@ -106,9 +106,9 @@ const UserAccount = () => {
 
                     {/* Item title bar */}
                     <div id="itemTitleBar">
-                        <p id="titleId">UserID</p>
-                        <p id="titleName">Name</p>
-                        <p id="titleRole">Role</p>
+                        <p id="userId">UserID</p>
+                        <p id="userName">Name</p>
+                        <p id="userRole">Role</p>
                     </div>
 
                     {/* User Acc list */}
