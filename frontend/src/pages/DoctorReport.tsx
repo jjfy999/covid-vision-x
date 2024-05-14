@@ -1,14 +1,13 @@
 import "../css/DoctorReport.css";
 import { useState, useEffect } from "react";
 import UserBox from "./templates/UserBox";
-import { sampleUsers } from "./sampleUserAcc";
-import { UserAccountDetails } from "./UserAccInterface";
+import { ReportDetails } from "./UserAccInterface";
 import { FaSearch } from "react-icons/fa";
 import Header from "./templates/Header";
 
 // Combined Component
 const DoctorReport = () => {
-    const [users, setUsers] = useState<UserAccountDetails[]>(sampleUsers);
+    const [users, setUsers] = useState<ReportDetails[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [filteredUsers, setFilteredUsers] = useState<UserAccountDetails[]>(
         []
@@ -19,9 +18,20 @@ const DoctorReport = () => {
         // Fetch user data from the API endpoint when component mounts
         const fetchData = async () => {
             try {
-                // const response = await axios.get('API_ENDPOINT_URL');
-                // setUsers(response.data);
-                setUsers(sampleUsers);
+                const tokens = JSON.parse(
+                    localStorage.getItem("authTokens") || "{}"
+                );
+                const token = tokens.access;
+                const res = await fetch("/baseUrl/docUploadedReports/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                });
+                const data = await res.json();
+                console.log(data);
+                setUsers(data.reports);
             } catch (error) {
                 console.error("Error fetching user data:", error);
                 setError("Error fetching user data");
@@ -29,20 +39,30 @@ const DoctorReport = () => {
         };
 
         fetchData(); // Call the fetchData function
-
-        const filtered = users.filter((user) =>
-            user.id.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredUsers(filtered);
-    }, [searchTerm, users]); // Empty dependency array means this effect runs only once after the first render
+    }, []); // Empty dependency array means this effect runs only once after the first render
 
     // Function to handle search
-    const handleSearch = () => {
-        const filtered = users.filter((user) =>
-            user.id.toLowerCase().includes(searchTerm.toLowerCase())
+    const handleSearch = (searchTerm: string) => {
+        const filtered = users.filter(
+            (user) =>
+                user.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.patient_name
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                user.status.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredUsers(filtered);
     };
+
+    useEffect(() => {
+        return () => {
+            setSearchTerm("");
+        };
+    }, []);
+
+    useEffect(() => {
+        setFilteredUsers(users);
+    }, [users]);
 
     return (
         <div>
@@ -64,7 +84,10 @@ const DoctorReport = () => {
                                 type="text"
                                 placeholder="Search user by ID..."
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    handleSearch(e.target.value);
+                                }}
                             />
                         </div>
                     </div>
@@ -79,16 +102,10 @@ const DoctorReport = () => {
                     {/* User Acc list */}
                     <div id="userListContainer">
                         <div id="userList">
-                            {filteredUsers.length === 0 ? (
-                                <p className="errorMessage">
-                                    Patient not found...
-                                </p>
-                            ) : (
+                            {users && (
                                 <UserBox
-                                    users={filteredUsers.filter(
-                                        (user) => user.role === "patient"
-                                    )}
-                                    context="patient"
+                                    users={filteredUsers}
+                                    context="report"
                                 />
                             )}
                         </div>

@@ -17,4 +17,5 @@ export interface ReportDetails {
     image: string;
     date: string;
     status: "Covid" | "Normal";
+    approved: boolean;
 }
