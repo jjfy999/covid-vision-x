@@ -28,9 +28,9 @@ jobs:
       run: |
         python manage.py makemigrations 
         python manage.py migrate 
-    #- name: drop database
-      #run: |
-       # DROP DATABASE IF EXISTS test_postgres;
+    - name: drop database
+      run: |
+        echo "DROP DATABASE IF EXISTS test_postgres;" | psql -h localhost -U postgres
     - name: Run Tests
       run: |
         python manage.py test userAccount
