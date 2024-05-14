@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { TextareaAutosize } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileProps {
     id: string;
@@ -30,6 +31,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     const [profile, setProfile] = useState({ ...props });
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange =
         (prop: keyof typeof profile) =>
@@ -114,25 +116,30 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 
     const handleDelete = async () => {
         try {
-            // Send delete request to API
-            const response = await fetch(`your-api-url/${profile.id}`, {
-                method: "DELETE",
-                // Additional headers or credentials if needed
-            });
+            const tokens = JSON.parse(
+                localStorage.getItem("authTokens") || "{}"
+            );
+            const token = tokens.access;
+            const response = await fetch(
+                `/baseUrl/sysDeleteUser/${profile.id}/`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
             if (response.ok) {
                 console.log("Profile deleted successfully");
-                // Handle any further UI updates or navigation
+                alert("Profile deleted successfully");
+                navigate("/UserAcc", { replace: true });
             } else {
-                console.error("Failed to delete profile");
-                // Handle error scenarios
+                console.error("Failed to delete profile", response.status);
             }
         } catch (error) {
             console.error("Error deleting profile:", error);
-            // Handle network errors or other exceptions
-        } finally {
-            // Close delete confirmation dialog
-            setDeleteConfirmationOpen(false);
         }
     };
 
