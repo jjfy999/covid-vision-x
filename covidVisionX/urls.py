@@ -27,16 +27,11 @@ from userAccount.admin import system_admin_site
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('system-admin/', system_admin_site.urls),
-    #path('', userAccount.loginPage, name='login'),
 
-    #path('login/', userAccount.loginAuth, name='loginAuth'),
-    #path('logout/', userAccount.logout, name='logout'),
     path('register/', userAccount.createUser,
          name='createUser'),  # for patient to register
     path('patientReport/', deepLearningModel.reportView, name='reportView'),
     path('patientProfile/', userAccount.getDetails, name='getDetails'),
-    #path('patientEditProfile/', userAccount.editProfileView,
-         #name='editProfileView'),  # for patient to view edit own details page
     path('updateDetails/', userAccount.updateDetails,
          name='updateDetails'),  # for patient to update own details
     path('updateUserDetails/<int:pk>/', userAccount.updateUserDetails,  # for system admin to update another person details!!!!!!!!!! (linked to below)
@@ -50,13 +45,10 @@ urlpatterns = [
     path('sysUserAccList/', userAccount.listUsers, name='sysUserAccList'),
     # for system admin to view own details
     path('sysProfileView/', userAccount.getDetails, name='getDetails'),
-    # for system admin to view edit own details page
-    #path('sysEditProfileView/', userAccount.sysEditProfileView,
-         #name='sysEditProfileView'),
+
     # for system admin to view specific user details
     path('accDetails/<int:pk>/', userAccount.getUserDetails, name='getUserDetails'),
-    #path('sysEditAccDetails/<int:pk>/', userAccount.sysEditAccDetails,
-         #name='sysEditUserDetails'),  # for system admin to edit another person details
+
     # for system admin to update own details
     path('sysUpdateDetails/', userAccount.updateDetails, name='updateDetails'),
     # for system admin to search for a doctor or patient
@@ -72,10 +64,7 @@ urlpatterns = [
     path('docPatientAccList/', userAccount.listPatients, name='docUserAccList'),
     path('docProfileView/', userAccount.getDetails,
          name='getDetails'),  # for doctor to view own details
-    #path('docEditProfileView/', userAccount.docEditProfileView,
-         #name='docEditProfileView'),  # for doctor to view edit own details page
-    # for doctor to upload xray image page
-    #path('docUploadXRay/', userAccount.docUploadXRay, name='docUploadXRay'),
+
     path('docNonUploadedReports/', deepLearningModel.listNonUploadedReports,
          name='docListReports'),  # for doctor to view non updated reports of patients
     path('docUpdateDetails/', userAccount.updateDetails,
