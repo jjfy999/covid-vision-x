@@ -62,8 +62,6 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
     };
 
     const handleDelete = async () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        // Add delete functionality here
         try {
             const tokens = JSON.parse(
                 localStorage.getItem("authTokens") || "{}"
@@ -83,6 +81,32 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
             navigate("/DoctorNonUpdatedReport", { replace: true });
         } catch (error) {
             console.error("Error deleting report:", error);
+        }
+    };
+
+    const handleUpload = async (newStatus: string) => {
+        try {
+            const tokens = JSON.parse(
+                localStorage.getItem("authTokens") || "{}"
+            );
+            const token = tokens.access;
+            const res = await fetch(`/baseUrl/uploadReport/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+                body: JSON.stringify({
+                    report_id: id,
+                    status: newStatus,
+                }),
+            });
+            if (!res.ok) {
+                throw new Error("http error: status " + res.status);
+            }
+            navigate("/DoctorNonUpdatedReport", { replace: true });
+        } catch (error) {
+            console.error("Error uploading report:", error);
         }
     };
 
@@ -115,13 +139,13 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                         <Typography variant="body2">result</Typography>
                         <FormControl fullWidth margin="normal">
                             <Select
-                                value={overwrite}
+                                value={overwrite || ReportData.status}
                                 onChange={handleStatusChange}
                                 displayEmpty
                                 inputProps={{ "aria-label": "Without label" }}
                             >
-                                <MenuItem value="covid">Covid</MenuItem>
-                                <MenuItem value="normal">Normal</MenuItem>
+                                <MenuItem value="Covid">Covid</MenuItem>
+                                <MenuItem value="Normal">Normal</MenuItem>
                             </Select>
                         </FormControl>
                         <Box display="flex" justifyContent="space-between">
@@ -135,6 +159,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                             <CustomButton
                                 className="uploadButton"
                                 variant="contained"
+                                onClick={() => handleUpload(overwrite)}
                             >
                                 Upload
                             </CustomButton>

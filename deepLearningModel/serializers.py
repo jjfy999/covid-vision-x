@@ -5,11 +5,13 @@ from .models import Report
 
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Report # Assuming Doctor and SystemAdmin have the same fields
+        model = Report  # Assuming Doctor and SystemAdmin have the same fields
         fields = '__all__'
 
 
 class ReportApprovalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
-        fields = ['approved','status']
+        fields = ['approved', 'status']
+
+    status = serializers.CharField(required=True)

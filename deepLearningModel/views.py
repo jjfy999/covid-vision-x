@@ -136,8 +136,8 @@ def listAllReports(request):  # for testing to view all reports
 @api_view(['PUT'])
 # for doctor to upload report             #haven code for dropdown overwrite status!!
 def uploadReport(request):
-    report_id = request.PUT.get('report_id')
-    status = request.PUT.get('status')
+    report_id = request.data.get('report_id')
+    status = request.data.get('status')
     try:
         report = Report.objects.get(pk=report_id)
         serializer = ReportApprovalSerializer(
@@ -161,7 +161,7 @@ def uploadReport(request):
 
 
 @api_view(['DELETE'])
-def deleteReport(request,pk):  # for doctor to delete non uploaded report
+def deleteReport(request, pk):  # for doctor to delete non uploaded report
     try:
         report = Report.objects.get(pk=pk)
         report.delete()
