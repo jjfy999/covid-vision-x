@@ -21,6 +21,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+    - name: drop database
+      run: |
+          psql -c 'DROP DATABASE IF EXISTS test_postgres;' -U postgres
     - name: Install Dependencies 
       run: |
         pip install -r requirements.txt
@@ -28,9 +31,6 @@ jobs:
       run: |
         python manage.py makemigrations 
         python manage.py migrate 
-    #- name: drop database
-      #run: |
-        #echo "DROP DATABASE IF EXISTS test_postgres;" | psql -h localhost -U postgres
     - name: Run Tests
       run: |
         python manage.py test userAccount
