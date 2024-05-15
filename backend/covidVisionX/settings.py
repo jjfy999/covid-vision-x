@@ -33,8 +33,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 DEBUG = os.environ.get("DEBUG")
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.31.26.236',
-                 'fypbackend.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
