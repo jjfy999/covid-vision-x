@@ -73,7 +73,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const response = await fetch("baseUrl/predictImage/", {
+                const response = await fetch("/baseUrl/predictImage/", {
                     method: "POST",
                     body: formData,
                     headers: {
@@ -116,13 +116,16 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const response = await fetch("baseUrl/researcherUploadModel/", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await fetch(
+                    "/baseUrl/researcherUploadModel/",
+                    {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
