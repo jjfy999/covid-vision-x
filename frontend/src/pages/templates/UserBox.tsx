@@ -111,7 +111,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="viewInfoBtn">
                                 <Link
                                     id={`infoBtn${index}`}
-                                    to={`/report/${reportUser.id}/`}
+                                    to={`/Report/${reportUser.id}/`}
                                 >
                                     View Details
                                 </Link>

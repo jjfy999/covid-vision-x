@@ -116,6 +116,22 @@
     padding: 6px ;
 }
 
+#NUReportId {
+    margin-left: 7.5rem; 
+    padding: 6px ;
+}
+
+#NUReportpatientName {
+    margin-left: 6rem;
+    padding: 6px ;
+}
+
+#NUReportpatientResult {
+    margin-left: 10rem;
+    padding: 6px ;
+}
+
+
 #userListContainer {
     position: fixed;
     top: 20rem; 

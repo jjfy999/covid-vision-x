@@ -136,6 +136,16 @@
     padding: 6px ;
 }
 
+#patientListId {
+    margin-left: 8rem; 
+    padding: 6px ;
+}
+
+#patientListName {
+    margin-left: 7rem;
+    padding: 6px ;
+}
+
 #userListContainer {
     position: fixed;
     top: 20rem; 

@@ -81,8 +81,8 @@ const PatientList = () => {
                 </section>
             </div>
             <div id="itemTitleBar">
-                <p id="userId">UserID</p>
-                <p id="userName">Name</p>
+                <p id="patientListId">Patient ID</p>
+                <p id="patientListName">Patient Name</p>
             </div>
             <div id="userListContainer">
                 <div id="userList">
