@@ -9,7 +9,6 @@ import {
     IconButton,
     CardMedia,
     Select,
-    MenuItem,
     FormControl,
     InputLabel,
     SelectChangeEvent,
