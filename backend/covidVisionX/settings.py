@@ -248,4 +248,28 @@ SIMPLE_JWT = {
 
 # Setting for cors header
 # All all url to hit apis. Changed once we can confirm the whitelisted url
+
+
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'https://covid-vision-x-three.vercel.app'
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Origin',
+    'Accept',
+]

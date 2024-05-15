@@ -1,5 +1,5 @@
 /* Title css starts */
-#userAccTitle{
+#userAccTitle, #modelTitle{
     padding-bottom: 10px;
     font-size: 2rem;
     color: var(--green);
@@ -14,6 +14,7 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 /* Title css ends */
 
 /* Search and Create user css starts */
@@ -122,6 +123,26 @@
 
 #userRole {
     margin-left: 12rem;
+    padding: 6px ;
+}
+
+#modelId {
+    margin-left: 9.5rem; 
+    padding: 6px ;
+}
+
+#modelName {
+    margin-left: 10rem;
+    padding: 6px ;
+}
+
+#patientListId {
+    margin-left: 8rem; 
+    padding: 6px ;
+}
+
+#patientListName {
+    margin-left: 7rem;
     padding: 6px ;
 }
 

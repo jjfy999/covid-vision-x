@@ -111,7 +111,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="viewInfoBtn">
                                 <Link
                                     id={`infoBtn${index}`}
-                                    to={`/report/${reportUser.id}/`}
+                                    to={`/Report/${reportUser.id}/`}
                                 >
                                     View Details
                                 </Link>
@@ -125,8 +125,9 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="user-img-box"> </div>
                             <p className="id">{model.id}</p>
                             <p className="name">{model.name}</p>
-                            <div className="viewInfoBtn">
+                            <div >
                                 <button
+                                    className="deleteModelBtn"
                                     id={`infoBtn${index}`}
                                     onClick={() => handleDelete(model.name)}
                                 >

@@ -18,6 +18,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState(() => {
         if (
+            location.pathname.includes("/PatientList/")||
             location.pathname.includes("/DoctorReport/") ||
             location.pathname.includes("/DoctorUploadImage/") ||
             location.pathname.includes("/DoctorNonUpdatedReport/")
@@ -54,6 +55,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     React.useEffect(() => {
         // Update activeLink when the pathname changes
         if (
+            location.pathname.includes("/PatientList/")||
             location.pathname.includes("/DoctorReport/") ||
             location.pathname.includes("/DoctorUploadImage/") ||
             location.pathname.includes("/DoctorNonUpdatedReport/")
@@ -89,8 +91,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/PatientReports/"
                             className={
-                                location.pathname === "/PatientReports/"||
-                                location.pathname === "/Report/"
+                                location.pathname === "/AccDetail/"||
+                                location.pathname === "/PatientReports/"
+                                
                                     ? "active"
                                     : "report"
                             }
@@ -175,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             {/* Render dropdown menu if the patientMenuOpen state is true */}
                             {patientMenuOpen && (
                                 <div className="dropdown-menu">
-                                    <Link to="/patientList/">
+                                    <Link to="/PatientList/">
                                         View Patients
                                     </Link>
                                     <Link to="/DoctorReport/">
@@ -243,7 +246,8 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/Model/"
                             className={
-                                location.pathname === "/model/"
+                                location.pathname === "/Model/"||
+                                location.pathname === "/ModelUpload/"
                                     ? "active"
                                     : "model"
                             }
