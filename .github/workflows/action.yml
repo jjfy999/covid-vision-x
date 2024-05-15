@@ -29,7 +29,7 @@ jobs:
           #psql -c 'DROP DATABASE IF EXISTS test_postgres;' 
     - name: Apply migration
       run: |
-        python manage.py makemigrations userAccount
+        python manage.py makemigrations 
         python manage.py migrate 
     - name: Run Tests
       run: |
