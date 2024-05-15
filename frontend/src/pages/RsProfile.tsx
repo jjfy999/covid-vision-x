@@ -13,13 +13,16 @@ const App = () => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const res = await fetch("/baseUrl/docProfileView/", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                });
+                const res = await fetch(
+                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docProfileView/",
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    }
+                );
                 if (!res.ok) {
                     throw new Error("http error: status " + res.status);
                 }

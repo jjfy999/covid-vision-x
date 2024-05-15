@@ -68,13 +68,16 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
-            const res = await fetch(`/baseUrl/deleteReport/${id}/`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-            });
+            const res = await fetch(
+                `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/deleteReport/${id}/`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
             if (!res.ok) {
                 throw new Error("http error: status " + res.status);
             }
@@ -91,17 +94,20 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
-            const res = await fetch(`/baseUrl/uploadReport/`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-                body: JSON.stringify({
-                    report_id: id,
-                    status: newStatus,
-                }),
-            });
+            const res = await fetch(
+                `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/uploadReport/`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                    body: JSON.stringify({
+                        report_id: id,
+                        status: newStatus,
+                    }),
+                }
+            );
             if (!res.ok) {
                 throw new Error("http error: status " + res.status);
             }
