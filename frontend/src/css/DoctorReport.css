@@ -101,6 +101,21 @@
     padding: 6px ;
 }
 
+#reportId {
+    margin-left: 7.5rem; 
+    padding: 6px ;
+}
+
+#reportPatientName {
+    margin-left: 6rem;
+    padding: 6px ;
+}
+
+#reportPatientResult {
+    margin-left: 10rem;
+    padding: 6px ;
+}
+
 #userListContainer {
     position: fixed;
     top: 20rem; 
