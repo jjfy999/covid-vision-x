@@ -89,7 +89,8 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/PatientReports/"
                             className={
-                                location.pathname === "/PatientReports/"
+                                location.pathname === "/PatientReports/"||
+                                location.pathname === "/Report/"
                                     ? "active"
                                     : "report"
                             }
@@ -97,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Report
                         </Link>
                         <Link
-                            to="/PatientProfile"
+                            to="/PatientProfile/"
                             className={
                                 location.pathname === "/PatientProfile/" ||
                                 location.pathname === "/PatientEditProfile/"
