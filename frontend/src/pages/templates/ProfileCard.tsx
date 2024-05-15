@@ -45,7 +45,13 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 
     const handleSave = async () => {
         // Check if any required field is empty
-        if (!profile.name || !profile.email || !profile.phone_number || !profile.username || (!profile.password && isPasswordChanged)) {
+        if (
+            !profile.name ||
+            !profile.email ||
+            !profile.phone_number ||
+            !profile.username ||
+            (!profile.password && isPasswordChanged)
+        ) {
             alert("Please fill in all fields.");
             return;
         }
@@ -83,7 +89,13 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
 
     const handleSave2 = async () => {
         // Check if any required field is empty
-        if (!profile.name || !profile.email || !profile.phone_number || !profile.username || (!profile.password && isPasswordChanged)) {
+        if (
+            !profile.name ||
+            !profile.email ||
+            !profile.phone_number ||
+            !profile.username ||
+            (!profile.password && isPasswordChanged)
+        ) {
             alert("Please fill in all fields.");
             return;
         }
@@ -98,7 +110,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
             delete updatedProfile.password;
         }
         try {
-            const res = await fetch("/baseUrl/updateUserDetails/", {
+            const res = await fetch("baseUrl/updateUserDetails/", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -145,7 +157,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
             if (response.ok) {
                 console.log("Profile deleted successfully");
                 alert("Profile deleted successfully");
-                navigate("/UserAcc", { replace: true });
+                navigate("/UserAcc/", { replace: true });
             } else {
                 console.error("Failed to delete profile", response.status);
             }

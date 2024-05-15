@@ -35,7 +35,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
         if (userRole === "doctor") {
             const fetchModelTypes = async () => {
                 try {
-                    const response = await fetch("baseUrl/docListModels/");
+                    const response = await fetch("/baseUrl/docListModels/");
                     const data = await response.json();
                     const modelTypes = data.keys.map(
                         (key: string, index: number) => ({

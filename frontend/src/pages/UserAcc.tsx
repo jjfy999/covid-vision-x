@@ -96,7 +96,7 @@ const UserAccount = () => {
 
                         {/* Create User Account button */}
                         <div id="createUser">
-                            <Link className="btns" to="/CreateUser">
+                            <Link className="btns" to="/CreateUser/">
                                 &#43; Add New User
                             </Link>
                         </div>

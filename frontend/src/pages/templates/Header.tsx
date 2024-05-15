@@ -13,17 +13,17 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const location = useLocation();
     const { logoutUser } = useAuth();
-    const isAccDetailPage = location.pathname.includes("/AccDetail");
+    const isAccDetailPage = location.pathname.includes("/AccDetail/");
 
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState(() => {
         if (
-            location.pathname.includes("/DoctorReport") ||
-            location.pathname.includes("/DoctorUploadImage") ||
-            location.pathname.includes("/DoctorNonUpdatedReport")
+            location.pathname.includes("/DoctorReport/") ||
+            location.pathname.includes("/DoctorUploadImage/") ||
+            location.pathname.includes("/DoctorNonUpdatedReport/")
         ) {
             return "Patient";
-        } else if (location.pathname.includes("/HomePage")) {
+        } else if (location.pathname.includes("/HomePage/")) {
             return "Home";
         } else {
             return "Profile";
@@ -54,12 +54,12 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
     React.useEffect(() => {
         // Update activeLink when the pathname changes
         if (
-            location.pathname.includes("/DoctorReport") ||
-            location.pathname.includes("/DoctorUploadImage") ||
-            location.pathname.includes("/DoctorNonUpdatedReport")
+            location.pathname.includes("/DoctorReport/") ||
+            location.pathname.includes("/DoctorUploadImage/") ||
+            location.pathname.includes("/DoctorNonUpdatedReport/")
         ) {
             setActiveLink("Patient");
-        } else if (location.pathname.includes("/HomePage")) {
+        } else if (location.pathname.includes("/HomePage/")) {
             setActiveLink("Home");
         } else {
             setActiveLink("Profile");
@@ -76,9 +76,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "patient" && (
                     <>
                         <Link
-                            to="/HomePage"
+                            to="/HomePage/"
                             className={
-                                location.pathname === "/HomePage"
+                                location.pathname === "/HomePage/"
                                     ? "active"
                                     : "home"
                             }
@@ -87,9 +87,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Home
                         </Link>
                         <Link
-                            to="/PatientReports"
+                            to="/PatientReports/"
                             className={
-                                location.pathname === "/PatientReports"
+                                location.pathname === "/PatientReports/"
                                     ? "active"
                                     : "report"
                             }
@@ -99,8 +99,8 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/PatientProfile"
                             className={
-                                location.pathname === "/PatientProfile" ||
-                                location.pathname === "/PatientEditProfile"
+                                location.pathname === "/PatientProfile/" ||
+                                location.pathname === "/PatientEditProfile/"
                                     ? "active"
                                     : "profile"
                             }
@@ -112,9 +112,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "system_admin" && (
                     <>
                         <Link
-                            to="/HomePage"
+                            to="/HomePage/"
                             className={
-                                location.pathname === "/HomePage"
+                                location.pathname === "/HomePage/"
                                     ? "active"
                                     : "home"
                             }
@@ -123,12 +123,12 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Home
                         </Link>
                         <Link
-                            to="/UserAcc"
+                            to="/UserAcc/"
                             className={
-                                location.pathname === "/UserAcc" ||
+                                location.pathname === "/UserAcc/" ||
                                 isAccDetailPage ||
-                                location.pathname === "/EditAcc" ||
-                                location.pathname === "/CreateUser"
+                                location.pathname === "/EditAcc/" ||
+                                location.pathname === "/CreateUser/"
                                     ? "active"
                                     : "useracc"
                             }
@@ -136,10 +136,10 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             User Accounts
                         </Link>
                         <Link
-                            to="/SysAdProfile"
+                            to="/SysAdProfile/"
                             className={
-                                location.pathname === "/SysAdProfile" ||
-                                location.pathname === "/SysAdEditProfile"
+                                location.pathname === "/SysAdProfile/" ||
+                                location.pathname === "/SysAdEditProfile/"
                                     ? "active"
                                     : "profile"
                             }
@@ -151,9 +151,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "doctor" && (
                     <>
                         <Link
-                            to="/HomePage"
+                            to="/HomePage/"
                             className={
-                                location.pathname === "/HomePage"
+                                location.pathname === "/HomePage/"
                                     ? "active"
                                     : "home"
                             }
@@ -174,14 +174,16 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             {/* Render dropdown menu if the patientMenuOpen state is true */}
                             {patientMenuOpen && (
                                 <div className="dropdown-menu">
-                                    <Link to="/patientList">View Patients</Link>
-                                    <Link to="/DoctorReport">
+                                    <Link to="/patientList/">
+                                        View Patients
+                                    </Link>
+                                    <Link to="/DoctorReport/">
                                         Patient Report
                                     </Link>
-                                    <Link to="/DoctorUploadImage">
+                                    <Link to="/DoctorUploadImage/">
                                         Upload X-ray Image
                                     </Link>
-                                    <Link to="/DoctorNonUpdatedReport">
+                                    <Link to="/DoctorNonUpdatedReport/">
                                         Non-Uploaded Report
                                     </Link>
                                 </div>
@@ -215,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             </div>
                         )} */}
                         <Link
-                            to="/doctorprofile"
+                            to="/doctorprofile/"
                             className={
                                 activeLink === "Profile" ? "active" : " "
                             }
@@ -227,9 +229,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                 {userRole === "researcher" && (
                     <>
                         <Link
-                            to="/HomePage"
+                            to="/HomePage/"
                             className={
-                                location.pathname === "/HomePage"
+                                location.pathname === "/HomePage/"
                                     ? "active"
                                     : "home"
                             }
@@ -238,9 +240,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Home
                         </Link>
                         <Link
-                            to="/Model"
+                            to="/Model/"
                             className={
-                                location.pathname === "/model"
+                                location.pathname === "/model/"
                                     ? "active"
                                     : "model"
                             }
@@ -248,10 +250,10 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             Model
                         </Link>
                         <Link
-                            to="/RsProfile"
+                            to="/RsProfile/"
                             className={
-                                location.pathname === "/RsProfile" ||
-                                location.pathname === "/RsEditProfile"
+                                location.pathname === "/RsProfile/" ||
+                                location.pathname === "/RsEditProfile/"
                                     ? "active"
                                     : "profile"
                             }

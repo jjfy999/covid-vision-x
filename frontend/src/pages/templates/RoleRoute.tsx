@@ -6,7 +6,7 @@ const RoleRoute = ({ requiredRole }: { requiredRole: string }) => {
 
     if (!user || (user && !requiredRole.includes(user.role))) {
         // Redirect if not logged in or role doesn't match
-        return <Navigate to="/loginpage" replace />;
+        return <Navigate to="/loginpage/" replace />;
     }
 
     return <Outlet />;

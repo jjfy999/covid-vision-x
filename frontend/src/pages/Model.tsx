@@ -44,7 +44,7 @@ const App = () => {
             <Header userRole="researcher" />
             <div className="searchCreate">
                 <div id="createUser">
-                    <Link className="btns" to="/ModelUpload">
+                    <Link className="btns" to="/ModelUpload/">
                         &#43; Add New Model
                     </Link>
                 </div>

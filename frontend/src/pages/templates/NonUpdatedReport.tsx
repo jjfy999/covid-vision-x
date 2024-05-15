@@ -79,7 +79,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                 throw new Error("http error: status " + res.status);
             }
             console.log("Report deleted successfully");
-            navigate("/DoctorNonUpdatedReport", { replace: true });
+            navigate("/DoctorNonUpdatedReport/", { replace: true });
         } catch (error) {
             console.error("Error deleting report:", error);
         }
@@ -105,7 +105,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
             if (!res.ok) {
                 throw new Error("http error: status " + res.status);
             }
-            navigate("/DoctorNonUpdatedReport", { replace: true });
+            navigate("/DoctorNonUpdatedReport/", { replace: true });
         } catch (error) {
             console.error("Error uploading report:", error);
         }

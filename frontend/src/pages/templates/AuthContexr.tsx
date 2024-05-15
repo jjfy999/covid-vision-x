@@ -32,9 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: string,
         password: string
     ) => {
-        console.log("Username at login: ", username);
-        console.log("Password at login: ", password);
-        const response = await fetch("baseUrl/api/token/", {
+        const response = await fetch("/baseUrl/api/token/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -62,11 +60,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem("authTokens");
-        redirect("/loginpage");
+        redirect("/loginpage/");
     };
 
     const updateToken = async () => {
-        const response = await fetch("baseUrl/api/token/refresh/", {
+        const response = await fetch("/baseUrl/api/token/refresh/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

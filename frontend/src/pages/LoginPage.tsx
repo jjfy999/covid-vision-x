@@ -31,8 +31,6 @@ function LoginPage() {
         }
 
         try {
-            console.log("Username before login: ", username);
-            console.log("Password before login: ", password);
             await loginUser(username, password);
         } catch (error) {
             console.error("Login error", error);
@@ -40,24 +38,28 @@ function LoginPage() {
         }
     };
     if (loggedInUser) {
-        console.log("User role: ", user.role);
-        console.log("loggedInUser: ", loggedInUser);
         // If user is authenticated, redirect based on user role
         switch (user.role) {
             case "patient":
                 return (
                     <Navigate
-                        to="/HomePage"
+                        to="/HomePage/"
                         state={{ userRole: role }}
                         replace
                     />
                 );
             case "doctor":
-                return <Navigate to="/HomePage" state={{ userRole: role }} replace />;
+                return (
+                    <Navigate
+                        to="/HomePage/"
+                        state={{ userRole: role }}
+                        replace
+                    />
+                );
             case "system_admin":
                 return (
                     <Navigate
-                        to="/HomePage"
+                        to="/HomePage/"
                         state={{ userRole: role }}
                         replace
                     />
@@ -65,7 +67,7 @@ function LoginPage() {
             case "researcher":
                 return (
                     <Navigate
-                        to="/HomePage"
+                        to="/HomePage/"
                         state={{ userRole: role }}
                         replace
                     />
@@ -92,7 +94,7 @@ function LoginPage() {
         };
 
         try {
-            const res = await axios.post("baseUrl/register/", signupData, {
+            const res = await axios.post("/baseUrl/register/", signupData, {
                 headers: {
                     "Content-Type": "application/json",
                 },

@@ -72,7 +72,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="viewInfoBtn">
                                 <Link
                                     id={`infoBtn${index}`}
-                                    to={`/AccDetail/${accountUser.id}`}
+                                    to={`/AccDetail/${accountUser.id}/`}
                                 >
                                     View Details
                                 </Link>
@@ -90,7 +90,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="viewInfoBtn">
                                 <Link
                                     id={`infoBtn${index}`}
-                                    to={`/reportDetails/${reportUser.id}`}
+                                    to={`/reportDetails/${reportUser.id}/`}
                                 >
                                     View Details
                                 </Link>
@@ -108,7 +108,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="viewInfoBtn">
                                 <Link
                                     id={`infoBtn${index}`}
-                                    to={`/report/${reportUser.id}`}
+                                    to={`/report/${reportUser.id}/`}
                                 >
                                     View Details
                                 </Link>

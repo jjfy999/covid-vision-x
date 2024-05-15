@@ -39,7 +39,7 @@ const AccountDetails = () => {
 
     // If the user is not found, display a message
     if (!checkUser) {
-        return <Link to="/HomePage">User not found {userId}</Link>;
+        return <Link to="/HomePage/">User not found {userId}</Link>;
     }
 
     return (

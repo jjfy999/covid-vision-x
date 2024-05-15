@@ -58,7 +58,7 @@ function EditProfile() {
                 throw new Error("http error: status " + response.status);
             } else {
                 alert("User created successfully");
-                navigate("/UserAcc");
+                navigate("/UserAcc/");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -218,7 +218,7 @@ function EditProfile() {
                     <button id="doneBtn" type="submit" form="infoForm">
                         Done
                     </button>
-                    <Link id="cancelBtn" to="/UserAcc">
+                    <Link id="cancelBtn" to="/UserAcc/">
                         Cancel
                     </Link>
                 </div>

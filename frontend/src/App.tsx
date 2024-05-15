@@ -30,47 +30,47 @@ import ModelUpload from "./pages/ModelUpload";
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route>
-            <Route path="/loginpage" element={<LoginPage />} />
-            <Route path="/HomePage" element={<HomePage />} />
-            <Route path="/AccDetail/:userId" element={<AccountDetails />} />
+            <Route path="/loginpage/" element={<LoginPage />} />
+            <Route path="/HomePage/" element={<HomePage />} />
+            <Route path="/AccDetail/:userId/" element={<AccountDetails />} />
             <Route path="/" element={<PrivateRoute />}>
                 <Route element={<RoleRoute requiredRole={"doctor"} />}>
-                    <Route path="/doctorprofile" element={<DoctorProfile />} />
-                    <Route path="/DoctorReport" element={<DoctorReport />} />
+                    <Route path="/doctorprofile/" element={<DoctorProfile />} />
+                    <Route path="/DoctorReport/" element={<DoctorReport />} />
                     <Route
-                        path="/DoctorNonUpdatedReport"
+                        path="/DoctorNonUpdatedReport/"
                         element={<DoctorNUR />}
                     />
                     <Route
-                        path="/reportDetails/:id"
+                        path="/reportDetails/:id/"
                         element={<ViewReportDetails />}
                     />
                     <Route
-                        path="/DoctorUploadImage"
+                        path="/DoctorUploadImage/"
                         element={<DoctorUploadImage />}
                     />
-                    <Route path="/patientList" element={<PatientList />} />
+                    <Route path="/patientList/" element={<PatientList />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"researcher"} />}>
-                    <Route path="/Rsprofile" element={<RsProfile />} />
-                    <Route path="/model" element={<Model />} />
-                    <Route path="/ModelUpload" element={<ModelUpload />} />
+                    <Route path="/Rsprofile/" element={<RsProfile />} />
+                    <Route path="/model/" element={<Model />} />
+                    <Route path="/ModelUpload/" element={<ModelUpload />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
-                    <Route path="/report/:id" element={<Report />} />
+                    <Route path="/report/:id/" element={<Report />} />
                     <Route
-                        path="/PatientProfile"
+                        path="/PatientProfile/"
                         element={<PatientProfile />}
                     />
                     <Route
-                        path="/PatientReports"
+                        path="/PatientReports/"
                         element={<PatientReports />}
                     />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"system_admin"} />}>
-                    <Route path="/UserAcc" element={<UserAccount />} />
-                    <Route path="/SysAdProfile" element={<SysadProfile />} />
-                    <Route path="/CreateUser" element={<CreateUser />} />
+                    <Route path="/UserAcc/" element={<UserAccount />} />
+                    <Route path="/SysAdProfile/" element={<SysadProfile />} />
+                    <Route path="/CreateUser/" element={<CreateUser />} />
                 </Route>
             </Route>
             <Route path="*" element={<ErrorPage />} />
