@@ -305,7 +305,7 @@ def predict(request):  # yongchuen model
     else:
         return JsonResponse({"error": "Failed to download the model.", "status": 400})
 
-
+'''
 def listModels(request):
 
     bucket_name = 'fypmodelss'
@@ -322,6 +322,32 @@ def listModels(request):
     }
 
     return JsonResponse(data, safe=False, status=200)
+'''
+
+@api_view(['GET'])
+def listModels(request):
+    if request.method == 'GET':
+        # Create an S3 client using the session object
+        session = boto3.Session()
+        s3_client = session.client('s3')
+
+        # Define the bucket name
+        bucket_name = 'fypmodelss'
+
+        # List objects in the bucket
+        response = s3_client.list_objects_v2(Bucket=bucket_name)
+
+        # Extract object keys from the response
+        keys = [obj['Key'] for obj in response.get('Contents', [])]
+
+        # Prepare the response data
+        data = {
+            'keys': keys
+        }
+
+        return JsonResponse(data, safe=False, status=200)
+
+    return JsonResponse({}, status=400)
 
 
 @api_view(['GET'])
