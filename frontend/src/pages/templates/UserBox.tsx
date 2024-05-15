@@ -35,13 +35,16 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
-            const res = await fetch(`/baseUrl/researcherDeleteModel/${id}/`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-            });
+            const res = await fetch(
+                `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/researcherDeleteModel/${id}/`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
             if (!res.ok) {
                 throw new Error("HTTP error, status = " + res.status);
             } else {

@@ -32,16 +32,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: string,
         password: string
     ) => {
-        const response = await fetch("/baseUrl/api/token/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        });
+        const response = await fetch(
+            "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            }
+        );
         const data = await response.json();
 
         if (response.status === 200) {
@@ -64,16 +67,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     const updateToken = async () => {
-        const response = await fetch("/baseUrl/api/token/refresh/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                refresh: (authTokens as unknown as { refresh: string })
-                    ?.refresh,
-            }),
-        });
+        const response = await fetch(
+            "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/refresh/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    refresh: (authTokens as unknown as { refresh: string })
+                        ?.refresh,
+                }),
+            }
+        );
 
         const data = await response.json();
 

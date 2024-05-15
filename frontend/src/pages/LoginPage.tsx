@@ -94,11 +94,15 @@ function LoginPage() {
         };
 
         try {
-            const res = await axios.post("/baseUrl/register/", signupData, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            const res = await axios.post(
+                "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/register/",
+                signupData,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
             if (res.status === 201) {
                 alert("Signup successful");
                 setIsLoginView(true);

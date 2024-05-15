@@ -21,13 +21,16 @@ const UserAccount = () => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const response = await fetch("/baseUrl/sysUserAccList/", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                });
+                const response = await fetch(
+                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/sysUserAccList/",
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    }
+                );
 
                 if (!response.ok) {
                     throw new Error("HTTP error, status = " + response.status);

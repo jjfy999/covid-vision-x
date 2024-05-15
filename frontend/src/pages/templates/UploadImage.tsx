@@ -35,7 +35,9 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
         if (userRole === "doctor") {
             const fetchModelTypes = async () => {
                 try {
-                    const response = await fetch("/baseUrl/docListModels/");
+                    const response = await fetch(
+                        "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docListModels/"
+                    );
                     const data = await response.json();
                     const modelTypes = data.keys.map(
                         (key: string, index: number) => ({
@@ -72,13 +74,16 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const response = await fetch("/baseUrl/predictImage/", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await fetch(
+                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/predictImage/",
+                    {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -116,7 +121,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "/baseUrl/researcherUploadModel/",
+                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/researcherUploadModel/",
                     {
                         method: "POST",
                         body: formData,

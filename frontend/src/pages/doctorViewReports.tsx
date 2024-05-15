@@ -15,13 +15,16 @@ const ViewReportDetails = () => {
                     localStorage.getItem("authTokens") || "{}"
                 );
                 const token = tokens.access;
-                const res = await fetch(`/baseUrl/docShowReport/${id}/`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: "Bearer " + token,
-                    },
-                });
+                const res = await fetch(
+                    `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docShowReport/${id}/`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                    }
+                );
                 const data = await res.json();
                 setReportData(data);
             } catch (error) {
