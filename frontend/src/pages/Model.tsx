@@ -16,7 +16,7 @@ const App = () => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docListModels/",
+                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docListModels/",
                     {
                         method: "GET",
                         headers: {

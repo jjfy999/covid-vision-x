@@ -19,7 +19,7 @@ const DoctorNUR = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docNonUploadedReports/",
+                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docNonUploadedReports/",
                     {
                         method: "GET",
                         headers: {

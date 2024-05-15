@@ -95,7 +95,7 @@ function LoginPage() {
 
         try {
             const res = await axios.post(
-                "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/register/",
+                "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/register/",
                 signupData,
                 {
                     headers: {

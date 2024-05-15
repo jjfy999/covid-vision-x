@@ -69,7 +69,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
             );
             const token = tokens.access;
             const res = await fetch(
-                `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/deleteReport/${id}/`,
+                `https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/deleteReport/${id}/`,
                 {
                     method: "DELETE",
                     headers: {
@@ -95,7 +95,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
             );
             const token = tokens.access;
             const res = await fetch(
-                `http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/uploadReport/`,
+                `https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/uploadReport/`,
                 {
                     method: "PUT",
                     headers: {

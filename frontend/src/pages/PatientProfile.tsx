@@ -14,7 +14,7 @@ function PatientProfile() {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/patientProfile/",
+                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/patientProfile/",
                     {
                         method: "GET",
                         headers: {

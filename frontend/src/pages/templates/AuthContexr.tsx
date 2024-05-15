@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         password: string
     ) => {
         const response = await fetch(
-            "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/",
+            "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/",
             {
                 method: "POST",
                 headers: {
@@ -68,7 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const updateToken = async () => {
         const response = await fetch(
-            "http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/refresh/",
+            "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/api/token/refresh/",
             {
                 method: "POST",
                 headers: {
