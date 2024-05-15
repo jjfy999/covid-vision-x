@@ -305,7 +305,7 @@ def predict(request):  # yongchuen model
     else:
         return JsonResponse({"error": "Failed to download the model.", "status": 400})
 
-'''
+
 def listModels(request):
 
     bucket_name = 'fypmodelss'
@@ -322,8 +322,8 @@ def listModels(request):
     }
 
     return JsonResponse(data, safe=False, status=200)
-'''
 
+'''
 @api_view(['GET'])
 def listModels(request):
     if request.method == 'GET':
@@ -347,7 +347,7 @@ def listModels(request):
         return JsonResponse(data, safe=False, status=200)
 
     return JsonResponse({}, status=400)
-
+'''
 
 @api_view(['GET'])
 def showReport(request, pk):
