@@ -218,12 +218,12 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                                 onChange={handleTypeChange}
                             >
                                 {modelTypes.map((modelType) => (
-                                    <MenuItem
+                                    <option
                                         key={modelType.id}
                                         value={modelType.name}
                                     >
                                         {modelType.name}
-                                    </MenuItem>
+                                    </option>
                                 ))}
                             </Select>
                         </FormControl>
