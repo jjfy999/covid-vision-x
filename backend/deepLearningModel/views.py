@@ -328,8 +328,7 @@ def listModels(request):
 def listModels(request):
     if request.method == 'GET':
         # Create an S3 client using the session object
-        session = boto3.Session()
-        s3_client = session.client('s3')
+        s3_client = boto3.client('s3', region_name=settings.AWS_S3_REGION_NAME)
 
         # Define the bucket name
         bucket_name = 'fypmodelss'
