@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/baseUrl': {
-        target: 'http://127.0.0.1:8000',
+        target: 'http://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/baseUrl/, ''),
       }
