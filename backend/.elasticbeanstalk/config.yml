@@ -1,0 +1,18 @@
+branch-defaults:
+  default:
+    environment: covidvisionx
+    group_suffix: null
+global:
+  application_name: fyptest
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Python 3.11
+  default_region: ap-southeast-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
