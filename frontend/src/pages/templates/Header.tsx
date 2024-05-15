@@ -243,7 +243,8 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/Model/"
                             className={
-                                location.pathname === "/model/"
+                                location.pathname === "/Model/"||
+                                location.pathname === "/ModelUpload/"
                                     ? "active"
                                     : "model"
                             }

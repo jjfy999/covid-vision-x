@@ -42,6 +42,8 @@ const App = () => {
     return (
         <>
             <Header userRole="researcher" />
+            <h1 id="modelTitle">Models</h1>
+
             <div className="searchCreate">
                 <div id="createUser">
                     <Link className="btns" to="/ModelUpload/">
@@ -50,8 +52,8 @@ const App = () => {
                 </div>
             </div>
             <div id="itemTitleBar">
-                <p id="userId">Id</p>
-                <p id="userName">Name</p>
+                <p id="modelId">Id</p>
+                <p id="modelName">Name</p>
             </div>
             <div id="userListContainer">
                 <div id="userList">
