@@ -110,6 +110,9 @@ DATABASES = {
         'PASSWORD': 'Admin100',
         'HOST': 'fypdatabase.cnuog0og8q72.ap-southeast-1.rds.amazonaws.com',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'test_database', # Specify a custom name here if needed
+        }
     }
 }
 
