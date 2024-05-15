@@ -39,9 +39,9 @@ const PatientReports = () => {
             <section className="doctorReportPage">
                 <h1 id="doctorReportTitle">My Report</h1>
                 <div id="itemTitleBar">
-                    <p id="patientId">Report ID</p>
-                    <p id="patientName">Patient Name</p>
-                    <p id="patientResult">Status</p>
+                    <p id="reportId">Report ID</p>
+                    <p id="reportPatientName">Patient Name</p>
+                    <p id="reportPatientResult">Status</p>
                 </div>
 
                 <div id="userListContainer">

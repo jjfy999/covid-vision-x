@@ -169,7 +169,9 @@ def analyze_image2(request):
 
 @api_view(['POST'])
 def uploadModel(request):
+
     if request.method == 'POST':
+
         # Get the model file from the request
         model_file = request.FILES['model']
         model_name = request.POST.get('model_name')
@@ -209,7 +211,7 @@ def deleteModel(request, name):
 
 models = {}
 
-
+from keras.applications.resnet50 import ResNet50, preprocess_input
 def download_and_load_model(model_path):
 
     if model_path not in models:
@@ -255,7 +257,7 @@ def predict(request):  # yongchuen model
             image_array = image / 255.0
 
             # Expand dimensions to match the model input shape
-            processed_image = np.expand_dims(image_array, axis=0)
+            processed_image = preprocess_input(np.expand_dims(image_array, axis=0))
 
             # image_tensor = tf.image.decode_image(image_data, channels=3)
             # resized_image = tf.image.resize(image_tensor, (256, 256))

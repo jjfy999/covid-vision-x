@@ -57,7 +57,7 @@ const router = createBrowserRouter(
                     <Route path="/ModelUpload/" element={<ModelUpload />} />
                 </Route>
                 <Route element={<RoleRoute requiredRole={"patient"} />}>
-                    <Route path="/report/:id/" element={<Report />} />
+                    <Route path="/Report/:id/" element={<Report />} />
                     <Route
                         path="/PatientProfile/"
                         element={<PatientProfile />}
