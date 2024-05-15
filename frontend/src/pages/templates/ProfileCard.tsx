@@ -44,6 +44,12 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     };
 
     const handleSave = async () => {
+        // Check if any required field is empty
+        if (!profile.name || !profile.email || !profile.phone_number || !profile.username || (!profile.password && isPasswordChanged)) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
         // Update your own profile details
         try {
             // Send update request to API
@@ -76,6 +82,12 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
     };
 
     const handleSave2 = async () => {
+        // Check if any required field is empty
+        if (!profile.name || !profile.email || !profile.phone_number || !profile.username || (!profile.password && isPasswordChanged)) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
         console.log(secondary);
         console.log("Start of call ...");
         const tokens = JSON.parse(localStorage.getItem("authTokens") || "{}");
