@@ -22,7 +22,7 @@ const UserAccount = () => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/sysUserAccList/",
+                    "www.covidvisionsx.online/sysUserAccList/",
                     {
                         method: "GET",
                         headers: {

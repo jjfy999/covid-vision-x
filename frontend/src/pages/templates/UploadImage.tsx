@@ -36,7 +36,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
             const fetchModelTypes = async () => {
                 try {
                     const response = await fetch(
-                        "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docListModels/"
+                        "www.covidvisionsx.online/docListModels/"
                     );
                     const data = await response.json();
                     const modelTypes = data.keys.map(
@@ -75,7 +75,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/predictImage/",
+                    "www.covidvisionsx.online/predictImage/",
                     {
                         method: "POST",
                         body: formData,
@@ -121,7 +121,7 @@ const UploadImage: React.FC<UploadProps> = ({ userRole }) => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/researcherUploadModel/",
+                    "www.covidvisionsx.online/researcherUploadModel/",
                     {
                         method: "POST",
                         body: formData,

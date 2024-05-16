@@ -36,7 +36,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
             );
             const token = tokens.access;
             const res = await fetch(
-                `https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/researcherDeleteModel/${id}/`,
+                `www.covidvisionsx.online/researcherDeleteModel/${id}/`,
                 {
                     method: "DELETE",
                     headers: {
@@ -125,7 +125,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
                             <div className="user-img-box"> </div>
                             <p className="id">{model.id}</p>
                             <p className="name">{model.name}</p>
-                            <div >
+                            <div>
                                 <button
                                     className="deleteModelBtn"
                                     id={`infoBtn${index}`}

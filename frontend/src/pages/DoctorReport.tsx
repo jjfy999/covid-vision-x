@@ -20,7 +20,7 @@ const DoctorReport = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/docUploadedReports/",
+                    "www.covidvisionsx.online/docUploadedReports/",
                     {
                         method: "GET",
                         headers: {

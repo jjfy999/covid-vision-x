@@ -44,7 +44,7 @@ function EditProfile() {
             const token = tokens.access;
 
             const response = await axios.post(
-                "https://CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com/sysCreateUser/",
+                "www.covidvisionsx.online/sysCreateUser/",
                 formData,
                 {
                     headers: {
