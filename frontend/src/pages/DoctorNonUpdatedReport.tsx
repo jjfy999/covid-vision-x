@@ -65,7 +65,7 @@ const DoctorNUR = () => {
             <Header userRole="doctor" />
             <div className="doctorReportPage">
                 <section>
-                    <h1 id="doctorReportTitle">Non-Updated Reports</h1>
+                    <h1 id="doctorReportTitle">Non-Uploaded Reports</h1>
                     <div className="searchBox">
                         <div className="searchBar">
                             <button className="searchButton">
