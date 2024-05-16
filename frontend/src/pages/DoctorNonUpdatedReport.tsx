@@ -19,7 +19,7 @@ const DoctorNUR = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "www.covidvisionsx.online/docNonUploadedReports/",
+                    "https://www.covidvisionsx.online/docNonUploadedReports/",
                     {
                         method: "GET",
                         headers: {

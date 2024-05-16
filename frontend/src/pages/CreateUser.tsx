@@ -44,7 +44,7 @@ function EditProfile() {
             const token = tokens.access;
 
             const response = await axios.post(
-                "www.covidvisionsx.online/sysCreateUser/",
+                "https://www.covidvisionsx.online/sysCreateUser/",
                 formData,
                 {
                     headers: {

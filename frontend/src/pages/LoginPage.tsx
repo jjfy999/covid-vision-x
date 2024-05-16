@@ -95,7 +95,7 @@ function LoginPage() {
 
         try {
             const res = await axios.post(
-                "www.covidvisionsx.online/register/",
+                "https://www.covidvisionsx.online/register/",
                 signupData,
                 {
                     headers: {

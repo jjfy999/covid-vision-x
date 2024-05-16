@@ -19,7 +19,7 @@ const AccountDetails = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    `www.covidvisionsx.online/docSearchUser/${userId}/`,
+                    `https://www.covidvisionsx.online/docSearchUser/${userId}/`,
                     {
                         method: "GET",
                         headers: {

@@ -16,7 +16,7 @@ const ViewReportDetails = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    `www.covidvisionsx.online/docShowReport/${id}/`,
+                    `https://www.covidvisionsx.online/docShowReport/${id}/`,
                     {
                         method: "GET",
                         headers: {

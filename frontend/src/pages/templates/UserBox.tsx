@@ -36,7 +36,7 @@ const UserBox: React.FC<UserBoxProps | ReportBoxProps | ModelBoxProps> = ({
             );
             const token = tokens.access;
             const res = await fetch(
-                `www.covidvisionsx.online/researcherDeleteModel/${id}/`,
+                `https://www.covidvisionsx.online/researcherDeleteModel/${id}/`,
                 {
                     method: "DELETE",
                     headers: {

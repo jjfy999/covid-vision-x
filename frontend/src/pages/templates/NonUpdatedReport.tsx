@@ -69,7 +69,7 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
             );
             const token = tokens.access;
             const res = await fetch(
-                `www.covidvisionsx.online/deleteReport/${id}/`,
+                `https://www.covidvisionsx.online/deleteReport/${id}/`,
                 {
                     method: "DELETE",
                     headers: {
@@ -94,17 +94,20 @@ const NonUpdatedReport: React.FC<ReportData> = (ReportData) => {
                 localStorage.getItem("authTokens") || "{}"
             );
             const token = tokens.access;
-            const res = await fetch(`www.covidvisionsx.online/uploadReport/`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-                body: JSON.stringify({
-                    report_id: id,
-                    status: newStatus,
-                }),
-            });
+            const res = await fetch(
+                `https://www.covidvisionsx.online/uploadReport/`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                    body: JSON.stringify({
+                        report_id: id,
+                        status: newStatus,
+                    }),
+                }
+            );
             if (!res.ok) {
                 throw new Error("http error: status " + res.status);
             }

@@ -16,7 +16,7 @@ const App = () => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "www.covidvisionsx.online/docListModels/",
+                    "https://www.covidvisionsx.online/docListModels/",
                     {
                         method: "GET",
                         headers: {

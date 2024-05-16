@@ -14,7 +14,7 @@ function PatientProfile() {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "www.covidvisionsx.online/patientProfile/",
+                    "https://www.covidvisionsx.online/patientProfile/",
                     {
                         method: "GET",
                         headers: {

@@ -32,16 +32,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         username: string,
         password: string
     ) => {
-        const response = await fetch("www.covidvisionsx.online/api/token/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        });
+        const response = await fetch(
+            "https://www.covidvisionsx.online/api/token/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            }
+        );
         const data = await response.json();
 
         if (response.status === 200) {
@@ -65,7 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const updateToken = async () => {
         const response = await fetch(
-            "www.covidvisionsx.online/api/token/refresh/",
+            "https://www.covidvisionsx.online/api/token/refresh/",
             {
                 method: "POST",
                 headers: {

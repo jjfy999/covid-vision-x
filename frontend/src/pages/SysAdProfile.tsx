@@ -14,7 +14,7 @@ const SysadProfile = () => {
                 );
                 const token = tokens.access;
                 const res = await fetch(
-                    "www.covidvisionsx.online/sysProfileView/",
+                    "https://www.covidvisionsx.online/sysProfileView/",
                     {
                         method: "GET",
                         headers: {

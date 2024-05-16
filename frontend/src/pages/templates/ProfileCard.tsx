@@ -144,7 +144,7 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
             );
             const token = tokens.access;
             const response = await fetch(
-                `www.covidvisionsx.online/sysDeleteUser/${profile.id}/`,
+                `https://www.covidvisionsx.online/sysDeleteUser/${profile.id}/`,
                 {
                     method: "DELETE",
                     headers: {

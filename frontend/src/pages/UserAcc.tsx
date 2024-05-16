@@ -22,7 +22,7 @@ const UserAccount = () => {
                 );
                 const token = tokens.access;
                 const response = await fetch(
-                    "www.covidvisionsx.online/sysUserAccList/",
+                    "https://www.covidvisionsx.online/sysUserAccList/",
                     {
                         method: "GET",
                         headers: {
