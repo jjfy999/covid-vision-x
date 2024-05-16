@@ -13,7 +13,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userRole }) => {
     const location = useLocation();
     const { logoutUser } = useAuth();
-    const isAccDetailPage = location.pathname.includes("/AccDetail/");
+    // const isAccDetailPage = location.pathname.includes("/AccDetail/");
 
     const [patientMenuOpen, setPatientMenuOpen] = React.useState(false);
     const [activeLink, setActiveLink] = React.useState(() => {
@@ -21,6 +21,10 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
             location.pathname.includes("/PatientList/")||
             location.pathname.includes("/DoctorReport/") ||
             location.pathname.includes("/DoctorUploadImage/") ||
+            location.pathname.includes("/AccDetail/")||
+            // location.pathname.includes("/doctorViewReports/")||
+            location.pathname.includes("/reportDetails/")||
+
             location.pathname.includes("/DoctorNonUpdatedReport/")
         ) {
             return "Patient";
@@ -58,6 +62,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
             location.pathname.includes("/PatientList/")||
             location.pathname.includes("/DoctorReport/") ||
             location.pathname.includes("/DoctorUploadImage/") ||
+            location.pathname.includes("/AccDetail/")||
+            // location.pathname.includes("/doctorViewReports/")||
+            location.pathname.includes("/reportDetails/")||
             location.pathname.includes("/DoctorNonUpdatedReport/")
         ) {
             setActiveLink("Patient");
@@ -91,8 +98,9 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                         <Link
                             to="/PatientReports/"
                             className={
-                                location.pathname === "/AccDetail/"||
-                                location.pathname === "/PatientReports/"
+                                // location.pathname === "/AccDetail/"||
+                                location.pathname === "/PatientReports/" ||
+                                location.pathname.includes("/Report/")
                                 
                                     ? "active"
                                     : "report"
@@ -130,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
                             to="/UserAcc/"
                             className={
                                 location.pathname === "/UserAcc/" ||
-                                isAccDetailPage ||
+                                location.pathname.includes("/AccDetail/") ||
                                 location.pathname === "/EditAcc/" ||
                                 location.pathname === "/CreateUser/"
                                     ? "active"
