@@ -25,9 +25,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Change directory (optional)
-        run: cd backend # Assuming covidvisionx is the project directory
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -45,6 +42,6 @@ jobs:
         run: python backend/manage.py migrate --settings=covidVisionX.settings_test
 
       - name: Run tests
-        run: python backend/userAccount/test/test_views_api.py --settings=covidVisionX.settings_test
+        run: python backend/manage.py test userAccount --settings=covidVisionX.settings_test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
