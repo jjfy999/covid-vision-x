@@ -1,39 +1,47 @@
 name: Django CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.11.2]
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies 
-      run: |
-        pip install -r requirements.txt
-    #- name: Check for Existing Test Database
-      #run: |
-          #psql -c 'DROP DATABASE IF EXISTS test_postgres;' 
-    - name: Apply migration
-      run: |
-        python manage.py makemigrations 
-        python manage.py migrate 
-    - name: Run Tests
-      run: |
-        python manage.py test userAccount
-    
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10.12"
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up PostgreSQL
+        run: sudo apt-get install libpq-dev
+
+      - name: Apply migrations
+        run: python manage.py migrate --settings=covidVisionX.settings_test
+
+      - name: Run tests
+        run: python manage.py test userAccount --settings=covidVisionX.settings_test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
