@@ -134,7 +134,7 @@ def updateDetails(request):  # for users to update own details
 @api_view(['PUT'])
 # for system admin to update another person's details
 def updateUserDetails(request):
-    print("heelo")
+
     role = request.data.get('role')
     pk = request.data.get('id')
     if role == 'doctor':

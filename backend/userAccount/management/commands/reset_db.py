@@ -19,7 +19,25 @@ fake = Faker()
 from django.db.utils import IntegrityError
 
 
+class Command(BaseCommand):
+    help = 'Reset the database by dropping all tables and recreating them'
 
+    def drop_all_tables(self):
+        with connection.cursor() as cursor:
+            cursor.execute("DROP SCHEMA public CASCADE; CREATE SCHEMA public;")
+
+    def handle(self, *args, **options):
+        # Drop all tables
+        self.drop_all_tables()
+
+        # Call migrate command to apply migrations
+        call_command('migrate')
+
+        self.stdout.write(self.style.SUCCESS(
+            'Database reset1 completed successfully!'))
+
+
+'''
 class Command(BaseCommand):
     help = 'Reset the database by dropping all tables and recreating them'
 
@@ -45,14 +63,6 @@ class Command(BaseCommand):
             admin.password = make_password('admin1')
             admin.save()
 
-            admin = SystemAdmin.objects.create(
-                username='admin2',
-                email='admin2@gmail.com',
-                phone_number='99999989',
-                name='admin2'
-            )
-            admin.password = make_password('admin2')
-            admin.save()
 
             patient = Patient.objects.create(
                 username='patient1',
@@ -112,7 +122,7 @@ class Command(BaseCommand):
 
 
             # Generate new users
-            for i in range(10, 20):
+            for i in range(10, 30):
                 role = random.choice(['patient', 'doctor'])
                 username = f'{role}{i+1}'
                 email = f'{username}@gmail.com'
@@ -154,7 +164,4 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(
             'Database reset completed successfully!'))
 
-        
-        
-        
-
+'''
