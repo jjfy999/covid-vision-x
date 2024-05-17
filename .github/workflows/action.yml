@@ -38,10 +38,7 @@ jobs:
       - name: Set up PostgreSQL
         run: sudo apt-get install libpq-dev
         
-      - name: Test with pytest
-        run: |
-          pip install pytest pytest-cov
-          pytest backend/userAccount/test/test_views_api.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-
+      - name: Test
+        run: python backend/manage.py test userAccount --settings=covidVisionX.settings_test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
