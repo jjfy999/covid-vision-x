@@ -33,7 +33,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "0x0000022EB225B4C0")
 DEBUG = os.environ.get("DEBUG")
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com', '*']
+ALLOWED_HOSTS = [
+    '127.0.0.1', 'CovidVisionX.eba-aap3dwij.ap-southeast-1.elasticbeanstalk.com', '*']
 
 
 # Application definition
@@ -53,7 +54,7 @@ INSTALLED_APPS = [
     'userAccount',
     'deepLearningModel',
     'storages',
-    #'test'
+    # 'test'
 
 ]
 
@@ -250,7 +251,6 @@ SIMPLE_JWT = {
 # All all url to hit apis. Changed once we can confirm the whitelisted url
 
 
-
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
@@ -273,3 +273,5 @@ CORS_ALLOW_HEADERS = [
     'Origin',
     'Accept',
 ]
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
