@@ -23,10 +23,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10.12"
 
@@ -37,8 +37,11 @@ jobs:
 
       - name: Set up PostgreSQL
         run: sudo apt-get install libpq-dev
+        
+      - name: Test with pytest
+        run: |
+          pip install pytest pytest-cov
+          pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
-      - name: Run tests
-        run: python backend/manage.py test --settings=covidVisionX.settings_test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
