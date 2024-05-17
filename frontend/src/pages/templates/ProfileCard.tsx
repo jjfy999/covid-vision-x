@@ -69,14 +69,17 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
                 delete updatedProfile.password;
             }
 
-            const response = await fetch("baseUrl/updateDetails/", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-                body: JSON.stringify(updatedProfile),
-            });
+            const response = await fetch(
+                "https://www.covidvisionsx.online/updateDetails/",
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                    body: JSON.stringify(updatedProfile),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -110,14 +113,17 @@ const ProfileCard: React.FC<ProfileProps> = (props) => {
             delete updatedProfile.password;
         }
         try {
-            const res = await fetch("baseUrl/updateUserDetails/", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
-                body: JSON.stringify(updatedProfile),
-            });
+            const res = await fetch(
+                "https://www.covidvisionsx.online/updateUserDetails/",
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                    body: JSON.stringify(updatedProfile),
+                }
+            );
             console.log(updatedProfile);
             if (!res.ok) {
                 console.log("erroro");
