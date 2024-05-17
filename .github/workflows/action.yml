@@ -41,10 +41,7 @@ jobs:
       - name: Apply migrations
         run: python backend/manage.py migrate --settings=covidVisionX.settings_test
 
-      - name: Change directory
-        run: cd backend
-
       - name: Run tests
-        run: python backend/manage.py test userAccount --settings=covidVisionX.settings_test
+        run: python backend/manage.py test userAccount --settings=backend.covidVisionX.settings_test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
