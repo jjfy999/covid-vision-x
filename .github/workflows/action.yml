@@ -41,7 +41,7 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest pytest-cov
-          pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest backend/userAccount/test/test_views_api.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
