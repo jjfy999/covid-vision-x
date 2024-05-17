@@ -42,9 +42,9 @@ jobs:
         run: sudo apt-get install libpq-dev
 
       - name: Apply migrations
-        run: python manage.py migrate --settings=backend.covidVisionX.settings_test
+        run: python backend/manage.py migrate --settings=backend.covidVisionX.settings_test
 
       - name: Run tests
-        run: python manage.py test userAccount --settings=backend.covidVisionX.settings_test
+        run: python backend/manage.py test userAccount --settings=backend.covidVisionX.settings_test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
