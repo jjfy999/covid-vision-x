@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'userAccount',
     'deepLearningModel',
     'storages',
+    'drf_spectacular',
     # 'test'
 
 ]
@@ -197,8 +198,20 @@ AUTH_USER_MODEL = 'userAccount.Account'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'CovidVisionX API',
+    'DESCRIPTION': 'API for CovidVisionX',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+    },
+}
+
 '''
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.isAuthenticated', ),
