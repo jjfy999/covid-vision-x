@@ -1,0 +1,922 @@
+openapi: 3.0.3
+info:
+  title: Covid Vision X API
+  version: 1.0.0
+  description: API for Covid Vision X
+paths:
+  /accDetails/{id}/:
+    get:
+      operationId: accDetails_retrieve
+      description: Get other user details
+      summary: Get other user details
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - accDetails
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorSysAdminGetDetails'
+          description: ''
+  /api/schema/:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/test/:
+    get:
+      operationId: api_test_retrieve
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/token/:
+    post:
+      operationId: api_token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyTokenObtainPair'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: api_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /deleteReport/{id}/:
+    delete:
+      operationId: deleteReport_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - deleteReport
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /docListAllReports/:
+    get:
+      operationId: docListAllReports_list
+      description: View all reports
+      tags:
+      - docListAllReports
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+          description: ''
+  /docNonUploadedReports/:
+    get:
+      operationId: docNonUploadedReports_list
+      description: View all non-uploaded reports
+      tags:
+      - docNonUploadedReports
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+          description: ''
+  /docPatientAccList/:
+    get:
+      operationId: docPatientAccList_list
+      description: List patients
+      summary: List patients
+      tags:
+      - docPatientAccList
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+          description: ''
+  /docProfileView/:
+    get:
+      operationId: docProfileView_retrieve
+      description: Get user details
+      summary: Get user details
+      tags:
+      - docProfileView
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /docSearchUser/{id}/:
+    get:
+      operationId: docSearchUser_retrieve
+      description: Search user
+      summary: Search user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - docSearchUser
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /docShowReport/{id}/:
+    get:
+      operationId: docShowReport_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - docShowReport
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /docUpdateDetails/:
+    put:
+      operationId: docUpdateDetails_update
+      description: Update user details
+      summary: Update user details
+      tags:
+      - docUpdateDetails
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientUpdate'
+          description: ''
+  /docUploadedReports/:
+    get:
+      operationId: docUploadedReports_list
+      description: View all uploaded reports
+      tags:
+      - docUploadedReports
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+          description: ''
+  /patientProfile/:
+    get:
+      operationId: patientProfile_retrieve
+      description: Get user details
+      summary: Get user details
+      tags:
+      - patientProfile
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /patientReport/:
+    get:
+      operationId: patientReport_retrieve
+      tags:
+      - patientReport
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /predictImage/:
+    post:
+      operationId: predictImage_create
+      tags:
+      - predictImage
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /register/:
+    post:
+      operationId: register_create
+      description: Create user
+      summary: Create user
+      tags:
+      - register
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ''
+  /researcherDeleteModel/{name}/:
+    delete:
+      operationId: researcherDeleteModel_destroy
+      parameters:
+      - in: path
+        name: name
+        schema:
+          type: string
+        required: true
+      tags:
+      - researcherDeleteModel
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /researcherUploadModel/:
+    post:
+      operationId: researcherUploadModel_create
+      tags:
+      - researcherUploadModel
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /sysCreateUser/:
+    post:
+      operationId: sysCreateUser_create
+      description: Create user
+      summary: Create user
+      tags:
+      - sysCreateUser
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ''
+  /sysDeleteUser/{id}/:
+    delete:
+      operationId: sysDeleteUser_destroy
+      description: Delete user
+      summary: Delete user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - sysDeleteUser
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                message: User deleted successfully.
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                error: User not found.
+          description: ''
+  /sysProfileView/:
+    get:
+      operationId: sysProfileView_retrieve
+      description: Get user details
+      summary: Get user details
+      tags:
+      - sysProfileView
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /sysSearchUser/{id}/:
+    get:
+      operationId: sysSearchUser_retrieve
+      description: Search user
+      summary: Search user
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - sysSearchUser
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /sysUpdateDetails/:
+    put:
+      operationId: sysUpdateDetails_update
+      description: Update user details
+      summary: Update user details
+      tags:
+      - sysUpdateDetails
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientUpdate'
+          description: ''
+  /sysUserAccList/:
+    get:
+      operationId: sysUserAccList_retrieve
+      description: List users
+      summary: List users
+      tags:
+      - sysUserAccList
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorSysAdmin'
+          description: ''
+  /updateDetails/:
+    put:
+      operationId: updateDetails_update
+      description: Update user details
+      summary: Update user details
+      tags:
+      - updateDetails
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientUpdate'
+          description: ''
+  /updateUserDetails/:
+    put:
+      operationId: updateUserDetails_update
+      description: Update other user details
+      summary: Update other user details
+      tags:
+      - updateUserDetails
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorSysAdminUpdate'
+          description: ''
+  /uploadReport/:
+    put:
+      operationId: uploadReport_update
+      tags:
+      - uploadReport
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    DoctorSysAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        phone_number:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+        role:
+          type: string
+          nullable: true
+          maxLength: 50
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - email
+      - id
+      - name
+      - password
+      - phone_number
+      - username
+    DoctorSysAdminGetDetails:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        phone_number:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      required:
+      - email
+      - id
+      - name
+      - password
+      - phone_number
+      - role
+      - username
+    DoctorSysAdminUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        phone_number:
+          type: string
+        password:
+          type: string
+    MyTokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        name:
+          type: string
+          maxLength: 100
+        phone_number:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 150
+        password:
+          type: string
+          maxLength: 128
+        role:
+          type: string
+          nullable: true
+          maxLength: 50
+        status:
+          $ref: '#/components/schemas/PatientStatusEnum'
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - email
+      - id
+      - name
+      - password
+      - phone_number
+      - username
+    PatientStatusEnum:
+      enum:
+      - Covid
+      - Normal
+      - Pneumonia
+      - Not_Applicable
+      type: string
+      description: |-
+        * `Covid` - Covid
+        * `Normal` - Normal
+        * `Pneumonia` - Pneumonia
+        * `Not_Applicable` - Not_Applicable
+    PatientUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        phone_number:
+          type: string
+        password:
+          type: string
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/ReportStatusEnum'
+        patient_name:
+          type: string
+          maxLength: 100
+        date:
+          type: string
+          format: date
+        approved:
+          type: boolean
+        image:
+          type: string
+          format: uri
+        patient_id:
+          type: integer
+      required:
+      - date
+      - id
+      - image
+      - patient_id
+      - patient_name
+      - status
+    ReportStatusEnum:
+      enum:
+      - Covid
+      - Normal
+      - Pneumonia
+      type: string
+      description: |-
+        * `Covid` - COVID
+        * `Normal` - Normal
+        * `Pneumonia` - Pneumonia
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
