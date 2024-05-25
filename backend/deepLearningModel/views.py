@@ -237,7 +237,9 @@ def download_and_load_model(model_path):
 def preprocess_image(image_data, target_size=(256, 256)):
     """Preprocesses the image to be fed into the neural network."""
     # Load the image file, resizing it to target size
-    image = cv2.imread(image_data)
+    #image = cv2.imread(image_data)
+    image_np = np.frombuffer(image_data, np.uint8)
+    image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = cv2.resize(image, target_size)
 
