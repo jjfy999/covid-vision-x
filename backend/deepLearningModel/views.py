@@ -234,6 +234,26 @@ def download_and_load_model(model_path):
     print(models[model_path])
     return models[model_path]
 
+def preprocess_image(image_data, target_size=(256, 256)):
+    """Preprocesses the image to be fed into the neural network."""
+    # Load the image file, resizing it to target size
+    image = cv2.imread(image_data)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = cv2.resize(image, target_size)
+
+    # Preprocess the image for the model
+    image_array = preprocess_input(np.expand_dims(image, axis=0))
+
+    return image_array
+
+
+def predict_image(model, image_array):
+    """Predicts the class of an image using the given model."""
+    # Predict the class
+    prediction = model.predict(image_array)
+
+    # Return the index of the highest probability class
+    return np.argmax(prediction, axis=1)
 
 @api_view(['POST'])
 def predict(request):  # yongchuen model
@@ -245,19 +265,20 @@ def predict(request):  # yongchuen model
 
             image_file = request.FILES['file']
             image_data = image_file.read()
-
-            image_np = np.frombuffer(image_data, np.uint8)
-            image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            preprocessed_image = preprocess_image(image_data)
+            prediction_index = predict_image(model, preprocessed_image)
+            #image_np = np.frombuffer(image_data, np.uint8)
+            #image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+            #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
             # Resize the image to match the input size of your model
-            image = cv2.resize(image, (256, 256))
+            #image = cv2.resize(image, (256, 256))
 
             # Normalize the image
-            image_array = image / 255.0
+            #image_array = image / 255.0
 
             # Expand dimensions to match the model input shape
-            processed_image = preprocess_input(np.expand_dims(image_array, axis=0))
+            #processed_image = preprocess_input(np.expand_dims(image_array, axis=0))
 
             # image_tensor = tf.image.decode_image(image_data, channels=3)
             # resized_image = tf.image.resize(image_tensor, (256, 256))
@@ -276,10 +297,10 @@ def predict(request):  # yongchuen model
                 Body=image_data, Bucket=bucket_name, Key=image_file.name)
 
             # Make predictions using the model
-            prediction = model.predict(processed_image)
+            #prediction = model.predict(processed_image)
 
             # Return the index of the highest probability class
-            prediction_index = np.argmax(prediction, axis=1)
+            #prediction_index = np.argmax(prediction, axis=1)
 
             class_labels = ['COVID', 'Normal', 'Pneumonia']
             predicted_class = class_labels[prediction_index[0]]
