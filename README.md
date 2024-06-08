@@ -18,3 +18,5 @@ online site below (Currently using postgres RDS and images S3 private bucket) Fo
 edit readme or something
 
 changes only on dev
+
+test
